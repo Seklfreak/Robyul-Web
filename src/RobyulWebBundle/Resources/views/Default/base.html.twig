@@ -92,7 +92,7 @@
 <script src="{{ asset_url }}"></script>
 {% endjavascripts %}
 {% if ga_tracking_id != "" %}
-<script type="text/javascript">
+<script type="text/javascript" data-cfasync="false">
     var gaProperty = '{{ ga_tracking_id }}';
     var disableStr = 'ga-disable-' + gaProperty;
     if (document.cookie.indexOf(disableStr + '=true') > -1) {
