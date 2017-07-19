@@ -1,0 +1,29 @@
+{% extends "RobyulWebBundle:Default:base.html.twig" %}
+
+{% block title %}Profile - Backgrounds - {% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <p class="lead">
+                You can customize your Robyul Profile using one of these user submitted backgrounds.<br>
+                To view your Robyul Profile say <code>{{ discord_bot_prefix }}profile</code> in Discord.
+            </p>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-md-center">
+            {% for background in backgrounds %}
+            <div class="col col-12 col-lg-5">
+                <div class="card" style="margin-bottom: 1rem;">
+                    <img class="card-img-top" src="{{ background.url }}" alt="{{ background.id }}" style="object-fit: cover; max-height: 300px; width: 100%;">
+                    <div class="card-block">
+                        <p class="card-text">
+                            To choose this Background say<br><code>{{ discord_bot_prefix }}profile background {{ background.id }}</code> in Discord.</p>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}
+
