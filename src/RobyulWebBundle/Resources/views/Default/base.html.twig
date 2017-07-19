@@ -14,6 +14,25 @@
     {% stylesheets '@RobyulWebBundle/Resources/public/css/main.css' filter='cssrewrite' %}
         <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
+    <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    <script data-cfasync="false">
+        window.addEventListener("load", function(){
+            window.cookieconsent.initialise({
+                "palette": {
+                    "popup": {
+                        "background": "#252e39"
+                    },
+                    "button": {
+                        "background": "#14a7d0"
+                    }
+                },
+                "theme": "edgeless",
+                "content": {
+                    "href": "{{ path('robyulweb_default_privacypolicy') }}"
+                }
+            })});
+    </script>
 </head>
 
 <body>
@@ -24,7 +43,7 @@
     </button>
     <a class="navbar-brand" href="{{ path('robyulweb_default_index') }}">
         {% image '@RobyulWebBundle/Resources/public/images/robyulblush.png' %}
-        <img src="{{ asset_url }}" width="30" height="30" class="d-inline-block align-top" alt="">
+        <img src="{{ asset_url }}" width="30" height="30" class="d-inline-block align-top" alt="robyul">
         {% endimage %}
         Robyul
     </a>
@@ -58,6 +77,11 @@
         <span class="navbar-text">
             This website is in an early Alpha
         </span>
+        <span class="navbar-text patreon-nav">
+            <a href="https://www.patreon.com/sekl" target="_blank">{% image '@RobyulWebBundle/Resources/public/images/become_a_patron_button.png' %}
+                <img src="{{ asset_url }}" alt="patreon">
+                {% endimage %}</a>
+        </span>
         {#<form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="text" placeholder="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -67,7 +91,7 @@
 
 <div class="container">
 
-    <div>
+    <div class="container">
         {% block content %}{% endblock %}
     </div>
 

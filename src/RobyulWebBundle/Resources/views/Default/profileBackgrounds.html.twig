@@ -14,8 +14,8 @@
         <div class="row justify-content-md-center">
             {% for background in backgrounds %}
             <div class="col col-12 col-lg-5">
-                <div class="card" style="margin-bottom: 1rem;">
-                    <img class="card-img-top" src="{{ background.url }}" alt="{{ background.id }}" style="object-fit: cover; max-height: 300px; width: 100%;">
+                <div class="card background-card">
+                    <img class="card-img-top" src="{{ background.url }}" alt="{{ background.id }}">
                     <div class="card-block">
                         <p class="card-text">
                             To choose this Background say<br><code>{{ discord_bot_prefix }}profile background {{ background.id }}</code> in Discord.</p>

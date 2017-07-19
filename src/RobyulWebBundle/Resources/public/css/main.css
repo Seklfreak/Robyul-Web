@@ -15,3 +15,17 @@ body {
 .commands-card {
     margin-bottom: 1rem;
 }
+.patreon-nav > a > img {
+    height: 30px;
+}
+.background-card {
+    margin-bottom: 1rem;
+}
+.background-card > img {
+    object-fit: cover; max-height: 300px; width: 100%;
+}
+@media (min-width: 768px) {
+    .patreon-nav {
+        margin-left: 1rem;
+    }
+}
