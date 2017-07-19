@@ -1,0 +1,531 @@
+{% extends "RobyulWebBundle:Default:base.html.twig" %}
+
+{% block title %}Commands - {% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <p class="lead">
+                List of all commands for Robyul.<br>
+                Required arguments look like <code><span class="arg">this</span></code>.<br>
+                Optional arguments look like <code><span class="opt-arg">this</span></code>.<br>
+                Robyul permissions are based on two Role levels: Admins and Mods.<br>
+                Possible Admin Role Names: <code>Admin</code>, <code>Admins</code>, <code>ADMIN</code>, <code>School Board</code>, <code>admin</code> and <code>admins</code>.<br>
+                Possible Mod Role Names: <code>Mod</code>, <code>Mods</code>, <code>Moderator</code>, <code>Moderators</code>, <code>Mod Trainee</code>, <code>MOD</code>, <code>Minimod</code>, <code>Guard</code>, <code>Janitor</code>, <code>mod</code> and <code>mods</code>.
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="donators">Donators</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Support me on <a href="https://www.patreon.com/sekl" target="_blank">Patreon</a>.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}donators</code> see everyone who donated for Robyul.</li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="moduleless">Module-less</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Various stuff.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}help</code> get a link to this page.</li>
+                <li><code>@Robyul <span class="arg">message</span></code> talk to Robyul.</li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="about">About</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Information about Robyul.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}about</code> get information about Robyul.</li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="levels">Levels and Profiles</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Get EXP for Messages.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}profile <span class="opt-arg">@user or user id</span></code> view your profile or the profile of an user.</li>
+                <li><code>{{ discord_bot_prefix }}profile title <span class="arg">title text</span></code> set the title text of your Profile.</li>
+                <li><code>{{ discord_bot_prefix }}profile bio <span class="arg">bio text</span></code> set the bio text of your profile.</li>
+                <li><code>{{ discord_bot_prefix }}profile background <span class="arg">background name</span></code> choose a background for your profile. You can view all backgrounds <a href="{{ path('robyulweb_default_profilebackgrounds') }}">here</a> and submit new ones <a href="https://goo.gl/forms/ZYFCGWNi5tYPAfki2" target="_blank">here</a>.</li>
+                <li><code>{{ discord_bot_prefix }}profile badge</code> choose badges for your profile. The badges you can choose vary per server.</li>
+                <li><code>{{ discord_bot_prefix }}profile badge move <span class="arg">category name</span> <span class="arg">badge name</span> <span class="arg">new spot number</span></code> Move a badge's position on your Profile.</li>
+                <li><code>{{ discord_bot_prefix }}rep <span class="arg">@user or user id</span></code> give a reputation point to the given user.</li>
+                <li><code>{{ discord_bot_prefix }}level <span class="opt-arg">@user or user id</span></code> view level stats.</li>
+                <li><code>{{ discord_bot_prefix }}level top</code> show the top members on your discord.</li>
+                <li><code>{{ discord_bot_prefix }}level global-top</code> show the top members on all robyul discords.</li>
+                <li><code>{{ discord_bot_prefix }}profile badge create <span class="arg">category name</span> <span class="arg">badge name</span> <a class="arg" href="#" data-toggle="tooltip" title="28x28px picture, Direct Link! (imgur for example), the bot will make it round automatically">image url</a> <a href="#" data-toggle="tooltip" title="HEX Color code" class="arg">border color</a> <a class="arg" href="#" data-toggle="tooltip" title="-1=available for nobody (you have to allow it per user basis), 0=available for everyone on your server">min server level to be able to get the badge</a> <a class="opt-arg" href="#" data-toggle="tooltip" title="Only available for Bot Owners">global</a></code> create a Robyul Badge on your server. <span class="badge badge-default">Admin</span></li>
+                <li><code>{{ discord_bot_prefix }}profile badge delete <span class="arg">category name</span> <span class="arg">badge name</span></code> Delete a badge from your server. <span class="badge badge-default">Admin</span></li>
+                <li><code>{{ discord_bot_prefix }}profile badge allow <span class="arg">@user or user id</span> <span class="arg">category name</span> <span class="arg">badge name</span></code> make a badge available for an user regardless of level requirement. Run it again to remove user from the list again. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ discord_bot_prefix }}profile badge deny <span class="arg">@user or user id</span> <span class="arg">category name</span> <span class="arg">badge name</span></code> make a badge unavailable for an user regardless of level requirement. Run it again to remove user from the list again. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ discord_bot_prefix }}profile badge list</code> List all badge categories.</li>
+                <li><code>{{ discord_bot_prefix }}profile badge list <span class="arg">category name</span></code> List all badges in a category.</li>
+                <li><code>{{ discord_bot_prefix }}levels reset user <span class="arg">@user or user id</span></code> resets the EXP and Level for the given user on the server.</li>
+                <li><code>{{ discord_bot_prefix }}levels ignore list</code> shows currently ignored users and channels <span class="badge badge-default">Mod</span>.</li>
+                <li><code>{{ discord_bot_prefix }}levels ignore user <span class="arg">@user or user id</span></code> makes Robyul ignore one users messages for EXP. <span class="badge badge-default">Admin</span></li>
+                <li><code>{{ discord_bot_prefix }}levels ignore channel <span class="arg">#channel or channel id</span></code> makes Robyul ignore a channels messages for EXP. <span class="badge badge-default">Admin</span></li>
+                <li><code>{{ discord_bot_prefix }}level process-history</code> Process old messages for Robyul EXP. If you want this done on your server DM <code>Sekl#7397</code> on Discord. <span class="badge badge-default">Bot Owner</span></li>
+                <li><code>{{ discord_bot_prefix }}profile background add <span class="arg">background name</span> <span class="arg">background url</span></code> Adds a background to Robyul. <span class="badge badge-default">Bot Owner</span></li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="noti">Keyword Notifications</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Get informed when someone talks about you or what you care about.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}noti add <span class="arg">keyword(s)</span></code> Get a DM from Robyul when someone says the keyword(s).</li>
+                <li><code>{{ discord_bot_prefix }}noti list</code> lists all your active keywords on this server.</li>
+                <li><code>{{ discord_bot_prefix }}noti delete <span class="arg">keyword(s)</span></code> deletes a keyword from this server.</li>
+                <li><code>{{ discord_bot_prefix }}noti ignore-channel <span class="arg">#channel or id</span></code> lets Robyul ignore all messages in the given cahnnel. Run it again to turn it on again. <span class="badge badge-default">Admin</span></li>
+                <li><code>{{ discord_bot_prefix }}noti ignore-channel list</code> lists all ignored channels on this server.</li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="vlive">V Live</h4>
+            <h6 class="card-subtitle mb-2 text-muted">See your Idols live.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}vlive <span class="arg">V Live channel name</span></code> get information about a V Live channel</li>
+                <li><code>{{ discord_bot_prefix }}vlive list</code> view all active V Live channel feeds on this server</li>
+                <li><code>{{ discord_bot_prefix }}vlive add <span class="arg">V Live channel name</span> <span class="opt-arg">name or id of the role to mention</span></code> adds a V Live channel feed to the specific channel. Tags the role if specified. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ discord_bot_prefix }}vlive delete <span class="arg">v live channel id</span></code> delete a V Live channel feed. Use <code>{{ discord_bot_prefix }}vlive list</code> to get the channel id. <span class="badge badge-default">Mod</span></li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="twitter">Twitter</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Stay up to date.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}twitter <span class="arg">twitter username</span></code> get information about a Twitter account</li>
+                <li><code>{{ discord_bot_prefix }}twitter list</code> view all active Twitter feeds on this server</li>
+                <li><code>{{ discord_bot_prefix }}twitter add <span class="arg">twitter username</span></code> adds a Twitter feed to the specific channel. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ discord_bot_prefix }}twitter delete <span class="arg">twitter feed id</span></code> delete a Twitter feed. Use <code>{{ discord_bot_prefix }}twitter list</code> to get the feed id. <span class="badge badge-default">Mod</span></li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="instagram">Instagram</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Get all the pictures.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}instagram <span class="arg">instagram username</span></code> get information about an Instagram account</li>
+                <li><code>{{ discord_bot_prefix }}instagram list</code> view all active Instagram feeds on this server</li>
+                <li><code>{{ discord_bot_prefix }}instagram add <span class="arg">instagram username</span></code> adds an Instagram feed to the specific channel. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ discord_bot_prefix }}instagram delete <span class="arg">instagram feed id</span></code> delete an Instagram feed. Use <code>{{ discord_bot_prefix }}instagram list</code> to get the feed id. <span class="badge badge-default">Mod</span></li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="facebook">Facebook</h4>
+            <h6 class="card-subtitle mb-2 text-muted">The biggest social network.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}facebook <span class="arg">facebook page name</span></code> get information about a Facebook page</li>
+                <li><code>{{ discord_bot_prefix }}facebook list</code> view all active Facebook page feeds on this server</li>
+                <li><code>{{ discord_bot_prefix }}facebook add <span class="arg">facebook page name</span></code> adds a Facebook page feed to the specific channel. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ discord_bot_prefix }}facebook delete <span class="arg">facebook feed id</span></code> delete a Facebook page feed. Use <code>{{ discord_bot_prefix }}facebook list</code> to get the feed id. <span class="badge badge-default">Mod</span></li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="charts">Music Charts</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Set up a welcome and leave message.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}ichart realtime</code> view the latest ichart realtime stats.</li>
+                <li><code>{{ discord_bot_prefix }}ichart week</code> view the ichart weekly stats.</li>
+                <li><code>{{ discord_bot_prefix }}melon realtime</code> view the latest melon realtime stats.</li>
+                <li><code>{{ discord_bot_prefix }}melon daily</code> view the melon daily stats of today.</li>
+                <li><code>{{ discord_bot_prefix }}melon song <a class="arg" href="#" data-toggle="tooltip" title="Try searching in hangul">search text</a></code> search for a song on melon .</li>
+                <li><code>{{ discord_bot_prefix }}melon artist <a class="arg" href="#" data-toggle="tooltip" title="Try searching in hangul">search text</a></code> search for an artist on melon.</li>
+                <li><code>{{ discord_bot_prefix }}melon album <a class="arg" href="#" data-toggle="tooltip" title="Try searching in hangul">search text</a></code> search for an album on melon.</li>
+                <li><code>{{ discord_bot_prefix }}gaon week</code> view the gaon charts for the current week.</li>
+                <li><code>{{ discord_bot_prefix }}gaon month</code> view the gaon charts for the current month.</li>
+                <li><code>{{ discord_bot_prefix }}gaon year</code> view the gaon charts for the current year.</li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="lastfm">LastFM/h4>
+            <h6 class="card-subtitle mb-2 text-muted">Find out what your friends listen to.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}lf <span class="opt-arg">@user or user id or last.fm username</span></code> find out more about the user.</li>
+                <li><code>{{ discord_bot_prefix }}lf np <span class="opt-arg">>@user or user id or last.fm username</span></code> see what the user is listening to right now.</li>
+                <li><code>{{ discord_bot_prefix }}lf topartists <span class="opt-arg">@user or user id or last.fm username</span></code> see the top artists of the user.</li>
+                <li><code>{{ discord_bot_prefix }}lf toptracks <span class="opt-arg">@user or user id or last.fm username</span></code> see the top tracks of the user.</li>
+                <li><code>{{ discord_bot_prefix }}lf topalbums <span class="opt-arg">@user or user id or last.fm username</span></code> see the top albums of the user.</li>
+                <li><code>{{ discord_bot_prefix }}lf server-top <span class="opt-arg"><a class="arg" data-toggle="tooltip" title="overall/week/month/3month/6month/year">timerange</a></span></code> shows the top tracks of all last.fm users on this server combined for the given timespan, by default overall.</li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="mod">Mod</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Get help Moderating your Server.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}cleanup after <span class="arg">after message id</span> <span class="opt-arg">until message id</span></code> cleans up after the first message id until the end, or the second message id if provided. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ discord_bot_prefix }}cleanup messages <span class="arg">number of messages</span></code> cleans up the last <span class="arg">number of messages</span> messages. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ discord_bot_prefix }}mute server <span class="arg">@user or user id</span></code> mutes the user on the whole server. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ discord_bot_prefix }}unmute server <spann class="arg">@user or user id</spann></code> unmutes the user on the whole server. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ discord_bot_prefix }}say <span class="arg">#channel or channel id</span> <span class="arg">message text</span></code> make the bot say the text in the specified channel. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ discord_bot_prefix }}upload <span class="arg">#channel or channel id</span> <a class="arg" class="opt-arg" href="#" data-toggle="tooltip" title="Upload a File using Discord when you use the command">+ ATTACHMENT</a></code> upload a file in the specified channel. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ discord_bot_prefix }}inspect <span class="opt-arg">@user or user id</span> <span class="opt-arg">text</span></code> shows various information about the given user relevant to mods. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ discord_bot_prefix }}search-user <span class="arg">search text</span></code> searches for users with text in their name. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ discord_bot_prefix }}kick <span class="arg">@user or user id</span></code> kicks the user from the server. <span class="badge badge-default">Mod and Discord Permission to Kick</span></li>
+                <li><code>{{ discord_bot_prefix }}ban <span class="arg">@user or user id</span> <a href="#" class="opt-arg" data-toggle="tooltip" title="Number of Days of messages you want to delete of the User">number of days</a></code> bans the user from the server, and deletes the messages for the last <span class="opt-arg">number of days</span> days of messages if provided.  <span class="badge badge-default">Mod and Discord Permission to Ban</span></li>
+                <li><code>{{ discord_bot_prefix }}edit <span class="arg">#channel or channel id</span> <span class="arg">message id</span> <span class="arg">message text</span></code> edit a message sent by robyul. <span class="badge badge-default">Admin</span></li>
+                <li><code>{{ discord_bot_prefix }}get <span class="arg">#channel or channel id</span> <span class="arg">message id</span></code> get the content of a specified message. <span class="badge badge-default">Admin</span></li>
+                <li><code>{{ discord_bot_prefix }}auto-inspects-channel <span class="opt-arg">channel # or id</span></code> prints the information above for users who join and different occasions. <span class="badge badge-default">Admin</span></li>
+                <li><code>{{ discord_bot_prefix }}leave-server <span class="arg">server id</span></code> makes robyul leave a server. <span class="badge badge-default">Bot Admin</span></li>
+                <li><code>{{ discord_bot_prefix }}inspect-extended <span class="opt-arg">@user or user id</span> <span class="opt-arg">text</span></code> like <code>{{ discord_bot_prefix }}_inspect</code> with more information. <span class="badge badge-default">Bot Owner</span></li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="bias">Bias</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Set up self bias role assignment for your members.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}bias stats</code> get bias role statistics.</li>
+                <li><code>{{ discord_bot_prefix }}bias help</code> prints the bias help text meant to guide your users in the specific channel.</li>
+                <li><code>{{ discord_bot_prefix }}bias set-config <span class="arg">channel # or id</span> <a class="arg" href="#" data-toggle="tooltip" title="Upload a Bias Config JSON using Discord when you use the command">+ ATTACHMENT</a></code> set a bias config for the specific channel. <span class="badge badge-default">Admin</span></li>
+                <li><code>{{ discord_bot_prefix }}bias get-config <span class="arg">channel # or id</span></code> get a bias config for the specific channel. <span class="badge badge-default">Admin</span></li>
+                <li><code>{{ discord_bot_prefix }}bias refresh</code> reloads all bias configs. <span class="badge badge-default">Bot Owner</span></li>
+            </ul>
+            You can get an example Bias Config JSON used on the I.O.I Discord server <a href="https://gist.github.com/Seklfreak/e7275e41671081724e5580b312a3e82e" target="_blank">here</a>. If you have issues creating your own config just DM <code>Sekl#7397</code> on Discord.
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="guildannouncements">Server Announcements</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Set up a welcome and leave message.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}guildannouncements set guild_join <span class="opt-arg">channel # or id</span> <span class="opt-arg">text</span></code> Set a Join message in the specific channel. Run the command without arguments to disable it.</li>
+                <li><code>{{ discord_bot_prefix }}guildannouncements set guild_leave <span class="opt-arg">channel # or id</span> <span class="opt-arg">text</span></code> Set a LEave message in the specific channel. Run the command without arguments to disable it.</li>
+            </ul>
+            Available placeholders for <span class="opt-arg">text</span>: <code>{USER_USERNAME}</code>, <code>{USER_ID}</code>, <code>{USER_DISCRIMINATOR}</code>, <code>{USER_NUMBER}</code>, <code>{USER_MENTION}</code>, <code>{GUILD_NAME}</code> and <code>{GUILD_ID}</code>. It is not recommended to use <code>{USER_MENTION}</code> and <code>{USER_NUMBER}</code> in leave messages.
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="translate">Translator</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Translate whatever language in your favorite language.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}translate <span class="arg">source language code</span> <span class="arg">target language code</span> <span class="arg">text to translate</span></code> translates text, language code korean: <span class="arg">ko</span>, language code english: <span class="arg">en</span>, all languages code <a href="https://cloud.google.com/translate/docs/languages" target="_blank">here</a>.</li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="urban">Urban Dictionary</h4>
+            <h6 class="card-subtitle mb-2 text-muted">The Dictionary of the internet.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}urban <span class="arg">word to look up</span></code> get a definition from Urban Dictionary. Warning: can get very explicit.</li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="reminder">Reminders</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Never forget anything again.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}remindme <span class="arg">what to do</span> <a class="arg" href="#" data-toggle="tooltip" title="Example: in 2 hours">time</a></code> Robyul will send you a DM when it's time.</li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="wolframalpha">WolframAlpha</h4>
+            <h6 class="card-subtitle mb-2 text-muted">The smartest search engine on the internet.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}w <span class="arg">question</span></code> WolframAlpha will tell you the answer, hopefully.</li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="gfycat">Gfycat</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Make GIFs less of a pain.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}gfy <span class="arg">link OR discord attachment</span> <span class="opt-arg">start in seconds</span> <span class="opt-arg">duration in seconds</span></code> Create a Gfy from the given video.</li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="streamable">Streamable</h4>
+            <h6 class="card-subtitle mb-2 text-muted">The simple video streaming service.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}streamable <span class="arg">link OR discord attachment</span></code> Create a Streamable from the given video.</li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="gallery">Gallery</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Galleries are copies of other channels where only the posted links get reposted.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}gallery add <span class="arg">source #channel or id</span> <span class="arg">target #channel or id</span> <span class="arg">target channel webhook id</span> <span class="arg">target channel webhook token</span></code> Creates a gallery for the given channels. <span class="badge badge-default">Admin</span></li>
+                <li><code>{{ discord_bot_prefix }}gallery list</code> Lists all active galleries on the channel.</li>
+                <li><code>{{ discord_bot_prefix }}gallery delete <span class="arg">gallery id</span></code> Deletes a gallery on the server. Use <code>{{ discord_bot_prefix }}gallery list</code> to get the gallery id. <span class="badge badge-default">Admin</span></li>
+                <li><code>{{ discord_bot_prefix }}gallery refresh</code> Refreshes all Gallery caches. <span class="badge badge-default">Bot Owner</span></li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="mirror">Mirror</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Mirrors are like Galleries but across servers. DM <code>Sekl#7397</code> on Discord to set up a Mirror.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}mirror create</code> Creates an empty mirror. <span class="badge badge-default">Bot Owner</span></li>
+                <li><code>{{ discord_bot_prefix }}mirror add-channel <span class="arg">mirror id</span> <span class="arg">#channel or id</span> <span class="arg">channel webhook id</span> <span class="arg">channel webhook token</span></code> Adds the given channel to a mirror. <span class="badge badge-default">Bot Owner</span></li>
+                <li><code>{{ discord_bot_prefix }}mirror list</code> Lists all mirrors. <span class="badge badge-default">Bot Owner</span></li>
+                <li><code>{{ discord_bot_prefix }}mirror delete <span class="arg">gallery id</span></code> Deletes a mirror. Use <code>{{ discord_bot_prefix }}mirror list</code> to get the mirror id. <span class="badge badge-default">Bot Owner</span></li>
+                <li><code>{{ discord_bot_prefix }}mirror refresh</code> Refreshes all Mirror caches. <span class="badge badge-default">Bot Owner</span></li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="randompictures">Random Picture</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Makes Robyul post random pictures of a Google Drive folder in time intervals or on request. DM <code>Sekl#7397</code> on Discord to set up a Random Picture folder.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}pic <span class="opt-arg">name</span></code> get a random picture from a folder. Without arguments it gets the folder from your roles.</li>
+                <li><code>{{ discord_bot_prefix }}randompictures new-config</code> Creates an empty config. <span class="badge badge-default">Bot Owner</span></li>
+                <li><code>{{ discord_bot_prefix }}randompictures list</code> Lists all picture folders. <span class="badge badge-default">Bot Owner</span></li>
+                <li><code>{{ discord_bot_prefix }}randompictures refresh <span class="arg">source id</span></code> Refreshes a source. Use <code>{{ discord_bot_prefix }}randompictures list</code> to get the source id. <span class="badge badge-default">Bot Owner</span></li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="choice">Choice</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Let Robyul make your life decisions.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}choose <span class="arg">choice a</span> <span class="arg">choice b</span> <span class="opt-arg">more choices...</span></code> Robyul chooses one of the choices.</li>
+                <li><code>{{ discord_bot_prefix }}roll <a class="opt-arg" href="#" data-toggle="tooltip" title="default 100">max number</a></code> lets Robyul choose a random number between 1 and <a class="opt-arg" href="#" data-toggle="tooltip" title="default 100">max number</a>.</li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="spoiler">Spoiler</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Protect others from your secret information.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}spoiler <span class="arg">text</span></code> hides text until you hover it. Doesn't work on Discord's Mobile Apps.</li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="reactionpolls">Reaction Polls</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Create Polls where you can vote using reactions.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}reactionpoll create "<span class="arg">question</span>" <span class="arg">max number of votes per user</span> <span class="arg">allowed emote</span> <span class="opt-arg">more allowed emotes...</span></code> create a Reaction Poll.</li>
+                <li><code>{{ discord_bot_prefix }}reactionpoll refresh</code> refreshes the Reaction Poll database. <span class="badge badge-default">Bot Owner</span></li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="customcommands">Custom Commands</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Make Custom Commands with Text, Pics and GIFs.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}<span class="arg">command name</span></code> run a custom command</li>
+                <li><code>{{ discord_bot_prefix }}commands edit <span class="arg">command name</span> <span class="arg">new command content</span></code> edit a custom command.</li>
+                <li><code>{{ discord_bot_prefix }}commands list</code> lists all custom commands on a server.</li>
+                <li><code>{{ discord_bot_prefix }}commands info <span class="arg">command name</span></code> shows information about a custom command.</li>
+                <li><code>{{ discord_bot_prefix }}commands search <span class="arg">search text</span></code> search in the custom command names.</li>
+                <li><code>{{ discord_bot_prefix }}commands add <span class="arg">command name</span> <span class="arg">command content</span></code> create a custom command. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ discord_bot_prefix }}commands delete <span class="arg">command name</span></code> delete a custom command. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ discord_bot_prefix }}commands import-json <span class="arg">JSON attachment</span></code> Imports custom commands to a server. DM <code>Sekl#7397</code> on Discord to use this command. <span class="badge badge-default">Bot Owner</span></li>
+                <li><code>{{ discord_bot_prefix }}commands refresh</code> Refreshes the custom command cache. <span class="badge badge-default">Bot Owner</span></li>
+            </ul>
+            Format of the Custom Commands JSON
+            <code>
+                {
+                "command_a" : "content a",
+                "command_b" : "content b"
+                }
+            </code>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="twitch">Twitch</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Gaming is important too.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}twitch <span class="arg">twitch channel name</span></code> get information about a Twitch channel</li>
+                <li><code>{{ discord_bot_prefix }}twitch list</code> view all active Twitch channel feeds on this server</li>
+                <li><code>{{ discord_bot_prefix }}twitch add <span class="arg">twitch channel name</span></code> adds a Twitch channel feed to the specific channel. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ discord_bot_prefix }}twitch delete <span class="arg">twitch feed id</span></code> delete a Twitch channel feed. Use <code>{{ discord_bot_prefix }}twitch list</code> to get the feed id. <span class="badge badge-default">Mod</span></li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="spoiler">Cat</h4>
+            <h6 class="card-subtitle mb-2 text-muted">The real MVPs of the internet.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}cat</code> shows you a cute cat. 🐈</li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="rps">Rock Paper Scissors</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Play against Robyul.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}rps <span class="arg">rock|paper|scissors</span></code> play a round of rock paper scissors against Robyul.</li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="osu">osu!</h4>
+            <h6 class="card-subtitle mb-2 text-muted">View osu! stats.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}osu <span class="arg">osu! username</span></code> shows osu-classic stats for the username.</li>
+                <li><code>{{ discord_bot_prefix }}osu!mania <span class="arg">osu! username</span></code> shows osu-mania stats for the username.</li>
+                <li><code>{{ discord_bot_prefix }}osu!mania <span class="arg">osu! username</span></code> shows osu catch-the-beat stats for the username.</li>
+                <li><code>{{ discord_bot_prefix }}osu!mania <span class="arg">osu! username</span></code> shows osu-taiko stats for the username.</li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="nuke">Nuke</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Nuke are opt-in global bans. The Robyul team will be able to ban members on your server if you enable nuke. We do this to ban Raiders and similar people who threaten multiple servers. You can always opt-out or unban nuked people.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}nuke participate <span class="opt-arg">log channel</span></code> Enable nukes on your server. The nuke log will be printed in the given channel. Please make sure Robyul has the permission to ban people. Run it again without arguments to disable it. <span class="badge badge-default">Admin</span></li>
+                <li><code>{{ discord_bot_prefix }}nuke log</code> Show nukes in the past. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ discord_bot_prefix }}nuke user <span class="arg">@user or user id</span> "<span class="arg">reason</span>"</code> nuke an user. <span class="badge badge-default">Nuke Mod (Robyul Staff)</span></li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="troublemaker">Troublemaker</h4>
+            <h6 class="card-subtitle mb-2 text-muted">This is a member report server across servers. Troublemakers will get posted across all participating servers. These reports will also get used in the inspects.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}troublemaker participate <span class="opt-arg">log channel</span></code> enable troublemaker log on your discord. Run it again without arguments to disable it. <span class="badge badge-default">Admin</span></li>
+                <li><code>{{ discord_bot_prefix }}troublemaker <span class="arg">@user or user id</span> <span class="arg">reason</span></code> reports a troublemaker. We encourage Mods to report all troublemakers if they could threaten other servers. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ discord_bot_prefix }}troublemaker list <span class="arg">@user or user id</span></code> shows all reports given for an user. <span class="badge badge-default">Mod</span></li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="stats">Stats</h4>
+            <h6 class="card-subtitle mb-2 text-muted">Look up Statistics of Users and Servers.</h6>
+            <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ discord_bot_prefix }}stats</code> statistics of the bot.</li>
+                    <li><code>{{ discord_bot_prefix }}userinfo <span class="opt-arg">@user or user id</span></code> information about a user.</li>
+                    <li><code>{{ discord_bot_prefix }}serverinfo</code> information about a server.</li>
+                    <li><code>{{ discord_bot_prefix }}voicestats <span class="opt-arg">@user or user id</span></code> shows the voice stats of an user.</li>
+                    <li><code>{{ discord_bot_prefix }}voicestats top</code> shows the top voice users on this server.</li>
+                    <li><code>{{ discord_bot_prefix }}emotes</code> shows a list of all custom emotes on the server.</li>
+                    <li><code>{{ discord_bot_prefix }}memberlist <span class="opt-arg">page #</span></code> shows a list of all members on your server ordered by the date they joined the server.</li>
+                <li><code>{{ discord_bot_prefix }}serverlist</code> shows a list with all servers robyul is on. <span class="badge badge-default">Bot Owner</span></li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="dig">Dig</h4>
+            <h6 class="card-subtitle mb-2 text-muted">It's always DNS.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}dig <a class="arg" href="#" data-toggle="tooltip" title="eg. robyul.chat">name</a> <a class="arg" href="#" data-toggle="tooltip" title="eg. AAAA">type</a> <span class="opt-arg">@DNS Server</span></code> do DNS queries.</li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="uptime">Uptime</h4>
+            <h6 class="card-subtitle mb-2 text-muted">How long is Robyul running?</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ discord_bot_prefix }}uptime</code> see Robyul's uptime.</li>
+            </ul>
+            </p>
+        </div>
+    </div>
+{% endblock %}
+

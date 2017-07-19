@@ -17,6 +17,33 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/commands")
+     */
+    public function commandsAction()
+    {
+        return $this->render('RobyulWebBundle:Default:commands.html.twig');
+    }
+
+    /**
+     * @Route("/profile/backgrounds")
+     */
+    public function profileBackgrounds()
+    {
+        $conn = \r\connect('localhost', 28015, $this->container->getParameter('rethinkdb_database'));
+
+        $backgroundsIterator = \r\table("profile_backgrounds")->run($conn);
+
+        $backgrounds = array();
+        foreach ($backgroundsIterator as $backgroundIterator) {
+            $backgrounds[$backgroundIterator["id"]] = iterator_to_array($backgroundIterator);
+        }
+        ksort($backgrounds, SORT_STRING|SORT_FLAG_CASE);
+
+        return $this->render('RobyulWebBundle:Default:profileBackgrounds.html.twig',
+            array('backgrounds' => $backgrounds));
+    }
+
+    /**
      * @Route("/imprint")
      */
     public function imprintAction()
@@ -30,23 +57,5 @@ class DefaultController extends Controller
     public function privacyPolicyAction()
     {
         return $this->render('RobyulWebBundle:Default:privacyPolicy.html.twig');
-    }
-
-    /**
-     * @Route("/profile/backgrounds")
-     */
-    public function profileBackgrounds()
-    {
-        $conn = \r\connect('localhost', 28015, 'Robyul2_Dev');
-
-        $backgroundsIterator = \r\table("profile_backgrounds")->run($conn);
-
-        $backgrounds = array();
-        foreach ($backgroundsIterator as $backgroundIterator) {
-            $backgrounds[] = iterator_to_array($backgroundIterator);
-        }
-
-        return $this->render('RobyulWebBundle:Default:profileBackgrounds.html.twig',
-            array('backgrounds' => $backgrounds));
     }
 }

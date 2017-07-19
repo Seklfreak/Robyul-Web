@@ -1,7 +1,101 @@
 {% extends "RobyulWebBundle:Default:base.html.twig" %}
 
-{% block title %}The KPop Discord Bot - {% endblock %}
+{% block title %}{% endblock %}
 {% block content %}
-    Hi!
+    <div class="jumbotron">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4">
+                    <h3>Over 100 Servers</h3>
+                </div>
+                <div class="col-lg-4">
+                    <h3>Over 25.000 Users</h3>
+                </div>
+                <div class="col-lg-4">
+                    <h3>1 Bot</h3>
+                </div>
+            </div>
+            <h1 class="display-3">Robyul <small>The KPop Discord Bot</small></h1>
+            <p>Robyul is a Discord Bot developed especially with the needs of of KPop Discord Servers in mind.</p>
+            <p>Direct Message <code>Sekl#7397</code> to get Robyul on your server.</p>
+        </div>
+    </div>
+
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Mod and Anti-Raid features</h2>
+                <p>
+                    <ul>
+                        <li>Kick and Ban</li>
+                        <li>Across-Server User Warning System (opt-in)</li>
+                        <li>Across-Server User Ban System (opt-in) and more</li>
+                    </ul>
+                </p>
+                <p><a class="btn btn-secondary" href="{{ path('robyulweb_default_commands') }}#mod" role="button">Learn more &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>Social Media Notifications</h2>
+                <p>
+                    <ul>
+                        <li>V Live</li>
+                        <li>Instagram (including Instagram Lives and Instagram Story)</li>
+                        <li>Twitter</li>
+                        <li>Facebook</li>
+                    </ul>
+                </p>
+                <p><a class="btn btn-secondary" href="{{ path('robyulweb_default_commands') }}#vlive" role="button">Learn more &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>Music Charts</h2>
+                <p>
+                    <ul>
+                        <li>iChart</li>
+                        <li>Melon</li>
+                        <li>Gaon</li>
+                    </ul>
+                </p>
+                <p><a class="btn btn-secondary" href="{{ path('robyulweb_default_commands') }}#charts" role="button">Learn more &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>Level System</h2>
+                <p>
+                    <ul>
+                        <li>Customizable Profiles</li>
+                        <li>Leaderboards</li>
+                        <li>Reputation System</li>
+                        <li>Ability to process old Messages and more</li>
+                    </ul>
+                </p>
+                <p><a class="btn btn-secondary" href="{{ path('robyulweb_default_commands') }}#levels" role="button">Learn more &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>Advanced Bias Role assignment</h2>
+                <p>
+                    <ul>
+                        <li>Multiple Levels (Primary and Secondary roles)</li>
+                        <li>Multiple Categories</li>
+                        <li>Alias and more</li>
+                    </ul>
+                </p>
+                <p><a class="btn btn-secondary" href="{{ path('robyulweb_default_commands') }}#bias" role="button">Learn more &raquo;</a></p>
+            </div>
+            <div class="col-md-4">
+                <h2>Media Tools</h2>
+                <p>
+                    <ul>
+                        <li>Gfycat</li>
+                        <li>Streamable</li>
+                    </ul>
+                </p>
+                <p><a class="btn btn-secondary" href="{{ path('robyulweb_default_commands') }}#gfycat" role="button">Learn more &raquo;</a></p>
+            </div>
+            <div class="col-md-12">
+                <p>And LastFM (including summary of the lastFM usage on a whole discord) and Translations and osu! and Gallery Mode for Channels and Channel Mirroring Across Servers and Random Pictures from Google Drive folders (timed and on request) and Custom Commands and Spoilers and Reaction polls and <a href="https://cleverbot.com/" target="_blank">Cleverbot</a> and more..</p>
+                <p><a class="btn btn-secondary" href="{{ path('robyulweb_default_commands') }}" role="button">View all commands &raquo;</a></p>
+            </div>
+        </div>
+    </div>
 {% endblock %}
 

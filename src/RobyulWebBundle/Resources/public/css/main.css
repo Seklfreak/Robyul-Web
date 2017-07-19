@@ -4,3 +4,14 @@ body {
 .footer {
     margin-bottom: 1rem;
 }
+.arg {
+    color: #031eff;
+    background-color: #e0e0e0;
+}
+.opt-arg {
+    color: rgba(40, 189, 61, 0.6);
+    background-color: #e0e0e0;
+}
+.commands-card {
+    margin-bottom: 1rem;
+}
