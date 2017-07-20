@@ -21,3 +21,7 @@ parameters:
     rethinkdb_database: Robyul2
 
     ga_tracking_id: ~
+
+    uglifycss_bin: '/usr/local/bin/uglifycss'
+    uglifyjs_bin: '/usr/local/bin/uglifyjs'
+    node_bin: '/usr/bin/nodejs'

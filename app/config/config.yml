@@ -75,8 +75,16 @@ swiftmailer:
 assetic:
     debug:          '%kernel.debug%'
     use_controller: '%kernel.debug%'
+    node:           '%node_bin%'
     filters:
-        cssrewrite: ~
+        cssrewrite:
+            apply_to: '\.css$'
+        uglifycss:
+            bin: '%uglifycss_bin%'
+            apply_to: '\.css$'
+        uglifyjs2:
+            bin: '%uglifyjs_bin%'
+            apply_to: '\.js$'
 
 sonata_seo:
     encoding:         UTF-8
