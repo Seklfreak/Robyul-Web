@@ -20,6 +20,13 @@ class DefaultController extends Controller
      */
     public function commandsAction()
     {
+        $seoPage = $this->container->get('sonata.seo.page');
+        $seoPage
+            ->setTitle("Commands - The KPop Discord Bot - Robyul")
+            ->addMeta('name', 'description', "View a list of all Robyul Discord Bot commands here.")
+            ->addMeta('property', 'og:description', "View a list of all Robyul Discord Bot commands here.");
+        $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
+
         return $this->render('RobyulWebBundle:Default:commands.html.twig');
     }
 
@@ -28,6 +35,13 @@ class DefaultController extends Controller
      */
     public function profileBackgrounds()
     {
+        $seoPage = $this->container->get('sonata.seo.page');
+        $seoPage
+            ->setTitle("Profile Backgrounds - The KPop Discord Bot - Robyul")
+            ->addMeta('name', 'description', "Customize your Robyul Discord Bot Profile using Background Pictures.")
+            ->addMeta('property', 'og:description', "Customize your Robyul Discord Bot Profile using Background Pictures.");
+        $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
+
         $conn = \r\connect('localhost', 28015, $this->container->getParameter('rethinkdb_database'));
 
         $backgroundsIterator = \r\table("profile_backgrounds")->run($conn);
@@ -47,6 +61,11 @@ class DefaultController extends Controller
      */
     public function imprintAction()
     {
+        $seoPage = $this->container->get('sonata.seo.page');
+        $seoPage
+            ->setTitle("Impressum - The KPop Discord Bot - Robyul");
+        $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
+
         return $this->render('RobyulWebBundle:Default:imprint.html.twig');
     }
 
@@ -55,6 +74,11 @@ class DefaultController extends Controller
      */
     public function privacyPolicyAction()
     {
+        $seoPage = $this->container->get('sonata.seo.page');
+        $seoPage
+            ->setTitle("Datenschutzerklärung - The KPop Discord Bot - Robyul");
+        $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
+
         return $this->render('RobyulWebBundle:Default:privacyPolicy.html.twig');
     }
 }
