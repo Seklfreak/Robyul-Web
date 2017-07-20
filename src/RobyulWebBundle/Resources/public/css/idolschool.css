@@ -1,0 +1,111 @@
+.idolschool-footer {
+    margin-top: 1rem;
+}
+
+#chart {
+    width: 500px;
+}
+
+#chart tbody {
+    display: block;
+    overflow-y: scroll;
+    max-height: 540px;
+    width: 400px;
+}
+
+#top #latestRank, #top #letter, #top #rankChange, #top .smWidth {
+    width: 60px;
+}
+
+#top #rankChange, #top .rankWidth {
+    width: 70px;
+}
+
+#top #name, #top .nameWidth {
+    width: 270px;
+}
+
+#top th {
+    text-align: left;
+    border-bottom: 2px solid #ccc;
+    padding: 10px 15px !important;
+}
+
+.note {
+    background: black;
+    color: white;
+    display: inline-block;
+    position: absolute;
+    box-sizing: border-box;
+    text-align: center;
+    padding: 8px 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 100%;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#top {
+    table-layout: fixed;
+    width: 400px;
+    font-size: 13px;
+}
+
+#top #topBody tr:hover {
+    background: #e6e6e6 !important;
+}
+
+#top #topBody tr.wanna-members {
+    background: #eee;
+}
+
+#top td {
+    padding: 10px 15px;
+    border-bottom: 1px solid #ccc;
+}
+
+.smallCaps {
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 12px;
+    color: #888;
+}
+
+img.arrow {
+    height: 10px;
+    margin-left: 5px;
+    margin-bottom: 3px;
+}
+
+.change {
+    padding-left: 3px;
+    font-weight: bold;
+}
+
+.change.up {
+    color: #00a500;
+}
+
+.change.down {
+    color: #d60a2a;
+}
+
+.axis path {
+    fill: none;
+    stroke: black;
+}
+
+.axis line {
+    stroke: black;
+}
+
+path.ranking {
+    fill: none;
+    cursor: pointer;
+}
+
+#pic {
+    height: 150px;
+    width: 150px;
+}

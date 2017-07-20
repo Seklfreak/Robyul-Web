@@ -33,6 +33,7 @@
                 }
             })});
     </script>
+    {% block header %}{% endblock %}
 </head>
 
 <body>
@@ -60,6 +61,10 @@
             <li class="nav-item{% if app.request.attributes.get('_route') == 'robyulweb_default_profilebackgrounds' %} active{% endif %}">
                 <a class="nav-link" href="{{ path('robyulweb_default_profilebackgrounds') }}">Backgrounds{% if
                     app.request.attributes.get('_route') == 'robyulweb_default_profilebackgrounds' %} <span class="sr-only">(current)</span>{% endif %}</a>
+            </li>
+            <li class="nav-item{% if app.request.attributes.get('_route') == 'robyulweb_idolschool_index' %} active{% endif %}">
+                <a class="nav-link" href="{{ path('robyulweb_idolschool_index') }}">Idol School{% if
+                    app.request.attributes.get('_route') == 'robyulweb_idolschool_index' %} <span class="sr-only">(current)</span>{% endif %}</a>
             </li>
             {#<li class="nav-item">
                 <a class="nav-link disabled" href="#">Disabled</a>
@@ -89,11 +94,9 @@
     </div>
 </nav>
 
-<div class="container">
+<div class="{% block containerclass %}container{% endblock %}">
 
-    <div class="container">
-        {% block content %}{% endblock %}
-    </div>
+    {% block content %}{% endblock %}
 
     <div class="footer">
         {% block footer %}
@@ -103,7 +106,6 @@
     </div>
 
 </div><!-- /.container -->
-
 
 <script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
 <script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
@@ -136,5 +138,6 @@
     ga('send', 'pageview');
 </script>
 {% endif %}
+{% block scripts %}{% endblock %}
 </body>
 </html>

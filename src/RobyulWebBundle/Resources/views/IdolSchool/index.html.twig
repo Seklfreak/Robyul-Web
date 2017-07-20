@@ -1,0 +1,65 @@
+{% extends "RobyulWebBundle:Default:base.html.twig" %}
+
+{% block header %}
+    {% stylesheets '@RobyulWebBundle/Resources/public/css/idolschool.css' filter='cssrewrite' %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
+{% block title %}Idol School Ranking - {% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-7">
+            <div id="graph">
+                <div class="row">
+                    <div class="col-12">
+                        <div id="plot">
+                            <div class="note" id="note0"></div>
+                            <div class="note" id="note1"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-end" id="profile">
+                    <div class="col-12 col-md-3">
+                        <img src="#" id="pic">
+                    </div>
+                    <div class="col-12 col-md-5">
+                        <h4 id="infoName"></h4>
+                        <div id="infoRank"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div id="chart">
+                <h1>Current Rankings</h1>
+                <table id="top">
+                    <thead>
+                    <tr class="smallCaps">
+                        <th id="latestRank" class="selectedSort">Rank</th>
+                        <th id="name">Name</th>
+                        <th id="rankChange">Change</th>
+                    </tr>
+                    </thead>
+                    <tbody id="topBody">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 idolschool-footer">
+            <a href="https://p101s2.github.io/" target="_blank">build using p101s2.github.io</a> -
+            <a href="https://discord.gg/7Vft9B3" target="_blank">join the Idol School discord</a>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://d3js.org/d3.v4.js"></script>
+    {% javascripts
+    '@RobyulWebBundle/Resources/public/js/idolschool.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
