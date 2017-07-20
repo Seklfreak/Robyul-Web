@@ -19,14 +19,6 @@ var episodes = [1, 2];
 var totalData;
 var dFirst;
 
-var colors = {
-    "A": "#fb9fcb",
-    "B": "#ff951c",
-    "C": "#fff200",
-    "D": "#00a500",
-    "F": "gray"
-};
-
 // Set up plot
 var svg = d3.select("#plot").append("svg")
     .attr("class", "axis")
@@ -40,7 +32,7 @@ var plot = svg.append("g").attr("transform", "translate(" + padding + "," + padd
 setXAxis();
 
 // Get data
-d3.csv("/bundles/robyulweb/csv/idolschool.csv", parseLine, function (err, data) {
+d3.csv("/bundles/robyulweb/csv/idolschool.v1.csv", parseLine, function (err, data) {
     totalData = processData(data);
     plotData(data);
     selectLine(dFirst, "#line1");
@@ -161,7 +153,7 @@ function getImageSource(d) {
 }
 
 function getBackground(d) {
-    return colors[d.letter];
+    return d.color;
 }
 
 function resetLines() {
@@ -349,7 +341,8 @@ function parseLine(row) {
     r.name = row.Names;
     r.company = "";
     r.letter = "";
-    r.specialNote = "";
+    r.specialNote = row.Notes;
+    r.color = row.Color;
     r.ranking = [];
     episodes.forEach(function(episode, i) {
         var rank = getRank(row["Episode " + episode]);
