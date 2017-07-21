@@ -102,7 +102,7 @@
             <ul class="list-unstyled">
                 <li><code>{{ discord_bot_prefix }}vlive <span class="arg">V Live channel name</span></code> get information about a V Live channel</li>
                 <li><code>{{ discord_bot_prefix }}vlive list</code> view all active V Live channel feeds on this server</li>
-                <li><code>{{ discord_bot_prefix }}vlive add <span class="arg">V Live channel name</span> <span class="opt-arg">name or id of the role to mention</span></code> adds a V Live channel feed to the specific channel. Tags the role if specified. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ discord_bot_prefix }}vlive add <span class="arg">V Live channel name</span> <span class="arg">discord #channel or channel id</span> <span class="opt-arg">name or id of the role to mention</span></code> adds a V Live channel feed to the specific channel. Tags the role if specified. <span class="badge badge-default">Mod</span></li>
                 <li><code>{{ discord_bot_prefix }}vlive delete <span class="arg">v live channel id</span></code> delete a V Live channel feed. Use <code>{{ discord_bot_prefix }}vlive list</code> to get the channel id. <span class="badge badge-default">Mod</span></li>
             </ul>
             </p>
@@ -116,7 +116,7 @@
             <ul class="list-unstyled">
                 <li><code>{{ discord_bot_prefix }}twitter <span class="arg">twitter username</span></code> get information about a Twitter account</li>
                 <li><code>{{ discord_bot_prefix }}twitter list</code> view all active Twitter feeds on this server</li>
-                <li><code>{{ discord_bot_prefix }}twitter add <span class="arg">twitter username</span></code> adds a Twitter feed to the specific channel. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ discord_bot_prefix }}twitter add <span class="arg">twitter username</span> <span class="arg">discord #channel or channel id</span></code> adds a Twitter feed to the specific channel. <span class="badge badge-default">Mod</span></li>
                 <li><code>{{ discord_bot_prefix }}twitter delete <span class="arg">twitter feed id</span></code> delete a Twitter feed. Use <code>{{ discord_bot_prefix }}twitter list</code> to get the feed id. <span class="badge badge-default">Mod</span></li>
             </ul>
             </p>
@@ -130,7 +130,7 @@
             <ul class="list-unstyled">
                 <li><code>{{ discord_bot_prefix }}instagram <span class="arg">instagram username</span></code> get information about an Instagram account</li>
                 <li><code>{{ discord_bot_prefix }}instagram list</code> view all active Instagram feeds on this server</li>
-                <li><code>{{ discord_bot_prefix }}instagram add <span class="arg">instagram username</span></code> adds an Instagram feed to the specific channel. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ discord_bot_prefix }}instagram add <span class="arg">instagram username</span> <span class="arg">discord #channel or channel id</span></code> adds an Instagram feed to the specific channel. <span class="badge badge-default">Mod</span></li>
                 <li><code>{{ discord_bot_prefix }}instagram delete <span class="arg">instagram feed id</span></code> delete an Instagram feed. Use <code>{{ discord_bot_prefix }}instagram list</code> to get the feed id. <span class="badge badge-default">Mod</span></li>
             </ul>
             </p>
@@ -144,7 +144,7 @@
             <ul class="list-unstyled">
                 <li><code>{{ discord_bot_prefix }}facebook <span class="arg">facebook page name</span></code> get information about a Facebook page</li>
                 <li><code>{{ discord_bot_prefix }}facebook list</code> view all active Facebook page feeds on this server</li>
-                <li><code>{{ discord_bot_prefix }}facebook add <span class="arg">facebook page name</span></code> adds a Facebook page feed to the specific channel. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ discord_bot_prefix }}facebook add <span class="arg">facebook page name</span> <span class="arg">discord #channel or channel id</span></code> adds a Facebook page feed to the specific channel. <span class="badge badge-default">Mod</span></li>
                 <li><code>{{ discord_bot_prefix }}facebook delete <span class="arg">facebook feed id</span></code> delete a Facebook page feed. Use <code>{{ discord_bot_prefix }}facebook list</code> to get the feed id. <span class="badge badge-default">Mod</span></li>
             </ul>
             </p>
@@ -418,7 +418,7 @@
             <ul class="list-unstyled">
                 <li><code>{{ discord_bot_prefix }}twitch <span class="arg">twitch channel name</span></code> get information about a Twitch channel</li>
                 <li><code>{{ discord_bot_prefix }}twitch list</code> view all active Twitch channel feeds on this server</li>
-                <li><code>{{ discord_bot_prefix }}twitch add <span class="arg">twitch channel name</span></code> adds a Twitch channel feed to the specific channel. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ discord_bot_prefix }}twitch add <span class="arg">twitch channel name</span> <span class="arg">discord #channel or channel id</span></code> adds a Twitch channel feed to the specific channel. <span class="badge badge-default">Mod</span></li>
                 <li><code>{{ discord_bot_prefix }}twitch delete <span class="arg">twitch feed id</span></code> delete a Twitch channel feed. Use <code>{{ discord_bot_prefix }}twitch list</code> to get the feed id. <span class="badge badge-default">Mod</span></li>
             </ul>
             </p>
@@ -448,7 +448,7 @@
     </div>
     <div class="card commands-card">
         <div class="card-block">
-            <h4 class="card-title" id="osu"><a href="#osu"">osu!</a></h4>
+            <h4 class="card-title" id="osu"><a href="#osu">osu!</a></h4>
             <h6 class="card-subtitle mb-2 text-muted">View osu! stats.</h6>
             <p class="card-text">
             <ul class="list-unstyled">
