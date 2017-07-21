@@ -58,6 +58,8 @@
                 <li><code>{{ discord_bot_prefix }}profile bio <span class="arg">bio text</span></code> set the bio text of your profile.</li>
                 <li><code>{{ discord_bot_prefix }}profile background <span class="arg">background name</span></code> choose a background for your profile. You can view all backgrounds <a href="{{ path('robyulweb_default_profilebackgrounds') }}">here</a> and submit new ones <a href="https://goo.gl/forms/ZYFCGWNi5tYPAfki2" target="_blank">here</a>.</li>
                 <li><code>{{ discord_bot_prefix }}profile badge</code> choose badges for your profile. The badges you can choose vary per server.</li>
+                <li><code>{{ discord_bot_prefix }}profile color <a class="arg" href="#" data-toggle="tooltip" title="box: color of the big box in the background; accent: color of the EXP bar; text: color of all text">box|accent|text</a> <a class="opt-arg" href="#" data-toggle="tooltip" title="HEX color">color</a></code> set colors for your profile. Call it without a color to set the default color.</li>
+                <li><code>{{ discord_bot_prefix }}profile opacity <a class="arg" href="#" data-toggle="tooltip" title="box: opacity of the big box in the background; details: opacity of the EXP Bar background, REP background and Name background">box|details</a> <a class="opt-arg" href="#" data-toggle="tooltip" title="0-1 (eg. 0.5)">opacity</a></code> set the opacity for elements of your profile. Call it without an opacity to set the default opacity.</li>
                 <li><code>{{ discord_bot_prefix }}profile badge move <span class="arg">category name</span> <span class="arg">badge name</span> <span class="arg">new spot number</span></code> Move a badge's position on your Profile.</li>
                 <li><code>{{ discord_bot_prefix }}rep <span class="arg">@user or user id</span></code> give a reputation point to the given user.</li>
                 <li><code>{{ discord_bot_prefix }}level <span class="opt-arg">@user or user id</span></code> view level stats.</li>
@@ -357,7 +359,7 @@
             <ul class="list-unstyled">
                 <li><code>{{ discord_bot_prefix }}choose <span class="arg">choice a</span> <span class="arg">choice b</span> <span class="opt-arg">more choices...</span></code> Robyul chooses one of the choices.</li>
                 <li><code>{{ discord_bot_prefix }}roll <a class="opt-arg" href="#" data-toggle="tooltip" title="default 100">max number</a></code> lets Robyul choose a random number between 1 and <a class="opt-arg" href="#" data-toggle="tooltip" title="default 100">max number</a>.</li>
-                <li><code>{{ discord_bot_prefix }}8ball <a class="arg">question</a></code> he always has an answer.</li>
+                <li><code>{{ discord_bot_prefix }}8ball <span class="arg">question</span></code> he always has an answer.</li>
             </ul>
             </p>
         </div>
