@@ -31,6 +31,21 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/statistics")
+     */
+    public function statisticsAction()
+    {
+        $seoPage = $this->container->get('sonata.seo.page');
+        $seoPage
+            ->setTitle("Statistics - The KPop Discord Bot - Robyul")
+            ->addMeta('name', 'description', "View statistics for Robyul.")
+            ->addMeta('property', 'og:description', "View statistics for Robyul.");
+        $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
+
+        return $this->render('RobyulWebBundle:Default:statistics.html.twig');
+    }
+
+    /**
      * @Route("/profile/backgrounds")
      */
     public function profileBackgrounds()

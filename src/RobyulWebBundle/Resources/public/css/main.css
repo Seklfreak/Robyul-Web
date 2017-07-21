@@ -24,6 +24,13 @@ body {
 .background-card > img {
     object-fit: cover; max-height: 300px; width: 100%;
 }
+.datadog-iframe {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2000px;
+    border: none;
+}
 @media (min-width: 768px) {
     .patreon-nav {
         margin-left: 1rem;
