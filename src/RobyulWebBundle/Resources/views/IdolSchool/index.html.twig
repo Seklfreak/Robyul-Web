@@ -1,7 +1,7 @@
 {% extends "RobyulWebBundle:Default:base.html.twig" %}
 
 {% block header %}
-    {% stylesheets '@RobyulWebBundle/Resources/public/css/idolschool.css' %}
+    {% stylesheets '@RobyulWebBundle/Resources/public/css/idolschool.css' output='static/css/idolschool.css' %}
     <link rel="stylesheet" href="{{ asset_url }}"/>
     {% endstylesheets %}
 {% endblock %}
@@ -57,7 +57,7 @@
 {% block scripts %}
     <script src="https://d3js.org/d3.v4.js"></script>
     {% javascripts
-    '@RobyulWebBundle/Resources/public/js/idolschool.js' %}
+    '@RobyulWebBundle/Resources/public/js/idolschool.js' output='static/js/idolschool.js' %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}

@@ -14,7 +14,7 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
-    {% stylesheets '@RobyulWebBundle/Resources/public/css/main.css' %}
+    {% stylesheets '@RobyulWebBundle/Resources/public/css/main.css' output='static/css/main.css' %}
         <link rel="stylesheet" href="{{ asset_url }}" />
     {% endstylesheets %}
     <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css" />
@@ -46,7 +46,7 @@
         <span class="navbar-toggler-icon"></span>
     </button>
     <a class="navbar-brand" href="{{ path('robyulweb_default_index') }}">
-        {% image '@RobyulWebBundle/Resources/public/images/robyulblush.png' %}
+        {% image '@RobyulWebBundle/Resources/public/images/robyulblush.png' output='static/images/robyulblush.png' %}
         <img src="{{ asset_url }}" width="30" height="30" class="d-inline-block align-top" alt="robyul">
         {% endimage %}
         Robyul
@@ -86,7 +86,7 @@
             This website is in an early Alpha
         </span>
         <span class="navbar-text patreon-nav">
-            <a href="https://www.patreon.com/sekl" target="_blank">{% image '@RobyulWebBundle/Resources/public/images/become_a_patron_button.png' %}
+            <a href="https://www.patreon.com/sekl" target="_blank">{% image '@RobyulWebBundle/Resources/public/images/become_a_patron_button.png' output='static/images/become_a_patron_button.png' %}
                 <img src="{{ asset_url }}" alt="patreon">
                 {% endimage %}</a>
         </span>
@@ -117,7 +117,7 @@
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 {% javascripts
 '@RobyulWebBundle/Resources/public/js/main.js'
-'@RobyulWebBundle/Resources/public/js/ie10-viewport-bug-workaround.js' %}
+'@RobyulWebBundle/Resources/public/js/ie10-viewport-bug-workaround.js' output='static/js/main.js' %}
 <script src="{{ asset_url }}"></script>
 {% endjavascripts %}
 {% if ga_tracking_id != "" %}
