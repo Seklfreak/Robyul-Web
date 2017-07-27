@@ -25,3 +25,5 @@ parameters:
     uglifycss_bin: '/usr/local/bin/uglifycss'
     uglifyjs_bin: '/usr/local/bin/uglifyjs'
     node_bin: '/usr/bin/nodejs'
+
+    redis_client: 'redis://localhost:6379'
