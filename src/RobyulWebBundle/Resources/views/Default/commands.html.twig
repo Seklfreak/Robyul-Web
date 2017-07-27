@@ -74,7 +74,7 @@
                 <li><code>{{ discord_bot_prefix }}profile badge deny <span class="arg">@user or user id</span> <span class="arg">category name</span> <span class="arg">badge name</span></code> make a badge unavailable for an user regardless of level requirement. Run it again to remove user from the list again. <span class="badge badge-default">Mod</span></li>
                 <li><code>{{ discord_bot_prefix }}profile badge list</code> List all badge categories.</li>
                 <li><code>{{ discord_bot_prefix }}profile badge list <span class="arg">category name</span></code> List all badges in a category.</li>
-                <li><code>{{ discord_bot_prefix }}levels reset user <span class="arg">@user or user id</span></code> resets the EXP and Level for the given user on the server.</li>
+                <li><code>{{ discord_bot_prefix }}levels reset user <span class="arg">@user or user id</span></code> resets the EXP and Level for the given user on the server. <span class="badge badge-default">Admin</span></li>
                 <li><code>{{ discord_bot_prefix }}levels ignore list</code> shows currently ignored users and channels <span class="badge badge-default">Mod</span>.</li>
                 <li><code>{{ discord_bot_prefix }}levels ignore user <span class="arg">@user or user id</span></code> makes Robyul ignore one users messages for EXP. <span class="badge badge-default">Admin</span></li>
                 <li><code>{{ discord_bot_prefix }}levels ignore channel <span class="arg">#channel or channel id</span></code> makes Robyul ignore a channels messages for EXP. <span class="badge badge-default">Admin</span></li>
@@ -254,6 +254,7 @@
                 <li><code>{{ discord_bot_prefix }}autorole add <span class="arg">role name or role id</span></code> robyul will assign the role to new members. <span class="badge badge-default">Admin</span></li>
                 <li><code>{{ discord_bot_prefix }}autorole remove <span class="arg">role name or role id</span></code> robyul will no longer assign the role to new members. <span class="badge badge-default">Admin</span></li>
                 <li><code>{{ discord_bot_prefix }}autorole list</code> lists all active autoroles.</li>
+                <li><code>{{ discord_bot_prefix }}autorole apply <span class="arg">role name or role id</span></code> assign a role to all members on your server. <span class="badge badge-default">Admin</span></li>
             </ul>
             </p>
         </div>
