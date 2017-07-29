@@ -31,7 +31,7 @@ framework:
     fragments: ~
     http_method_override: true
     assets:
-        version: 'v4'
+        version: 'v5'
     php_errors:
         log: true
 
@@ -128,3 +128,22 @@ snc_redis:
             alias: default
             dsn: '%redis_client%'
             logging: %kernel.debug%
+
+hwi_oauth:
+    firewall_names: [secured_area]
+    resource_owners:
+        discord:
+            type:                oauth2
+            client_id:           284003302629179392
+            client_secret:       uYUsiWYQi-rrBydlouKCNoRCNMqtPmnr
+            access_token_url:    https://discordapp.com/api/oauth2/token
+            authorization_url:   https://discordapp.com/api/oauth2/authorize
+            infos_url:           https://discordapp.com/api/v6/users/@me
+            scope:               "identify guilds"
+            user_response_class: HWI\Bundle\OAuthBundle\OAuth\Response\PathUserResponse
+            paths:
+                identifier: id
+                nickname:   id
+                realname:   id
+            options:
+                csrf: true

@@ -40,3 +40,19 @@ body {
 .gist-data {
     max-height: 500px;
 }
+
+.login-link {
+    color: rgba(255, 255, 255, 0.5);
+}
+.login-link img {
+    display: inline;
+    padding: 0;
+    height: 30px;
+    width: 30px;
+    border-radius: 15px;
+}
+.profile-big-avatar {
+    height: 128px;
+    width: 128px;
+    border-radius: 64px;
+}
