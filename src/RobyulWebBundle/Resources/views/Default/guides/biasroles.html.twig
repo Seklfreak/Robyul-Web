@@ -1,0 +1,58 @@
+{% extends "RobyulWebBundle:Default:base.html.twig" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <h1>Robyul Automatic Bias Picker Guide</h1>
+            <p>
+                This tutorial will go over how to setup the necessary .json file to make the bias picker work. Unless you want to spend time writing the entire config file yourself I recommend that you use the following template when making your file.
+            </p>
+            <script src="https://gist.github.com/Seklfreak/8f057e415445a884d6febe321874ae34.js?file=robyul-bias-template.json"></script>
+            <p>
+                First off you will have to get a program that can properly structure the .json file, for this I recommend either Notepad++ or Sublime Text. The template is setup for ten primary and secondary member roles + three additional roles but this can easily be adjusted by either removing or adding additional fields for each of your roles. The field for one role looks like:
+            </p>
+            <script src="https://gist.github.com/Seklfreak/8f057e415445a884d6febe321874ae34.js?file=one-field-template.json"></script>
+            <p>
+                Next up is understanding the labels in the document.<br>
+                <code>"Label": "Primary Bias Roles"</code> this field refers to the category of the roles listed below.<br>
+                <code>"Pool": "bias-roles"</code> this label should be left either empty or with bias-roles within it depending on which roles it concerns.<br>
+                <code>"Hidden": true</code> this affect whether the you can see the line in the picture below in your roles channel or not when you use the “_bias help” command in Discord. For bias roles you should make the primary bias category hidden and only show the secondary bias category to avoid two identical lines when using the “_bias help” command.
+            </p>
+            {% image '@RobyulWebBundle/Resources/public/images/guides/biasroles/image1.png' output='static/images/guides-biasroles-image1.png' %}
+            <img src="{{ asset_url }}">
+            {% endimage %}</a>
+            <p>
+                <code>"Limit": 1</code> this decides how many of the roles below a user can get, for primary roles “1” is recommended while for subroles you can choose yourself. Write “-1” for unlimited.
+            </p>
+            <p>
+                Next up is the field for each role. The most important thing about this is that two roles can not have the same names. This means that you have to differ between the primary and secondary bias roles in some way, the template uses a ★ as an example of this.<br>
+                <code>"Name": "Member 3★"</code> this should be the role name.<br>
+                <code>"Print": "Member 3"</code> this is what the “_bias help” command shows in Discord.<br>
+                <code>"Aliases": [
+                    "Alias 1",
+                    "Alias 2"
+                    ]</code> aliases are the keywords that a person can use to the get the role.<br>
+                Here is an example of how an complete field for a primary bias role (note the diamond used to differ between primary and secondary roles) can look:
+            </p>
+            <script src="https://gist.github.com/Seklfreak/8f057e415445a884d6febe321874ae34.js?file=one-field-example.json"></script>
+            <p>
+                <code>"Message": ""</code> this is the help message you see when you use the “_bias help” command.<br>
+                For example: <code>"Message": "The bias role you assign **first** will be your **primary role** and **appear above the others**."</code> looks like:
+            </p>
+            {% image '@RobyulWebBundle/Resources/public/images/guides/biasroles/image2.png' output='static/images/guides-biasroles-image2.png' %}
+            <img src="{{ asset_url }}">
+            {% endimage %}</a>
+            <p>
+                I recommend using the <code>“Message”: “”</code> included with the secondary bias roles category for this and leaving all other empty.
+            </p>
+            <p>
+                When you have setup the .json file as you want/need it you should input the entire document on this website: <a href="https://jsonformatter.org/" target="_blank">jsonformatter.org</a>. This will check so that your code is working as intended and otherwise notify you about any errors. These are usually simply missed brackets or commas but if can’t manage to get it to work (we’re aware the code can be overwhelming) you should join the Discord server dedicated to Robyul <a href="https://discord.gg/s5qZvUV" target="_blank">https://discord.gg/s5qZvUV</a> where me, <code>sunny#9418</code> or <code>Sekl#7397</code> will be able to help you.
+            </p>
+            <p>
+                <b>Written by the amazing 24/7 customer support sunny.</b>
+            </p>
+        </div>
+
+    </div>
+{% endblock %}
+

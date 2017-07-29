@@ -48,7 +48,7 @@ class DefaultController extends Controller
     /**
      * @Route("/profile/backgrounds")
      */
-    public function profileBackgrounds()
+    public function profileBackgroundsAction()
     {
         $seoPage = $this->container->get('sonata.seo.page');
         $seoPage
@@ -69,6 +69,21 @@ class DefaultController extends Controller
 
         return $this->render('RobyulWebBundle:Default:profileBackgrounds.html.twig',
             array('backgrounds' => $backgrounds));
+    }
+
+    /**
+     * @Route("/guides/bias-roles")
+     */
+    public function biasRoleGuidesAction()
+    {
+        $seoPage = $this->container->get('sonata.seo.page');
+        $seoPage
+            ->setTitle("Bias Roles - Guides - The KPop Discord Bot - Robyul")
+            ->addMeta('name', 'description', "Learn how to set up Bias Role self assignment for your users.")
+            ->addMeta('property', 'og:description', "Learn how to set up Bias Role self assignment for your users.");
+        $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
+
+        return $this->render('RobyulWebBundle:Default:guides/biasroles.html.twig');
     }
 
     /**
