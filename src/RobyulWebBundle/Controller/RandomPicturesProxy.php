@@ -42,7 +42,7 @@ class RandomPicturesProxy extends Controller
                 Response::HTTP_OK,
                 array(
                     'Content-Type' => 'image/'.$_format,
-                    'Content-Disposition' => 'inline; filename="'.$slug.'"'
+                    'Content-Disposition' => 'inline; filename="'.$slug.'.'.$_format.'"'
                 )
             );
         } else {
