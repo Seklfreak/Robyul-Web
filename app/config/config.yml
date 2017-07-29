@@ -134,12 +134,12 @@ hwi_oauth:
     resource_owners:
         discord:
             type:                oauth2
-            client_id:           284003302629179392
-            client_secret:       uYUsiWYQi-rrBydlouKCNoRCNMqtPmnr
+            client_id:           '%discord_client_id%'
+            client_secret:       '%discord_client_secret%'
             access_token_url:    https://discordapp.com/api/oauth2/token
             authorization_url:   https://discordapp.com/api/oauth2/authorize
             infos_url:           https://discordapp.com/api/v6/users/@me
-            scope:               "identify guilds"
+            scope:               'identify guilds'
             user_response_class: HWI\Bundle\OAuthBundle\OAuth\Response\PathUserResponse
             paths:
                 identifier: id

@@ -27,3 +27,6 @@ parameters:
     node_bin: '/usr/bin/nodejs'
 
     redis_client: 'redis://localhost:6379'
+
+    discord_client_id: ~
+    discord_client_secret: ~
