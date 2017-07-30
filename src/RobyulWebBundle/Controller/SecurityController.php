@@ -21,8 +21,6 @@ class SecurityController extends Controller
             ->addMeta('property', 'og:description', "View your Profile.");
         $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
 
-        dump($this->getUser());
-
         $allGuilds = Unirest\Request::get('http://localhost:2021/bot/guilds');
         $isInGuilds = array();
 
