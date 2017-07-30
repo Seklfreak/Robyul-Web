@@ -2,12 +2,16 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-2">
+        <div class="col-12 col-md-2">
             <img class="profile-big-avatar" src="{{ app.user.avatarUrl }}?size=256">
         </div>
-        <div class="col-10">
+        <div class="col-12 col-md-4">
             <h1>{{ app.user.discordUsername }}</h1>
             <p>You are in <b>{{ memberOfGuilds|length }} servers</b> with Robyul.</p>
+        </div>
+        <div class="col-12 col-md-6">
+            <iframe width="400" height="300" frameborder="0" scrolling="no" src="{{ path('robyulweb_frame_profile',
+            {'userID': app.user.id, 'guildID': 'global'}) }}"></iframe>
         </div>
     </div>
     <div class="row">
@@ -22,7 +26,6 @@
                         {% endif %}
                         {# TODO: Placeholder image #}
                         </p>
-
                     </li>
                 {% endfor %}
             </ul>
