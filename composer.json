@@ -32,6 +32,7 @@
         "rybakit/msgpack": "^0.2.2",
         "sensio/distribution-bundle": "^5.0.19",
         "sensio/framework-extra-bundle": "^3.0.2",
+        "sentry/sentry-symfony": "^0.8.2",
         "snc/redis-bundle": "2.x-dev",
         "sonata-project/seo-bundle": "^2.2",
         "symfony/assetic-bundle": "^2.8",

@@ -20,7 +20,8 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Sonata\SeoBundle\SonataSeoBundle(),
             new Snc\RedisBundle\SncRedisBundle(),
-            new HWI\Bundle\OAuthBundle\HWIOAuthBundle()
+            new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
+            new Sentry\SentryBundle\SentryBundle()
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

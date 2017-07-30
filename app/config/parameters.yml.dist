@@ -30,3 +30,5 @@ parameters:
 
     discord_client_id: ~
     discord_client_secret: ~
+
+    sentry_dns: ~

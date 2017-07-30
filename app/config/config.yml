@@ -147,3 +147,6 @@ hwi_oauth:
                 realname:   id
             options:
                 csrf: true
+
+sentry:
+    dsn: "%sentry_dns%"
