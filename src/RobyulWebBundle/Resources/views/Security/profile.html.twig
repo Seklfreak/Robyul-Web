@@ -14,8 +14,8 @@
         <div class="col-12">
             <ul class="list-inline" style="margin-top: 1rem;">
                 {% for guild in memberOfGuilds %}
-                    <li class="list-inline-item">
-                        <h4>{{ guild.Name }}</h4>
+                    <li class="list-inline-item" style="max-width: 128px;">
+                        <h5 style="text-align: center;">{{ guild.Name }}</h5>
                         {% if guild.Icon != "" %}
                             <img class="profile-big-avatar"
                                  src="https://cdn.discordapp.com/icons/{{ guild.ID }}/{{ guild.Icon }}.jpg?size=256">
