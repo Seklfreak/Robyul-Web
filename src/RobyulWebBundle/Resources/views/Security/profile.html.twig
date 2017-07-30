@@ -7,7 +7,25 @@
         </div>
         <div class="col-10">
             <h1>{{ app.user.discordUsername }}</h1>
-            <p>Work In Progress...</p>
+            <p>You are in <b>{{ memberOfGuilds|length }} servers</b> with Robyul.</p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <ul class="list-inline" style="margin-top: 1rem;">
+                {% for guild in memberOfGuilds %}
+                    <li class="list-inline-item">
+                        <h4>{{ guild.Name }}</h4>
+                        {% if guild.Icon != "" %}
+                            <img class="profile-big-avatar"
+                                 src="https://cdn.discordapp.com/icons/{{ guild.ID }}/{{ guild.Icon }}.jpg?size=256">
+                        {% endif %}
+                        {# TODO: Placeholder image #}
+                        </p>
+
+                    </li>
+                {% endfor %}
+            </ul>
         </div>
     </div>
 {% endblock %}

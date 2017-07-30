@@ -5,6 +5,7 @@ namespace RobyulWebBundle\Controller;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Unirest;
 
 class SecurityController extends Controller
 {
@@ -22,6 +23,18 @@ class SecurityController extends Controller
 
         dump($this->getUser());
 
-        return $this->render('RobyulWebBundle:Security:profile.html.twig');
+        $allGuilds = Unirest\Request::get('http://localhost:2021/bot/guilds');
+        $isInGuilds = array();
+
+        foreach ($allGuilds->body as $guild) {
+            $member = Unirest\Request::get('http://localhost:2021/member/'.$guild->ID.'/'.$this->getUser()->getID().'/is');
+            if ($member->body->IsMember === true) {
+                $isInGuilds[] = $guild;
+            }
+        }
+
+        return $this->render('RobyulWebBundle:Security:profile.html.twig', array(
+            'memberOfGuilds' => $isInGuilds
+        ));
     }
 }
