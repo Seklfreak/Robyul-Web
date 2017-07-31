@@ -5,6 +5,8 @@ namespace RobyulWebBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Unirest;
+use MessagePack\Packer;
+use MessagePack\Unpacker;
 
 class DefaultController extends Controller
 {
@@ -58,15 +60,27 @@ class DefaultController extends Controller
             ->addMeta('property', 'og:description', "Customize your Robyul Discord Bot Profile using Background Pictures.");
         $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
 
-        $conn = \r\connect('localhost', 28015, $this->container->getParameter('rethinkdb_database'));
+        $unpacker = new Unpacker();
+        $packer = new Packer();
+        $redis = $this->container->get('snc_redis.default');
 
-        $backgroundsIterator = \r\table("profile_backgrounds")->run($conn);
+        $key = 'robyul2-web:db:backgrounds';
+        if ($redis->exists($key) == true) {
+            $backgrounds = unserialize($unpacker->unpack($redis->get($key)));
+        } else {
+            $conn = \r\connect('localhost', 28015, $this->container->getParameter('rethinkdb_database'));
 
-        $backgrounds = array();
-        foreach ($backgroundsIterator as $backgroundIterator) {
-            $backgrounds[$backgroundIterator["id"]] = iterator_to_array($backgroundIterator);
+            $backgroundsIterator = \r\table("profile_backgrounds")->run($conn);
+
+            $backgrounds = array();
+            foreach ($backgroundsIterator as $backgroundIterator) {
+                $backgrounds[$backgroundIterator["id"]] = iterator_to_array($backgroundIterator);
+            }
+            ksort($backgrounds, SORT_STRING|SORT_FLAG_CASE);
+
+            $redis->set($key, $packer->pack(serialize($backgrounds)));
+            $redis->expireat($key, strtotime("+15 minutes"));
         }
-        ksort($backgrounds, SORT_STRING|SORT_FLAG_CASE);
 
         return $this->render('RobyulWebBundle:Default:profileBackgrounds.html.twig',
             array('backgrounds' => $backgrounds));
@@ -120,13 +134,27 @@ class DefaultController extends Controller
      */
     public function rankingAction($guildID)
     {
+        $unpacker = new Unpacker();
+        $packer = new Packer();
+        $redis = $this->container->get('snc_redis.default');
+
         $guildName = 'Global';
         $metaName = 'View the Global Robyul Ranking.';
         $guildIcon = '';
+
+        $key = 'robyul2-web:api:guild:'.$guildID;
         if ($guildID !== 'global') {
-            $guildInfo = Unirest\Request::get('http://localhost:2021/guild/'.$guildID);
-            $guildName = $guildInfo->body->Name;
-            $guildIcon = $guildInfo->body->Icon;
+            if ($redis->exists($key) == true) {
+                $guildData = $unpacker->unpack($redis->get($key));
+            } else {
+                $guildInfo = Unirest\Request::get('http://localhost:2021/guild/'.$guildID);
+                $guildData = (array) $guildInfo->body;
+
+                $redis->set($key, $packer->pack($guildData));
+                $redis->expireat($key, strtotime("+1 hour"));
+            }
+            $guildName = $guildData['Name'];
+            $guildIcon = $guildData['Icon'];
             $metaName = 'View the Robyul Ranking for '.$guildName.'.';
         }
 
@@ -138,13 +166,22 @@ class DefaultController extends Controller
         $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
 
 
-        $rankingInfo = Unirest\Request::get('http://localhost:2021/rankings/'.$guildID);
+        $key = 'robyul2-web:api:rankings:'.$guildID;
+        if ($redis->exists($key) == true) {
+            $rankingData = unserialize($unpacker->unpack($redis->get($key)));
+        } else {
+            $rankingInfo = Unirest\Request::get('http://localhost:2021/rankings/'.$guildID);
+            $rankingData = (array) $rankingInfo->body;
+
+            $redis->set($key, $packer->pack(serialize($rankingData)));
+            $redis->expireat($key, strtotime("+1 hour"));
+        }
 
         return $this->render('RobyulWebBundle:Default:ranking.html.twig', array(
             'guildID' => $guildID,
             'guildName' => $guildName,
             'guildIcon' => $guildIcon,
-            'rankings' => $rankingInfo->body
+            'rankings' => $rankingData
         ));
     }
 }

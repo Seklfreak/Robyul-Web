@@ -7,6 +7,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Unirest;
 use Symfony\Component\HttpFoundation\Response;
+use MessagePack\Packer;
+use MessagePack\Unpacker;
 
 class FrameController extends Controller
 {
@@ -20,8 +22,21 @@ class FrameController extends Controller
      */
     public function profileAction($userID, $guildID)
     {
-        $profile = Unirest\Request::get('http://localhost:2021/profile/'.$userID.'/'.$guildID);
+        $unpacker = new Unpacker();
+        $packer = new Packer();
+        $redis = $this->container->get('snc_redis.default');
 
-        return new Response($profile->raw_body);
+        $key = 'robyul2-web:api:profile:'.$guildID.':'.$userID;;
+        if ($redis->exists($key) == true) {
+            $profileData = $unpacker->unpack($redis->get($key));
+        } else {
+            $profile = Unirest\Request::get('http://localhost:2021/profile/'.$userID.'/'.$guildID);
+            $profileData = $profile->raw_body;
+
+            $redis->set($key, $packer->pack($profileData));
+            $redis->expireat($key, strtotime("+15 minutes"));
+        }
+
+        return new Response($profileData);
     }
 }
