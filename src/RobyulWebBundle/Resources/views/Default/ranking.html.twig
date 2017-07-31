@@ -3,8 +3,8 @@
 {% block content %}
     <div class="jumbotron ranking-jumbotron">
         {% if guildIcon !=  "" %}
-        <img class="ranking-big-icon"
-             src="https://cdn.discordapp.com/icons/{{ guildID }}/{{ guildIcon }}.jpg?size=256">
+            <img class="ranking-big-icon"
+                 src="https://cdn.discordapp.com/icons/{{ guildID }}/{{ guildIcon }}.jpg?size=256">
         {% else %}
             <i class="fa fa-trophy ranking-big-global-icon" aria-hidden="true"></i>
         {% endif %}
@@ -31,8 +31,14 @@
                 <td>
                 <span class="ranking-table-item" data-profile-iframe-url="{{ path('robyulweb_frame_profile',
                 {'userID': rank.User.ID, 'guildID': guildID}) }}">
-                <img class="profile-medium-avatar"
-                     src="{{ discord_avatar(rank.User.ID, rank.User.AvatarHash) }}?size=128">
+                    {% if rank.User.AvatarHash == "" %}
+                        {% image '@RobyulWebBundle/Resources/public/images/placeholder_icon.jpg' output='static/images/placeholder_icon.jpg' %}
+                        <img class="profile-medium-avatar" src="{{ asset_url }}">
+                                {% endimage %}
+                    {% else %}
+                        <img class="profile-medium-avatar"
+                             src="{{ discord_avatar(rank.User.ID, rank.User.AvatarHash) }}?size=128">
+                    {% endif %}
                     {{ rank.User.Username }}
                     <small>#{{ rank.User.Discriminator }}</small>
                 </span>
