@@ -14,10 +14,6 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
           integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
-
-    {% stylesheets '@RobyulWebBundle/Resources/public/css/main.css' output='static/css/main.css' %}
-    <link rel="stylesheet" href="{{ asset_url }}"/>
-    {% endstylesheets %}
     <link rel="stylesheet" type="text/css"
           href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css"/>
     <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
@@ -39,6 +35,10 @@
             })
         });
     </script>
+    <script src="https://use.fontawesome.com/2351bf315b.js"></script>
+    {% stylesheets '@RobyulWebBundle/Resources/public/css/main.css' output='static/css/main.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
     {% block header %}{% endblock %}
 </head>
 
@@ -71,6 +71,11 @@
                 <a class="nav-link" href="{{ path('robyulweb_default_profilebackgrounds') }}">Backgrounds{% if
                     app.request.attributes.get('_route') == 'robyulweb_default_profilebackgrounds' %} <span
                         class="sr-only">(current)</span>{% endif %}</a>
+            </li>
+            <li class="nav-item{% if app.request.attributes.get('_route') == 'robyulweb_default_ranking' %} active{% endif %}">
+                <a class="nav-link" href="{{ path('robyulweb_default_ranking') }}">Rankings{% if
+                    app.request.attributes.get('_route') == 'robyulweb_default_ranking' %} <span class="sr-only">(current)</span>{% endif %}
+                </a>
             </li>
             <li class="nav-item{% if app.request.attributes.get('_route') == 'robyulweb_default_statistics' %} active{% endif %}">
                 <a class="nav-link" href="{{ path('robyulweb_default_statistics') }}">Statistics{% if

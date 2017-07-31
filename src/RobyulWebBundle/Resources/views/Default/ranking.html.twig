@@ -1,0 +1,48 @@
+{% extends "RobyulWebBundle:Default:base.html.twig" %}
+
+{% block content %}
+    <div class="jumbotron ranking-jumbotron">
+        {% if guildIcon !=  "" %}
+        <img class="ranking-big-icon"
+             src="https://cdn.discordapp.com/icons/{{ guildID }}/{{ guildIcon }}.jpg?size=256">
+        {% else %}
+            <i class="fa fa-trophy ranking-big-global-icon" aria-hidden="true"></i>
+        {% endif %}
+        <h1 class="display-3 ranking-server-title">
+            {% if guildName|lower == "global" %}
+                Global Ranking
+            {% else %}
+                <small>Ranking for</small> {{ guildName }}
+            {% endif %}
+        </h1>
+    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>#</th>
+            <th>User</th>
+            <th>Level</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for rank in rankings.Ranks %}
+            <tr class="ranking-table-row">
+                <th scope="row">{{ rank.Ranking }}</th>
+                <td>
+                <span class="ranking-table-item" data-profile-iframe-url="{{ path('robyulweb_frame_profile',
+                {'userID': rank.User.ID, 'guildID': guildID}) }}">
+                <img class="profile-medium-avatar"
+                     src="{{ discord_avatar(rank.User.ID, rank.User.AvatarHash) }}?size=128">
+                    {{ rank.User.Username }}
+                    <small>#{{ rank.User.Discriminator }}</small>
+                </span>
+                </td>
+                <td>
+                    <small>Level</small> {{ rank.Level }}
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+

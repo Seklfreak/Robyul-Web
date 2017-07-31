@@ -57,6 +57,54 @@ body {
     border-radius: 64px;
 }
 
+.profile-medium-avatar {
+    height: 64px;
+    width: 63px;
+    border-radius: 32px;
+}
+
 .popover {
     max-width: 428px;
+}
+
+.ranking-jumbotron {
+    text-align: center;
+}
+
+.ranking-big-icon {
+    height: 128px;
+    width: 128px;
+    border-radius: 64px;
+    vertical-align: bottom;
+}
+
+.ranking-server-title {
+    display: inline;
+    margin-left: 1rem;
+}
+
+.ranking-server-title small {
+    font-size: 60%;
+    color: #8e8e8e;
+}
+
+.ranking-big-global-icon {
+    font-size: 6em !important;
+    color: #8e8e8e;
+}
+
+.ranking-table-item img {
+    margin-right: 1rem;
+}
+
+.ranking-table-row th small, .ranking-table-row td small {
+    font-size: 60%;
+    color: #8e8e8e;
+}
+
+.ranking-table-row th, .ranking-table-row td {
+    font-size: 2.5rem;
+    font-weight: 300;
+    line-height: 1.1;
+    vertical-align: middle !important;
 }

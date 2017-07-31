@@ -4,6 +4,7 @@ namespace RobyulWebBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Unirest;
 
 class DefaultController extends Controller
 {
@@ -110,5 +111,40 @@ class DefaultController extends Controller
         $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
 
         return $this->render('RobyulWebBundle:Default:privacyPolicy.html.twig');
+    }
+
+    /**
+     * @Route("/ranking/{guildID}",
+     *     defaults={"guildID": "global"}
+     * )
+     */
+    public function rankingAction($guildID)
+    {
+        $guildName = 'Global';
+        $metaName = 'View the Global Robyul Ranking.';
+        $guildIcon = '';
+        if ($guildID !== 'global') {
+            $guildInfo = Unirest\Request::get('http://localhost:2021/guild/'.$guildID);
+            $guildName = $guildInfo->body->Name;
+            $guildIcon = $guildInfo->body->Icon;
+            $metaName = 'View the Robyul Ranking for '.$guildName.'.';
+        }
+
+        $seoPage = $this->container->get('sonata.seo.page');
+        $seoPage
+            ->setTitle($guildName." Ranking - The KPop Discord Bot - Robyul")
+            ->addMeta('name', 'description', $metaName)
+            ->addMeta('property', 'og:description', $metaName);
+        $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
+
+
+        $rankingInfo = Unirest\Request::get('http://localhost:2021/rankings/'.$guildID);
+
+        return $this->render('RobyulWebBundle:Default:ranking.html.twig', array(
+            'guildID' => $guildID,
+            'guildName' => $guildName,
+            'guildIcon' => $guildIcon,
+            'rankings' => $rankingInfo->body
+        ));
     }
 }

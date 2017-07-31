@@ -65,7 +65,7 @@ class DiscordUser implements UserInterface, \Serializable
         if (substr($this->avatarHash, 0, 2) === "a_") {
             return 'https://cdn.discordapp.com/avatars/'.$this->id.'/'.$this->avatarHash.'.gif';
         } else {
-            return 'https://cdn.discordapp.com/avatars/'.$this->id.'/'.$this->avatarHash.'.jpg';
+            return 'https://cdn.discordapp.com/avatars/'.$this->id.'/'.$this->avatarHash.'.png';
         }
     }
 

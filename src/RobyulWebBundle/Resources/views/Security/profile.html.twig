@@ -20,15 +20,17 @@
                 {% for guild in memberOfGuilds %}
                     <li class="list-inline-item server-tile-item" data-profile-iframe-url="{{ path('robyulweb_frame_profile',
                     {'userID': app.user.id, 'guildID': guild.ID}) }}" style="width: 128px;">
-                        <h5 style="text-align: center;">{{ guild.Name }}</h5>
-                        {% if guild.Icon != "" %}
-                            <img class="profile-big-avatar"
-                                 src="https://cdn.discordapp.com/icons/{{ guild.ID }}/{{ guild.Icon }}.jpg?size=256">
-                        {% else %}
-                            {% image '@RobyulWebBundle/Resources/public/images/placeholder_icon.jpg' output='static/images/placeholder_icon.jpg' %}
-                            <img class="profile-big-avatar" src="{{ asset_url }}">
-                            {% endimage %}
-                        {% endif %}
+                        <a href="{{ path('robyulweb_default_ranking', {'guildID': guild.ID}) }}">
+                            <h5 style="text-align: center;">{{ guild.Name }}</h5>
+                            {% if guild.Icon != "" %}
+                                <img class="profile-big-avatar"
+                                     src="https://cdn.discordapp.com/icons/{{ guild.ID }}/{{ guild.Icon }}.jpg?size=256">
+                            {% else %}
+                                {% image '@RobyulWebBundle/Resources/public/images/placeholder_icon.jpg' output='static/images/placeholder_icon.jpg' %}
+                                <img class="profile-big-avatar" src="{{ asset_url }}">
+                                {% endimage %}
+                            {% endif %}
+                        </a>
                         </p>
                     </li>
                 {% endfor %}
