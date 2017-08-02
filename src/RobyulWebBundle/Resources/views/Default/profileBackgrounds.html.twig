@@ -12,21 +12,21 @@
     </div>
     <div class="container">
         <div class="row">
-            <ul class="nav nav-pills backgrounds-nav">
-                <li class="nav-item backgrounds-filter-button-tag">
+            <ul class="list-inline nav-pills backgrounds-nav">
+                <li class="list-inline-item nav-item backgrounds-filter-button-tag">
                     <a class="nav-link active" data-toggle="pill" href="#" data-tag="">All</a>
                 </li>
-                {% set tagsPrintFirst = ['boy group', 'boy group'] %}
+                {% set tagsPrintFirst = ['girl group', 'boy group', 'solo artist', 'acting'] %}
                 {% for tag in tags %}
                     {% if tag in tagsPrintFirst %}
-                    <li class="nav-item backgrounds-filter-button-tag">
+                    <li class="list-inline-item nav-item backgrounds-filter-button-tag">
                         <a class="nav-link" data-toggle="pill" href="#" data-tag="{{ tag }}">{{ tag|capitalize }}</a>
                     </li>
                     {% endif %}
                 {% endfor %}
                 {% for tag in tags|sort %}
                     {% if tag not in tagsPrintFirst %}
-                        <li class="nav-item backgrounds-filter-button-tag">
+                        <li class="list-inline-item nav-item backgrounds-filter-button-tag">
                             <a class="nav-link" data-toggle="pill" href="#" data-tag="{{ tag }}">{{ tag|capitalize }}</a>
                         </li>
                     {% endif %}
