@@ -76,14 +76,26 @@ class DefaultController extends Controller
             foreach ($backgroundsIterator as $backgroundIterator) {
                 $backgrounds[$backgroundIterator["id"]] = iterator_to_array($backgroundIterator);
             }
-            ksort($backgrounds, SORT_STRING|SORT_FLAG_CASE);
 
             $redis->set($key, $packer->pack(serialize($backgrounds)));
             $redis->expireat($key, strtotime("+15 minutes"));
         }
 
-        return $this->render('RobyulWebBundle:Default:profileBackgrounds.html.twig',
-            array('backgrounds' => $backgrounds));
+        $tags = array();
+        foreach ($backgrounds as $background) {
+            if (array_key_exists('tags', $background)) {
+                foreach ($background['tags'] as $tag) {
+                    if (!in_array($tag, $tags)) {
+                        $tags[] = $tag;
+                    }
+                }
+            }
+        }
+
+        return $this->render('RobyulWebBundle:Default:profileBackgrounds.html.twig', array(
+            'backgrounds' => $backgrounds,
+            'tags' => $tags
+        ));
     }
 
     /**
@@ -142,36 +154,36 @@ class DefaultController extends Controller
         $metaName = 'View the Global Robyul Ranking.';
         $guildIcon = '';
 
-        $key = 'robyul2-web:api:guild:'.$guildID;
+        $key = 'robyul2-web:api:guild:' . $guildID;
         if ($guildID !== 'global') {
             if ($redis->exists($key) == true) {
                 $guildData = unserialize($unpacker->unpack($redis->get($key)));
             } else {
-                $guildInfo = Unirest\Request::get('http://localhost:2021/guild/'.$guildID);
-                $guildData = (array) $guildInfo->body;
+                $guildInfo = Unirest\Request::get('http://localhost:2021/guild/' . $guildID);
+                $guildData = (array)$guildInfo->body;
 
                 $redis->set($key, $packer->pack(serialize($guildData)));
                 $redis->expireat($key, strtotime("+1 hour"));
             }
             $guildName = $guildData['Name'];
             $guildIcon = $guildData['Icon'];
-            $metaName = 'View the Robyul Ranking for '.$guildName.'.';
+            $metaName = 'View the Robyul Ranking for ' . $guildName . '.';
         }
 
         $seoPage = $this->container->get('sonata.seo.page');
         $seoPage
-            ->setTitle($guildName." Ranking - The KPop Discord Bot - Robyul")
+            ->setTitle($guildName . " Ranking - The KPop Discord Bot - Robyul")
             ->addMeta('name', 'description', $metaName)
             ->addMeta('property', 'og:description', $metaName);
         $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
 
 
-        $key = 'robyul2-web:api:rankings:'.$guildID;
+        $key = 'robyul2-web:api:rankings:' . $guildID;
         if ($redis->exists($key) == true) {
             $rankingData = unserialize($unpacker->unpack($redis->get($key)));
         } else {
-            $rankingInfo = Unirest\Request::get('http://localhost:2021/rankings/'.$guildID);
-            $rankingData = (array) $rankingInfo->body;
+            $rankingInfo = Unirest\Request::get('http://localhost:2021/rankings/' . $guildID);
+            $rankingData = (array)$rankingInfo->body;
 
             $redis->set($key, $packer->pack(serialize($rankingData)));
             $redis->expireat($key, strtotime("+1 hour"));

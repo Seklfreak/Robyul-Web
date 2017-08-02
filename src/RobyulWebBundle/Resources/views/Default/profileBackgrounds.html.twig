@@ -11,9 +11,35 @@
         </div>
     </div>
     <div class="container">
-        <div class="row justify-content-md-center">
+        <div class="row">
+            <ul class="nav nav-pills backgrounds-nav">
+                <li class="nav-item backgrounds-filter-button-tag">
+                    <a class="nav-link active" data-toggle="pill" href="#" data-tag="">All</a>
+                </li>
+                {% set tagsPrintFirst = ['boy group', 'boy group'] %}
+                {% for tag in tags %}
+                    {% if tag in tagsPrintFirst %}
+                    <li class="nav-item backgrounds-filter-button-tag">
+                        <a class="nav-link" data-toggle="pill" href="#" data-tag="{{ tag }}">{{ tag|capitalize }}</a>
+                    </li>
+                    {% endif %}
+                {% endfor %}
+                {% for tag in tags|sort %}
+                    {% if tag not in tagsPrintFirst %}
+                        <li class="nav-item backgrounds-filter-button-tag">
+                            <a class="nav-link" data-toggle="pill" href="#" data-tag="{{ tag }}">{{ tag|capitalize }}</a>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row justify-content-md-center backgrounds-container">
             {% for background in backgrounds %}
-            <div class="col col-12 col-lg-5">
+            <div class="col col-12 col-lg-5 background-item"
+                data-tags="{% if "tags" in background|keys %}{{ background.tags|join(',') }}{% endif %}" data-name="{{ background.id }}"
+            >
                 <div class="card background-card">
                     <img class="card-img-top" src="{{ background.url }}" alt="{{ background.id }}">
                     <div class="card-block">
