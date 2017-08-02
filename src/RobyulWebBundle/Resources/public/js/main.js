@@ -11,6 +11,9 @@ $(function () {
         },
         sortBy: 'name'
     });
+    $backgroundsContainer.imagesLoaded().progress( function() {
+        $backgroundsContainer.isotope('layout');
+    });
 
     $('.backgrounds-filter-button-tag a').click(function (e) {
         e.preventDefault();
