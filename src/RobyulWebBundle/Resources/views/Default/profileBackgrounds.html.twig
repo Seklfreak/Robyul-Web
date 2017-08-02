@@ -20,14 +20,14 @@
                 {% for tag in tags %}
                     {% if tag in tagsPrintFirst %}
                     <li class="list-inline-item nav-item backgrounds-filter-button-tag">
-                        <a class="nav-link" data-toggle="pill" href="#" data-tag="{{ tag }}">{{ tag|capitalize }}</a>
+                        <a class="nav-link" data-toggle="pill" href="#" data-tag="{{ tag }}">{{ tag|title }}</a>
                     </li>
                     {% endif %}
                 {% endfor %}
                 {% for tag in tags|sort %}
                     {% if tag not in tagsPrintFirst %}
                         <li class="list-inline-item nav-item backgrounds-filter-button-tag">
-                            <a class="nav-link" data-toggle="pill" href="#" data-tag="{{ tag }}">{{ tag|capitalize }}</a>
+                            <a class="nav-link" data-toggle="pill" href="#" data-tag="{{ tag }}">{{ tag|title }}</a>
                         </li>
                     {% endif %}
                 {% endfor %}
