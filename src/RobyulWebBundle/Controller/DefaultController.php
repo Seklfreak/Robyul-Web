@@ -186,7 +186,7 @@ class DefaultController extends Controller
             $rankingData = (array)$rankingInfo->body;
 
             $redis->set($key, $packer->pack(serialize($rankingData)));
-            $redis->expireat($key, strtotime("+1 hour"));
+            $redis->expireat($key, strtotime("+30 minutes"));
         }
 
         return $this->render('RobyulWebBundle:Default:ranking.html.twig', array(
