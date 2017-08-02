@@ -145,12 +145,12 @@ class DefaultController extends Controller
         $key = 'robyul2-web:api:guild:'.$guildID;
         if ($guildID !== 'global') {
             if ($redis->exists($key) == true) {
-                $guildData = $unpacker->unpack($redis->get($key));
+                $guildData = unserialize($unpacker->unpack($redis->get($key)));
             } else {
                 $guildInfo = Unirest\Request::get('http://localhost:2021/guild/'.$guildID);
                 $guildData = (array) $guildInfo->body;
 
-                $redis->set($key, $packer->pack($guildData));
+                $redis->set($key, $packer->pack(serialize($guildData)));
                 $redis->expireat($key, strtotime("+1 hour"));
             }
             $guildName = $guildData['Name'];
