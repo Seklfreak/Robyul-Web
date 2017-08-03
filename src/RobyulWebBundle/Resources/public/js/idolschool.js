@@ -76,8 +76,14 @@ function processData(data) {
         d.currentRank = getCurrentRank(d);
         d.isEliminated = isEliminated(d);
         d.rankChange = getRankChange(d);
-    })
+        preloadImage(getImageSource(d));
+    });
     return data;
+}
+
+function preloadImage(url) {
+    var img = new Image();
+    img.src = url;
 }
 
 function isEliminated(d) {
