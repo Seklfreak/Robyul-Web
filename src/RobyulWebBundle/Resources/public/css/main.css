@@ -97,6 +97,15 @@ body {
     margin-right: 1rem;
 }
 
+.ranking-table-item-inactive {
+    color: #8e8e8e;
+}
+
+.ranking-table-item-inactive img {
+    -webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+
 .ranking-table-row th small, .ranking-table-row td small {
     font-size: 60%;
     color: #8e8e8e;

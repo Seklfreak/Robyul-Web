@@ -29,7 +29,11 @@
             <tr class="ranking-table-row">
                 <th scope="row">{{ rank.Ranking }}</th>
                 <td>
-                <span class="ranking-table-item" data-profile-iframe-url="{{ path('robyulweb_frame_profile',
+                    {% set isMember = false %}
+                    {% if rank.IsMember is defined %}
+                        {% set isMember = rank.IsMember %}
+                    {% endif %}
+                <span class="ranking-table-item {% if isMember == true %}profile-hover{% else %}ranking-table-item-inactive{% endif %}" data-profile-iframe-url="{{ path('robyulweb_frame_profile',
                 {'userID': rank.User.ID, 'guildID': guildID}) }}">
                     {% if rank.User.AvatarHash == "" %}
                         {% image '@RobyulWebBundle/Resources/public/images/placeholder_icon.jpg' output='static/images/placeholder_icon.jpg' %}

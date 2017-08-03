@@ -41,7 +41,7 @@ $(function () {
         }
     });
 
-    $('.profile-hover, .ranking-table-item').each(function () {
+    $('.profile-hover').each(function () {
         var $tileItem = $(this);
         var iframeUrl = $tileItem.data('profile-iframe-url');
 
