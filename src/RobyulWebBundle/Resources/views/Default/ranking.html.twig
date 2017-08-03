@@ -20,7 +20,7 @@
                 {% set rankUserData = user_rank_data(guildID, app.user.ID) %}
                 {% if rankUserData.IsMember is defined and rankUserData.IsMember == true %}
                     <span class="profile-hover" data-profile-iframe-url="{{ path('robyulweb_frame_profile',
-                    {'userID': app.user.ID, 'guildID': guildID}) }}">You are #{{ rankUserData.Ranking }} on this server.</span>
+                    {'userID': app.user.ID, 'guildID': guildID}) }}">You are <b>#{{ rankUserData.Ranking }}</b>{% if rankings.Count is defined %} of <b>{{ rankings.Count|number_format(0, '', ' ') }} members</b>{% endif %}.</span>
                 {% else %}
                     You are not on this server.
                 {% endif %}
