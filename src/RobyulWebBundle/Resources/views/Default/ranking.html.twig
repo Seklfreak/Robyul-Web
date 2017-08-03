@@ -15,6 +15,19 @@
                 <small>Ranking for</small> {{ guildName }}
             {% endif %}
         </h1>
+        <p>
+            {% if is_granted('ROLE_DISCORD_USER') %}
+                {% set rankUserData = user_rank_data(guildID, app.user.ID) %}
+                {% if rankUserData.IsMember is defined and rankUserData.IsMember == true %}
+                    <span class="profile-hover" data-profile-iframe-url="{{ path('robyulweb_frame_profile',
+                    {'userID': app.user.ID, 'guildID': guildID}) }}">You are #{{ rankUserData.Ranking }} on this server.</span>
+                {% else %}
+                    You are not on this server.
+                {% endif %}
+            {% else %}
+                <a href="{{ hwi_oauth_login_url('discord') }}">Login using Discord</a> to see your rank.
+            {% endif %}
+        </p>
     </div>
     <table class="table">
         <thead>
