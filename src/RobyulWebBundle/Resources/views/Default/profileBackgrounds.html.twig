@@ -16,18 +16,71 @@
                 <li class="list-inline-item nav-item backgrounds-filter-button-tag">
                     <a class="nav-link active" data-toggle="pill" href="#" data-tag="">All</a>
                 </li>
-                {% set tagsPrintFirst = ['girl group', 'boy group', 'solo artist', 'acting'] %}
+                {% set tagsAlias = {
+                    'aoa': 'AOA',
+                    'astro': 'ASTRO',
+                    'b.a.p': 'B.A.P',
+                    'blackpink': 'BLACKPINK',
+                    'btob': 'BtoB',
+                    'bts': 'BTS',
+                    'clc': 'CLC',
+                    'day6': 'Day6',
+                    'dia': 'DIA',
+                    'exo': 'EXO',
+                    'f(x)': 'f(x)',
+                    'gfriend': 'GFRIEND',
+                    'got7': 'GOT7',
+                    'gugudan': 'gugudan',
+                    'i.o.i': 'I.O.I',
+                    'infinite': 'INFINITE',
+                    'knk': 'KNK',
+                    'laboum': 'LABOUM',
+                    'loona': 'LOONA',
+                    'mamamoo': 'MAMAMOO',
+                    'misc': 'Misc.',
+                    'monsta x': 'MONSTA X',
+                    'nct': 'NCT',
+                    'nu\'est': 'NU\'EST',
+                    'ohmygirl': 'Oh My Girl',
+                    'pentagon': 'PENTAGON',
+                    'pristin': 'PRISTIN',
+                    'seventeen': 'SEVENTEEN',
+                    'sf9': 'SF9',
+                    'shinee': 'SHINee',
+                    'snsd': 'SNSD',
+                    't-ara': 'T-ara',
+                    'toppdogg': 'ToppDogg',
+                    'twice': 'TWICE',
+                    'vixx': 'VIXX',
+                    'wanna one': 'WANNA ONE',
+                    'winner': 'WINNER',
+                    'wjsn': 'WJSN'
+                } %}
+                {% set tagsPrintFirst = ['girl group', 'boy group', 'solo artist', 'acting', 'misc'] %}
                 {% for tag in tags %}
                     {% if tag in tagsPrintFirst %}
                     <li class="list-inline-item nav-item backgrounds-filter-button-tag">
-                        <a class="nav-link" data-toggle="pill" href="#" data-tag="{{ tag }}">{{ tag|title }}</a>
+                        <a class="nav-link" data-toggle="pill" href="#" data-tag="{{ tag }}">
+                            {% if tagsAlias[tag] is defined %}
+                                {{ tagsAlias[tag] }}
+                            {% else %}
+                                {{ tag|title }}
+                            {% endif %}
+                        </a>
                     </li>
                     {% endif %}
                 {% endfor %}
+                <br>
                 {% for tag in tags|sort %}
                     {% if tag not in tagsPrintFirst %}
                         <li class="list-inline-item nav-item backgrounds-filter-button-tag">
-                            <a class="nav-link" data-toggle="pill" href="#" data-tag="{{ tag }}">{{ tag|title }}</a>
+                            <a class="nav-link" data-toggle="pill" href="#" data-tag="{{ tag }}">
+                                {% if tagsAlias[tag] is defined %}
+                                {{ tagsAlias[tag] }}
+                                {% else %}
+                                {{ tag|title }}
+                                {% endif %}
+                            </a>
                         </li>
                     {% endif %}
                 {% endfor %}
