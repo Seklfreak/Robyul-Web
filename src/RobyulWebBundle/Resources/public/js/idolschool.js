@@ -32,7 +32,7 @@ var plot = svg.append("g").attr("transform", "translate(" + padding + "," + padd
 setXAxis();
 
 // Get data
-d3.csv("/bundles/robyulweb/csv/idolschool.v3.csv", parseLine, function (err, data) {
+d3.csv("/bundles/robyulweb/csv/idolschool.v4.csv", parseLine, function (err, data) {
     totalData = processData(data);
     plotData(data);
     selectLine(dFirst, "#line1");
@@ -71,14 +71,34 @@ function setXAxis() {
 
 // Add rank info to data
 function processData(data) {
+    var result = [];
+    i = 0;
     data.forEach(function(d) {
-        d.latestRank = getLatestRank(d);
-        d.currentRank = getCurrentRank(d);
-        d.isEliminated = isEliminated(d);
-        d.rankChange = getRankChange(d);
-        preloadImage(getImageSource(d));
+        if (getCurrentRank(d) >= 0) {
+            d.latestRank = getLatestRank(d);
+            d.currentRank = getCurrentRank(d);
+            d.isEliminated = isEliminated(d);
+            d.rankChange = getRankChange(d);
+            result.push(d);
+            preloadImage(getImageSource(d));
+            i += 1;
+        }
     });
-    return data;
+    console.debug(i);
+    data.forEach(function(d) {
+        if (getCurrentRank(d) < 0) {
+            i += 1;
+            d.latestRank = i;
+            d.currentRank = getCurrentRank(d);
+            d.isEliminated = isEliminated(d);
+            d.rankChange = getRankChange(d);
+            result.push(d);
+            preloadImage(getImageSource(d));
+            console.debug(d.currentRank);
+        }
+    });
+    console.debug(result);
+    return result;
 }
 
 function preloadImage(url) {
@@ -140,8 +160,6 @@ function td(str, cl) {
     return "<td class='" + cl + "'>" + str + "</td>";
 }
 
-
-
 // Displays profile
 function displayProfile(d) {
     $("#pic").attr("src", getImageSource(d));
@@ -202,18 +220,16 @@ function getLowestRank(data) {
                 min = d2;
             }
         })
-    })
+    });
     return min;
 }
 
 function plotData(data) {
-
     // Update y axis
     scaleY.domain([1, getLowestRank(data)]);
 
     var paths = plot.selectAll("path.ranking").data(data);
-
-
+    console.debug(paths);
 
     var pathGenerator = d3.line()
         .x(function (d) { return scaleX(d.x); })
@@ -226,7 +242,8 @@ function plotData(data) {
                 dFirst = d;
             }
             if (d.specialNote != "") { // Special Line
-                return "sline" + d.latestRank;
+                return "line" + d.latestRank;
+                // return "sline" + d.latestRank; // TODO: ???
             }
             return "line" + d.latestRank;
         })
@@ -359,7 +376,7 @@ function parseLine(row) {
             o.rank = rank;
             r.ranking.push(o);
         }
-    })
+    });
     return r;
 }
 
