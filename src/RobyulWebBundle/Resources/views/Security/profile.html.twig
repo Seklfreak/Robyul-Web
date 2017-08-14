@@ -4,7 +4,7 @@
     <div class="row">
         {% set discordUser = discord_user(app.user.id) %}
         <div class="col-12 col-md-2">
-            <img class="profile-big-avatar" src="{{ discord_avatar(app.user.ID, app.user.AvatarHash) }}?size=256">
+            <img class="profile-big-avatar" src="{{ discord_avatar(app.user.ID, discordUser.AvatarHash) }}?size=256">
         </div>
         <div class="col-12 col-md-4">
             <h1>{{ discordUser.Username }}</h1>

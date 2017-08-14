@@ -114,7 +114,7 @@
             {% set discordUser = discord_user(app.user.id) %}
             <span>
                 <a class="nav-link login-link" href="{{ path('robyulweb_security_profile') }}">
-                    <img class="nav-link login-link" src="{{ discord_avatar(app.user.ID, app.user.AvatarHash) }}?size=64">
+                    <img class="nav-link login-link" src="{{ discord_avatar(app.user.ID, discordUser.AvatarHash) }}?size=64">
                     Hi, {{ discordUser.Username }}!</a>
             </span>
             <span>
