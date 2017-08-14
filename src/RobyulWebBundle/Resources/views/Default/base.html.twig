@@ -111,10 +111,11 @@
                 {% endimage %}</a>
         </span>
         {% if is_granted('ROLE_DISCORD_USER') %}
+            {% set discordUser = discord_user(app.user.id) %}
             <span>
                 <a class="nav-link login-link" href="{{ path('robyulweb_security_profile') }}">
-                    <img class="nav-link login-link" src="{{ app.user.avatarUrl }}?size=64">
-                    Hi, {{ app.user.discordUsername }}!</a>
+                    <img class="nav-link login-link" src="{{ discord_avatar(app.user.ID, app.user.AvatarHash) }}?size=64">
+                    Hi, {{ discordUser.Username }}!</a>
             </span>
             <span>
                 <a class="nav-link login-link" href="{{ path('logout') }}">Logout</a>
