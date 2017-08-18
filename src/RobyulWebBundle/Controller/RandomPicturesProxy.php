@@ -35,6 +35,8 @@ class RandomPicturesProxy extends Controller
             $dlLink = 'https://drive.google.com/uc?id='.$gdFile['Id'].'&export=download';
             $logger->info("downloading \"".$dlLink."\"");
 
+            ini_set('max_execution_time', 300);
+            ini_set('default_socket_timeout', 100);
             $binary = file_get_contents($dlLink);
 
             return new Response(

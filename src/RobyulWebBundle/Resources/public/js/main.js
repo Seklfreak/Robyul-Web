@@ -52,4 +52,14 @@ $(function () {
             delay: 500
         });
     });
+
+    var $randomPicturesGridContainer = $('.random-pictures-grid-container');
+    $randomPicturesGridContainer.isotope({
+        // options
+        itemSelector: '.random-pictures-grid-item',
+        percentPosition: true
+    });
+    $randomPicturesGridContainer.imagesLoaded().progress( function() {
+        $randomPicturesGridContainer.isotope('layout');
+    });
 });

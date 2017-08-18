@@ -138,3 +138,7 @@ body {
 .backgrounds-nav {
     margin-bottom: 1rem;
 }
+
+.random-pictures-grid-item {
+    max-width: 300px;
+}
