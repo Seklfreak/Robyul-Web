@@ -68,7 +68,11 @@ class DefaultController extends Controller
         if ($redis->exists($key) == true) {
             $backgrounds = unserialize($unpacker->unpack($redis->get($key)));
         } else {
-            $conn = \r\connect('localhost', 28015, $this->container->getParameter('rethinkdb_database'));
+            $conn = \r\connect(
+                $this->container->getParameter('rethinkdb_host'),
+                $this->container->getParameter('rethinkdb_port'),
+                $this->container->getParameter('rethinkdb_database')
+            );
 
             $backgroundsIterator = \r\table("profile_backgrounds")->run($conn);
 
