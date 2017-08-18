@@ -3,8 +3,9 @@
 {% block containerclass %}container-fluid{% endblock %}
 
 {% block content %}
-    <div class="row">
+    <div class="row random-pictures-grid-row">
         <div class="col-12 random-pictures-grid-container">
+            <div class="random-pictures-grid-sizer"></div>
             {% for item in pictureHistoryItems %}
                 <a href="{{ item.Link }}" target="_blank">
                     <img class="random-pictures-grid-item" src="{{ item.Link }}" alt="{{ item.Filename }}">

@@ -139,6 +139,21 @@ body {
     margin-bottom: 1rem;
 }
 
-.random-pictures-grid-item {
-    max-width: 300px;
+.random-pictures-grid-sizer, .random-pictures-grid-item {
+    width: 100%;
+}
+@media (min-width: 768px) {
+    .random-pictures-grid-sizer, .random-pictures-grid-item {
+        width: 25%;
+    }
+}
+@media (min-width: 992px) {
+    .random-pictures-grid-sizer, .random-pictures-grid-item {
+        width: 20%;
+    }
+}
+
+.random-pictures-grid-row, .random-pictures-grid-row > .random-pictures-grid-container {
+    padding-left: 0;
+    padding-right: 0;
 }

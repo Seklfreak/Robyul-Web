@@ -57,7 +57,10 @@ $(function () {
     $randomPicturesGridContainer.isotope({
         // options
         itemSelector: '.random-pictures-grid-item',
-        percentPosition: true
+        percentPosition: true,
+        masonry: {
+            columnWidth: '.random-pictures-grid-sizer'
+        }
     });
     $randomPicturesGridContainer.imagesLoaded().progress( function() {
         $randomPicturesGridContainer.isotope('layout');
