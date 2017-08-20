@@ -31,7 +31,7 @@ framework:
     fragments: ~
     http_method_override: true
     assets:
-        version: 'v19'
+        version: 'v20'
     php_errors:
         log: true
 
@@ -147,7 +147,3 @@ hwi_oauth:
                 realname:   id
             options:
                 csrf: true
-
-sentry:
-    dsn: "%sentry_dns%"
-    environment: "%kernel.environment%"

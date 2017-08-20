@@ -12,6 +12,8 @@ class DefaultControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/');
 
-        $this->assertContains('Hello World', $client->getResponse()->getContent());
+        $this->assertContains(
+            'Robyul is a Discord Bot developed especially with the needs of of KPop Discord Servers in mind.',
+            $client->getResponse()->getContent());
     }
 }

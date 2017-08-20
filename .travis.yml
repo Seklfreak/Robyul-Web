@@ -1,0 +1,12 @@
+language: php
+php:
+  - '7.0'
+  - '7.1'
+  - nightly
+before-install:
+  - composer self-update
+install:
+  - composer install
+  - cp app/config/parameters.yml.dist app/config/parameters.yml
+script:
+  - phpunit

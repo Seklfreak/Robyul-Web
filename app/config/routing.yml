@@ -20,7 +20,3 @@ robyul_web:
     resource: "@RobyulWebBundle/Controller/"
     type:     annotation
     prefix:   /
-
-#app:
-#    resource: '@AppBundle/Controller/'
-#    type: annotation
