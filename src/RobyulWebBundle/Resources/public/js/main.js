@@ -1,6 +1,11 @@
 $(function () {
+    // Activate tooltips
     $('[data-toggle="tooltip"]').tooltip();
-
+    // Lazy load lazy images
+    $("img.lazy").lazyload({
+        effect : "fadeIn"
+    });
+    // Enable grid for background list
     var $backgroundsContainer = $('.backgrounds-container');
     $backgroundsContainer.isotope({
         // options
@@ -14,7 +19,7 @@ $(function () {
     $backgroundsContainer.imagesLoaded().progress( function() {
         $backgroundsContainer.isotope('layout');
     });
-
+    // Filtering for background list
     $('.backgrounds-filter-button-tag a').click(function (e) {
         e.preventDefault();
         var tag = $(this).data('tag');
@@ -40,7 +45,7 @@ $(function () {
             })
         }
     });
-
+    // Enable profile iframe hovers
     $('.profile-hover').each(function () {
         var $tileItem = $(this);
         var iframeUrl = $tileItem.data('profile-iframe-url');
@@ -52,7 +57,7 @@ $(function () {
             delay: 500
         });
     });
-
+    // Enable grid fo random pictures history
     var $randomPicturesGridContainer = $('.random-pictures-grid-container');
     $randomPicturesGridContainer.isotope({
         // options

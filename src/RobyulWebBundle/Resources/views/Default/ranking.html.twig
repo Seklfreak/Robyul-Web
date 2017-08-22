@@ -53,8 +53,8 @@
                         <img class="profile-medium-avatar" src="{{ asset_url }}">
                                 {% endimage %}
                     {% else %}
-                        <img class="profile-medium-avatar"
-                             src="{{ discord_avatar(rank.User.ID, rank.User.AvatarHash) }}?size=128">
+                        <img class="profile-medium-avatar lazy"
+                             data-original="{{ discord_avatar(rank.User.ID, rank.User.AvatarHash) }}?size=128">
                     {% endif %}
                     {{ rank.User.Username }}
                     <small>#{{ rank.User.Discriminator }}</small>
