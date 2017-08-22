@@ -1,6 +1,10 @@
 $(function () {
     // Activate tooltips
     $('[data-toggle="tooltip"]').tooltip();
+    // Lazy load lazy images
+    $("img.lazy").lazyload({
+        effect: "fadeIn"
+    });
     // Enable grid for background list
     var $backgroundsContainer = $('.backgrounds-container');
     $backgroundsContainer.isotope({
@@ -12,12 +16,14 @@ $(function () {
         },
         sortBy: 'name'
     });
-    $backgroundsContainer.imagesLoaded().progress( function() {
+    $backgroundsContainer.imagesLoaded().progress(function () {
         $backgroundsContainer.isotope('layout');
     });
-    // Lazy load lazy images
-    $("img.lazy").lazyload({
-        effect : "fadeIn"
+    // Lazy load background images
+    $backgroundsContainer.one('layoutComplete', function () {
+        $("img.background-lazy").lazyload({
+            failure_limit: 100000
+        });
     });
     // Filtering for background list
     $('.backgrounds-filter-button-tag a').click(function (e) {
@@ -67,7 +73,17 @@ $(function () {
             columnWidth: '.random-pictures-grid-sizer'
         }
     });
-    $randomPicturesGridContainer.imagesLoaded().progress( function() {
+    $randomPicturesGridContainer.imagesLoaded().progress(function () {
         $randomPicturesGridContainer.isotope('layout');
+    });
+    // Lazy load random picture images
+    $randomPicturesGridContainer.one('layoutComplete', function () {
+        $("img.random-pictures-lazy").lazyload({
+            failure_limit: 100,
+            effect : "fadeIn"
+        });
+        $('img.random-pictures-grid-item').on('load', function () {
+            $randomPicturesGridContainer.isotope('layout');
+        });
     });
 });

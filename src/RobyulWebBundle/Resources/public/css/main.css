@@ -151,6 +151,9 @@ body {
     .random-pictures-grid-sizer, .random-pictures-grid-item {
         width: 20%;
     }
+    .random-pictures-grid-container-fluid {
+        margin-top: -1.1rem;
+    }
 }
 
 .random-pictures-grid-row, .random-pictures-grid-row > .random-pictures-grid-container {

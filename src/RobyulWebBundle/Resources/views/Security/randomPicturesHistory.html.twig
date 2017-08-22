@@ -1,6 +1,6 @@
 {% extends "RobyulWebBundle:Default:base.html.twig" %}
 
-{% block containerclass %}container-fluid{% endblock %}
+{% block containerclass %}container-fluid random-pictures-grid-container-fluid{% endblock %}
 
 {% block content %}
     <div class="row random-pictures-grid-row">
@@ -8,7 +8,7 @@
             <div class="random-pictures-grid-sizer"></div>
             {% for item in pictureHistoryItems %}
                 <a href="{{ item.Link }}" target="_blank">
-                    <img class="random-pictures-grid-item" src="{{ item.Link }}" alt="{{ item.Filename }}">
+                    <img class="random-pictures-grid-item random-pictures-lazy" data-original="{{ item.Link }}" alt="{{ item.Filename }}">
                 </a>
             {% endfor %}
         </div>
