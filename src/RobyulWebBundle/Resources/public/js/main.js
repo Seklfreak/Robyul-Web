@@ -1,10 +1,6 @@
 $(function () {
     // Activate tooltips
     $('[data-toggle="tooltip"]').tooltip();
-    // Lazy load lazy images
-    $("img.lazy").lazyload({
-        effect : "fadeIn"
-    });
     // Enable grid for background list
     var $backgroundsContainer = $('.backgrounds-container');
     $backgroundsContainer.isotope({
@@ -69,5 +65,9 @@ $(function () {
     });
     $randomPicturesGridContainer.imagesLoaded().progress( function() {
         $randomPicturesGridContainer.isotope('layout');
+    });
+    // Lazy load lazy images
+    $("img.lazy").lazyload({
+        effect : "fadeIn"
     });
 });
