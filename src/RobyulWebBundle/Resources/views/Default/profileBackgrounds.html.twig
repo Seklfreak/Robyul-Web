@@ -95,7 +95,7 @@
                 data-tags="{% if "tags" in background|keys %}{{ background.tags|join(',') }}{% endif %}" data-name="{{ background.id }}"
             >
                 <div class="card background-card">
-                    <img class="card-img-top lazy" data-original="{{ background.url }}" alt="{{ background.id }}">
+                    <img class="card-img-top" src="{{ background.url }}" alt="{{ background.id }}">
                     <div class="card-block">
                         <p class="card-text">
                             To choose this Background say<br><code>{{ discord_bot_prefix }}profile background {{ background.id }}</code> in Discord.</p>

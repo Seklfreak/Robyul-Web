@@ -15,6 +15,10 @@ $(function () {
     $backgroundsContainer.imagesLoaded().progress( function() {
         $backgroundsContainer.isotope('layout');
     });
+    // Lazy load lazy images
+    $("img.lazy").lazyload({
+        effect : "fadeIn"
+    });
     // Filtering for background list
     $('.backgrounds-filter-button-tag a').click(function (e) {
         e.preventDefault();
@@ -65,9 +69,5 @@ $(function () {
     });
     $randomPicturesGridContainer.imagesLoaded().progress( function() {
         $randomPicturesGridContainer.isotope('layout');
-    });
-    // Lazy load lazy images
-    $("img.lazy").lazyload({
-        effect : "fadeIn"
     });
 });
