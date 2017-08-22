@@ -19,12 +19,6 @@ $(function () {
     $backgroundsContainer.imagesLoaded().progress(function () {
         $backgroundsContainer.isotope('layout');
     });
-    // Lazy load background images
-    $backgroundsContainer.one('layoutComplete', function () {
-        $("img.background-lazy").lazyload({
-            failure_limit: 100000
-        });
-    });
     // Filtering for background list
     $('.backgrounds-filter-button-tag a').click(function (e) {
         e.preventDefault();
