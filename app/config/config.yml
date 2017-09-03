@@ -40,7 +40,6 @@ twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
     globals:
-        discord_bot_prefix: '_'
         ga_tracking_id: '%ga_tracking_id%'
 
 # Doctrine Configuration

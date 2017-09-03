@@ -34,3 +34,5 @@ parameters:
     discord_client_secret: 'yourclientsecret'
 
     sentry_dns: ~
+
+    bot_default_prefix: '_'

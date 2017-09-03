@@ -19,9 +19,11 @@ class DefaultController extends Controller
     }
 
     /**
-     * @Route("/commands")
+     * @Route("/commands/{guildID}",
+     *     defaults={"guildID": "global"}
+     * )
      */
-    public function commandsAction()
+    public function commandsAction($guildID)
     {
         $seoPage = $this->container->get('sonata.seo.page');
         $seoPage
@@ -30,7 +32,33 @@ class DefaultController extends Controller
             ->addMeta('property', 'og:description', "View a list of all Robyul Discord Bot commands here.");
         $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
 
-        return $this->render('RobyulWebBundle:Default:commands.html.twig');
+        $unpacker = new Unpacker();
+        $packer = new Packer();
+        $redis = $this->container->get('snc_redis.default');
+
+        $guildPrefix = $this->container->getParameter('bot_default_prefix');
+
+        $key = 'robyul2-web:api:guild:' . $guildID;
+        if ($guildID !== 'global') {
+            if ($redis->exists($key) == true) {
+                $guildData = unserialize($unpacker->unpack($redis->get($key)));
+            } else {
+                $guildInfo = Unirest\Request::get('http://localhost:2021/guild/' . $guildID);
+                $guildData = (array)$guildInfo->body;
+
+                $redis->set($key, $packer->pack(serialize($guildData)));
+                $redis->expireat($key, strtotime("+1 hour"));
+            }
+            dump($guildData);
+            if (array_key_exists('BotPrefix', $guildData)) {
+                $guildPrefix = $guildData['BotPrefix'];
+            }
+        }
+
+        return $this->render('RobyulWebBundle:Default:commands.html.twig',
+            array(
+                'guildBotPrefix' => $guildPrefix
+            ));
     }
 
     /**
