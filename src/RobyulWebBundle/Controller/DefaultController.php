@@ -49,7 +49,6 @@ class DefaultController extends Controller
                 $redis->set($key, $packer->pack(serialize($guildData)));
                 $redis->expireat($key, strtotime("+1 hour"));
             }
-            dump($guildData);
             if (array_key_exists('BotPrefix', $guildData)) {
                 $guildPrefix = $guildData['BotPrefix'];
             }
