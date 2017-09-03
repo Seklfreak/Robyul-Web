@@ -40,13 +40,13 @@
                         <ul class="list-unstyled">
                             {% if guild.Features.Levels_Badges.Count > 0 %}
                                 <li>
-                                    <a href="{{ path('robyulweb_default_commands') }}#levels"><i
+                                    <a href="{{ path('robyulweb_default_commands', {'guildID': guild.ID}) }}#levels"><i
                                                 class="fa fa-certificate" aria-hidden="true"></i> Badges</a>
                                 </li>
                             {% endif %}
                             {% if guild.Features.RandomPictures.Count > 0 %}
                                 <li>
-                                    <a href="{{ path('robyulweb_default_commands') }}#randompictures"><i
+                                    <a href="{{ path('robyulweb_default_commands', {'guildID': guild.ID}) }}#randompictures"><i
                                                 class="fa fa-picture-o" aria-hidden="true"></i> Random Pictures</a>
                                 </li>
                                 <li>
