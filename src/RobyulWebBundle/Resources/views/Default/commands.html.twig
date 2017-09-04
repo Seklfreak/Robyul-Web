@@ -30,8 +30,9 @@
             <h6 class="card-subtitle mb-2 text-muted">Various stuff.</h6>
             <p class="card-text">
             <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}help</code> get a link to this page.</li>
-                <li><code>@Robyul <span class="arg">message</span></code> talk to Robyul.</li>
+                <li><code>@{{ bot_user }} help</code> or <code>{{ guildBotPrefix }}help</code> get a link to this page.</li>
+                <li><code>@{{ bot_user }} prefix</code> or <code>{{ guildBotPrefix }}prefix</code> find out the Robyul prefix for this server.</li>
+                <li><code>@{{ bot_user }} <span class="arg">message</span></code> talk to Robyul.</li>
             </ul>
             </p>
         </div>
@@ -543,7 +544,8 @@
                 <ul class="list-unstyled">
                     <li><code>{{ guildBotPrefix }}stats</code> statistics of the bot.</li>
                     <li><code>{{ guildBotPrefix }}userinfo <span class="opt-arg">@user or user id</span></code> information about a user.</li>
-                    <li><code>{{ guildBotPrefix }}serverinfo</code> information about a server.</li>
+                    <li><code>{{ guildBotPrefix }}serverinfo <span class="opt-arg">server id</span></code> information about a server. Information about other servers is only available to Robyul Staff.</li>
+                    <li><code>{{ guildBotPrefix }}channelinfo <span class="opt-arg">channel id</span></code> information about a channel. Information about channels on other servers is only available to Robyul Staff.</li>
                     <li><code>{{ guildBotPrefix }}voicestats <span class="opt-arg">@user or user id</span></code> shows the voice stats of an user.</li>
                     <li><code>{{ guildBotPrefix }}voicestats top</code> shows the top voice users on this server.</li>
                     <li><code>{{ guildBotPrefix }}emotes</code> shows a list of all custom emotes on the server.</li>
