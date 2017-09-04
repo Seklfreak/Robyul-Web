@@ -36,3 +36,4 @@ parameters:
     sentry_dns: ~
 
     bot_default_prefix: '_'
+    bot_user: 'Robyul#7030'
