@@ -12,6 +12,7 @@ hwi_oauth_login:
 
 discord_login:
     path: /login/check
+    defaults: { _remember_me: on }
 
 logout:
     path: /logout
