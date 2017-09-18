@@ -42,7 +42,7 @@ class RobyulSessionSubscriber implements EventSubscriberInterface
             'DiscordUserID' => "",
         );
 
-        if ($this->securityTokenStorage->getToken() != null) {
+        if ($this->securityTokenStorage->getToken() != null && !is_string($this->securityTokenStorage->getToken()->getUser())) {
             $userID = $this->securityTokenStorage->getToken()->getUser()->getID();
             $data['DiscordUserID'] = $userID;
         }
