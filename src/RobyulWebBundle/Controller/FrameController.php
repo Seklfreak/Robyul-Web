@@ -30,7 +30,7 @@ class FrameController extends Controller
         if ($redis->exists($key) == true) {
             $profileData = $unpacker->unpack($redis->get($key));
         } else {
-            $profile = Unirest\Request::get('http://localhost:2021/profile/'.$userID.'/'.$guildID);
+            $profile = Unirest\Request::get('http://localhost:2021/profile/'.$userID.'/'.$guildID, array('Authorization' => 'Webkey '.$this->getParameter('bot_webkey')));
             $profileData = $profile->raw_body;
 
             $redis->set($key, $packer->pack($profileData));

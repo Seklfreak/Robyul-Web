@@ -39,3 +39,8 @@ monolog:
 
 #swiftmailer:
 #    delivery_addresses: ['me@example.com']
+
+snc_redis:
+    profiler_storage:
+        client: default
+        ttl: 3600
