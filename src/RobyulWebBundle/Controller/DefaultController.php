@@ -43,7 +43,7 @@ class DefaultController extends Controller
             if ($redis->exists($key) == true) {
                 $guildData = unserialize($unpacker->unpack($redis->get($key)));
             } else {
-                $guildInfo = Unirest\Request::get('http://localhost:2021/guild/' . $guildID);
+                $guildInfo = Unirest\Request::get('http://localhost:2021/guild/' . $guildID, array('Authorization' => 'Webkey '.$this->getParameter('bot_webkey')));
                 $guildData = (array)$guildInfo->body;
 
                 $redis->set($key, $packer->pack(serialize($guildData)));
@@ -190,7 +190,7 @@ class DefaultController extends Controller
             if ($redis->exists($key) == true) {
                 $guildData = unserialize($unpacker->unpack($redis->get($key)));
             } else {
-                $guildInfo = Unirest\Request::get('http://localhost:2021/guild/' . $guildID);
+                $guildInfo = Unirest\Request::get('http://localhost:2021/guild/' . $guildID, array('Authorization' => 'Webkey '.$this->container->getParameter('bot_webkey')));
                 $guildData = (array)$guildInfo->body;
 
                 $redis->set($key, $packer->pack(serialize($guildData)));
@@ -213,7 +213,7 @@ class DefaultController extends Controller
         if ($redis->exists($key) == true) {
             $rankingData = unserialize($unpacker->unpack($redis->get($key)));
         } else {
-            $rankingInfo = Unirest\Request::get('http://localhost:2021/rankings/' . $guildID);
+            $rankingInfo = Unirest\Request::get('http://localhost:2021/rankings/' . $guildID, array('Authorization' => 'Webkey '.$this->container->getParameter('bot_webkey')));
             $rankingData = (array)$rankingInfo->body;
 
             $redis->set($key, $packer->pack(serialize($rankingData)));
@@ -227,4 +227,12 @@ class DefaultController extends Controller
             'rankings' => $rankingData
         ));
     }
+    
+        /**
+         * @Route("/invite")
+         */
+        public function inviteAction()
+        {
+            return $this->redirect($this->getParameter('bot_invite_link'));
+        }
 }
