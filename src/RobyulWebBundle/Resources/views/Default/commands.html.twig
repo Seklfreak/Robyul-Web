@@ -153,6 +153,7 @@
                 <li><code>{{ guildBotPrefix }}instagram <span class="arg">instagram username</span></code> get information about an Instagram account</li>
                 <li><code>{{ guildBotPrefix }}instagram list</code> view all active Instagram feeds on this server</li>
                 <li><code>{{ guildBotPrefix }}instagram add <span class="arg">instagram username</span> <span class="arg">discord #channel or channel id</span></code> adds an Instagram feed to the specific channel. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ guildBotPrefix }}instagram toggle-direct-links <span class="arg">instagram feed id</span></code> toggles between Discord Embed (default) or linking the Pictures as text. Use <code>{{ guildBotPrefix }}instagram list</code> to get the feed id. <span class="badge badge-default">Mod</span></li>
                 <li><code>{{ guildBotPrefix }}instagram delete <span class="arg">instagram feed id</span></code> delete an Instagram feed. Use <code>{{ guildBotPrefix }}instagram list</code> to get the feed id. <span class="badge badge-default">Mod</span></li>
             </ul>
             </p>
@@ -212,9 +213,9 @@
             <ul class="list-unstyled">
                 <li><code>{{ guildBotPrefix }}lf <span class="opt-arg">@user or user id or last.fm username</span></code> find out more about the user.</li>
                 <li><code>{{ guildBotPrefix }}lf np <span class="opt-arg">>@user or user id or last.fm username</span></code> see what the user is listening to right now.</li>
-                <li><code>{{ guildBotPrefix }}lf topartists <span class="opt-arg">@user or user id or last.fm username</span></code> see the top artists of the user.</li>
-                <li><code>{{ guildBotPrefix }}lf toptracks <span class="opt-arg">@user or user id or last.fm username</span></code> see the top tracks of the user.</li>
-                <li><code>{{ guildBotPrefix }}lf topalbums <span class="opt-arg">@user or user id or last.fm username</span></code> see the top albums of the user.</li>
+                <li><code>{{ guildBotPrefix }}lf topartists <span class="opt-arg">@user or user id or last.fm username</span> <span class="opt-arg"><a class="arg" data-toggle="tooltip" title="overall/week/month/3month/6month/year">timerange</a></code> see the top artists of the user.</li>
+                <li><code>{{ guildBotPrefix }}lf toptracks <span class="opt-arg">@user or user id or last.fm username</span> <span class="opt-arg"><a class="arg" data-toggle="tooltip" title="overall/week/month/3month/6month/year">timerange</a></code> see the top tracks of the user.</li>
+                <li><code>{{ guildBotPrefix }}lf topalbums <span class="opt-arg">@user or user id or last.fm username</span> <span class="opt-arg"><a class="arg" data-toggle="tooltip" title="overall/week/month/3month/6month/year">timerange</a></code> see the top albums of the user.</li>
                 <li><code>{{ guildBotPrefix }}lf server-top <span class="opt-arg"><a class="arg" data-toggle="tooltip" title="overall/week/month/3month/6month/year">timerange</a></span></code> shows the top tracks of all last.fm users on this server combined for the given timespan, by default overall.</li>
             </ul>
             </p>
@@ -257,6 +258,7 @@
                 <li><code>{{ guildBotPrefix }}bias help</code> prints the bias help text meant to guide your users in the specific channel.</li>
                 <li><code>{{ guildBotPrefix }}bias set-config <span class="arg">channel # or id</span> <a class="arg" href="#" data-toggle="tooltip" title="Upload a Bias Config JSON using Discord when you use the command">+ ATTACHMENT</a></code> set a bias config for the specific channel. <span class="badge badge-default">Admin</span></li>
                 <li><code>{{ guildBotPrefix }}bias get-config <span class="arg">channel # or id</span></code> get a bias config for the specific channel. <span class="badge badge-default">Admin</span></li>
+                <li><code>{{ guildBotPrefix }}bias remove-config <span class="arg">channel # or id</span></code> remove a bias config for the specific channel. <span class="badge badge-default">Admin</span></li>
                 <li><code>{{ guildBotPrefix }}bias refresh</code> reloads all bias configs. <span class="badge badge-default">Bot Owner</span></li>
             </ul>
             A guide how to set up the config can be found <a href="{{ path('robyulweb_default_biasroleguides') }}">here</a>.
