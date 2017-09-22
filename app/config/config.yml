@@ -32,7 +32,7 @@ framework:
     fragments: ~
     http_method_override: true
     assets:
-        version: 'v33'
+        version: 'v35'
     php_errors:
         log: true
 
@@ -44,6 +44,9 @@ twig:
         ga_tracking_id: '%ga_tracking_id%'
         bot_default_prefix: '%bot_default_prefix%'
         bot_user: '%bot_user%'
+        js_parameters:
+            bot_api_base_url: '%bot_api_base_url%'
+            session_url: '%session_url%'
 
 # Doctrine Configuration
 doctrine:
