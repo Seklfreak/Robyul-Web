@@ -39,3 +39,5 @@ parameters:
     bot_user: 'Robyul#7030'
     bot_webkey: 'your-secure-webkey'
     bot_invite_link: 'https://discordapp.com/oauth2/authorize?client_id=CLIENT_ID&scope=bot&permissions=0x00000000'
+    bot_api_base_url: 'https://api.robyul.chat/'
+    session_url: 'https://robyul.chat/session'
