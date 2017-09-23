@@ -160,3 +160,7 @@ body {
     padding-left: 0;
     padding-right: 0;
 }
+
+.statistics-counter {
+    text-align: center;
+}

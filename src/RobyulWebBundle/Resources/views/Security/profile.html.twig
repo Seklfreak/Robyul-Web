@@ -54,6 +54,12 @@
                                                 class="fa fa-picture-o" aria-hidden="true"></i> Gallery</a>
                                 </li>
                             {% endif %}
+                            {% if guild.ID in adminOfGuildIDs or guild.ID in modOfGuildIDs %}
+                                <li>
+                                    <a href="{{ path('robyulweb_security_statistics', {'guildID': guild.ID}) }}"><i
+                                                class="fa fa-bar-chart" aria-hidden="true"></i> Statistics</a>
+                                </li>
+                            {% endif %}
                         </ul>
                     </li>
                 {% endfor %}

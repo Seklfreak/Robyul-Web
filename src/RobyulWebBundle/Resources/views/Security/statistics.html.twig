@@ -1,0 +1,69 @@
+{% extends "RobyulWebBundle:Default:base.html.twig" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-4">
+            <div class="statistics-counter" data-type="messages" data-interval="5m" data-refresh="10000" data-guild-id="{{ guildID }}">
+                <h5>Messages in the last 5 Minutes</h5>
+                <h3 id="number"></h3>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="statistics-counter" data-type="joins" data-interval="5m" data-refresh="10000" data-guild-id="{{ guildID }}">
+                <h5>Joins in the last 5 Minutes</h5>
+                <h3 id="number"></h3>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="statistics-counter" data-type="leaves" data-interval="5m" data-refresh="10000" data-guild-id="{{ guildID }}">
+                <h5>Leaves in the last 5 Minutes</h5>
+                <h3 id="number"></h3>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <div class="statistics-counter" data-type="messages" data-interval="1h" data-refresh="300000" data-guild-id="{{ guildID }}">
+                <h5>Messages in the last hour</h5>
+                <h3 id="number"></h3>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="statistics-counter" data-type="joins" data-interval="1h" data-refresh="300000" data-guild-id="{{ guildID }}">
+                <h5>Joins in the last hour</h5>
+                <h3 id="number"></h3>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="statistics-counter" data-type="leaves" data-interval="1h" data-refresh="300000" data-guild-id="{{ guildID }}">
+                <h5>Leaves in the last hour</h5>
+                <h3 id="number"></h3>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-4">
+            <div class="statistics-counter" data-type="messages" data-interval="24h" data-refresh="1800000" data-guild-id="{{ guildID }}">
+                <h5>Messages in the last 24 hours</h5>
+                <h3 id="number"></h3>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="statistics-counter" data-type="joins" data-interval="24h" data-refresh="1800000" data-guild-id="{{ guildID }}">
+                <h5>Joins in the last 24 hours</h5>
+                <h3 id="number"></h3>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="statistics-counter" data-type="leaves" data-interval="24h" data-refresh="1800000" data-guild-id="{{ guildID }}">
+                <h5>Leaves in the last 24 hours</h5>
+                <h3 id="number"></h3>
+            </div>
+        </div>
+    </div>
+        {#
+        <div class="col-12">
+            <canvas id="combined-chart" width="400" height="400" data-guild-id="{{ guildID }}"></canvas>
+        </div> 
+        #}
+{% endblock %}

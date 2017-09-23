@@ -80,4 +80,98 @@ $(function () {
             $randomPicturesGridContainer.isotope('layout');
         });
     });
+    // Statistics Counter
+    $('.statistics-counter').each(function() {
+        var $statisticsCounter = $(this);
+        var type = $statisticsCounter.data('type');
+        var interval = $statisticsCounter.data('interval');
+        var refresh = $statisticsCounter.data('refresh');
+        var guildID = $statisticsCounter.data('guild-id');
+        var $number = $(this).find('#number');
+
+        var serverStatisticsCountEndpoint = "statistics/" + guildID + "/" + type + "/" + interval + "/count";
+
+        apiRequest(serverStatisticsCountEndpoint, function (msg) {
+            $number.html(msg.Count);
+        });
+        window.setInterval(function() {
+            apiRequest(serverStatisticsCountEndpoint, function (msg) {
+                $number.html(msg.Count);
+            });
+        }, refresh);
+    });
+    // Statistics Chart
+    var $combinedChart = $('#combined-chart');
+    if (typeof $combinedChart != 'undefined' && $combinedChart.length > 0) {
+        var guildID = $combinedChart.data('guild-id');
+        var serverStatisticsMessagesHourlyEndpoint = "statistics/" + guildID + "/messages/hour/histogram";
+        var sessionID = "";
+
+        apiRequest(serverStatisticsMessagesHourlyEndpoint, function (msg) {
+            console.debug(msg);
+        });
+
+        var combinedChartContext = $combinedChart[0].getContext('2d')
+        var combinedChart = new Chart(combinedChartContext, {
+            type: 'bar',
+            data: {
+                labels: ["Red", "Blue", "Yellow", "Green", "Purple", "Orange"],
+                datasets: [{
+                    label: '# of Votes',
+                    data: [12, 19, 3, 5, 2, 3],
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255,99,132,1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero:true
+                        }
+                    }]
+                }
+            }
+        });
+    }
+    // Do API Requests
+    function apiRequest(endpoint, callback) {
+        $.ajax({
+            method: "POST",
+            url: window.parameters.session_url,
+            cache: false,
+            dataType: "text"
+          })
+            .done(function( msg ) {
+                sessionID = msg;
+
+                $.ajax({
+                    method: "GET",
+                    url: window.parameters.bot_api_base_url + endpoint,
+                    cache: false,
+                    dataType: "json",
+                    headers: {
+                        "Authorization": "PHP-Session "+sessionID
+                    }
+                })
+                    .done(function( msg ) {
+                        callback(msg)
+                    });
+            });
+    }
 });

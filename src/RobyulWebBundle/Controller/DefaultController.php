@@ -7,6 +7,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Unirest;
 use MessagePack\Packer;
 use MessagePack\Unpacker;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class DefaultController extends Controller
 {
@@ -228,11 +231,28 @@ class DefaultController extends Controller
         ));
     }
     
-        /**
-         * @Route("/invite")
-         */
-        public function inviteAction()
-        {
-            return $this->redirect($this->getParameter('bot_invite_link'));
+    /**
+     * @Route("/invite")
+     */
+    public function inviteAction()
+    {
+        return $this->redirect($this->getParameter('bot_invite_link'));
+    }
+        
+    /**
+     * @Route("/session")
+     * @Method({"POST"})
+     */
+    public function sessionAction(Request $request)
+    {
+        if (!$request->hasPreviousSession() || $request->getSession()->getId() == "") {
+            return;
         }
+
+        return new Response(
+            $request->getSession()->getId(),
+            Response::HTTP_OK,
+            array('content-type' => 'text/plain')
+        );
+    }
 }

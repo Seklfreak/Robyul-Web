@@ -39,6 +39,8 @@ class SecurityController extends Controller
         }
 
         $isInGuilds = array();
+        $adminInGuilds = array();
+        $modInGulds = array();
 
         foreach ($allGuilds as $guild) {
             $key = 'robyul2-web:api:member:'.$guild->ID.':'.$this->getUser()->getID().':is';
@@ -54,11 +56,33 @@ class SecurityController extends Controller
 
             if ($isMember === true) {
                 $isInGuilds[] = $guild;
+
+                $key = 'robyul2-web:api:member:'.$guild->ID.':'.$this->getUser()->getID().':status';
+                if ($redis->exists($key) == true) {
+                    $statusMember = $unpacker->unpack($redis->get($key));
+                } else {
+                    $statusMember = Unirest\Request::get('http://localhost:2021/member/'.$guild->ID.'/'.$this->getUser()->getID().'/status', array('Authorization' => 'Webkey '.$this->getParameter('bot_webkey')));
+                    $statusMember = (array) $statusMember->body;
+
+                    $redis->set($key, $packer->pack($statusMember));
+                    $redis->expireat($key, strtotime("+15 minutes"));
+                }
+                $isAdmin = (bool) $statusMember['IsGuildAdmin'];
+                $isMod = (bool) $statusMember['IsGuildMod'];
+
+                if ($isAdmin === true) {
+                    $adminInGuilds[] = $guild->ID;
+                }
+                if ($isMod === true) {
+                    $modInGulds[] = $guild->ID;
+                }
             }
         }
 
         return $this->render('RobyulWebBundle:Security:profile.html.twig', array(
-            'memberOfGuilds' => $isInGuilds
+            'memberOfGuilds' => $isInGuilds,
+            'adminOfGuildIDs' => $adminInGuilds,
+            'modOfGuildIDs' => $modInGulds,
         ));
     }
 
@@ -111,4 +135,27 @@ class SecurityController extends Controller
             'pictureHistoryItems' => $pictureHistoryData
         ));
     }
+    
+        /**
+         * @Route("/d/statistics/{guildID}")
+         */
+        public function statisticsAction($guildID)
+        {
+            $statusMember = Unirest\Request::get('http://localhost:2021/member/'.$guildID.'/'.$this->getUser()->getID().'/status', array('Authorization' => 'Webkey '.$this->getParameter('bot_webkey')));
+            $statusMember = (array) $statusMember->body;
+
+            $packer = new Packer();
+            $redis = $this->container->get('snc_redis.default');
+            $key = 'robyul2-web:api:member:'.$guildID.':'.$this->getUser()->getID().':status';
+            $redis->set($key, $packer->pack($statusMember));
+            $redis->expireat($key, strtotime("+15 minutes"));
+
+            if ($statusMember['IsGuildAdmin'] === false && $statusMember['IsGuildMod'] === false) {
+                return $this->redirectToRoute('robyulweb_security_profile');
+            }
+
+            return $this->render('RobyulWebBundle:Security:statistics.html.twig', array(
+                'guildID' => $guildID,
+            ));
+        }
 }

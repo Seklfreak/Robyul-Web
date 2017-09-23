@@ -165,7 +165,8 @@
 '@RobyulWebBundle/Resources/public/js/imagesloaded.pkgd.js'
 '@RobyulWebBundle/Resources/public/js/isotope.pkgd.js'
 '@RobyulWebBundle/Resources/public/js/ie10-viewport-bug-workaround.js'
-'@RobyulWebBundle/Resources/public/js/jquery.lazyload.js' output='static/js/main.js' %}
+'@RobyulWebBundle/Resources/public/js/jquery.lazyload.js'
+'@RobyulWebBundle/Resources/public/js/Chart.bundle.js' output='static/js/main.js' %}
 <script src="{{ asset_url }}"></script>
 {% endjavascripts %}
 {% if ga_tracking_id != "" %}
@@ -198,6 +199,9 @@
         ga('send', 'pageview');
     </script>
 {% endif %}
+<script>
+window.parameters = {{ js_parameters|json_encode|raw }};
+</script>
 {% block scripts %}{% endblock %}
 </body>
 </html>
