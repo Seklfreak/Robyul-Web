@@ -157,7 +157,7 @@ class SecurityController extends Controller
         $redis->set($key, $packer->pack($statusMember));
         $redis->expireat($key, strtotime("+15 minutes"));
 
-        if ($statusMember['IsGuildAdmin'] === false && $statusMember['IsGuildMod'] === false) {
+        if ($statusMember['IsGuildAdmin'] !== true && $statusMember['IsGuildMod'] !== true) {
             return $this->redirectToRoute('robyulweb_security_profile');
         }
 
@@ -196,7 +196,7 @@ class SecurityController extends Controller
         $redis->set($key, $packer->pack($statusMember));
         $redis->expireat($key, strtotime("+15 minutes"));
     
-        if ($statusMember['HasGuildPermissionAdministrator'] === false) {
+        if ($statusMember['HasGuildPermissionAdministrator'] !== true) {
             return $this->redirectToRoute('robyulweb_security_profile');
         }
 
