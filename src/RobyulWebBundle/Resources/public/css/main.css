@@ -164,3 +164,19 @@ body {
 .statistics-counter {
     text-align: center;
 }
+
+.server-general-header {
+    margin-bottom: 1rem;
+    text-align: center !important;
+}
+
+#chatlog-around-messageid-form {
+    margin-bottom: 1rem;
+}
+
+.chatlog-table td {
+    font-size: 0.75rem;
+}
+.chatlog-table tr.selected {
+    background-color: rgba(0,0,0,.065);
+}

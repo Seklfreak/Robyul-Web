@@ -174,4 +174,38 @@ $(function () {
                     });
             });
     }
+    // Chatlog submit
+    var $chatlogAroundMessageIDForm = $('#chatlog-around-messageid-form');
+    var $chatlogChannelSelect = $('#chatlog-channel-select');
+    var $chatlogAroundMessageIDInput = $('#chatlog-around-messageid-input');
+    var $chatlogResultTBody = $('#chatlog-result-tbody');
+    $chatlogAroundMessageIDForm.on('submit', function() {
+        event.preventDefault();
+        var guildID = $chatlogAroundMessageIDForm.data('guild-id');
+        var channelID = $chatlogChannelSelect.find('option:selected').val();
+        var aroundMessageID = $chatlogAroundMessageIDInput.val();
+
+        var serverStatisticsCountEndpoint = "chatlog/" + guildID + "/" + channelID + "/around/" + aroundMessageID;
+
+        apiRequest(serverStatisticsCountEndpoint, function (msg) {
+            var resultHTML = '';
+            $.each(msg, function(i, message) {
+                var classes = '';
+                if (message.ID == aroundMessageID) {
+                    classes = 'selected';
+                }
+                resultHTML += '<tr class="' + classes + '"><td scope="row"><a href="#" class="chatlog-messageid-click" data-message-id="' + message.ID + '" id="message-' + message.ID + '">#' + message.ID + '</a></td><td>' + message.CreatedAt + '</td><td>' + message.AuthorUsername + ' (#' + message.AuthorID + ')</td><td>' + message.Content + "<br>" + message.Attachments + '</td></tr>';
+            });
+            $chatlogResultTBody.html(resultHTML);
+            if ($("#message-"+aroundMessageID).length > 0) {
+                $(document).scrollTop( $("#message-"+aroundMessageID).offset().top - 200 ); 
+            }
+            $('.chatlog-messageid-click').on('click', function() {
+                var $chatlogMessageIDClick = $(this);
+                var aroundMessageId = $chatlogMessageIDClick.data('message-id');
+                $chatlogAroundMessageIDInput.val(aroundMessageId);
+                $chatlogAroundMessageIDForm.submit();
+            });
+        });
+    });
 });
