@@ -174,6 +174,13 @@ class SecurityController extends Controller
         $guildName = $guildData['Name'];
         $guildIcon = $guildData['Icon'];
 
+        $seoPage = $this->container->get('sonata.seo.page');
+        $seoPage
+            ->setTitle($guildName . " Server Statistics - The KPop Discord Bot - Robyul")
+            ->addMeta('name', 'description', "View the server statistics for " . $guildName . ".")
+            ->addMeta('property', 'og:description', "View the server statistics for " . $guildName . ".");
+        $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
+
         return $this->render('RobyulWebBundle:Security:statistics.html.twig', array(
         'guildID' => $guildID,
         'guildName' => $guildName,
@@ -213,6 +220,13 @@ class SecurityController extends Controller
         $guildName = $guildData['Name'];
         $guildIcon = $guildData['Icon'];
         $guildChannels = $guildData['Channels'];
+        
+        $seoPage = $this->container->get('sonata.seo.page');
+        $seoPage
+        ->setTitle($guildName . " Chatlog - The KPop Discord Bot - Robyul")
+        ->addMeta('name', 'description', "View the chatlog for " . $guildName . ".")
+        ->addMeta('property', 'og:description', "View the chatlog for " . $guildName . ".");
+        $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
     
         return $this->render('RobyulWebBundle:Security:chatlog.html.twig', array(
         'guildID' => $guildID,
