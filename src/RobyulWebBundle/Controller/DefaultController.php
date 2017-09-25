@@ -10,15 +10,20 @@ use MessagePack\Unpacker;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use RobyulWebBundle\Service\RobyulApi;
 
 class DefaultController extends Controller
 {
     /**
      * @Route("/")
      */
-    public function indexAction()
+    public function indexAction(RobyulApi $robyulApi)
     {
-        return $this->render('RobyulWebBundle:Default:index.html.twig');
+        $botStatistics = $robyulApi->getRequest('statistics/bot', '+30 minutes');
+
+        return $this->render('RobyulWebBundle:Default:index.html.twig', array(
+            'botStatistics' => $botStatistics
+        ));
     }
 
     /**
