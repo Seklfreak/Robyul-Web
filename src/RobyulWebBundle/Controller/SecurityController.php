@@ -8,13 +8,14 @@ use MessagePack\Unpacker;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Unirest;
+use RobyulWebBundle\Service\RobyulApi;
 
 class SecurityController extends Controller
 {
     /**
      * @Route("/d/profile")
      */
-    public function profileAction()
+    public function profileAction(RobyulApi $robyulApi)
     {
         $seoPage = $this->container->get('sonata.seo.page');
         $seoPage
@@ -44,33 +45,14 @@ class SecurityController extends Controller
         $adminPermInGuilds = array();
 
         foreach ($allGuilds as $guild) {
-            $key = 'robyul2-web:api:member:'.$guild->ID.':'.$this->getUser()->getID().':is';
-            if ($redis->exists($key) == true) {
-                $isMember = $unpacker->unpack($redis->get($key));
-            } else {
-                $isMember = Unirest\Request::get('http://localhost:2021/member/'.$guild->ID.'/'.$this->getUser()->getID().'/is', array('Authorization' => 'Webkey '.$this->getParameter('bot_webkey')));
-                $isMember = (bool) $isMember->body->IsMember;
+            $guildMemberStatus = $robyulApi->getRequest('member/'.$guild->ID.'/'.$this->getUser()->getID().'/status', '+15 minutes');
 
-                $redis->set($key, $packer->pack($isMember));
-                $redis->expireat($key, strtotime("+15 minutes"));
-            }
-
-            if ($isMember === true) {
+            if ((bool) $guildMemberStatus['IsMember'] === true) {
                 $isInGuilds[] = $guild;
 
-                $key = 'robyul2-web:api:member:'.$guild->ID.':'.$this->getUser()->getID().':status';
-                if ($redis->exists($key) == true) {
-                    $statusMember = $unpacker->unpack($redis->get($key));
-                } else {
-                    $statusMember = Unirest\Request::get('http://localhost:2021/member/'.$guild->ID.'/'.$this->getUser()->getID().'/status', array('Authorization' => 'Webkey '.$this->getParameter('bot_webkey')));
-                    $statusMember = (array) $statusMember->body;
-
-                    $redis->set($key, $packer->pack($statusMember));
-                    $redis->expireat($key, strtotime("+15 minutes"));
-                }
-                $isAdmin = (bool) $statusMember['IsGuildAdmin'];
-                $isMod = (bool) $statusMember['IsGuildMod'];
-                $hasAdminPerm = (bool) $statusMember['HasGuildPermissionAdministrator'];
+                $isAdmin = (bool) $guildMemberStatus['IsGuildAdmin'];
+                $isMod = (bool) $guildMemberStatus['IsGuildMod'];
+                $hasAdminPerm = (bool) $guildMemberStatus['HasGuildPermissionAdministrator'];
 
                 if ($isAdmin === true) {
                     $adminInGuilds[] = $guild->ID;
