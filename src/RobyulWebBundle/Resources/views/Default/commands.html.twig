@@ -104,6 +104,29 @@
     </div>
     <div class="card commands-card">
         <div class="card-block">
+            <h4 class="card-title" id="music"><a href="#music">Music</a></h4>
+            <h6 class="card-subtitle mb-2 text-muted">Listen to kpop with your friends.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>//play <span class="arg">song name or url</span></code> Plays a song.</li>
+                <li><code>//np</code> Shows the song currently playing.</li>
+                <li><code>//queue</code> Shows the currently active queue.</li>
+                <li><code>//skip</code> Skips the currently playing song.</li>
+                <li><code>//remove <span class="arg">position</span></code> Removes a song from the queue.</li>
+                <li><code>//shuffle</code> Shuffles the songs you queued.</li>
+                <li><code>//search <span class="arg">query</span></code> Search and list songs from YouTube.</li>
+                <li><code>//setdj <span class="arg">role name</span></code> Sets the DJ role. Use <code>//setdj none</code> to reset this. <span class="badge badge-default">Manage Server permission</span></li>
+                <li><code>//stop</code> Tells Robyul to clear the queue and to disconnect from VC. <span class="badge badge-default">DJ</span></li>
+                <li><code>//skipto <span class="arg">position</span></code> Skip to a specific position in the queue. <span class="badge badge-default">DJ</span></li>
+                <li><code>//forceskip</code> Forcibly skips the current song without any vote. <span class="badge badge-default">DJ</span></li>
+                <li><code>//settc <span class="arg">channel name</span></code> Sets the text channel for music commands. If Robyul has the <code>Manage Channel</code> it will adjust the topic to show the current track. Use <code>//settc none</code> to reset this. <span class="badge badge-default">Manage Server permission</span></li>
+                <li><code>//setvc <span class="arg">channel name</span></code> Sets the voice channel for the Music feature. Use <code>//setvc none</code> to reset this. <span class="badge badge-default">Manage Server permission</span></li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
             <h4 class="card-title" id="vlive"><a href="#vlive">V Live</a></h4>
             <h6 class="card-subtitle mb-2 text-muted">See your Idols live.</h6>
             <p class="card-text">
@@ -156,6 +179,21 @@
                 <li><code>{{ guildBotPrefix }}instagram toggle-direct-links <span class="arg">instagram feed id</span></code> toggles between Discord Embed (default) or linking the Pictures as text. Use <code>{{ guildBotPrefix }}instagram list</code> to get the feed id. <span class="badge badge-default">Mod</span></li>
                 <li><code>{{ guildBotPrefix }}instagram delete <span class="arg">instagram feed id</span></code> delete an Instagram feed. Use <code>{{ guildBotPrefix }}instagram list</code> to get the feed id. <span class="badge badge-default">Mod</span></li>
             </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="reddit"><a href="#reddit">Reddit</a></h4>
+            <h6 class="card-subtitle mb-2 text-muted">The frontpage of the internet.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ guildBotPrefix }}reddit <span class="arg">subreddit name</span></code> displays information about a subreddit</li>
+                <li><code>{{ guildBotPrefix }}reddit list</code> view all active subreddit feeds on this server</li>
+                <li><code>{{ guildBotPrefix }}reddit add <span class="arg">subreddit name</span> <span class="arg">discord #channel or channel id</span> <span class="opt-arg">post delay in minutes</span></code> adds a subreddit feed to the specific channel. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ guildBotPrefix }}reddit delete <span class="arg">subreddit feed id</span></code> delete a subreddit feed. Use <code>{{ guildBotPrefix }}reddit list</code> to get the feed id. <span class="badge badge-default">Mod</span></li>
+            </ul>
+            If you set a post delay to a reddit feed Robyul will delay posting each submission. Robyul will check if the has been deleted after the post delay, and only post the submission if the post has not been deleted.
             </p>
         </div>
     </div>
@@ -569,8 +607,9 @@
                     <li><code>{{ guildBotPrefix }}voicestats top</code> shows the top voice users on this server.</li>
                     <li><code>{{ guildBotPrefix }}emotes</code> shows a list of all custom emotes on the server.</li>
                     <li><code>{{ guildBotPrefix }}memberlist <span class="opt-arg">page #</span> <a class="opt-arg" href="#" data-toggle="tooltip" title="only available for Bot Owners">server id</a></code> shows a list of all members on your server ordered by the date they joined the server.</li>
-                <li><code>{{ guildBotPrefix }}serverlist</code> shows a list with all servers robyul is on. <span class="badge badge-default">Bot Owner</span></li>
-            </ul>
+                    <li><code>{{ guildBotPrefix }}names <span class="arg">@user or user id</span></code> shows past user and nicknames of an user.</li>
+                    <li><code>{{ guildBotPrefix }}serverlist</code> shows a list with all servers robyul is on. <span class="badge badge-default">Bot Owner</span></li>
+                </ul>
             </p>
         </div>
     </div>
