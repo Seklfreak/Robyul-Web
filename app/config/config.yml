@@ -136,7 +136,7 @@ snc_redis:
             type: predis
             alias: default
             dsn: '%redis_client%'
-            logging: %kernel.debug%
+            logging: '%kernel.debug%'
 
 hwi_oauth:
     firewall_names: [secured_area]

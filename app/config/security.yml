@@ -23,7 +23,6 @@ security:
             oauth:
                 resource_owners:
                     discord:       "/login/check"
-                login_path:        /connect/discord
                 use_forward:       false
                 login_path:        /connect/discord
                 default_target_path: /d/profile
