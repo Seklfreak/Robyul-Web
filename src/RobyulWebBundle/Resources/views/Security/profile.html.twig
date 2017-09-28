@@ -60,7 +60,7 @@
                                                 class="fa fa-bar-chart" aria-hidden="true"></i> Statistics</a>
                                 </li>
                             {% endif %}
-                            {% if guild.ID in adminPermInGuilds %}
+                            {% if guild.ID in adminPermInGuilds and guild.Features.Chatlog.Enabled %}
                                 <li>
                                     <a href="{{ path('robyulweb_security_chatlog', {'guildID': guild.ID}) }}"><i
                                                 class="fa fa-archive" aria-hidden="true"></i> Chatlog</a>

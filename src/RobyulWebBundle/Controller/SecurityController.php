@@ -189,19 +189,19 @@ class SecurityController extends Controller
             return $this->redirectToRoute('robyulweb_security_profile');
         }
 
-        $key = 'robyul2-web:api:guild:' . $guildID;
-        if ($redis->exists($key) == true) {
-            $guildData = unserialize($unpacker->unpack($redis->get($key)));
-        } else {
-            $guildInfo = Unirest\Request::get('http://localhost:2021/guild/' . $guildID, array('Authorization' => 'Webkey '.$this->container->getParameter('bot_webkey')));
-            $guildData = (array)$guildInfo->body;
+        $guildInfo = Unirest\Request::get('http://localhost:2021/guild/' . $guildID, array('Authorization' => 'Webkey '.$this->container->getParameter('bot_webkey')));
+        $guildData = (array)$guildInfo->body;
 
-            $redis->set($key, $packer->pack(serialize($guildData)));
-            $redis->expireat($key, strtotime("+1 hour"));
-        }
+        $redis->set($key, $packer->pack(serialize($guildData)));
+        $redis->expireat($key, strtotime("+1 hour"));
+
         $guildName = $guildData['Name'];
         $guildIcon = $guildData['Icon'];
         $guildChannels = $guildData['Channels'];
+        $chatlogEnabled = (bool)$guildData['Features']->Chatlog->Enabled;
+        if ($chatlogEnabled !== true) {
+            return $this->redirectToRoute('robyulweb_security_profile');
+        }
         
         $seoPage = $this->container->get('sonata.seo.page');
         $seoPage
