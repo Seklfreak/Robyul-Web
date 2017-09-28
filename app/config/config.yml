@@ -32,7 +32,7 @@ framework:
     fragments: ~
     http_method_override: true
     assets:
-        version: 'v40'
+        version: 'v41'
     php_errors:
         log: true
 
