@@ -24,20 +24,7 @@ class SecurityController extends Controller
             ->addMeta('property', 'og:description', "View your Profile.");
         $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
 
-        $unpacker = new Unpacker();
-        $packer = new Packer();
-        $redis = $this->container->get('snc_redis.default');
-
-        $key = 'robyul2-web:api:bot:guilds';
-        if ($redis->exists($key) == true) {
-            $allGuilds = unserialize($unpacker->unpack($redis->get($key)));
-        } else {
-            $allGuilds = Unirest\Request::get('http://localhost:2021/bot/guilds', array('Authorization' => 'Webkey '.$this->getParameter('bot_webkey')));
-            $allGuilds = (array) $allGuilds->body;
-
-            $redis->set($key, $packer->pack(serialize($allGuilds)));
-            $redis->expireat($key, strtotime("+15 minutes"));
-        }
+        $allGuilds = $robyulApi->getRequest('bot/guilds', '+15 minutes');
 
         $isInGuilds = array();
         $adminInGuilds = array();
@@ -77,37 +64,15 @@ class SecurityController extends Controller
     /**
      * @Route("/d/randompictures/{guildID}")
      */
-    public function randomPicturesHistoryAction($guildID)
+    public function randomPicturesHistoryAction($guildID, RobyulApi $robyulApi)
     {
-        $unpacker = new Unpacker();
-        $packer = new Packer();
-        $redis = $this->container->get('snc_redis.default');
+        $memberStatus = $robyulApi->getRequest('member/'.$guildID.'/'.$this->getUser()->getID().'/is', '+15 minutes');
 
-        $key = 'robyul2-web:api:guild:' . $guildID;
-        if ($redis->exists($key) == true) {
-            $guildData = unserialize($unpacker->unpack($redis->get($key)));
-        } else {
-            $guildInfo = Unirest\Request::get('http://localhost:2021/guild/' . $guildID, array('Authorization' => 'Webkey '.$this->getParameter('bot_webkey')));
-            $guildData = (array)$guildInfo->body;
-
-            $redis->set($key, $packer->pack(serialize($guildData)));
-            $redis->expireat($key, strtotime("+1 hour"));
-        }
-
-        $key = 'robyul2-web:api:member:'.$guildID.':'.$this->getUser()->getID().':is';
-        if ($redis->exists($key) == true) {
-            $isMember = $unpacker->unpack($redis->get($key));
-        } else {
-            $isMember = Unirest\Request::get('http://localhost:2021/member/'.$guildID.'/'.$this->getUser()->getID().'/is', array('Authorization' => 'Webkey '.$this->getParameter('bot_webkey')));
-            $isMember = (bool) $isMember->body->IsMember;
-
-            $redis->set($key, $packer->pack($isMember));
-            $redis->expireat($key, strtotime("+15 minutes"));
-        }
-
-        if (!$isMember) {
+        if ($memberStatus['IsMember'] !== true) {
             return $this->redirectToRoute('robyulweb_security_profile');
         }
+
+        $guildData = $robyulApi->getRequest('guild/'.$guildID);
 
         $seoPage = $this->container->get('sonata.seo.page');
         $seoPage
@@ -116,8 +81,7 @@ class SecurityController extends Controller
             ->addMeta('property', 'og:description', "View the most recent pictures for " . $guildData['Name'] . ".");
         $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
 
-        $pictureHistoryInfo = Unirest\Request::get('http://localhost:2021/randompictures/history/' . $guildID . '/1/100', array('Authorization' => 'Webkey '.$this->getParameter('bot_webkey')));
-        $pictureHistoryData = (array)$pictureHistoryInfo->body;
+        $pictureHistoryData = $robyulApi->getRequest('randompictures/history/' . $guildID . '/1/100', '+1 minutes');
 
         return $this->render('RobyulWebBundle:Security:randomPicturesHistory.html.twig', array(
             'pictureHistoryItems' => $pictureHistoryData
@@ -127,32 +91,15 @@ class SecurityController extends Controller
     /**
      * @Route("/d/statistics/{guildID}")
      */
-    public function statisticsAction($guildID)
+    public function statisticsAction($guildID, RobyulApi $robyulApi)
     {
-        $statusMember = Unirest\Request::get('http://localhost:2021/member/'.$guildID.'/'.$this->getUser()->getID().'/status', array('Authorization' => 'Webkey '.$this->getParameter('bot_webkey')));
-        $statusMember = (array) $statusMember->body;
-
-        $unpacker = new Unpacker();
-        $packer = new Packer();
-        $redis = $this->container->get('snc_redis.default');
-        $key = 'robyul2-web:api:member:'.$guildID.':'.$this->getUser()->getID().':status';
-        $redis->set($key, $packer->pack($statusMember));
-        $redis->expireat($key, strtotime("+15 minutes"));
+        $statusMember = $robyulApi->getRequest('member/'.$guildID.'/'.$this->getUser()->getID().'/status', '+1 minutes');
 
         if ($statusMember['IsGuildAdmin'] !== true && $statusMember['IsGuildMod'] !== true) {
             return $this->redirectToRoute('robyulweb_security_profile');
         }
 
-        $key = 'robyul2-web:api:guild:' . $guildID;
-        if ($redis->exists($key) == true) {
-            $guildData = unserialize($unpacker->unpack($redis->get($key)));
-        } else {
-            $guildInfo = Unirest\Request::get('http://localhost:2021/guild/' . $guildID, array('Authorization' => 'Webkey '.$this->container->getParameter('bot_webkey')));
-            $guildData = (array)$guildInfo->body;
-
-            $redis->set($key, $packer->pack(serialize($guildData)));
-            $redis->expireat($key, strtotime("+1 hour"));
-        }
+        $guildData = $robyulApi->getRequest('guild/' . $guildID);
         $guildName = $guildData['Name'];
         $guildIcon = $guildData['Icon'];
 
@@ -173,27 +120,15 @@ class SecurityController extends Controller
     /**
      * @Route("/d/chatlog/{guildID}")
      */
-    public function chatlogAction($guildID)
+    public function chatlogAction($guildID, RobyulApi $robyulApi)
     {
-        $statusMember = Unirest\Request::get('http://localhost:2021/member/'.$guildID.'/'.$this->getUser()->getID().'/status', array('Authorization' => 'Webkey '.$this->getParameter('bot_webkey')));
-        $statusMember = (array) $statusMember->body;
-    
-        $unpacker = new Unpacker();
-        $packer = new Packer();
-        $redis = $this->container->get('snc_redis.default');
-        $key = 'robyul2-web:api:member:'.$guildID.':'.$this->getUser()->getID().':status';
-        $redis->set($key, $packer->pack($statusMember));
-        $redis->expireat($key, strtotime("+15 minutes"));
+        $statusMember = $robyulApi->getRequest('member/'.$guildID.'/'.$this->getUser()->getID().'/status', '+1 minutes');
     
         if ($statusMember['HasGuildPermissionAdministrator'] !== true) {
             return $this->redirectToRoute('robyulweb_security_profile');
         }
 
-        $guildInfo = Unirest\Request::get('http://localhost:2021/guild/' . $guildID, array('Authorization' => 'Webkey '.$this->container->getParameter('bot_webkey')));
-        $guildData = (array)$guildInfo->body;
-
-        $redis->set($key, $packer->pack(serialize($guildData)));
-        $redis->expireat($key, strtotime("+1 hour"));
+        $guildData = $robyulApi->getRequest('guild/'.$guildID, '+1 minutes');
 
         $guildName = $guildData['Name'];
         $guildIcon = $guildData['Icon'];

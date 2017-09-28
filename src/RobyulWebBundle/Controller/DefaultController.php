@@ -31,7 +31,7 @@ class DefaultController extends Controller
      *     defaults={"guildID": "global"}
      * )
      */
-    public function commandsAction($guildID)
+    public function commandsAction($guildID, RobyulApi $robyulApi)
     {
         $seoPage = $this->container->get('sonata.seo.page');
         $seoPage
@@ -40,23 +40,11 @@ class DefaultController extends Controller
             ->addMeta('property', 'og:description', "View a list of all Robyul Discord Bot commands here.");
         $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
 
-        $unpacker = new Unpacker();
-        $packer = new Packer();
-        $redis = $this->container->get('snc_redis.default');
-
         $guildPrefix = $this->container->getParameter('bot_default_prefix');
 
-        $key = 'robyul2-web:api:guild:' . $guildID;
         if ($guildID !== 'global') {
-            if ($redis->exists($key) == true) {
-                $guildData = unserialize($unpacker->unpack($redis->get($key)));
-            } else {
-                $guildInfo = Unirest\Request::get('http://localhost:2021/guild/' . $guildID, array('Authorization' => 'Webkey '.$this->getParameter('bot_webkey')));
-                $guildData = (array)$guildInfo->body;
+            $guildData = $robyulApi->getRequest('guild/'.$guildID);
 
-                $redis->set($key, $packer->pack(serialize($guildData)));
-                $redis->expireat($key, strtotime("+1 hour"));
-            }
             if (array_key_exists('BotPrefix', $guildData)) {
                 $guildPrefix = $guildData['BotPrefix'];
             }
@@ -183,27 +171,15 @@ class DefaultController extends Controller
      *     defaults={"guildID": "global"}
      * )
      */
-    public function rankingAction($guildID)
+    public function rankingAction($guildID, RobyulApi $robyulApi)
     {
-        $unpacker = new Unpacker();
-        $packer = new Packer();
-        $redis = $this->container->get('snc_redis.default');
-
         $guildName = 'Global';
         $metaName = 'View the Global Robyul Ranking.';
         $guildIcon = '';
 
-        $key = 'robyul2-web:api:guild:' . $guildID;
         if ($guildID !== 'global') {
-            if ($redis->exists($key) == true) {
-                $guildData = unserialize($unpacker->unpack($redis->get($key)));
-            } else {
-                $guildInfo = Unirest\Request::get('http://localhost:2021/guild/' . $guildID, array('Authorization' => 'Webkey '.$this->container->getParameter('bot_webkey')));
-                $guildData = (array)$guildInfo->body;
+            $guildData = $robyulApi->getRequest('guild/'.$guildID);
 
-                $redis->set($key, $packer->pack(serialize($guildData)));
-                $redis->expireat($key, strtotime("+1 hour"));
-            }
             $guildName = $guildData['Name'];
             $guildIcon = $guildData['Icon'];
             $metaName = 'View the Robyul Ranking for ' . $guildName . '.';
@@ -217,16 +193,7 @@ class DefaultController extends Controller
         $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
 
 
-        $key = 'robyul2-web:api:rankings:' . $guildID;
-        if ($redis->exists($key) == true) {
-            $rankingData = unserialize($unpacker->unpack($redis->get($key)));
-        } else {
-            $rankingInfo = Unirest\Request::get('http://localhost:2021/rankings/' . $guildID, array('Authorization' => 'Webkey '.$this->container->getParameter('bot_webkey')));
-            $rankingData = (array)$rankingInfo->body;
-
-            $redis->set($key, $packer->pack(serialize($rankingData)));
-            $redis->expireat($key, strtotime("+30 minutes"));
-        }
+        $rankingData = $robyulApi->getRequest('rankings/'.$guildID, '+30 minutes');
 
         return $this->render('RobyulWebBundle:Default:ranking.html.twig', array(
             'guildID' => $guildID,
