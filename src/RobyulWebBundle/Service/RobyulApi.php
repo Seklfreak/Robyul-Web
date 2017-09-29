@@ -4,16 +4,24 @@ namespace RobyulWebBundle\Service;
 
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Unirest;
+use Psr\Log\LoggerInterface;
 
 class RobyulApi
 {
     private $container;
     private $redis;
+    private $logger;
 
-    public function __construct(ContainerInterface $container)
+    public function __construct(ContainerInterface $container, LoggerInterface $logger)
     {
         $this->container = $container;
         $this->redis = $this->container->get('snc_redis.default');
+        $this->logger = $logger;
+    }
+
+    protected function logRequest($method, $url, $as, $took)
+    {
+        $this->logger->info($method.' '.$url.' as '.$as.' took '.$took.'s');
     }
 
     public function getRequest($endpoint, $expire = '+1 hour')
@@ -22,11 +30,14 @@ class RobyulApi
         if ($this->redis->exists($key) == true) {
             $data = unserialize($this->redis->get($key));
         } else {
+            $timeStart = microtime(true);
             $data = Unirest\Request::get('http://localhost:2021/' . $endpoint,
             array(
                 'Authorization' => 'Webkey '.$this->container->getParameter('bot_webkey'),
                 'User-Agent' => 'Robuyl-Web/0.1' // TODO: version
             ));
+            $timeEnd = microtime(true);
+            $this->logRequest('GET', 'http://localhost:2021/' . $endpoint, 'json array', $timeEnd-$timeStart);
             $data = (array)$data->body;
 
             $this->redis->set($key, serialize($data));
@@ -41,11 +52,14 @@ class RobyulApi
         if ($this->redis->exists($key) == true) {
             $data = unserialize($this->redis->get($key));
         } else {
+            $timeStart = microtime(true);
             $data = Unirest\Request::get('http://localhost:2021/' . $endpoint,
             array(
             'Authorization' => 'Webkey '.$this->container->getParameter('bot_webkey'),
             'User-Agent' => 'Robuyl-Web/0.1' // TODO: version
             ));
+            $timeEnd = microtime(true);
+            $this->logRequest('GET', 'http://localhost:2021/' . $endpoint, 'raw', $timeEnd-$timeStart);
             $data = (string)$data->body;
     
             $this->redis->set($key, serialize($data));
