@@ -24,40 +24,12 @@ class SecurityController extends Controller
             ->addMeta('property', 'og:description', "View your Profile.");
         $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
 
-        $allGuilds = $robyulApi->getRequest('bot/guilds', '+15 minutes');
+        $allGuilds = $robyulApi->getRequest('user/'.$this->getUser()->getID().'/guilds', '+15 minutes');
 
         $isInGuilds = array();
-        $adminInGuilds = array();
-        $modInGulds = array();
-        $adminPermInGuilds = array();
-
-        foreach ($allGuilds as $guild) {
-            $guildMemberStatus = $robyulApi->getRequest('member/'.$guild->ID.'/'.$this->getUser()->getID().'/status', '+15 minutes');
-
-            if ((bool) $guildMemberStatus['IsMember'] === true) {
-                $isInGuilds[] = $guild;
-
-                $isAdmin = (bool) $guildMemberStatus['IsGuildAdmin'];
-                $isMod = (bool) $guildMemberStatus['IsGuildMod'];
-                $hasAdminPerm = (bool) $guildMemberStatus['HasGuildPermissionAdministrator'];
-
-                if ($isAdmin === true) {
-                    $adminInGuilds[] = $guild->ID;
-                }
-                if ($isMod === true) {
-                    $modInGulds[] = $guild->ID;
-                }
-                if ($hasAdminPerm === true) {
-                    $adminPermInGuilds[] = $guild->ID;
-                }
-            }
-        }
 
         return $this->render('RobyulWebBundle:Security:profile.html.twig', array(
-            'memberOfGuilds' => $isInGuilds,
-            'adminOfGuildIDs' => $adminInGuilds,
-            'modOfGuildIDs' => $modInGulds,
-            'adminPermInGuilds' => $adminPermInGuilds,
+            'memberOfGuilds' => $allGuilds,
         ));
     }
 

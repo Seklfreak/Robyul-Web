@@ -54,13 +54,13 @@
                                                 class="fa fa-picture-o" aria-hidden="true"></i> Gallery</a>
                                 </li>
                             {% endif %}
-                            {% if guild.ID in adminOfGuildIDs or guild.ID in modOfGuildIDs %}
+                            {% if guild.Status.IsGuildAdmin or guild.Status.IsGuildMod %}
                                 <li>
                                     <a href="{{ path('robyulweb_security_statistics', {'guildID': guild.ID}) }}"><i
                                                 class="fa fa-bar-chart" aria-hidden="true"></i> Statistics</a>
                                 </li>
                             {% endif %}
-                            {% if guild.ID in adminPermInGuilds and guild.Features.Chatlog.Enabled %}
+                            {% if guild.Status.HasGuildPermissionAdministrator and guild.Features.Chatlog.Enabled %}
                                 <li>
                                     <a href="{{ path('robyulweb_security_chatlog', {'guildID': guild.ID}) }}"><i
                                                 class="fa fa-archive" aria-hidden="true"></i> Chatlog</a>
