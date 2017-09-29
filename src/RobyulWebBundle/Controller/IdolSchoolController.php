@@ -14,9 +14,9 @@ class IdolSchoolController extends Controller
     {
         $seoPage = $this->container->get('sonata.seo.page');
         $seoPage
-            ->setTitle("Idol School Ranking - The KPop Discord Bot - Robyul")
-            ->addMeta('name', 'description', "View the Ranking over time for Mnet's Idol School here.")
-            ->addMeta('property', 'og:description', "View the Ranking over time for Mnet's Idol School here.");
+            ->setTitle("Idol School (fromis-) Ranking - The KPop Discord Bot - Robyul")
+            ->addMeta('name', 'description', "View the Ranking over time for Mnet's Idol School forming the Girl Group fromis_.")
+            ->addMeta('property', 'og:description', "View the Ranking over time for Mnet's Idol School forming the Girl Group fromis_.");
         $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
 
         return $this->render('RobyulWebBundle:IdolSchool:index.html.twig');
