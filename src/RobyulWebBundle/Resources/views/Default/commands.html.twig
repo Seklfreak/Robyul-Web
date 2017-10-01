@@ -93,7 +93,8 @@
             <h6 class="card-subtitle mb-2 text-muted">Get informed when someone talks about you or what you care about.</h6>
             <p class="card-text">
             <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}noti add <span class="arg">keyword(s)</span></code> Get a DM from Robyul when someone says the keyword(s).</li>
+                <li><code>{{ guildBotPrefix }}noti add <span class="arg">keyword(s)</span></code> Get a DM from Robyul when someone says the keyword(s) on your current server.</li>
+                <li><code>{{ guildBotPrefix }}noti add global <span class="arg">keyword(s)</span></code> Like above but you get notified for every server with Robyul you are on.</li>
                 <li><code>{{ guildBotPrefix }}noti list</code> lists all your active keywords on this server.</li>
                 <li><code>{{ guildBotPrefix }}noti delete <span class="arg">keyword(s)</span></code> deletes a keyword from this server.</li>
                 <li><code>{{ guildBotPrefix }}noti ignore-channel <span class="arg">#channel or id</span></code> lets Robyul ignore all messages in the given channel. Run it again to turn it on again. <span class="badge badge-default">Admin</span></li>
@@ -449,7 +450,7 @@
             <p class="card-text">
             <ul class="list-unstyled">
                 <li><code>{{ guildBotPrefix }}pic <span class="opt-arg">name</span></code> get a random picture from a folder. Without arguments it gets the folder from your roles.</li>
-                <li><code>{{ guildBotPrefix }}randompictures new-config</code> Creates an empty config. <span class="badge badge-default">Bot Owner</span></li>
+                <li><code>{{ guildBotPrefix }}randompictures new-config <span class="arg">alias=alias1,alias2</span> <span class="arg">folder=folder1,folder2</span> <span class="opt-arg">channel=channel1,channel2</span></code> Creates an empty config. <span class="badge badge-default">Bot Owner</span></li>
                 <li><code>{{ guildBotPrefix }}randompictures list</code> Lists all picture folders. <span class="badge badge-default">Bot Owner</span></li>
                 <li><code>{{ guildBotPrefix }}randompictures refresh <span class="arg">source id</span></code> Refreshes a source. Use <code>{{ guildBotPrefix }}randompictures list</code> to get the source id. <span class="badge badge-default">Bot Owner</span></li>
             </ul>
