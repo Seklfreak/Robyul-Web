@@ -313,7 +313,7 @@
             <h6 class="card-subtitle mb-2 text-muted">Assign Roles as soon as a member joins.</h6>
             <p class="card-text">
             <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}autorole add <span class="arg">role name or role id</span></code> robyul will assign the role to new members. <span class="badge badge-default">Admin</span></li>
+                <li><code>{{ guildBotPrefix }}autorole add <span class="arg">role name or role id</span> <span class="opt-arg">after n minutes/hours/days</span></code> robyul will assign the role to new members. <span class="badge badge-default">Admin</span></li>
                 <li><code>{{ guildBotPrefix }}autorole remove <span class="arg">role name or role id</span></code> robyul will no longer assign the role to new members. <span class="badge badge-default">Admin</span></li>
                 <li><code>{{ guildBotPrefix }}autorole list</code> lists all active autoroles.</li>
                 <li><code>{{ guildBotPrefix }}autorole apply <span class="arg">role name or role id</span></code> assign a role to all members on your server. <span class="badge badge-default">Admin</span></li>
@@ -504,11 +504,13 @@
                 <li><code>{{ guildBotPrefix }}<span class="arg">command name</span></code> run a custom command</li>
                 <li><code>{{ guildBotPrefix }}commands edit <span class="arg">command name</span> <span class="arg">new command content</span></code> edit a custom command.</li>
                 <li><code>{{ guildBotPrefix }}commands list</code> lists all custom commands on a server.</li>
+                <li><code>{{ guildBotPrefix }}commands list top</code> lists all custom commands on a server ordered by usage.</li>
                 <li><code>{{ guildBotPrefix }}commands info <span class="arg">command name</span></code> shows information about a custom command.</li>
                 <li><code>{{ guildBotPrefix }}commands search <span class="arg">search text</span></code> search in the custom command names.</li>
                 <li><code>{{ guildBotPrefix }}commands add <span class="arg">command name</span> <span class="arg">command content</span></code> create a custom command. <span class="badge badge-default">Mod</span></li>
                 <li><code>{{ guildBotPrefix }}commands delete <span class="arg">command name</span></code> delete a custom command. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}commands import-json <span class="arg">JSON attachment</span></code> Imports custom commands to a server. DM <code>Sekl#7397</code> on Discord to use this command. <span class="badge badge-default">Bot Owner</span></li>
+                <li><code>{{ guildBotPrefix }}commands export-json</code> Exports custom commands on your server. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ guildBotPrefix }}commands import-json <span class="arg">JSON attachment</span></code> Imports custom commands to a server. <span class="badge badge-default">Mod</span></li>
                 <li><code>{{ guildBotPrefix }}commands refresh</code> Refreshes the custom command cache. <span class="badge badge-default">Bot Owner</span></li>
             </ul>
             Format of the Custom Commands JSON
