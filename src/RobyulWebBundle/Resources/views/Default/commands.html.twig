@@ -298,8 +298,8 @@
             <ul class="list-unstyled">
                 <li><code>{{ guildBotPrefix }}bias stats</code> get bias role statistics.</li>
                 <li><code>{{ guildBotPrefix }}bias help</code> prints the bias help text meant to guide your users in the specific channel.</li>
-                <li><code>{{ guildBotPrefix }}bias set-config <span class="arg">channel # or id</span> <a class="arg" href="#" data-toggle="tooltip" title="Upload a Bias Config JSON using Discord when you use the command">+ ATTACHMENT</a></code> set a bias config for the specific channel. <span class="badge badge-default">Admin</span></li>
-                <li><code>{{ guildBotPrefix }}bias get-config <span class="arg">channel # or id</span></code> get a bias config for the specific channel. <span class="badge badge-default">Admin</span></li>
+                <li><code>{{ guildBotPrefix }}bias set-config <span class="arg">channel # or id</span> <a class="arg" href="#" data-toggle="tooltip" title="Upload a Bias Config JSON using Discord when you use the command">+ ATTACHMENT</a></code> set a bias config for the specific channel. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ guildBotPrefix }}bias get-config <span class="arg">channel # or id</span></code> get a bias config for the specific channel. <span class="badge badge-default">Mod</span></li>
                 <li><code>{{ guildBotPrefix }}bias remove-config <span class="arg">channel # or id</span></code> remove a bias config for the specific channel. <span class="badge badge-default">Admin</span></li>
                 <li><code>{{ guildBotPrefix }}bias refresh</code> reloads all bias configs. <span class="badge badge-default">Bot Owner</span></li>
             </ul>
@@ -612,7 +612,8 @@
                     <li><code>{{ guildBotPrefix }}voicestats <span class="opt-arg">@user or user id</span></code> shows the voice stats of an user.</li>
                     <li><code>{{ guildBotPrefix }}voicestats top</code> shows the top voice users on this server.</li>
                     <li><code>{{ guildBotPrefix }}emotes</code> shows a list of all custom emotes on the server.</li>
-                    <li><code>{{ guildBotPrefix }}memberlist <span class="opt-arg">page #</span> <a class="opt-arg" href="#" data-toggle="tooltip" title="only available for Bot Owners">server id</a></code> shows a list of all members on your server ordered by the date they joined the server.</li>
+                    <li><code>{{ guildBotPrefix }}memberlist <span class="opt-arg">page #</span> <span class="opt-arg">role name or id</span> <a class="opt-arg" href="#" data-toggle="tooltip" title="only available for Bot Owners">server id</a></code> shows a list of all members on your server ordered by the date they joined the server.</li>
+                    <li><code>{{ guildBotPrefix }}rolelist <a class="opt-arg" href="#" data-toggle="tooltip" title="only available for Bot Owners">server id</a></code> shows a roles on the server.</li>
                     <li><code>{{ guildBotPrefix }}names <span class="arg">@user or user id</span></code> shows past user and nicknames of an user.</li>
                     <li><code>{{ guildBotPrefix }}serverlist</code> shows a list with all servers robyul is on. <span class="badge badge-default">Bot Owner</span></li>
                 </ul>
