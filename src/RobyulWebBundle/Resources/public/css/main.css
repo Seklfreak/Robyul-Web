@@ -189,6 +189,11 @@ body {
     text-overflow: ellipsis;
 }
 
+.profile-bar .progress-bar {
+    padding-left: 0.3rem;
+    padding-right: 0.3rem;
+}
+
 .profile-bar-colour-1 {
     background-color: #007bff !important;
 }
