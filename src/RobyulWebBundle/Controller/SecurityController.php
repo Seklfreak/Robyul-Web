@@ -28,9 +28,17 @@ class SecurityController extends Controller
 
         $allRankings = $robyulApi->getRequest('rankings/user/'.$this->getUser()->getID().'/all', '+15 minutes');
 
+        $globalAdjustedEXP = 0;
+        foreach ($allRankings as $ranking) {
+            if ($ranking->GuildID != "global" && $ranking->Level > 0) {
+                $globalAdjustedEXP += $ranking->EXP;
+            }
+        }
+
         return $this->render('RobyulWebBundle:Security:profile.html.twig', array(
             'memberOfGuilds' => $allGuilds,
             'allRankings' => $allRankings,
+            'globalAdjustedEXP' => $globalAdjustedEXP,
         ));
     }
 
