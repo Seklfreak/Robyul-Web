@@ -180,3 +180,24 @@ body {
 .chatlog-table tr.selected {
     background-color: rgba(0,0,0,.065);
 }
+
+.profile-bar, .profile-bar .progress-bar {
+    height: 2.5rem;
+    font-size: 1.5rem;
+    line-height: 2.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.profile-bar-colour-1 {
+    background-color: #007bff !important;
+}
+.profile-bar-colour-2 {
+    background-color: #5cb85c !important;
+}
+.profile-bar-colour-3 {
+    background-color: #ffc107!important
+}
+.profile-bar-colour-4 {
+    background-color: #dc3545 !important;
+}

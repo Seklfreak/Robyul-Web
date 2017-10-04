@@ -26,10 +26,11 @@ class SecurityController extends Controller
 
         $allGuilds = $robyulApi->getRequest('user/'.$this->getUser()->getID().'/guilds', '+15 minutes');
 
-        $isInGuilds = array();
+        $allRankings = $robyulApi->getRequest('rankings/user/'.$this->getUser()->getID().'/all', '+15 minutes');
 
         return $this->render('RobyulWebBundle:Security:profile.html.twig', array(
             'memberOfGuilds' => $allGuilds,
+            'allRankings' => $allRankings,
         ));
     }
 
