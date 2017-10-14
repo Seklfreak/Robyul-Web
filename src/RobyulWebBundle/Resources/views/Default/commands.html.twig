@@ -32,7 +32,7 @@
             <ul class="list-unstyled">
                 <li><code>@{{ bot_user }} help</code> or <code>{{ guildBotPrefix }}help</code> get a link to this page.</li>
                 <li><code>@{{ bot_user }} prefix</code> or <code>{{ guildBotPrefix }}prefix</code> find out the Robyul prefix for this server.</li>
-                <li><code>@{{ bot_user }} <span class="arg">message</span></code> talk to Robyul.</li>
+                {# <li><code>@{{ bot_user }} <span class="arg">message</span></code> talk to Robyul.</li> #}
             </ul>
             </p>
         </div>
@@ -76,6 +76,10 @@
                 <li><code>{{ guildBotPrefix }}profile badge deny <span class="arg">@user or user id</span> <span class="arg">category name</span> <span class="arg">badge name</span></code> make a badge unavailable for an user regardless of level requirement. Run it again to remove user from the list again. <span class="badge badge-default">Mod</span></li>
                 <li><code>{{ guildBotPrefix }}profile badge list</code> List all badge categories.</li>
                 <li><code>{{ guildBotPrefix }}profile badge list <span class="arg">category name</span></code> List all badges in a category.</li>
+                <li><code>{{ guildBotPrefix }}levels roles add <span class="arg">role name or id</span> <span class="arg">start level</span> <span class="opt-arg">last level</span></code> ties a role to the specified level range. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ guildBotPrefix }}levels roles list</code> lists all roles to levels connections. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ guildBotPrefix }}levels roles delete <span class="arg">connection id</span></code> removes a role to level connection. Use <code>{{ guildBotPrefix }}levels role list</code> to get the ID. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ guildBotPrefix }}levels roles apply</code> applies all level roles to all members that meet the requirements. <span class="badge badge-default">Mod</span></li>
                 <li><code>{{ guildBotPrefix }}levels reset user <span class="arg">@user or user id</span></code> resets the EXP and Level for the given user on the server. <span class="badge badge-default">Admin</span></li>
                 <li><code>{{ guildBotPrefix }}levels ignore list</code> shows currently ignored users and channels <span class="badge badge-default">Mod</span>.</li>
                 <li><code>{{ guildBotPrefix }}levels ignore user <span class="arg">@user or user id</span></code> makes Robyul ignore one users messages for EXP. <span class="badge badge-default">Admin</span></li>
@@ -505,13 +509,13 @@
             <p class="card-text">
             <ul class="list-unstyled">
                 <li><code>{{ guildBotPrefix }}<span class="arg">command name</span></code> run a custom command</li>
-                <li><code>{{ guildBotPrefix }}commands edit <span class="arg">command name</span> <span class="arg">new command content</span></code> edit a custom command.</li>
                 <li><code>{{ guildBotPrefix }}commands list</code> lists all custom commands on a server.</li>
                 <li><code>{{ guildBotPrefix }}commands list top</code> lists all custom commands on a server ordered by usage.</li>
                 <li><code>{{ guildBotPrefix }}commands info <span class="arg">command name</span></code> shows information about a custom command.</li>
                 <li><code>{{ guildBotPrefix }}commands search <span class="arg">search text</span></code> search in the custom command names.</li>
                 <li><code>{{ guildBotPrefix }}commands add <span class="arg">command name</span> <span class="arg">command content</span></code> create a custom command. <span class="badge badge-default">Mod</span></li>
                 <li><code>{{ guildBotPrefix }}commands delete <span class="arg">command name</span></code> delete a custom command. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ guildBotPrefix }}commands edit <span class="arg">command name</span> <span class="arg">new command content</span></code> edit a custom command. <span class="badge badge-default">Mod</span></li>
                 <li><code>{{ guildBotPrefix }}commands export-json</code> Exports custom commands on your server. <span class="badge badge-default">Mod</span></li>
                 <li><code>{{ guildBotPrefix }}commands import-json <span class="arg">JSON attachment</span></code> Imports custom commands to a server. <span class="badge badge-default">Mod</span></li>
                 <li><code>{{ guildBotPrefix }}commands refresh</code> Refreshes the custom command cache. <span class="badge badge-default">Bot Owner</span></li>
