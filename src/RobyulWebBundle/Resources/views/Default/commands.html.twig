@@ -461,6 +461,7 @@
             <p class="card-text">
             <ul class="list-unstyled">
                 <li><code>{{ guildBotPrefix }}pic <span class="opt-arg">name</span></code> get a random picture from a folder. Without arguments it gets the folder from your roles.</li>
+                <li><code>{{ guildBotPrefix }}randompictures pic-delay <span class="arg">n in minutes</span></code> Sets a timeout for the <code>{{ guildBotPrefix }}pic</code> command. <span class="badge badge-default">Mod</span></li>
                 <li><code>{{ guildBotPrefix }}randompictures new-config <span class="arg">alias=alias1,alias2</span> <span class="arg">folder=folder1,folder2</span> <span class="opt-arg">channel=channel1,channel2</span></code> Creates an empty config. <span class="badge badge-default">Bot Owner</span></li>
                 <li><code>{{ guildBotPrefix }}randompictures list</code> Lists all picture folders. <span class="badge badge-default">Bot Owner</span></li>
                 <li><code>{{ guildBotPrefix }}randompictures refresh <span class="arg">source id</span></code> Refreshes a source. Use <code>{{ guildBotPrefix }}randompictures list</code> to get the source id. <span class="badge badge-default">Bot Owner</span></li>
@@ -623,10 +624,25 @@
                     <li><code>{{ guildBotPrefix }}emotes</code> shows a list of all custom emotes on the server.</li>
                     <li><code>{{ guildBotPrefix }}memberlist <span class="opt-arg">page #</span> <span class="opt-arg">role name or id</span> <a class="opt-arg" href="#" data-toggle="tooltip" title="only available for Bot Owners">server id</a></code> shows a list of all members on your server ordered by the date they joined the server.</li>
                     <li><code>{{ guildBotPrefix }}rolelist <a class="opt-arg" href="#" data-toggle="tooltip" title="only available for Bot Owners">server id</a></code> shows all roles on the server.</li>
+                    <li><code>{{ guildBotPrefix }}channellist <a class="opt-arg" href="#" data-toggle="tooltip" title="only available for Bot Owners">server id</a></code> shows all channels on the server.</li>
                     <li><code>{{ guildBotPrefix }}names <span class="arg">@user or user id</span></code> shows past user and nicknames of an user.</li>
                     <li><code>{{ guildBotPrefix }}invite <span class="arg">invite code or url</span></code> shows information about an invite.</li>
                     <li><code>{{ guildBotPrefix }}serverlist</code> shows a list with all servers robyul is on. <span class="badge badge-default">Bot Owner</span></li>
                 </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="persistency"><a href="#persistency">Persistency</a></h4>
+            <h6 class="card-subtitle mb-2 text-muted">Restores roles and more for users who rejoin a server they were on before</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ guildBotPrefix }}persistency status</code> shows what robyul is restoring on rejoins.</li>
+                <li><code>{{ guildBotPrefix }}persistency toggle bias-roles</code> toggles restoring of all <a href="#bias">bias</a> roles (disabled by default).</li>
+                <li><code>{{ guildBotPrefix }}persistency role add <span class="arg">role name or id</span></code> adds a role to the list of roles that get restored.</li>
+                <li><code>{{ guildBotPrefix }}persistency role remove <span class="arg">role name or id</span></code> removes a role from the list of roles that get restored.</li>
+            </ul>
             </p>
         </div>
     </div>
@@ -637,6 +653,17 @@
             <p class="card-text">
             <ul class="list-unstyled">
                 <li><code>{{ guildBotPrefix }}uptime</code> see Robyul's uptime.</li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="color"><a href="#color">Color</a></h4>
+            <h6 class="card-subtitle mb-2 text-muted">All colors are beautiful</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ guildBotPrefix }}color <span class="arg">#hex</span></code> shows a sample of the given color.</li>
             </ul>
             </p>
         </div>
