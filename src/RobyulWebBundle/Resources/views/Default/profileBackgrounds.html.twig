@@ -56,9 +56,12 @@
                     'winner': 'WINNER',
                     'wjsn': 'WJSN',
                     'onf': 'ONF',
-                    'ace': 'A.C.E'
+                    'ace': 'A.C.E',
+                    'jpop': 'JPop',
+                    'girl\' day': 'Girl\'s Day',
+                    'iz': 'IZ'
                 } %}
-                {% set tagsPrintFirst = ['girl group', 'boy group', 'solo artist', 'acting', 'misc'] %}
+                {% set tagsPrintFirst = ['girl group', 'boy group', 'solo artist', 'acting', 'jpop', 'misc'] %}
                 {% for tag in tags %}
                     {% if tag in tagsPrintFirst %}
                     <li class="list-inline-item nav-item backgrounds-filter-button-tag">
