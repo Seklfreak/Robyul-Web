@@ -201,6 +201,7 @@
                 <li><code>{{ guildBotPrefix }}reddit <span class="arg">subreddit name</span></code> displays information about a subreddit</li>
                 <li><code>{{ guildBotPrefix }}reddit list</code> view all active subreddit feeds on this server</li>
                 <li><code>{{ guildBotPrefix }}reddit add <span class="arg">subreddit name</span> <span class="arg">discord #channel or channel id</span> <span class="opt-arg">post delay in minutes</span></code> adds a subreddit feed to the specific channel. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ guildBotPrefix }}reddit toggle-direct-links <span class="arg">subreddit feed id</span></code> toggles between the direct link and text mode of a reddit feed. Use <code>{{ guildBotPrefix }}reddit list</code> to get the feed id. <span class="badge badge-default">Mod</span></li>
                 <li><code>{{ guildBotPrefix }}reddit delete <span class="arg">subreddit feed id</span></code> delete a subreddit feed. Use <code>{{ guildBotPrefix }}reddit list</code> to get the feed id. <span class="badge badge-default">Mod</span></li>
             </ul>
             If you set a post delay to a reddit feed Robyul will delay posting each submission. Robyul will check if the has been deleted after the post delay, and only post the submission if the post has not been deleted.
@@ -293,6 +294,7 @@
                 <li><code>{{ guildBotPrefix }}batch-roles <span class="arg">role a</span> | <span class="arg">role b</span> | <span class="arg">role c</span> | <span class="opt-arg">after=role name</span> <span class="opt-arg">color=hex code</span></code> creates multiple roles at once. <span class="badge badge-default">Mod</span></li>
                 <li><code>{{ guildBotPrefix }}auto-inspects-channel <span class="opt-arg">channel # or id</span></code> prints the information above for users who join and different occasions. <span class="badge badge-default">Admin</span></li>
                 <li><code>{{ guildBotPrefix }}prefix <span class="opt-arg">new prefix</span></code> sets the new Robyul prefix for this server. Call it without the argument to find out the current prefix. <span class="badge badge-default">Admin</span></li>
+                <li><code>@{{ bot_user }} prefix <span class="opt-arg">new prefix</span></code> sets the new Robyul prefix for this server. <span class="badge badge-default">Admin</span></li>
                 <li><code>{{ guildBotPrefix }}toggle-chatlog</code> Toggle Chatlog recording and anonymising of server statistics. <span class="badge badge-default">Admin</span></li>
                 <li><code>{{ guildBotPrefix }}leave-server <span class="arg">server id</span></code> makes robyul leave a server. <span class="badge badge-default">Bot Admin</span></li>
                 <li><code>{{ guildBotPrefix }}inspect-extended <span class="opt-arg">@user or user id</span> <span class="opt-arg">text</span></code> like <code>{{ guildBotPrefix }}inspect</code> with more information. <span class="badge badge-default">Bot Owner</span></li>
@@ -431,10 +433,11 @@
             <p class="card-text">
             <ul class="list-unstyled">
                 <li><code>{{ guildBotPrefix }}mirror create</code> Creates an empty mirror. <span class="badge badge-default">Bot Owner</span></li>
-                <li><code>{{ guildBotPrefix }}mirror add-channel <span class="arg">mirror id</span> <span class="arg">#channel or id</span> <span class="arg">channel webhook id</span> <span class="arg">channel webhook token</span></code> Adds the given channel to a mirror. <span class="badge badge-default">Bot Owner</span></li>
-                <li><code>{{ guildBotPrefix }}mirror list</code> Lists all mirrors. <span class="badge badge-default">Bot Owner</span></li>
-                <li><code>{{ guildBotPrefix }}mirror delete <span class="arg">gallery id</span></code> Deletes a mirror. Use <code>{{ guildBotPrefix }}mirror list</code> to get the mirror id. <span class="badge badge-default">Bot Owner</span></li>
-                <li><code>{{ guildBotPrefix }}mirror refresh</code> Refreshes all Mirror caches. <span class="badge badge-default">Bot Owner</span></li>
+                <li><code>{{ guildBotPrefix }}mirror add-channel <span class="arg">mirror id</span> <span class="arg">#channel or id</span> <span class="arg">channel webhook id</span> <span class="arg">channel webhook token</span></code> Adds the given channel to a mirror. <span class="badge badge-default">Robyul Staff</span></li>
+                <li><code>{{ guildBotPrefix }}mirror list</code> Lists all mirrors. <span class="badge badge-default">Robyul Staff</span></li>
+                <li><code>{{ guildBotPrefix }}mirror toggle <span class="arg">gallery id</span></code> Toggles between text and link mode for mirrors. Use <code>{{ guildBotPrefix }}mirror list</code> to get the mirror id. <span class="badge badge-default">Robyul Staff</span></li>
+                <li><code>{{ guildBotPrefix }}mirror delete <span class="arg">gallery id</span></code> Deletes a mirror. Use <code>{{ guildBotPrefix }}mirror list</code> to get the mirror id. <span class="badge badge-default">Robyul Staff</span></li>
+                <li><code>{{ guildBotPrefix }}mirror refresh</code> Refreshes all Mirror caches. <span class="badge badge-default">Robyul Staff</span></li>
             </ul>
             </p>
         </div>
@@ -448,9 +451,10 @@
                 <li>React with a ⭐ to a message to star it.</li>
                 <li><code>{{ guildBotPrefix }}starboard top</code> Displays the top starred messages.</li>
                 <li><code>{{ guildBotPrefix }}starboard starrers <span class="opt-arg">message id</span></code> Shows who starred the specific message.</li>
-                <li><code>{{ guildBotPrefix }}starboard status</code> Displays the current Starboard channel.</li>
+                <li><code>{{ guildBotPrefix }}starboard status</code> Displays inoformation about the Starboard settings.</li>
                 <li><code>{{ guildBotPrefix }}starboard set <span class="opt-arg">channel # or id</span></code> Sets the starboard channel. Use it without the argument to disable the channel. <span class="badge badge-default">Mod</span></li>
                 <li><code>{{ guildBotPrefix }}starboard minimum <span class="arg">number of stars</span></code> Sets how many stars are required to have Robyul post it in the defined channel. By default 1 star. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ guildBotPrefix }}starboard emoji <span class="arg">discord emoji</span></code> Sets an Emoji as a Starboard instead of the star. You can add multiple emojis by running the command with different emoji multiple times. Remove the emoji by running the command again with the same emoji. <span class="badge badge-default">Mod</span></li>
             </ul>
             </p>
         </div>
@@ -463,6 +467,7 @@
             <ul class="list-unstyled">
                 <li><code>{{ guildBotPrefix }}pic <span class="opt-arg">name</span></code> get a random picture from a folder. Without arguments it gets the folder from your roles.</li>
                 <li><code>{{ guildBotPrefix }}randompictures pic-delay <span class="arg">n in minutes</span></code> Sets a timeout for the <code>{{ guildBotPrefix }}pic</code> command. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ guildBotPrefix }}randompictures delay-ignore-channel <span class="arg">#channel or channel id</span></code> Robyul will ignore the timeout for the <code>{{ guildBotPrefix }}pic</code> command in this channel. <span class="badge badge-default">Mod</span></li>
                 <li><code>{{ guildBotPrefix }}randompictures new-config <span class="arg">alias=alias1,alias2</span> <span class="arg">folder=folder1,folder2</span> <span class="opt-arg">channel=channel1,channel2</span></code> Creates an empty config. <span class="badge badge-default">Bot Owner</span></li>
                 <li><code>{{ guildBotPrefix }}randompictures list</code> Lists all picture folders. <span class="badge badge-default">Bot Owner</span></li>
                 <li><code>{{ guildBotPrefix }}randompictures refresh <span class="arg">source id</span></code> Refreshes a source. Use <code>{{ guildBotPrefix }}randompictures list</code> to get the source id. <span class="badge badge-default">Bot Owner</span></li>
@@ -643,6 +648,17 @@
                 <li><code>{{ guildBotPrefix }}persistency toggle bias-roles</code> toggles restoring of all <a href="#bias">bias</a> roles (disabled by default).</li>
                 <li><code>{{ guildBotPrefix }}persistency role add <span class="arg">role name or id</span></code> adds a role to the list of roles that get restored.</li>
                 <li><code>{{ guildBotPrefix }}persistency role remove <span class="arg">role name or id</span></code> removes a role from the list of roles that get restored.</li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="weather"><a href="#weather">Weather</a></h4>
+            <h6 class="card-subtitle mb-2 text-muted">How is Real Life looking?</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ guildBotPrefix }}weather <span class="opt-arg">location</span></code> get the weather. Remembers the last location you requested. </li>
             </ul>
             </p>
         </div>
