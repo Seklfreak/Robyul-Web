@@ -170,7 +170,7 @@ function displayProfile(d) {
 }
 
 function getImageSource(d) {
-    return "/bundles/robyulweb/images/theunit/contestants/" + d.name.replace(/ /g, "") + ".png";
+    return "/bundles/robyulweb/images/theunit/contestants/" + d.name.replace(/ /g, "").toLowerCase() + ".png";
 }
 
 function getBackground(d) {
