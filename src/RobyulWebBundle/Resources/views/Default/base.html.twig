@@ -92,9 +92,14 @@
                             class="sr-only">(current)</span>{% endif %}</a>
                 </div>
             </li>
-            <li class="nav-item{% if app.request.attributes.get('_route') == 'robyulweb_idolschool_index' %} active{% endif %}">
-                <a class="nav-link" href="{{ path('robyulweb_idolschool_index') }}">Idol School{% if
-                    app.request.attributes.get('_route') == 'robyulweb_idolschool_index' %} <span class="sr-only">(current)</span>{% endif %}
+            <li class="nav-item{% if app.request.attributes.get('_route') == 'robyulweb_showrankings_index' %} active{% endif %}">
+                <a class="nav-link" href="{{ path('robyulweb_showrankings_index') }}">Idol School{% if
+                    app.request.attributes.get('_route') == 'robyulweb_showrankings_index' %} <span class="sr-only">(current)</span>{% endif %}
+                </a>
+            </li>
+            <li class="nav-item{% if app.request.attributes.get('_route') == 'robyulweb_showrankings_mixnine' %} active{% endif %}">
+                <a class="nav-link" href="{{ path('robyulweb_showrankings_mixnine') }}">MIXNINE{% if
+                    app.request.attributes.get('_route') == 'robyulweb_showrankings_mixnine' %} <span class="sr-only">(current)</span>{% endif %}
                 </a>
             </li>
             {#<li class="nav-item">

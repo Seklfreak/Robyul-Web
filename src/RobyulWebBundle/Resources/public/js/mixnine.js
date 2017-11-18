@@ -15,7 +15,7 @@ var middlePadding = (padding * 2) + 100;
 //var width = $(window).width() - middlePadding - CHART_WIDTH - 30;
 var width = 1280 - middlePadding - CHART_WIDTH - 30;
 
-var episodes = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11];
+var episodes = [1];
 var totalData;
 var dFirst;
 
@@ -32,7 +32,7 @@ var plot = svg.append("g").attr("transform", "translate(" + padding + "," + padd
 setXAxis();
 
 // Get data
-d3.csv("/bundles/robyulweb/csv/idolschool.v16.csv", parseLine, function (err, data) {
+d3.csv("/bundles/robyulweb/csv/mixnine.v1.csv", parseLine, function (err, data) {
     totalData = processData(data);
     plotData(data);
     selectLine(dFirst, "#line1");
@@ -170,7 +170,7 @@ function displayProfile(d) {
 }
 
 function getImageSource(d) {
-    return "/bundles/robyulweb/images/idolschool/contestants/" + d.name.replace(/ /g, "") + ".jpg";
+    return "/bundles/robyulweb/images/mixnine/contestants/" + d.name.replace(/ /g, "") + ".jpg.jpg";
 }
 
 function getBackground(d) {
@@ -210,7 +210,7 @@ function selectLine(d, lineId) {
 
 
 function getLowestRank(data) {
-    var min = 41;
+    var min = 98;
     data.forEach(function(d) {
         d.ranking.forEach(function(d2) {
             if (d2 < min) {
@@ -286,6 +286,10 @@ function getRankChange(d) {
     if (d.ranking.length < episodes.length) {
         return "-";
     }
+    if ($.inArray(d.ranking.length - 2, d.ranking)  === -1) {
+        return 0;
+    }
+
     var prevRank = d.ranking[d.ranking.length - 2].rank;
     return prevRank - getCurrentRank(d);
 }
