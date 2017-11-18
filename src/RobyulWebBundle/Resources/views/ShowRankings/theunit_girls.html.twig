@@ -4,6 +4,9 @@
     {% stylesheets '@RobyulWebBundle/Resources/public/css/idolschool.css' output='static/css/idolschool.css' %}
     <link rel="stylesheet" href="{{ asset_url }}"/>
     {% endstylesheets %}
+    {% stylesheets '@RobyulWebBundle/Resources/public/css/theunit.css' output='static/css/theunit.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
 {% endblock %}
 
 {% block content %}
@@ -14,16 +17,6 @@
                     <div class="col-12">
                         <div id="plot">
                             <div class="note" id="note0"></div>
-                            <div class="note" id="note1"></div>
-                            <div class="note" id="note2"></div>
-                            <div class="note" id="note3"></div>
-                            <div class="note" id="note4"></div>
-                            <div class="note" id="note5"></div>
-                            <div class="note" id="note6"></div>
-                            <div class="note" id="note7"></div>
-                            <div class="note" id="note8"></div>
-                            <div class="note" id="note9"></div>
-                            <div class="note" id="note10"></div>
                         </div>
                     </div>
                 </div>
@@ -40,7 +33,7 @@
         </div>
         <div class="col-md-5">
             <div id="chart">
-                <h1>Final Rankings</h1>
+                <h1>Current Rankings</h1>
                 <table id="top">
                     <thead>
                     <tr class="smallCaps">
@@ -58,7 +51,7 @@
     <div class="row">
         <div class="col-12 idolschool-footer">
             <a href="https://p101s2.github.io/" target="_blank">build using p101s2.github.io</a> -
-            <a href="https://discord.gg/7Vft9B3" target="_blank">join the fromis_ discord</a>
+            <a href="https://discord.gg/FVncbSH" target="_blank">join the The Unit discord</a>
         </div>
     </div>
 {% endblock %}
@@ -66,7 +59,7 @@
 {% block scripts %}
     <script src="https://d3js.org/d3.v4.js"></script>
     {% javascripts
-    '@RobyulWebBundle/Resources/public/js/idolschool.js' output='static/js/idolschool.js' %}
+    '@RobyulWebBundle/Resources/public/js/theunit_girls.js' output='static/js/theunit_girls.js' %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}

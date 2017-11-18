@@ -36,4 +36,34 @@ class ShowRankingsController extends Controller
 
         return $this->render('RobyulWebBundle:ShowRankings:mixnine.html.twig');
     }
+
+    /**
+     * @Route("/theunit/boys/")
+     */
+    public function theunitBoysAction()
+    {
+        $seoPage = $this->container->get('sonata.seo.page');
+        $seoPage
+            ->setTitle("The Unit Ranking Boys - The KPop Discord Bot - Robyul")
+            ->addMeta('name', 'description', "View the Boys Ranking over time for KBS's The Unit survival show.")
+            ->addMeta('property', 'og:description', "View the Boys Ranking over time for KBS's The Unit survival show.");
+        $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
+
+        return $this->render('RobyulWebBundle:ShowRankings:theunit_boys.html.twig');
+    }
+
+    /**
+     * @Route("/theunit/girls/")
+     */
+    public function theunitGirlsAction()
+    {
+        $seoPage = $this->container->get('sonata.seo.page');
+        $seoPage
+            ->setTitle("The Unit Ranking Girls - The KPop Discord Bot - Robyul")
+            ->addMeta('name', 'description', "View the Girls Ranking over time for KBS's The Unit survival show.")
+            ->addMeta('property', 'og:description', "View the Girls Ranking over time for KBS's The Unit survival show.");
+        $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
+
+        return $this->render('RobyulWebBundle:ShowRankings:theunit_girls.html.twig');
+    }
 }
