@@ -14,7 +14,6 @@
                     <div class="col-12">
                         <div id="plot">
                             <div class="note" id="note0"></div>
-                            <div class="note" id="note1"></div>
                         </div>
                     </div>
                 </div>
@@ -32,7 +31,7 @@
         <div class="col-md-5">
             <div id="chart">
                 <h1>Current Rankings
-                    <small><a href="{{ path('robyulweb_showrankings_mixnineboys') }}"><i class="fa fa-arrow-right" aria-hidden="true"></i> Boys</a></small>
+                    <small><a href="{{ path('robyulweb_showrankings_mixnine') }}"><i class="fa fa-arrow-right" aria-hidden="true"></i> Girls</a></small>
                 </h1>
                 <table id="top">
                     <thead>
@@ -58,7 +57,7 @@
 {% block scripts %}
     <script src="https://d3js.org/d3.v4.js"></script>
     {% javascripts
-    '@RobyulWebBundle/Resources/public/js/mixnine.js' output='static/js/mixnine.js' %}
+    '@RobyulWebBundle/Resources/public/js/mixnine_boys.js' output='static/js/mixnine.js' %}
     <script src="{{ asset_url }}"></script>
     {% endjavascripts %}
 {% endblock %}

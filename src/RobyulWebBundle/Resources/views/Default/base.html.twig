@@ -97,10 +97,17 @@
                     app.request.attributes.get('_route') == 'robyulweb_showrankings_index' %} <span class="sr-only">(current)</span>{% endif %}
                 </a>
             </li>
-            <li class="nav-item{% if app.request.attributes.get('_route') == 'robyulweb_showrankings_mixnine' %} active{% endif %}">
-                <a class="nav-link" href="{{ path('robyulweb_showrankings_mixnine') }}">MIXNINE{% if
-                    app.request.attributes.get('_route') == 'robyulweb_showrankings_mixnine' %} <span class="sr-only">(current)</span>{% endif %}
-                </a>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+                   aria-expanded="false">MIXNINE</a>
+                <div class="dropdown-menu" aria-labelledby="dropdown01">
+                    <a class="dropdown-item" href="{{ path('robyulweb_showrankings_mixnineboys') }}">Boys{% if
+                        app.request.attributes.get('_route') == 'robyulweb_showrankings_mixnineboys' %} <span
+                            class="sr-only">(current)</span>{% endif %}</a>
+                    <a class="dropdown-item" href="{{ path('robyulweb_showrankings_mixnine') }}">Girls{% if
+                        app.request.attributes.get('_route') == 'robyulweb_showrankings_mixnine' %} <span
+                            class="sr-only">(current)</span>{% endif %}</a>
+                </div>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"

@@ -38,6 +38,21 @@ class ShowRankingsController extends Controller
     }
 
     /**
+     * @Route("/mixnine/boys/")
+     */
+    public function mixnineBoysAction()
+    {
+        $seoPage = $this->container->get('sonata.seo.page');
+        $seoPage
+            ->setTitle("MIXNINE Ranking Boys - The KPop Discord Bot - Robyul")
+            ->addMeta('name', 'description', "View the Boys Ranking over time for YG's MIXNINE survival show.")
+            ->addMeta('property', 'og:description', "View the Boys Ranking over time for YG's MIXNINE survival show.");
+        $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
+
+        return $this->render('RobyulWebBundle:ShowRankings:mixnine_boys.html.twig');
+    }
+
+    /**
      * @Route("/theunit/boys/")
      */
     public function theunitBoysAction()
