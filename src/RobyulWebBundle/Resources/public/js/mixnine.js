@@ -286,9 +286,6 @@ function getRankChange(d) {
     if (d.ranking.length < episodes.length) {
         return "-";
     }
-    if ($.inArray(d.ranking.length - 2, d.ranking)  === -1) {
-        return 0;
-    }
 
     var prevRank = d.ranking[d.ranking.length - 2].rank;
     return prevRank - getCurrentRank(d);
