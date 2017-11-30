@@ -37,6 +37,7 @@ parameters:
 
     bot_default_prefix: '_'
     bot_user: 'Robyul#7030'
+    bot_user_id: '283848369250500608'
     bot_webkey: 'your-secure-webkey'
     bot_invite_link: 'https://discordapp.com/oauth2/authorize?client_id=CLIENT_ID&scope=bot&permissions=0x00000000'
     bot_api_base_url: 'https://api.robyul.chat/'
