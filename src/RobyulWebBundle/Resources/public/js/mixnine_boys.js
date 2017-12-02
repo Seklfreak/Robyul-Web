@@ -32,7 +32,7 @@ var plot = svg.append("g").attr("transform", "translate(" + padding + "," + padd
 setXAxis();
 
 // Get data
-d3.csv("/bundles/robyulweb/csv/mixnine.boys.v67.csv", parseLine, function (err, data) {
+d3.csv("/bundles/robyulweb/csv/mixnine.boys.v7.csv", parseLine, function (err, data) {
     totalData = processData(data);
     plotData(data);
     selectLine(dFirst, "#line1");
@@ -56,7 +56,7 @@ function setXAxis() {
     episodes.forEach(function (episode, i) {
         // Add episode label
         plot.append("text")
-            .text("Ranking " + episode)
+            .text(episode) // TODO
             .attr("x", scaleX(i))
             .attr("y", -20)
             .attr("class", "episodeLabel smallCaps");
