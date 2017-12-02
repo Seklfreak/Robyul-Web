@@ -17,6 +17,12 @@ discord_login:
 logout:
     path: /logout
 
+# higher priority for vanityinvites
+robyul_vanityinvite:
+    resource: "@RobyulWebBundle/Controller/VanityInviteController.php"
+    type:     annotation
+    prefix:   /
+
 robyul_web:
     resource: "@RobyulWebBundle/Controller/"
     type:     annotation
