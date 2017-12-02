@@ -193,7 +193,10 @@
 '@RobyulWebBundle/Resources/public/js/isotope.pkgd.js'
 '@RobyulWebBundle/Resources/public/js/ie10-viewport-bug-workaround.js'
 '@RobyulWebBundle/Resources/public/js/jquery.lazyload.js'
-'@RobyulWebBundle/Resources/public/js/Chart.bundle.js' output='static/js/main.js' %}
+'@RobyulWebBundle/Resources/public/js/Chart.bundle.js'
+'@RobyulWebBundle/Resources/public/js/clipboard.js'
+'@RobyulWebBundle/Resources/public/js/frappe-charts.min.iife.js'
+'@RobyulWebBundle/Resources/public/js/moment.js' output='static/js/main.js' %}
 <script src="{{ asset_url }}"></script>
 {% endjavascripts %}
 {% if ga_tracking_id != "" %}
@@ -226,7 +229,7 @@
         ga('send', 'pageview');
     </script>
 {% endif %}
-<script>
+<script type="text/javascript" data-cfasync="false">
 window.parameters = {{ js_parameters|json_encode|raw }};
 </script>
 {% block scripts %}{% endblock %}

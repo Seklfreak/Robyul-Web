@@ -1,0 +1,66 @@
+{% extends "RobyulWebBundle:Default:base.html.twig" %}
+
+{% block content %}
+    {% set vanityInviteUrl %}https://{{ vanityinvite_domain }}/{{ vanityInviteName }}{% endset %}
+    <div class="row server-general-header">
+        <div class="col-12">
+            {% if guildIcon !=  "" %}
+                <img class="ranking-big-icon"
+                     src="https://cdn.discordapp.com/icons/{{ guildID }}/{{ guildIcon }}.jpg?size=256">
+            {% endif %}
+            <h1 class="display-3 ranking-server-title">
+                <small>Custom Invite Statistics for</small> {{ guildName }}
+            </h1>
+            <div class="row justify-content-center">
+                <div class="col-12 col-md-6 col-lg-4">
+                    <h3>Invite your friends using</h3>
+                </div>
+                <div class="col-12 col-md-6 col-lg-4">
+                    <div class="input-group">
+                        <input type="text" class="form-control" id="vanityinvite-link" readonly
+                               value="{{ vanityInviteUrl }}"
+                               aria-label="Custom Invite">
+                        <span class="input-group-btn">
+                    <button class="btn btn-secondary clipboard-button" type="button"
+                            data-clipboard-target="#vanityinvite-link">
+                        <i class="fa fa-clipboard" aria-hidden="true"></i>
+                    </button>
+                </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <form id="vanityinvite-range-form" data-guild-id="{{ guildID }}">
+        <div class="row justify-content-center">
+            <div class="col-12 col-md-1">
+                <h4>Last</h4>
+            </div>
+            <div class="col-12 col-md-3">
+                <input type="number" class="form-control" value="24" min="3" required id="count-vanityinvite-input">
+            </div>
+            <div class="col-12 col-md-4">
+                <select class="form-control" required id="interval-vanityinvite-select">
+                    <option value="minute">minutes</option>
+                    <option value="hour" selected="selected">hours</option>
+                    <option value="day">days</option>
+                    <option value="week">weeks</option>
+                    <option value="month">months</option>
+                </select>
+            </div>
+            <div class="col-12 col-md-3">
+                <button type="submit" class="btn btn-primary" id="button-vanityinvite-submit">Go</button>
+            </div>
+        </div>
+    </form>
+    <div class="row">
+        <div class="col-12">
+            <div id="vanityinvite-chart"
+                 data-guild-id="{{ guildID }}"
+                 data-guild-name="{{ guildName }}"
+                 data-vanity-invite-name="{{ vanityInviteName }}"
+                 data-vanity-invite-url="{{ vanityInviteUrl }}"
+            ></div>
+        </div>
+    </div>
+{% endblock %}

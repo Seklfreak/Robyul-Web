@@ -140,4 +140,41 @@ class SecurityController extends Controller
         'guildChannels' => $guildChannels,
         ));
     }
+
+    /**
+     * @Route("/d/vanityinvite/{guildID}")
+     */
+    public function vanityInviteAction($guildID, RobyulApi $robyulApi)
+    {
+        $statusMember = $robyulApi->getRequest('member/'.$guildID.'/'.$this->getUser()->getID().'/status', '+1 minutes');
+
+        if ($statusMember['IsGuildAdmin'] !== true && $statusMember['IsGuildMod'] !== true) {
+            return $this->redirectToRoute('robyulweb_security_profile');
+        }
+
+        $guildData = $robyulApi->getRequest('guild/'.$guildID, '+1 minutes');
+
+        $guildName = $guildData['Name'];
+        $guildIcon = $guildData['Icon'];
+        $guildChannels = $guildData['Channels'];
+        $vanityInviteName = (string)$guildData['Features']->VanityInvite->VanityInviteName;
+        if (strlen($vanityInviteName) <= 0) {
+            return $this->redirectToRoute('robyulweb_security_profile');
+        }
+
+        $seoPage = $this->container->get('sonata.seo.page');
+        $seoPage
+            ->setTitle($guildName . " Custom Invite - The KPop Discord Bot - Robyul")
+            ->addMeta('name', 'description', "View statistics for the custom invite for " . $guildName . ".")
+            ->addMeta('property', 'og:description', "View statistics for the custom invite for " . $guildName . ".");
+        $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
+
+        return $this->render('RobyulWebBundle:Security:vanityinvite.html.twig', array(
+            'guildID' => $guildID,
+            'guildName' => $guildName,
+            'guildIcon' => $guildIcon,
+            'guildChannels' => $guildChannels,
+            'vanityInviteName' => $vanityInviteName,
+        ));
+    }
 }

@@ -5,6 +5,8 @@ $(function () {
     $("img.lazy").lazyload({
         effect: "fadeIn"
     });
+    // Activate clipboard.js
+    new Clipboard('.clipboard-button');
     // Enable grid for background list
     var $backgroundsContainer = $('.backgrounds-container');
     $backgroundsContainer.isotope({
@@ -74,14 +76,14 @@ $(function () {
     $randomPicturesGridContainer.one('layoutComplete', function () {
         $("img.random-pictures-lazy").lazyload({
             failure_limit: 100,
-            effect : "fadeIn"
+            effect: "fadeIn"
         });
         $('img.random-pictures-grid-item').on('load', function () {
             $randomPicturesGridContainer.isotope('layout');
         });
     });
     // Statistics Counter
-    $('.statistics-counter').each(function() {
+    $('.statistics-counter').each(function () {
         var $statisticsCounter = $(this);
         var type = $statisticsCounter.data('type');
         var interval = $statisticsCounter.data('interval');
@@ -94,7 +96,7 @@ $(function () {
         apiRequest(serverStatisticsCountEndpoint, function (msg) {
             $number.html(msg.Count);
         });
-        window.setInterval(function() {
+        window.setInterval(function () {
             apiRequest(serverStatisticsCountEndpoint, function (msg) {
                 $number.html(msg.Count);
             });
@@ -102,16 +104,15 @@ $(function () {
     });
     // Statistics Chart
     var $combinedChart = $('#combined-chart');
-    if (typeof $combinedChart != 'undefined' && $combinedChart.length > 0) {
+    if (typeof $combinedChart !== 'undefined' && $combinedChart.length > 0) {
         var guildID = $combinedChart.data('guild-id');
         var serverStatisticsMessagesHourlyEndpoint = "statistics/" + guildID + "/messages/hour/histogram";
-        var sessionID = "";
 
         apiRequest(serverStatisticsMessagesHourlyEndpoint, function (msg) {
             console.debug(msg);
         });
 
-        var combinedChartContext = $combinedChart[0].getContext('2d')
+        var combinedChartContext = $combinedChart[0].getContext('2d');
         var combinedChart = new Chart(combinedChartContext, {
             type: 'bar',
             data: {
@@ -142,7 +143,7 @@ $(function () {
                 scales: {
                     yAxes: [{
                         ticks: {
-                            beginAtZero:true
+                            beginAtZero: true
                         }
                     }]
                 }
@@ -154,7 +155,7 @@ $(function () {
     var $chatlogChannelSelect = $('#chatlog-channel-select');
     var $chatlogAroundMessageIDInput = $('#chatlog-around-messageid-input');
     var $chatlogResultTBody = $('#chatlog-result-tbody');
-    $chatlogAroundMessageIDForm.on('submit', function(event) {
+    $chatlogAroundMessageIDForm.on('submit', function (event) {
         event.preventDefault();
         var guildID = $chatlogAroundMessageIDForm.data('guild-id');
         var channelID = $chatlogChannelSelect.find('option:selected').val();
@@ -164,7 +165,7 @@ $(function () {
 
         apiRequest(serverStatisticsCountEndpoint, function (msg) {
             var resultHTML = '';
-            $.each(msg, function(i, message) {
+            $.each(msg, function (i, message) {
                 var classes = '';
                 if (message.ID == aroundMessageID) {
                     classes = 'selected';
@@ -172,10 +173,10 @@ $(function () {
                 resultHTML += '<tr class="' + classes + '"><td scope="row"><a href="#" class="chatlog-messageid-click" data-message-id="' + escapeHTML(message.ID) + '" id="message-' + escapeHTML(message.ID) + '">#' + escapeHTML(message.ID) + '</a></td><td>' + escapeHTML(message.CreatedAt) + '</td><td>' + escapeHTML(message.AuthorUsername) + ' (#' + escapeHTML(message.AuthorID) + ')</td><td>' + escapeHTML(message.Content) + "<br>" + escapeHTML(message.Attachments) + '</td></tr>';
             });
             $chatlogResultTBody.html(resultHTML);
-            if ($("#message-"+aroundMessageID).length > 0) {
-                $(document).scrollTop( $("#message-"+aroundMessageID).offset().top - 200 ); 
+            if ($("#message-" + aroundMessageID).length > 0) {
+                $(document).scrollTop($("#message-" + aroundMessageID).offset().top - 200);
             }
-            $('.chatlog-messageid-click').on('click', function() {
+            $('.chatlog-messageid-click').on('click', function () {
                 var $chatlogMessageIDClick = $(this);
                 var aroundMessageId = $chatlogMessageIDClick.data('message-id');
                 $chatlogAroundMessageIDInput.val(aroundMessageId);
@@ -183,6 +184,109 @@ $(function () {
             });
         });
     });
+    // Vanity Invite Chart Chart
+    var $vanityInviteChart = $('#vanityinvite-chart');
+    if (typeof $vanityInviteChart !== 'undefined' && $vanityInviteChart.length > 0) {
+        var guildID = $vanityInviteChart.data('guild-id');
+        var guildName = $vanityInviteChart.data('guild-name');
+        var vanityInviteName = $vanityInviteChart.data('vanity-invite-name');
+        var vanityInviteUrl = $vanityInviteChart.data('vanity-invite-url');
+
+        var data = {
+            labels: ["please wait", "please wait"],
+            datasets: [
+                {
+                    title: "Clicks",
+                    values: [0, 0]
+                },
+                {
+                    title: "Joins",
+                    values: [0, 0]
+                }
+            ]
+        };
+
+        var chart = new Chart({
+            parent: $vanityInviteChart[0], // or a DOM element
+            title: "Stats for " + vanityInviteUrl + " on " + guildName,
+            data: data,
+            type: 'line',
+            height: 250,
+
+            colors: ['#7cd6fd', '#743ee2']
+
+            //format_tooltip_x: d => (d + '').toUpperCase(),
+            //format_tooltip_y: d => d + ' pts'
+        });
+
+        // VanityStats submit
+        var $vanityInviteRangeForm = $('#vanityinvite-range-form');
+        var $vanityInviteCountInput = $('#count-vanityinvite-input');
+        var $vanityInviteIntervalSelect = $('#interval-vanityinvite-select');
+        var $vanityInviteSubmitButton = $('#button-vanityinvite-submit');
+        $vanityInviteRangeForm.on('submit', function (event) {
+            event.preventDefault();
+            $vanityInviteSubmitButton.prop('disabled', true);
+            var count = $vanityInviteCountInput.val();
+            var interval = $vanityInviteIntervalSelect.find('option:selected').val();
+
+            if (!$.isNumeric(count) || parseInt(count) < 3) {
+                return
+            }
+
+            var vanityInviteStatisticsEndpoint = "statistics/" + guildID + "/vanityinvite/" + interval + "/histogram/" + count;
+
+            apiRequest(vanityInviteStatisticsEndpoint, function (msg) {
+                var valuesClicks = [];
+                var valuesJoins = [];
+                var labels = [];
+
+                $.each(msg, function(key, value) {
+                    valuesClicks.push(value.Count1);
+                    valuesJoins.push(value.Count2);
+
+                    var date = moment(value.Time);
+
+                    //console.debug(date);
+
+                    switch (interval) {
+                        case "minute":
+                            labels.push(date.format('HH:mm'));
+                            break;
+                        case "hour":
+                            labels.push(date.format('Do HH:00'));
+                            break;
+                        case "day":
+                            labels.push(date.format('MMM DD'));
+                            break;
+                        case "week":
+                            labels.push(date.format('MMM DD'));
+                            break;
+                        case "month":
+                            labels.push(date.format('YYYY MMM'));
+                            break;
+                        default:
+                            labels.push(value.Time);
+                    }
+                });
+
+                //console.debug(valuesClicks);
+                //console.debug(valuesJoins);
+                //console.debug(labels);
+
+                chart.update_values(
+                    [
+                        {values: valuesClicks},
+                        {values: valuesJoins}
+                    ],
+                    labels
+                );
+                $vanityInviteSubmitButton.prop('disabled', false);
+            });
+        });
+        $vanityInviteRangeForm.submit();
+    }
+
     // helpers
     function escapeHTML(text) {
         var htmlEscapes = {
@@ -194,18 +298,19 @@ $(function () {
             '/': '&#x2F;'
         };
         var htmlEscaper = /[&<>"'\/]/g;
-        return ('' + text).replace(htmlEscaper, function(match) {
+        return ('' + text).replace(htmlEscaper, function (match) {
             return htmlEscapes[match];
         });
     }
+
     function apiRequest(endpoint, callback) {
         $.ajax({
             method: "POST",
             url: window.parameters.session_url,
             cache: false,
             dataType: "text"
-          })
-            .done(function( msg ) {
+        })
+            .done(function (msg) {
                 sessionID = msg;
 
                 $.ajax({
@@ -214,10 +319,10 @@ $(function () {
                     cache: false,
                     dataType: "json",
                     headers: {
-                        "Authorization": "PHP-Session "+sessionID
+                        "Authorization": "PHP-Session " + sessionID
                     }
                 })
-                    .done(function( msg ) {
+                    .done(function (msg) {
                         callback(msg)
                     });
             });

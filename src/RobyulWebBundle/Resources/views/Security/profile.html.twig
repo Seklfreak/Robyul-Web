@@ -94,6 +94,12 @@
                                                 class="fa fa-archive" aria-hidden="true"></i> Chatlog</a>
                                 </li>
                             {% endif %}
+                            {% if (guild.Status.IsGuildAdmin or guild.Status.IsGuildMod) and guild.Features.VanityInvite.VanityInviteName != "" %}
+                                <li>
+                                    <a href="{{ path('robyulweb_security_vanityinvite', {'guildID': guild.ID}) }}"><i
+                                                class="fa fa-link" aria-hidden="true"></i> Custom Invite</a>
+                                </li>
+                            {% endif %}
                         </ul>
                     </li>
                 {% endfor %}
