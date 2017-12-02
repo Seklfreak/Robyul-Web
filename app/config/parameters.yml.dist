@@ -44,4 +44,5 @@ parameters:
     bot_api_base_url: 'https://api.robyul.chat/'
     session_url: 'https://robyul.chat/session'
 
+    default_domain: 'robyul.chat'
     vanityinvite_domain: 'discord.is'

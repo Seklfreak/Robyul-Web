@@ -19,11 +19,13 @@ logout:
 
 # higher priority for vanityinvites
 robyul_vanityinvite:
-    resource: "@RobyulWebBundle/Controller/VanityInviteController.php"
+    resource: "@RobyulWebBundle/VanityInviteController/"
     type:     annotation
     prefix:   /
+    host:    '%vanityinvite_domain%'
 
 robyul_web:
     resource: "@RobyulWebBundle/Controller/"
     type:     annotation
     prefix:   /
+    host:    '%default_domain%'
