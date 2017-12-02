@@ -15,7 +15,7 @@ var middlePadding = (padding * 2) + 100;
 //var width = $(window).width() - middlePadding - CHART_WIDTH - 30;
 var width = 1280 - middlePadding - CHART_WIDTH - 30;
 
-var episodes = [4,5];
+var episodes = [0,1];
 var totalData;
 var dFirst;
 
@@ -32,7 +32,7 @@ var plot = svg.append("g").attr("transform", "translate(" + padding + "," + padd
 setXAxis();
 
 // Get data
-d3.csv("/bundles/robyulweb/csv/theunit.boys.v2.csv", parseLine, function (err, data) {
+d3.csv("/bundles/robyulweb/csv/theunit.boys.v4.csv", parseLine, function (err, data) {
     totalData = processData(data);
     plotData(data);
     selectLine(dFirst, "#line1");
@@ -56,7 +56,7 @@ function setXAxis() {
     episodes.forEach(function (episode, i) {
         // Add episode label
         plot.append("text")
-            .text("Week " + episode)
+            .text("Ranking " + episode)
             .attr("x", scaleX(i))
             .attr("y", -20)
             .attr("class", "episodeLabel smallCaps");
