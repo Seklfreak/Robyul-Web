@@ -21,7 +21,7 @@ class RobyulApi
 
     protected function logRequest($method, $url, $as, $took)
     {
-        $this->logger->info($method.' '.$url.' as '.$as.' took '.$took.'s');
+        $this->logger->info($method . ' ' . $url . ' as ' . $as . ' took ' . $took . 's');
     }
 
     public function getRequest($endpoint, $expire = '+1 hour')
@@ -32,20 +32,22 @@ class RobyulApi
         } else {
             $timeStart = microtime(true);
             $data = Unirest\Request::get('http://localhost:2021/' . $endpoint,
-            array(
-                'Authorization' => 'Webkey '.$this->container->getParameter('bot_webkey'),
-                'User-Agent' => 'Robuyl-Web/0.1' // TODO: version
-            ));
+                array(
+                    'Authorization' => 'Webkey ' . $this->container->getParameter('bot_webkey'),
+                    'User-Agent' => 'Robuyl-Web/0.1' // TODO: version
+                ));
             $timeEnd = microtime(true);
-            $this->logRequest('GET', 'http://localhost:2021/' . $endpoint, 'json array', $timeEnd-$timeStart);
+            $this->logRequest('GET', 'http://localhost:2021/' . $endpoint, 'json array', $timeEnd - $timeStart);
             $data = (array)$data->body;
 
-            $this->redis->set($key, serialize($data));
-            $this->redis->expireat($key, strtotime($expire));
+            if ($expire != '') {
+                $this->redis->set($key, serialize($data));
+                $this->redis->expireat($key, strtotime($expire));
+            }
         }
         return $data;
     }
-    
+
     public function getRequestRaw($endpoint, $expire = '+1 hour')
     {
         $key = 'robyul2-web:api:raw:' . md5($endpoint);
@@ -54,14 +56,14 @@ class RobyulApi
         } else {
             $timeStart = microtime(true);
             $data = Unirest\Request::get('http://localhost:2021/' . $endpoint,
-            array(
-            'Authorization' => 'Webkey '.$this->container->getParameter('bot_webkey'),
-            'User-Agent' => 'Robuyl-Web/0.1' // TODO: version
-            ));
+                array(
+                    'Authorization' => 'Webkey ' . $this->container->getParameter('bot_webkey'),
+                    'User-Agent' => 'Robuyl-Web/0.1' // TODO: version
+                ));
             $timeEnd = microtime(true);
-            $this->logRequest('GET', 'http://localhost:2021/' . $endpoint, 'raw', $timeEnd-$timeStart);
+            $this->logRequest('GET', 'http://localhost:2021/' . $endpoint, 'raw', $timeEnd - $timeStart);
             $data = (string)$data->body;
-    
+
             $this->redis->set($key, serialize($data));
             $this->redis->expireat($key, strtotime($expire));
         }

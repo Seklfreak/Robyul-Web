@@ -32,6 +32,7 @@ parameters:
 
     discord_client_id: 'yourclientid'
     discord_client_secret: 'yourclientsecret'
+    discord_invite_base: 'https://discord.gg'
 
     sentry_dns: ~
 
@@ -42,3 +43,5 @@ parameters:
     bot_invite_link: 'https://discordapp.com/oauth2/authorize?client_id=CLIENT_ID&scope=bot&permissions=0x00000000'
     bot_api_base_url: 'https://api.robyul.chat/'
     session_url: 'https://robyul.chat/session'
+
+    vanityinvite_domain: 'discord.is'
