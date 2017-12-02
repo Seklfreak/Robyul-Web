@@ -305,6 +305,19 @@
     </div>
     <div class="card commands-card">
         <div class="card-block">
+            <h4 class="card-title" id="custominvites"><a href="#custominvites">Custom Invites</a></h4>
+            <h6 class="card-subtitle mb-2 text-muted">Get a prettier invite url for your server.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ guildBotPrefix }}custom-invite</code> View the current Custom Invite configuration for your server. <span class="badge badge-default">Mod</span></li>
+                <li><code>{{ guildBotPrefix }}custom-invite set <span class="arg">name</span> <span class="arg">#channel or channel id</span></code> Set the Custom Invite name for your server. The invite will go to the given channel. <span class="badge badge-default">Admin</span></li>
+                <li><code>{{ guildBotPrefix }}custom-invite remove</code> Removes the Custom Invite for your server. <span class="badge badge-default">Admin</span></li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
             <h4 class="card-title" id="bias"><a href="#bias">Bias</a></h4>
             <h6 class="card-subtitle mb-2 text-muted">Set up self bias role assignment for your members.</h6>
             <p class="card-text">
@@ -316,7 +329,7 @@
                 <li><code>{{ guildBotPrefix }}bias remove-config <span class="arg">channel # or id</span></code> remove a bias config for the specific channel. <span class="badge badge-default">Admin</span></li>
                 <li><code>{{ guildBotPrefix }}bias refresh</code> reloads all bias configs. <span class="badge badge-default">Bot Owner</span></li>
             </ul>
-            A guide how to set up the config can be found <a href="{{ path('robyulweb_default_biasroleguides') }}">here</a>.
+            A guide how to set up the config can be found on the Discord Server for Robyul.</a>.
             </p>
         </div>
     </div>
