@@ -156,7 +156,6 @@ class SecurityController extends Controller
 
         $guildName = $guildData['Name'];
         $guildIcon = $guildData['Icon'];
-        $guildChannels = $guildData['Channels'];
         $vanityInviteName = (string)$guildData['Features']->VanityInvite->VanityInviteName;
         if (strlen($vanityInviteName) <= 0) {
             return $this->redirectToRoute('robyulweb_security_profile');
@@ -173,7 +172,6 @@ class SecurityController extends Controller
             'guildID' => $guildID,
             'guildName' => $guildName,
             'guildIcon' => $guildIcon,
-            'guildChannels' => $guildChannels,
             'vanityInviteName' => $vanityInviteName,
         ));
     }

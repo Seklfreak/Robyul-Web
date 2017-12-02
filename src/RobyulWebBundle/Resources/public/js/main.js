@@ -241,7 +241,7 @@ $(function () {
                 var valuesJoins = [];
                 var labels = [];
 
-                $.each(msg, function(key, value) {
+                $.each(msg.reverse(), function(key, value) {
                     valuesClicks.push(value.Count1);
                     valuesJoins.push(value.Count2);
 
