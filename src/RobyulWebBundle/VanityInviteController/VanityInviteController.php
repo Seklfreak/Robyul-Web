@@ -28,6 +28,11 @@ class VanityInviteController extends Controller
             }
             $clientId = md5($userIp . $request->headers->get('User-Agent'));
 
+            $guildIdText = '';
+            if (array_key_exists('GuildID', $vanityInviteData)) {
+                $guildIdText = 'Guild ID:' . $vanityInviteData['GuildID'];
+            }
+
             $this->get('gamp.analytics')
                 ->setClientId($clientId)
                 ->setDocumentPath('/' . $vanityInviteData['Code'])
@@ -35,6 +40,12 @@ class VanityInviteController extends Controller
                 ->setDocumentReferrer($request->headers->get('referer', ''))
                 ->setUserLanguage($request->headers->get('accept-language', ''))
                 ->setIpOverride($userIp)
+                ->setDataSource('php')
+                ->setGeographicalOverride($request->headers->get('HTTP_CF_IPCOUNTRY', 'XX'))
+                ->setCampaignName('vanityinvite')
+                ->setCampaignSource('web')
+                ->setCampaignMedium('discord')
+                ->setCampaignContent($guildIdText)
                 ->sendEvent();
 
             return $this->redirect($this->getParameter('discord_invite_base') . '/' . $vanityInviteData['Code']);
