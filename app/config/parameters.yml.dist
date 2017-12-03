@@ -46,3 +46,4 @@ parameters:
 
     default_domain: 'robyul.chat'
     vanityinvite_domain: 'discord.is'
+    vanityinvite_ga_tracking_id: UA-XXXX-Y

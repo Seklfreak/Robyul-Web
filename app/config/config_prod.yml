@@ -24,3 +24,7 @@ monolog:
 sentry:
     dsn: "%sentry_dns%"
     environment: "%kernel.environment%"
+
+
+four_labs_gamp:
+    sandbox: false

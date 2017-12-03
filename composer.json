@@ -25,6 +25,7 @@
         "danielmewes/php-rql": "^2.3",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
+        "fourlabs/gamp-bundle": "^2.2",
         "hwi/oauth-bundle": "^0.5.3",
         "incenteev/composer-parameter-handler": "^2.0",
         "mashape/unirest-php": "^3.0",

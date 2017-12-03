@@ -158,3 +158,11 @@ hwi_oauth:
                 realname:   id
             options:
                 csrf: true
+
+four_labs_gamp:
+    protocol_version: 1
+    tracking_id: '%vanityinvite_ga_tracking_id%'
+    use_ssl: true
+    anonymize_ip: true
+    async_requests: true
+    sandbox: true

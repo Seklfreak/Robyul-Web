@@ -20,7 +20,8 @@ class AppKernel extends Kernel
             new Sonata\SeoBundle\SonataSeoBundle(),
             new Snc\RedisBundle\SncRedisBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
-            new Sentry\SentryBundle\SentryBundle()
+            new Sentry\SentryBundle\SentryBundle(),
+            new FourLabs\GampBundle\FourLabsGampBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
