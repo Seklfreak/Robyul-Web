@@ -19,14 +19,16 @@ class VanityInviteController extends Controller
      */
     public function vanityInviteAction($vanityName, RobyulApi $robyulApi, Request $request)
     {
-        $vanityInviteData = $robyulApi->getRequest('vanityinvite/' . $vanityName, '');
+        $vanityInviteData = $robyulApi->getRequest(
+            'vanityinvite/' . $vanityName . '?referer=' . urlencode($request->headers->get('referer', '')),
+            '');
 
         if (array_key_exists('Code', $vanityInviteData)) {
             $userIp = $request->getClientIp();
             if ($request->headers->get('HTTP_CF_CONNECTING_IP') !== null) {
                 $userIp = $request->headers->get('HTTP_CF_CONNECTING_IP');
             }
-            $clientId = md5($userIp . $request->headers->get('User-Agent'));
+            $clientId = md5($userIp . '-' . $request->headers->get('user-agent'));
 
             $guildIdText = '';
             if (array_key_exists('GuildID', $vanityInviteData)) {
@@ -36,7 +38,7 @@ class VanityInviteController extends Controller
             $this->get('gamp.analytics')
                 ->setClientId($clientId)
                 ->setDocumentPath('/' . $vanityName)
-                ->setUserAgentOverride($request->headers->get('User-Agent', ''))
+                ->setUserAgentOverride($request->headers->get('user-agent', ''))
                 ->setDocumentReferrer($request->headers->get('referer', ''))
                 ->setUserLanguage($request->headers->get('accept-language', ''))
                 ->setIpOverride($userIp)
