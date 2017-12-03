@@ -186,6 +186,7 @@ $(function () {
     });
     // Vanity Invite Chart Chart
     var $vanityInviteChart = $('#vanityinvite-chart');
+    var $vanityInviteReferers = $('#vanityinvite-referers');
     if (typeof $vanityInviteChart !== 'undefined' && $vanityInviteChart.length > 0) {
         var guildID = $vanityInviteChart.data('guild-id');
         var guildName = $vanityInviteChart.data('guild-name');
@@ -193,7 +194,7 @@ $(function () {
         var vanityInviteUrl = $vanityInviteChart.data('vanity-invite-url');
 
         var data = {
-            labels: ["please wait", "please wait"],
+            labels: ["Please wait…", "Please wait…"],
             datasets: [
                 {
                     title: "Clicks",
@@ -213,10 +214,11 @@ $(function () {
             type: 'line',
             height: 250,
 
-            colors: ['#7cd6fd', '#743ee2']
+            colors: ['#7cd6fd', '#743ee2'],
 
-            //format_tooltip_x: d => (d + '').toUpperCase(),
-            //format_tooltip_y: d => d + ' pts'
+            show_dots: 1,
+            heatline: 1,
+            region_fill: 1
         });
 
         // VanityStats submit
@@ -240,6 +242,7 @@ $(function () {
                 var valuesClicks = [];
                 var valuesJoins = [];
                 var labels = [];
+                var referers = {};
 
                 $.each(msg.reverse(), function(key, value) {
                     valuesClicks.push(value.Count1);
@@ -268,11 +271,22 @@ $(function () {
                         default:
                             labels.push(value.Time);
                     }
+
+                    $.each(value.SubItems, function(subKey, subValue) {
+                        //console.debug(subValue.Key, subValue.Value);
+
+                        if (subValue.Key in referers) {
+                            referers[subValue.Key] = referers[subValue.Key] + parseInt(subValue.Value);
+                        } else {
+                            referers[subValue.Key] = parseInt(subValue.Value);
+                        }
+                    });
                 });
 
                 //console.debug(valuesClicks);
                 //console.debug(valuesJoins);
                 //console.debug(labels);
+                //console.debug(referers);
 
                 chart.update_values(
                     [
@@ -281,6 +295,18 @@ $(function () {
                     ],
                     labels
                 );
+
+                var newReferersText = "";
+                $.each(referers, function(key, value) {
+                    if (key !== "") {
+                        newReferersText = newReferersText + "<a href=\"" + key + "\" target=\"_blank\"  rel=\"nofollow\">" + key + "</a> " + "(" + value + ") ";
+                    }
+                });
+                if (newReferersText === "") {
+                    newReferersText = "None"
+                }
+                $vanityInviteReferers.html(newReferersText);
+
                 $vanityInviteSubmitButton.prop('disabled', false);
             });
         });

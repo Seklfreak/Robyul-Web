@@ -11,7 +11,7 @@
             <h1 class="display-3 ranking-server-title">
                 <small>Custom Invite Statistics for</small> {{ guildName }}
             </h1>
-            <div class="row justify-content-center">
+            <div class="row justify-content-center" style="margin-top: 1rem;">
                 <div class="col-12 col-md-6 col-lg-4">
                     <h3>Invite your friends using</h3>
                 </div>
@@ -61,6 +61,12 @@
                  data-vanity-invite-name="{{ vanityInviteName }}"
                  data-vanity-invite-url="{{ vanityInviteUrl }}"
             ></div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h5>Referers in the time range:</h5>
+            <p id="vanityinvite-referers">Please wait…</p>
         </div>
     </div>
 {% endblock %}
