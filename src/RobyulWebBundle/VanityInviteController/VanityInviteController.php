@@ -30,12 +30,12 @@ class VanityInviteController extends Controller
 
             $guildIdText = '';
             if (array_key_exists('GuildID', $vanityInviteData)) {
-                $guildIdText = 'Guild ID:' . $vanityInviteData['GuildID'];
+                $guildIdText = 'GuildID:' . $vanityInviteData['GuildID'];
             }
 
             $this->get('gamp.analytics')
                 ->setClientId($clientId)
-                ->setDocumentPath('/' . $vanityInviteData['Code'])
+                ->setDocumentPath('/' . $vanityName)
                 ->setUserAgentOverride($request->headers->get('User-Agent', ''))
                 ->setDocumentReferrer($request->headers->get('referer', ''))
                 ->setUserLanguage($request->headers->get('accept-language', ''))
