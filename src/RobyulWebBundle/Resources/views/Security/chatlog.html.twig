@@ -14,7 +14,7 @@
     </div>
     <form id="chatlog-around-messageid-form" data-guild-id="{{ guildID }}">
         <div class="row">
-            <div class="col">
+            <div class="col-12 col-md-3">
                 <select class="form-control" id="chatlog-channel-select" required>
                     {% for channel in guildChannels %}
                         {% if channel.Type == "text" %}
@@ -23,10 +23,10 @@
                     {% endfor %}
                 </select>
             </div>
-            <div class="col">
+            <div class="col-12 col-md-3">
                 <input type="text" class="form-control" id="chatlog-around-messageid-input" placeholder="Around Message ID">
             </div>
-            <div class="col">
+            <div class="col-12 col-md-3">
                 <button type="submit" class="btn btn-primary" id="button-chatlog-submit">Lookup</button>
             </div>
         </div>
