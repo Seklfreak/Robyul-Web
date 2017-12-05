@@ -155,19 +155,29 @@ $(function () {
     var $chatlogChannelSelect = $('#chatlog-channel-select');
     var $chatlogAroundMessageIDInput = $('#chatlog-around-messageid-input');
     var $chatlogResultTBody = $('#chatlog-result-tbody');
+    var $chatlogSubmitButton = $('#button-chatlog-submit');
     $chatlogAroundMessageIDForm.on('submit', function (event) {
         event.preventDefault();
+        $chatlogSubmitButton.prop('disabled', true);
         var guildID = $chatlogAroundMessageIDForm.data('guild-id');
         var channelID = $chatlogChannelSelect.find('option:selected').val();
         var aroundMessageID = $chatlogAroundMessageIDInput.val();
 
+        if (aroundMessageID === "") {
+            aroundMessageID = "last";
+        }
+
         var serverStatisticsCountEndpoint = "chatlog/" + guildID + "/" + channelID + "/around/" + aroundMessageID;
 
         apiRequest(serverStatisticsCountEndpoint, function (msg) {
+            if (aroundMessageID === "last") {
+                aroundMessageID = msg[msg.length-1].ID;
+            }
+
             var resultHTML = '';
             $.each(msg, function (i, message) {
                 var classes = '';
-                if (message.ID == aroundMessageID) {
+                if (message.ID === aroundMessageID) {
                     classes = 'selected';
                 }
                 resultHTML += '<tr class="' + classes + '"><td scope="row"><a href="#" class="chatlog-messageid-click" data-message-id="' + escapeHTML(message.ID) + '" id="message-' + escapeHTML(message.ID) + '">#' + escapeHTML(message.ID) + '</a></td><td>' + escapeHTML(message.CreatedAt) + '</td><td>' + escapeHTML(message.AuthorUsername) + ' (#' + escapeHTML(message.AuthorID) + ')</td><td>' + escapeHTML(message.Content) + "<br>" + escapeHTML(message.Attachments) + '</td></tr>';
@@ -176,6 +186,7 @@ $(function () {
             if ($("#message-" + aroundMessageID).length > 0) {
                 $(document).scrollTop($("#message-" + aroundMessageID).offset().top - 200);
             }
+            $chatlogSubmitButton.prop('disabled', false);
             $('.chatlog-messageid-click').on('click', function () {
                 var $chatlogMessageIDClick = $(this);
                 var aroundMessageId = $chatlogMessageIDClick.data('message-id');
