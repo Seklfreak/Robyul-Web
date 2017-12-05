@@ -171,7 +171,7 @@ $(function () {
 
         apiRequest(serverStatisticsCountEndpoint, function (msg) {
             if (aroundMessageID === "last") {
-                aroundMessageID = msg[msg.length-1].ID;
+                aroundMessageID = msg[msg.length - 1].ID;
             }
 
             var resultHTML = '';
@@ -180,7 +180,32 @@ $(function () {
                 if (message.ID === aroundMessageID) {
                     classes = 'selected';
                 }
-                resultHTML += '<tr class="' + classes + '"><td scope="row"><a href="#" class="chatlog-messageid-click" data-message-id="' + escapeHTML(message.ID) + '" id="message-' + escapeHTML(message.ID) + '">#' + escapeHTML(message.ID) + '</a></td><td>' + escapeHTML(message.CreatedAt) + '</td><td>' + escapeHTML(message.AuthorUsername) + ' (#' + escapeHTML(message.AuthorID) + ')</td><td>' + escapeHTML(message.Content) + "<br>" + escapeHTML(message.Attachments) + '</td></tr>';
+                if (message.Deleted === true) {
+                    classes = 'deleted';
+                }
+
+                var contentText1 = message.Content;
+                var contentText2 = "";
+                if (Array.isArray(contentText1) && contentText1.length > 1) {
+                    $.each(contentText1, function (contentI, contentText) {
+                        if (contentI > 0) {
+                            contentText2 += " <i class=\"fa fa-arrow-right\" aria-hidden=\"true\"></i> Edited:<br>" + escapeHTML(contentText)
+                        }
+                    });
+                    contentText1 = escapeHTML(contentText1[0]);
+                }
+                var attachmentsText = "";
+                if (Array.isArray(message.Attachments) && message.Attachments.length > 0) {
+                    $.each(message.Attachments, function (attachmentI, attachmentText) {
+                        attachmentsText += "<a href=\"" + attachmentText + "\" target=\"_blank\" rel=\"nofollow\">" + attachmentText + "</a>";
+                        if (attachmentI < message.Attachments.length) {
+                            attachmentsText += "<br>"
+                        }
+                    });
+                    attachmentsText = "<br><i class=\"fa fa-arrow-right\" aria-hidden=\"true\"></i> Attachment(s): " + attachmentsText;
+                }
+
+                resultHTML += '<tr class="' + classes + '"><td scope="row"><a href="#" class="chatlog-messageid-click" data-message-id="' + escapeHTML(message.ID) + '" id="message-' + escapeHTML(message.ID) + '">#' + escapeHTML(message.ID) + '</a></td><td>' + escapeHTML(message.CreatedAt) + '</td><td>' + escapeHTML(message.AuthorUsername) + ' (#' + escapeHTML(message.AuthorID) + ')</td><td>' + contentText1 + attachmentsText + contentText2 + '</td></tr>';
             });
             $chatlogResultTBody.html(resultHTML);
             if ($("#message-" + aroundMessageID).length > 0) {
@@ -255,7 +280,7 @@ $(function () {
                 var labels = [];
                 var referers = {};
 
-                $.each(msg.reverse(), function(key, value) {
+                $.each(msg.reverse(), function (key, value) {
                     valuesClicks.push(value.Count1);
                     valuesJoins.push(value.Count2);
 
@@ -283,7 +308,7 @@ $(function () {
                             labels.push(value.Time);
                     }
 
-                    $.each(value.SubItems, function(subKey, subValue) {
+                    $.each(value.SubItems, function (subKey, subValue) {
                         //console.debug(subValue.Key, subValue.Value);
 
                         if (subValue.Key in referers) {
@@ -308,7 +333,7 @@ $(function () {
                 );
 
                 var newReferersText = "";
-                $.each(referers, function(key, value) {
+                $.each(referers, function (key, value) {
                     if (key !== "") {
                         newReferersText = newReferersText + "<a href=\"" + key + "\" target=\"_blank\"  rel=\"nofollow\">" + key + "</a> " + "(" + value + ") ";
                     }

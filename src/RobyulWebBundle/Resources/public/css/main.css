@@ -180,6 +180,9 @@ body {
 .chatlog-table tr.selected {
     background-color: rgba(0,0,0,.065);
 }
+.chatlog-table tr.deleted {
+    background-color: rgba(255,0,0,.065);
+}
 
 .profile-bar, .profile-bar .progress-bar {
     height: 2.5rem;
