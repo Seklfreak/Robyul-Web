@@ -22,7 +22,9 @@ robyul_vanityinvite:
     resource: "@RobyulWebBundle/VanityInviteController/"
     type:     annotation
     prefix:   /
-    host:    '%vanityinvite_domain%'
+    host:    '{mainhosts}'
+    requirements:
+        mainhosts: '%vanityinvite_domain%|127.0.0.1'
 
 robyul_web:
     resource: "@RobyulWebBundle/Controller/"
