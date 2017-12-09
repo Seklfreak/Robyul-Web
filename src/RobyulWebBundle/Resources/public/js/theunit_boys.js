@@ -32,7 +32,7 @@ var plot = svg.append("g").attr("transform", "translate(" + padding + "," + padd
 setXAxis();
 
 // Get data
-d3.csv("/bundles/robyulweb/csv/theunit.boys.v4.csv", parseLine, function (err, data) {
+d3.csv("/bundles/robyulweb/csv/theunit.boys.v5.csv", parseLine, function (err, data) {
     totalData = processData(data);
     plotData(data);
     selectLine(dFirst, "#line1");
