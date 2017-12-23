@@ -103,6 +103,7 @@
                 <li><code>{{ guildBotPrefix }}noti add global <span class="arg">keyword(s)</span></code> Like above but you get notified for every server with Robyul you are on.</li>
                 <li><code>{{ guildBotPrefix }}noti list</code> lists all your active keywords on this server.</li>
                 <li><code>{{ guildBotPrefix }}noti delete <span class="arg">keyword(s)</span></code> deletes a keyword from this server.</li>
+                <li><code>{{ guildBotPrefix }}noti toggle-mode</code> switches between display modes for the notification messages (content after information or content before information).</li>
                 <li><code>{{ guildBotPrefix }}noti ignore-channel <span class="arg">#channel or id</span></code> lets Robyul ignore all messages in the given channel. Run it again to turn it on again. <span class="badge badge-default">Admin</span></li>
                 <li><code>{{ guildBotPrefix }}noti ignore-channel list</code> lists all ignored channels on this server.</li>
             </ul>
@@ -293,7 +294,7 @@
                 <li><code>{{ guildBotPrefix }}get <span class="arg">#channel or channel id</span> <span class="arg">message id</span></code> get the content of a specified message. <span class="badge badge-default">Admin</span></li>
                 <li><code>{{ guildBotPrefix }}react <span class="arg">#channel or channel id</span> <span class="arg">message id</span> <span class="arg">emoji</span></code> adds a reaction to the specified message. <span class="badge badge-default">Mod</span></li>
                 <li><code>{{ guildBotPrefix }}batch-roles <span class="arg">role a</span> | <span class="arg">role b</span> | <span class="arg">role c</span> | <span class="opt-arg">after=role name</span> <span class="opt-arg">color=hex code</span></code> creates multiple roles at once. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}auto-inspects-channel <span class="opt-arg">channel # or id</span></code> prints the information above for users who join and different occasions. <span class="badge badge-default">Admin</span></li>
+                <li><code>{{ guildBotPrefix }}auto-inspects-channel <span class="opt-arg">channel # or id</span></code> prints the information above for users who join and different occasions. Run the command without a channel to disable it. <span class="badge badge-default">Admin</span></li>
                 <li><code>{{ guildBotPrefix }}prefix <span class="opt-arg">new prefix</span></code> sets the new Robyul prefix for this server. Call it without the argument to find out the current prefix. <span class="badge badge-default">Admin</span></li>
                 <li><code>@{{ bot_user }} set prefix <span class="opt-arg">new prefix</span></code> sets the new Robyul prefix for this server. <span class="badge badge-default">Admin</span></li>
                 <li><code>{{ guildBotPrefix }}toggle-chatlog</code> Toggle Chatlog recording and anonymising of server statistics. <span class="badge badge-default">Admin</span></li>
@@ -598,8 +599,8 @@
             <ul class="list-unstyled">
                 <li><code>{{ guildBotPrefix }}osu <span class="arg">osu! username</span></code> shows osu-classic stats for the username.</li>
                 <li><code>{{ guildBotPrefix }}osu!mania <span class="arg">osu! username</span></code> shows osu-mania stats for the username.</li>
-                <li><code>{{ guildBotPrefix }}osu!mania <span class="arg">osu! username</span></code> shows osu catch-the-beat stats for the username.</li>
-                <li><code>{{ guildBotPrefix }}osu!mania <span class="arg">osu! username</span></code> shows osu-taiko stats for the username.</li>
+                <li><code>{{ guildBotPrefix }}osu!ctb <span class="arg">osu! username</span></code> shows osu catch-the-beat stats for the username.</li>
+                <li><code>{{ guildBotPrefix }}osu!taiko <span class="arg">osu! username</span></code> shows osu-taiko stats for the username.</li>
             </ul>
             </p>
         </div>
@@ -702,11 +703,23 @@
     </div>
     <div class="card commands-card">
         <div class="card-block">
-            <h4 class="card-title" id="dig"><a href="#dig">Dig</a></h4>
+            <h4 class="card-title" id="network"><a href="#network">Network</a></h4>
             <h6 class="card-subtitle mb-2 text-muted">It's always DNS.</h6>
             <p class="card-text">
             <ul class="list-unstyled">
                 <li><code>{{ guildBotPrefix }}dig <a class="arg" href="#" data-toggle="tooltip" title="eg. robyul.chat">name</a> <a class="arg" href="#" data-toggle="tooltip" title="eg. AAAA">type</a> <span class="opt-arg">@DNS Server</span></code> do DNS queries.</li>
+                <li><code>{{ guildBotPrefix }}whois <a class="arg" href="#" data-toggle="tooltip" title="eg. robyul.chat">name</a></code> make whois requests.</li>
+            </ul>
+            </p>
+        </div>
+    </div>
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="misc"><a href="#misc">Miscellaneous</a></h4>
+            <h6 class="card-subtitle mb-2 text-muted">Everything else.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ guildBotPrefix }}discordmoney</code> find out how much your friends spent on discord.</li>
             </ul>
             </p>
         </div>
