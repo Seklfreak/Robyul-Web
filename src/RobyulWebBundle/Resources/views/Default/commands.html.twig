@@ -4,19 +4,23 @@
     <div class="container">
         <div class="row">
             <p class="lead">
-                List of all commands for Robyul.<br>
+                List of all commands for Robyul{% if guildName != "Global" %} on {{ guildName }}{% endif %}.<br>
                 Required arguments look like <code><span class="arg">this</span></code>.<br>
                 Optional arguments look like <code><span class="opt-arg">this</span></code>.<br>
                 Robyul permissions are based on two Role levels: Admins and Mods.<br>
-                Possible Admin Role Names: <code>Admin</code>, <code>Admins</code>, <code>ADMIN</code>, <code>School Board</code>, <code>admin</code> and <code>admins</code>.<br>
-                Possible Mod Role Names: <code>Mod</code>, <code>Mods</code>, <code>Moderator</code>, <code>Moderators</code>, <code>Mod Trainee</code>, <code>MOD</code>, <code>Minimod</code>, <code>Guard</code>, <code>Janitor</code>, <code>mod</code> and <code>mods</code>.
+                Possible Admin Role Names: <code>Admin</code>, <code>Admins</code>, <code>ADMIN</code>, <code>School
+                    Board</code>, <code>admin</code> and <code>admins</code>.<br>
+                Possible Mod Role Names: <code>Mod</code>, <code>Mods</code>, <code>Moderator</code>,
+                <code>Moderators</code>, <code>Mod Trainee</code>, <code>MOD</code>, <code>Minimod</code>,
+                <code>Guard</code>, <code>Janitor</code>, <code>mod</code> and <code>mods</code>.
             </p>
         </div>
     </div>
     <div class="card commands-card">
         <div class="card-block">
             <h4 class="card-title" id="donators"><a href="#donators">Donators</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Support me on <a href="https://www.patreon.com/sekl" target="_blank">Patreon</a>.</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Support me on <a href="https://www.patreon.com/sekl"
+                                                                       target="_blank">Patreon</a>.</h6>
             <p class="card-text">
             <ul class="list-unstyled">
                 <li><code>{{ guildBotPrefix }}donators</code> see everyone who donated for Robyul.</li>
@@ -30,8 +34,11 @@
             <h6 class="card-subtitle mb-2 text-muted">Various stuff.</h6>
             <p class="card-text">
             <ul class="list-unstyled">
-                <li><code>@{{ bot_user }} help</code> or <code>{{ guildBotPrefix }}help</code> get a link to this page.</li>
-                <li><code>@{{ bot_user }} prefix</code> or <code>{{ guildBotPrefix }}prefix</code> find out the Robyul prefix for this server.</li>
+                <li><code>@{{ bot_user }} help</code> or <code>{{ guildBotPrefix }}help</code> get a link to this page.
+                </li>
+                <li><code>@{{ bot_user }} prefix</code> or <code>{{ guildBotPrefix }}prefix</code> find out the Robyul
+                    prefix for this server.
+                </li>
                 {# <li><code>@{{ bot_user }} <span class="arg">message</span></code> talk to Robyul.</li> #}
             </ul>
             </p>
@@ -48,72 +55,175 @@
             </p>
         </div>
     </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="levels"><a href="#levels">Levels and Profiles</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Get EXP for Messages.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}profile <span class="opt-arg">@user or user id</span></code> view your profile or the profile of an user.</li>
-                <li><code>{{ guildBotPrefix }}gif-profile <span class="opt-arg">@user or user id</span></code> view your profile, or the one of an user, as a gif, only works if they have an animated Display Picture (Discord Nitro).</li>
-                <li><code>{{ guildBotPrefix }}profile title <span class="arg">title text</span></code> set the title text of your Profile.</li>
-                <li><code>{{ guildBotPrefix }}profile bio <span class="arg">bio text</span></code> set the bio text of your profile.</li>
-                <li><code>{{ guildBotPrefix }}profile background <span class="arg">background name</span></code> choose a background for your profile. You can view all backgrounds <a href="{{ path('robyulweb_default_profilebackgrounds') }}">here</a> and submit new ones <a href="https://goo.gl/forms/ZYFCGWNi5tYPAfki2" target="_blank">here</a>.</li>
-                <li><code>{{ guildBotPrefix }}profile badge</code> choose badges for your profile. The badges you can choose vary per server.</li>
-                <li><code>{{ guildBotPrefix }}profile birthday <span class="arg">MM/DD</span></code> set your birthday, it will get shown on your Profile.</li>
-                <li><code>{{ guildBotPrefix }}profile timezone <span class="arg">timezone name</span></code> set your timezone, your current time will get shown on your Profile. View a list of all timezone names <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List" target="_blank">here</a> (Use the TZ column). Call the command without a timezone to reset your timezone.</li>
-                <li><code>{{ guildBotPrefix }}profile color <a class="arg" href="#" data-toggle="tooltip" title="box: color of the big box in the background; accent: color of the EXP bar; text: color of all text">box|accent|text</a> <a class="opt-arg" href="#" data-toggle="tooltip" title="HEX color">color</a></code> set colors for your profile. Call it without a color to set the default color.</li>
-                <li><code>{{ guildBotPrefix }}profile opacity <a class="arg" href="#" data-toggle="tooltip" title="box: opacity of the big box in the background; details: opacity of the EXP Bar background, REP background and Name background">box|details</a> <a class="opt-arg" href="#" data-toggle="tooltip" title="0-1 (eg. 0.5)">opacity</a></code> set the opacity for elements of your profile. Call it without an opacity to set the default opacity.</li>
-                <li><code>{{ guildBotPrefix }}profile badge move <span class="arg">category name</span> <span class="arg">badge name</span> <span class="arg">new spot number</span></code> Move a badge's position on your Profile.</li>
-                <li><code>{{ guildBotPrefix }}rep <span class="arg">@user or user id</span></code> give a reputation point to the given user.</li>
-                <li><code>{{ guildBotPrefix }}level <span class="opt-arg">@user or user id</span></code> view level stats.</li>
-                <li><code>{{ guildBotPrefix }}level top</code> show the top members on your discord.</li>
-                <li><code>{{ guildBotPrefix }}level global-top</code> show the top members on all robyul discords.</li>
-                <li><code>{{ guildBotPrefix }}ranking</code> get a link to the ranking of the discord server you are on.</li>
-                <li><code>{{ guildBotPrefix }}profile badge create <span class="arg">category name</span> <span class="arg">badge name</span> <a class="arg" href="#" data-toggle="tooltip" title="28x28px picture, Direct Link! (imgur for example), the bot will make it round automatically">image url</a> <a href="#" data-toggle="tooltip" title="HEX Color code" class="arg">border color</a> <a class="arg" href="#" data-toggle="tooltip" title="-1=available for nobody (you have to allow it per user basis), 0=available for everyone on your server">min server level to be able to get the badge</a> <a class="opt-arg" href="#" data-toggle="tooltip" title="Only available for Bot Owners">global</a></code> create a Robyul Badge on your server. <span class="badge badge-default">Admin</span></li>
-                <li><code>{{ guildBotPrefix }}profile badge delete <span class="arg">category name</span> <span class="arg">badge name</span></code> Delete a badge from your server. <span class="badge badge-default">Admin</span></li>
-                <li><code>{{ guildBotPrefix }}profile badge allow <span class="arg">@user or user id</span> <span class="arg">category name</span> <span class="arg">badge name</span></code> make a badge available for an user regardless of level requirement. Run it again to remove user from the list again. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}profile badge deny <span class="arg">@user or user id</span> <span class="arg">category name</span> <span class="arg">badge name</span></code> make a badge unavailable for an user regardless of level requirement. Run it again to remove user from the list again. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}profile badge list</code> List all badge categories.</li>
-                <li><code>{{ guildBotPrefix }}profile badge list <span class="arg">category name</span></code> List all badges in a category.</li>
-                <li><code>{{ guildBotPrefix }}levels roles add <span class="arg">role name or id</span> <span class="arg">start level</span> <span class="opt-arg">last level</span></code> ties a role to the specified level range. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}levels roles list</code> lists all roles to levels connections. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}levels roles delete <span class="arg">connection id</span></code> removes a role to level connection. Use <code>{{ guildBotPrefix }}levels role list</code> to get the ID. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}levels roles apply</code> applies all level roles to all members that meet the requirements. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}levels roles grant <span class="arg">@user or user id</span> <span class="arg">role name or id</span></code> grant an user a role ignoring level requirements. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}levels roles deny <span class="arg">@user or user id</span> <span class="arg">role name or id</span></code> deny an user a role ignoring level requirements. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}levels reset user <span class="arg">@user or user id</span></code> resets the EXP and Level for the given user on the server. <span class="badge badge-default">Admin</span></li>
-                <li><code>{{ guildBotPrefix }}levels ignore list</code> shows currently ignored users and channels <span class="badge badge-default">Mod</span>.</li>
-                <li><code>{{ guildBotPrefix }}levels ignore user <span class="arg">@user or user id</span></code> makes Robyul ignore one users messages for EXP. <span class="badge badge-default">Admin</span></li>
-                <li><code>{{ guildBotPrefix }}levels ignore channel <span class="arg">#channel or channel id</span></code> makes Robyul ignore a channels messages for EXP. <span class="badge badge-default">Admin</span></li>
-                <li><code>{{ guildBotPrefix }}level process-history</code> Process old messages for Robyul EXP. If you want this done on your server DM <code>Sekl#7397</code> on Discord. <span class="badge badge-default">Bot Owner</span></li>
-                <li><code>{{ guildBotPrefix }}profile background add <span class="arg">background name</span> <span class="arg">background url</span> <a class="arg" href="#" data-toggle="tooltip" title="split by ,">tags</a> </code> Adds a background to Robyul. <span class="badge badge-default">Bot Owner</span></li>
-                <li><code>{{ guildBotPrefix }}profile background delete <span class="arg">background name</span></code> Deletes a Background. <span class="badge badge-default">Bot Owner</span></li>
-            </ul>
-            </p>
+    {% if moduleNames is null or "levels" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="levels"><a href="#levels">Levels and Profiles</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Get EXP for Messages.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}profile <span class="opt-arg">@user or user id</span></code> view your
+                        profile or the profile of an user.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}gif-profile <span class="opt-arg">@user or user id</span></code> view
+                        your profile, or the one of an user, as a gif, only works if they have an animated Display
+                        Picture (Discord Nitro).
+                    </li>
+                    <li><code>{{ guildBotPrefix }}profile title <span class="arg">title text</span></code> set the title
+                        text of your Profile.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}profile bio <span class="arg">bio text</span></code> set the bio text
+                        of your profile.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}profile background <span class="arg">background name</span></code>
+                        choose a background for your profile. You can view all backgrounds <a
+                                href="{{ path('robyulweb_default_profilebackgrounds') }}">here</a> and submit new ones
+                        <a href="https://goo.gl/forms/ZYFCGWNi5tYPAfki2" target="_blank">here</a>.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}profile badge</code> choose badges for your profile. The badges you
+                        can choose vary per server.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}profile birthday <span class="arg">MM/DD</span></code> set your
+                        birthday, it will get shown on your Profile.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}profile timezone <span class="arg">timezone name</span></code> set
+                        your timezone, your current time will get shown on your Profile. View a list of all timezone
+                        names <a href="https://en.wikipedia.org/wiki/List_of_tz_database_time_zones#List"
+                                 target="_blank">here</a> (Use the TZ column). Call the command without a timezone to
+                        reset your timezone.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}profile color <a class="arg" href="#" data-toggle="tooltip"
+                                                                   title="box: color of the big box in the background; accent: color of the EXP bar; text: color of all text">box|accent|text</a>
+                            <a class="opt-arg" href="#" data-toggle="tooltip" title="HEX color">color</a></code> set
+                        colors for your profile. Call it without a color to set the default color.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}profile opacity <a class="arg" href="#" data-toggle="tooltip"
+                                                                     title="box: opacity of the big box in the background; details: opacity of the EXP Bar background, REP background and Name background">box|details</a>
+                            <a class="opt-arg" href="#" data-toggle="tooltip" title="0-1 (eg. 0.5)">opacity</a></code>
+                        set the opacity for elements of your profile. Call it without an opacity to set the default
+                        opacity.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}profile badge move <span class="arg">category name</span> <span
+                                    class="arg">badge name</span> <span class="arg">new spot number</span></code> Move a
+                        badge's position on your Profile.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}rep <span class="arg">@user or user id</span></code> give a reputation
+                        point to the given user.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}level <span class="opt-arg">@user or user id</span></code> view level
+                        stats.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}level top</code> show the top members on your discord.</li>
+                    <li><code>{{ guildBotPrefix }}level global-top</code> show the top members on all robyul discords.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}ranking</code> get a link to the ranking of the discord server you are
+                        on.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}profile badge create <span class="arg">category name</span> <span
+                                    class="arg">badge name</span> <a class="arg" href="#" data-toggle="tooltip"
+                                                                     title="28x28px picture, Direct Link! (imgur for example), the bot will make it round automatically">image
+                                url</a> <a href="#" data-toggle="tooltip" title="HEX Color code" class="arg">border
+                                color</a> <a class="arg" href="#" data-toggle="tooltip"
+                                             title="-1=available for nobody (you have to allow it per user basis), 0=available for everyone on your server">min
+                                server level to be able to get the badge</a> <a class="opt-arg" href="#"
+                                                                                data-toggle="tooltip"
+                                                                                title="Only available for Bot Owners">global</a></code>
+                        create a Robyul Badge on your server. <span class="badge badge-default">Admin</span></li>
+                    <li><code>{{ guildBotPrefix }}profile badge delete <span class="arg">category name</span> <span
+                                    class="arg">badge name</span></code> Delete a badge from your server. <span
+                                class="badge badge-default">Admin</span></li>
+                    <li><code>{{ guildBotPrefix }}profile badge allow <span class="arg">@user or user id</span> <span
+                                    class="arg">category name</span> <span class="arg">badge name</span></code> make a
+                        badge available for an user regardless of level requirement. Run it again to remove user from
+                        the list again. <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}profile badge deny <span class="arg">@user or user id</span> <span
+                                    class="arg">category name</span> <span class="arg">badge name</span></code> make a
+                        badge unavailable for an user regardless of level requirement. Run it again to remove user from
+                        the list again. <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}profile badge list</code> List all badge categories.</li>
+                    <li><code>{{ guildBotPrefix }}profile badge list <span class="arg">category name</span></code> List
+                        all badges in a category.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}levels roles add <span class="arg">role name or id</span> <span
+                                    class="arg">start level</span> <span class="opt-arg">last level</span></code> ties a
+                        role to the specified level range. <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}levels roles list</code> lists all roles to levels connections. <span
+                                class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}levels roles delete <span class="arg">connection id</span></code>
+                        removes a role to level connection. Use <code>{{ guildBotPrefix }}levels role list</code> to get
+                        the ID. <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}levels roles apply</code> applies all level roles to all members that
+                        meet the requirements. <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}levels roles grant <span class="arg">@user or user id</span> <span
+                                    class="arg">role name or id</span></code> grant an user a role ignoring level
+                        requirements. <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}levels roles deny <span class="arg">@user or user id</span> <span
+                                    class="arg">role name or id</span></code> deny an user a role ignoring level
+                        requirements. <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}levels reset user <span class="arg">@user or user id</span></code>
+                        resets the EXP and Level for the given user on the server. <span class="badge badge-default">Admin</span>
+                    </li>
+                    <li><code>{{ guildBotPrefix }}levels ignore list</code> shows currently ignored users and channels
+                        <span class="badge badge-default">Mod</span>.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}levels ignore user <span class="arg">@user or user id</span></code>
+                        makes Robyul ignore one users messages for EXP. <span class="badge badge-default">Admin</span>
+                    </li>
+                    <li><code>{{ guildBotPrefix }}levels ignore channel <span class="arg">#channel or channel id</span></code>
+                        makes Robyul ignore a channels messages for EXP. <span class="badge badge-default">Admin</span>
+                    </li>
+                    <li><code>{{ guildBotPrefix }}level process-history</code> Process old messages for Robyul EXP. If
+                        you want this done on your server DM <code>Sekl#7397</code> on Discord. <span
+                                class="badge badge-default">Bot Owner</span></li>
+                    <li><code>{{ guildBotPrefix }}profile background add <span class="arg">background name</span> <span
+                                    class="arg">background url</span> <a class="arg" href="#" data-toggle="tooltip"
+                                                                         title="split by ,">tags</a> </code> Adds a
+                        background to Robyul. <span class="badge badge-default">Bot Owner</span></li>
+                    <li><code>{{ guildBotPrefix }}profile background delete <span
+                                    class="arg">background name</span></code> Deletes a Background. <span
+                                class="badge badge-default">Bot Owner</span></li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="noti"><a href="#noti">Keyword Notifications</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Get informed when someone talks about you or what you care about.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}noti add <span class="arg">keyword(s)</span></code> Get a DM from Robyul when someone says the keyword(s) on your current server.</li>
-                <li><code>{{ guildBotPrefix }}noti add global <span class="arg">keyword(s)</span></code> Like above but you get notified for every server with Robyul you are on.</li>
-                <li><code>{{ guildBotPrefix }}noti list</code> lists all your active keywords on this server.</li>
-                <li><code>{{ guildBotPrefix }}noti delete <span class="arg">keyword(s)</span></code> deletes a keyword from this server.</li>
-                <li><code>{{ guildBotPrefix }}noti toggle-mode</code> switches between display modes for the notification messages (content after information or content before information).</li>
-                <li><code>{{ guildBotPrefix }}noti ignore-channel <span class="arg">#channel or id</span></code> lets Robyul ignore all messages in the given channel. Run it again to turn it on again. <span class="badge badge-default">Admin</span></li>
-                <li><code>{{ guildBotPrefix }}noti ignore-channel list</code> lists all ignored channels on this server.</li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "notifications" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="noti"><a href="#noti">Keyword Notifications</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Get informed when someone talks about you or what you care
+                    about.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}noti add <span class="arg">keyword(s)</span></code> Get a DM from
+                        Robyul when someone says the keyword(s) on your current server.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}noti add global <span class="arg">keyword(s)</span></code> Like above
+                        but you get notified for every server with Robyul you are on.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}noti list</code> lists all your active keywords on this server.</li>
+                    <li><code>{{ guildBotPrefix }}noti delete <span class="arg">keyword(s)</span></code> deletes a
+                        keyword from this server.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}noti toggle-mode</code> switches between display modes for the
+                        notification messages (content after information or content before information).
+                    </li>
+                    <li><code>{{ guildBotPrefix }}noti ignore-channel <span class="arg">#channel or id</span></code>
+                        lets Robyul ignore all messages in the given channel. Run it again to turn it on again. <span
+                                class="badge badge-default">Admin</span></li>
+                    <li><code>{{ guildBotPrefix }}noti ignore-channel list</code> lists all ignored channels on this
+                        server.
+                    </li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
+    {% endif %}
     <div class="card commands-card">
         <div class="card-block">
             <h4 class="card-title" id="music"><a href="#music">Music</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Listen to kpop with your friends. Powered by <a href="https://github.com/jagrosh/MusicBot" target="_blank">JMusicBot</a>.</h6>
+            <h6 class="card-subtitle mb-2 text-muted">Listen to kpop with your friends. Powered by <a
+                        href="https://github.com/jagrosh/MusicBot" target="_blank">JMusicBot</a>.</h6>
             <p class="card-text">
             <ul class="list-unstyled">
                 <li><code>//play <span class="arg">song name or url</span></code> Plays a song.</li>
@@ -123,606 +233,1049 @@
                 <li><code>//remove <span class="arg">position</span></code> Removes a song from the queue.</li>
                 <li><code>//shuffle</code> Shuffles the songs you queued.</li>
                 <li><code>//search <span class="arg">query</span></code> Search and list songs from YouTube.</li>
-                <li><code>//setdj <span class="arg">role name</span></code> Sets the DJ role. Use <code>//setdj none</code> to reset this. <span class="badge badge-default">Manage Server permission</span></li>
-                <li><code>//stop</code> Tells Robyul to clear the queue and to disconnect from VC. <span class="badge badge-default">DJ</span></li>
-                <li><code>//skipto <span class="arg">position</span></code> Skip to a specific position in the queue. <span class="badge badge-default">DJ</span></li>
-                <li><code>//forceskip</code> Forcibly skips the current song without any vote. <span class="badge badge-default">DJ</span></li>
-                <li><code>//settc <span class="arg">channel name</span></code> Sets the text channel for music commands. If Robyul has the <code>Manage Channel</code> it will adjust the topic to show the current track. Use <code>//settc none</code> to reset this. <span class="badge badge-default">Manage Server permission</span></li>
-                <li><code>//setvc <span class="arg">channel name</span></code> Sets the voice channel for the Music feature. Use <code>//setvc none</code> to reset this. <span class="badge badge-default">Manage Server permission</span></li>
+                <li><code>//setdj <span class="arg">role name</span></code> Sets the DJ role. Use <code>//setdj
+                        none</code> to reset this. <span class="badge badge-default">Manage Server permission</span>
+                </li>
+                <li><code>//stop</code> Tells Robyul to clear the queue and to disconnect from VC. <span
+                            class="badge badge-default">DJ</span></li>
+                <li><code>//skipto <span class="arg">position</span></code> Skip to a specific position in the queue.
+                    <span class="badge badge-default">DJ</span></li>
+                <li><code>//forceskip</code> Forcibly skips the current song without any vote. <span
+                            class="badge badge-default">DJ</span></li>
+                <li><code>//settc <span class="arg">channel name</span></code> Sets the text channel for music commands.
+                    If Robyul has the <code>Manage Channel</code> it will adjust the topic to show the current track.
+                    Use <code>//settc none</code> to reset this. <span class="badge badge-default">Manage Server permission</span>
+                </li>
+                <li><code>//setvc <span class="arg">channel name</span></code> Sets the voice channel for the Music
+                    feature. Use <code>//setvc none</code> to reset this. <span class="badge badge-default">Manage Server permission</span>
+                </li>
             </ul>
             </p>
         </div>
     </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="vlive"><a href="#vlive">V Live</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">See your Idols live.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}vlive <span class="arg">V Live channel name</span></code> get information about a V Live channel.</li>
-                <li><code>{{ guildBotPrefix }}vlive list</code> view all active V Live channel feeds on this server.</li>
-                <li><code>{{ guildBotPrefix }}vlive add <span class="arg">V Live channel name</span> <span class="arg">discord #channel or channel id</span> <span class="opt-arg">name or id of the role to mention</span></code> adds a V Live channel feed to the specific channel. Tags the role if specified. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}vlive delete <span class="arg">v live channel id</span></code> delete a V Live channel feed. Use <code>{{ guildBotPrefix }}vlive list</code> to get the channel id. <span class="badge badge-default">Mod</span></li>
-            </ul>
-            </p>
+    {% if moduleNames is null or "vlive" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="vlive"><a href="#vlive">V Live</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">See your Idols live.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}vlive <span class="arg">V Live channel name</span></code> get
+                        information about a V Live channel.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}vlive list</code> view all active V Live channel feeds on this server.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}vlive add <span class="arg">V Live channel name</span> <span
+                                    class="arg">discord #channel or channel id</span> <span class="opt-arg">name or id of the role to mention</span></code>
+                        adds a V Live channel feed to the specific channel. Tags the role if specified. <span
+                                class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}vlive delete <span class="arg">v live channel id</span></code> delete
+                        a V Live channel feed. Use <code>{{ guildBotPrefix }}vlive list</code> to get the channel id.
+                        <span class="badge badge-default">Mod</span></li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="youtube"><a href="#youtube">YouTube</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Music Videos and more.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}youtube <span class="arg">search text</span></code> search for videos or channels on YouTube.</li>
-                <li><code>{{ guildBotPrefix }}youtube video <span class="arg">search text</span></code> search only for videos on YouTube.</li>
-                <li><code>{{ guildBotPrefix }}youtube channel <span class="arg">search text</span></code> search only for channels on YouTube.</li>
-                <li><code>{{ guildBotPrefix }}youtube channel add <span class="arg">youtube channel name</span> <span class="arg">#channel or channel id</span></code> adds a youtube channel feed to a specific channel. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}youtube channel list</code> lists all active youtube channel feeds. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}youtube channel delete <span class="arg">feed id</span></code> deletes a youtube channel feed. Use <code>{{ guildBotPrefix }}youtube channel list</code> to get the feed id. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}youtube service restart</code> restarts Robyul's YouTube service. <span class="badge badge-default">Bot Owner</span></li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "youtube" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="youtube"><a href="#youtube">YouTube</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Music Videos and more.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}youtube <span class="arg">search text</span></code> search for videos
+                        or channels on YouTube.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}youtube video <span class="arg">search text</span></code> search only
+                        for videos on YouTube.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}youtube channel <span class="arg">search text</span></code> search
+                        only for channels on YouTube.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}youtube channel add <span class="arg">youtube channel name</span>
+                            <span class="arg">#channel or channel id</span></code> adds a youtube channel feed to a
+                        specific channel. <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}youtube channel list</code> lists all active youtube channel feeds.
+                        <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}youtube channel delete <span class="arg">feed id</span></code> deletes
+                        a youtube channel feed. Use <code>{{ guildBotPrefix }}youtube channel list</code> to get the
+                        feed id. <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}youtube service restart</code> restarts Robyul's YouTube service.
+                        <span class="badge badge-default">Bot Owner</span></li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="twitter"><a href="#twitter">Twitter</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Stay up to date.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}twitter <span class="arg">twitter username</span></code> get information about a Twitter account</li>
-                <li><code>{{ guildBotPrefix }}twitter list</code> view all active Twitter feeds on this server</li>
-                <li><code>{{ guildBotPrefix }}twitter add <span class="arg">twitter username</span> <span class="arg">discord #channel or channel id</span></code> adds a Twitter feed to the specific channel. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}twitter delete <span class="arg">twitter feed id</span></code> delete a Twitter feed. Use <code>{{ guildBotPrefix }}twitter list</code> to get the feed id. <span class="badge badge-default">Mod</span></li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "twitter" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="twitter"><a href="#twitter">Twitter</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Stay up to date.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}twitter <span class="arg">twitter username</span></code> get
+                        information about a Twitter account
+                    </li>
+                    <li><code>{{ guildBotPrefix }}twitter list</code> view all active Twitter feeds on this server</li>
+                    <li><code>{{ guildBotPrefix }}twitter add <span class="arg">twitter username</span> <span
+                                    class="arg">discord #channel or channel id</span></code> adds a Twitter feed to the
+                        specific channel. <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}twitter delete <span class="arg">twitter feed id</span></code> delete
+                        a Twitter feed. Use <code>{{ guildBotPrefix }}twitter list</code> to get the feed id. <span
+                                class="badge badge-default">Mod</span></li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="instagram"><a href="#instagram">Instagram</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Get all the pictures.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}instagram <span class="arg">instagram username</span></code> get information about an Instagram account</li>
-                <li><code>{{ guildBotPrefix }}instagram list</code> view all active Instagram feeds on this server</li>
-                <li><code>{{ guildBotPrefix }}instagram add <span class="arg">instagram username</span> <span class="arg">discord #channel or channel id</span> <a class="opt-arg" href="#" data-toggle="tooltip" title="add 'links' to make Robyul post direct links instead of using an embed.">links</a></code> adds an Instagram feed to the specific channel. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}instagram toggle-direct-links <span class="arg">instagram feed id</span></code> toggles between Discord Embed (default) or linking the Pictures as text. Use <code>{{ guildBotPrefix }}instagram list</code> to get the feed id. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}instagram delete <span class="arg">instagram feed id</span></code> delete an Instagram feed. Use <code>{{ guildBotPrefix }}instagram list</code> to get the feed id. <span class="badge badge-default">Mod</span></li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "instagram" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="instagram"><a href="#instagram">Instagram</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Get all the pictures.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}instagram <span class="arg">instagram username</span></code> get
+                        information about an Instagram account
+                    </li>
+                    <li><code>{{ guildBotPrefix }}instagram list</code> view all active Instagram feeds on this server
+                    </li>
+                    <li><code>{{ guildBotPrefix }}instagram add <span class="arg">instagram username</span> <span
+                                    class="arg">discord #channel or channel id</span> <a class="opt-arg" href="#"
+                                                                                         data-toggle="tooltip"
+                                                                                         title="add 'links' to make Robyul post direct links instead of using an embed.">links</a></code>
+                        adds an Instagram feed to the specific channel. <span class="badge badge-default">Mod</span>
+                    </li>
+                    <li><code>{{ guildBotPrefix }}instagram toggle-direct-links <span
+                                    class="arg">instagram feed id</span></code> toggles between Discord Embed (default)
+                        or linking the Pictures as text. Use <code>{{ guildBotPrefix }}instagram list</code> to get the
+                        feed id. <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}instagram delete <span class="arg">instagram feed id</span></code>
+                        delete an Instagram feed. Use <code>{{ guildBotPrefix }}instagram list</code> to get the feed
+                        id. <span class="badge badge-default">Mod</span></li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="reddit"><a href="#reddit">Reddit</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">The frontpage of the internet.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}reddit <span class="arg">subreddit name</span></code> displays information about a subreddit</li>
-                <li><code>{{ guildBotPrefix }}reddit /u/<span class="arg">redditor name</span></code> displays information about a redditor</li>
-                <li><code>{{ guildBotPrefix }}reddit list</code> view all active subreddit feeds on this server</li>
-                <li><code>{{ guildBotPrefix }}reddit add <span class="arg">subreddit name</span> <span class="arg">discord #channel or channel id</span> <span class="opt-arg">post delay in minutes</span> <a class="opt-arg" href="#" data-toggle="tooltip" title="add 'links' to make Robyul post direct links instead of using an embed.">links</a></code> adds a subreddit feed to the specific channel. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}reddit toggle-direct-links <span class="arg">subreddit feed id</span></code> toggles between the direct link and text mode of a reddit feed. Use <code>{{ guildBotPrefix }}reddit list</code> to get the feed id. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}reddit delete <span class="arg">subreddit feed id</span></code> delete a subreddit feed. Use <code>{{ guildBotPrefix }}reddit list</code> to get the feed id. <span class="badge badge-default">Mod</span></li>
-            </ul>
-            If you set a post delay to a reddit feed Robyul will delay posting each submission. Robyul will check if the has been deleted after the post delay, and only post the submission if the post has not been deleted.
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "reddit" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="reddit"><a href="#reddit">Reddit</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">The frontpage of the internet.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}reddit <span class="arg">subreddit name</span></code> displays
+                        information about a subreddit
+                    </li>
+                    <li><code>{{ guildBotPrefix }}reddit /u/<span class="arg">redditor name</span></code> displays
+                        information about a redditor
+                    </li>
+                    <li><code>{{ guildBotPrefix }}reddit list</code> view all active subreddit feeds on this server</li>
+                    <li><code>{{ guildBotPrefix }}reddit add <span class="arg">subreddit name</span> <span class="arg">discord #channel or channel id</span>
+                            <span class="opt-arg">post delay in minutes</span> <a class="opt-arg" href="#"
+                                                                                  data-toggle="tooltip"
+                                                                                  title="add 'links' to make Robyul post direct links instead of using an embed.">links</a></code>
+                        adds a subreddit feed to the specific channel. <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}reddit toggle-direct-links <span class="arg">subreddit feed id</span></code>
+                        toggles between the direct link and text mode of a reddit feed. Use <code>{{ guildBotPrefix }}
+                            reddit list</code> to get the feed id. <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}reddit delete <span class="arg">subreddit feed id</span></code> delete
+                        a subreddit feed. Use <code>{{ guildBotPrefix }}reddit list</code> to get the feed id. <span
+                                class="badge badge-default">Mod</span></li>
+                </ul>
+                If you set a post delay to a reddit feed Robyul will delay posting each submission. Robyul will check if
+                the has been deleted after the post delay, and only post the submission if the post has not been
+                deleted.
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="facebook"><a href="#facebook">Facebook</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">The biggest social network.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}facebook <span class="arg">facebook page name</span></code> get information about a Facebook page</li>
-                <li><code>{{ guildBotPrefix }}facebook list</code> view all active Facebook page feeds on this server</li>
-                <li><code>{{ guildBotPrefix }}facebook add <span class="arg">facebook page name</span> <span class="arg">discord #channel or channel id</span></code> adds a Facebook page feed to the specific channel. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}facebook delete <span class="arg">facebook feed id</span></code> delete a Facebook page feed. Use <code>{{ guildBotPrefix }}facebook list</code> to get the feed id. <span class="badge badge-default">Mod</span></li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "facebook" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="facebook"><a href="#facebook">Facebook</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">The biggest social network.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}facebook <span class="arg">facebook page name</span></code> get
+                        information about a Facebook page
+                    </li>
+                    <li><code>{{ guildBotPrefix }}facebook list</code> view all active Facebook page feeds on this
+                        server
+                    </li>
+                    <li><code>{{ guildBotPrefix }}facebook add <span class="arg">facebook page name</span> <span
+                                    class="arg">discord #channel or channel id</span></code> adds a Facebook page feed
+                        to the specific channel. <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}facebook delete <span class="arg">facebook feed id</span></code>
+                        delete a Facebook page feed. Use <code>{{ guildBotPrefix }}facebook list</code> to get the feed
+                        id. <span class="badge badge-default">Mod</span></li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="charts"><a href="#charts">Music Charts</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Find out if your Faves are in the charts.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}ichart realtime</code> view the latest ichart realtime stats.</li>
-                <li><code>{{ guildBotPrefix }}ichart week</code> view the ichart weekly stats.</li>
-                <li><code>{{ guildBotPrefix }}melon realtime</code> view the latest melon realtime stats.</li>
-                <li><code>{{ guildBotPrefix }}melon daily</code> view the melon daily stats of today.</li>
-                <li><code>{{ guildBotPrefix }}melon song <a class="arg" href="#" data-toggle="tooltip" title="Try searching in hangul">search text</a></code> search for a song on melon .</li>
-                <li><code>{{ guildBotPrefix }}melon artist <a class="arg" href="#" data-toggle="tooltip" title="Try searching in hangul">search text</a></code> search for an artist on melon.</li>
-                <li><code>{{ guildBotPrefix }}melon album <a class="arg" href="#" data-toggle="tooltip" title="Try searching in hangul">search text</a></code> search for an album on melon.</li>
-                <li><code>{{ guildBotPrefix }}gaon week</code> view the gaon charts for the current week.</li>
-                <li><code>{{ guildBotPrefix }}gaon month</code> view the gaon charts for the current month.</li>
-                <li><code>{{ guildBotPrefix }}gaon year</code> view the gaon charts for the current year.</li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "charts" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="charts"><a href="#charts">Music Charts</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Find out if your Faves are in the charts.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}ichart realtime</code> view the latest ichart realtime stats.</li>
+                    <li><code>{{ guildBotPrefix }}ichart week</code> view the ichart weekly stats.</li>
+                    <li><code>{{ guildBotPrefix }}melon realtime</code> view the latest melon realtime stats.</li>
+                    <li><code>{{ guildBotPrefix }}melon daily</code> view the melon daily stats of today.</li>
+                    <li><code>{{ guildBotPrefix }}melon song <a class="arg" href="#" data-toggle="tooltip"
+                                                                title="Try searching in hangul">search text</a></code>
+                        search for a song on melon .
+                    </li>
+                    <li><code>{{ guildBotPrefix }}melon artist <a class="arg" href="#" data-toggle="tooltip"
+                                                                  title="Try searching in hangul">search text</a></code>
+                        search for an artist on melon.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}melon album <a class="arg" href="#" data-toggle="tooltip"
+                                                                 title="Try searching in hangul">search text</a></code>
+                        search for an album on melon.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}gaon week</code> view the gaon charts for the current week.</li>
+                    <li><code>{{ guildBotPrefix }}gaon month</code> view the gaon charts for the current month.</li>
+                    <li><code>{{ guildBotPrefix }}gaon year</code> view the gaon charts for the current year.</li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="lyrics"><a href="#lyrics">Lyrics</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Sing along!</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}lyrics <span class="arg">search text</span></code> search for the lyrics of a song.</li>
-                <li><code>{{ guildBotPrefix }}lyrics list <span class="arg">search text</span></code> list songs on genius.com which match the search text.</li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "lyrics" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="lyrics"><a href="#lyrics">Lyrics</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Sing along!</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}lyrics <span class="arg">search text</span></code> search for the
+                        lyrics of a song.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}lyrics list <span class="arg">search text</span></code> list songs on
+                        genius.com which match the search text.
+                    </li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="lastfm"><a href="#lastfm">LastFM</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Find out what your friends listen to.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}lf set <span class="opt-arg">last.fm username</span></code> makes robyul remember your username so you don't have to name it every time for <code>{{ guildBotPrefix }}lf np</code> and the other last.fm commands.</li>
-                <li><code>{{ guildBotPrefix }}lf <span class="opt-arg">@user or user id or last.fm username</span></code> find out more about the user.</li>
-                <li><code>{{ guildBotPrefix }}lf np <span class="opt-arg">@user or user id or last.fm username</span></code> see what the user is listening to right now.</li>
-                <li><code>{{ guildBotPrefix }}lf topartists <span class="opt-arg">@user or user id or last.fm username</span> <span class="opt-arg"><a class="arg" data-toggle="tooltip" title="overall/week/month/3month/6month/year">timerange</a></code> see the top artists of the user.</li>
-                <li><code>{{ guildBotPrefix }}lf toptracks <span class="opt-arg">@user or user id or last.fm username</span> <span class="opt-arg"><a class="arg" data-toggle="tooltip" title="overall/week/month/3month/6month/year">timerange</a></code> see the top tracks of the user.</li>
-                <li><code>{{ guildBotPrefix }}lf topalbums <span class="opt-arg">@user or user id or last.fm username</span> <span class="opt-arg"><a class="arg" data-toggle="tooltip" title="overall/week/month/3month/6month/year">timerange</a></code> see the top albums of the user.</li>
-                <li><code>{{ guildBotPrefix }}lf server-top <span class="opt-arg"><a class="arg" data-toggle="tooltip" title="overall/week/month/3month/6month/year">timerange</a></span></code> shows the top tracks of all last.fm users on this server combined for the given timespan, by default overall.</li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "lastfm" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="lastfm"><a href="#lastfm">LastFM</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Find out what your friends listen to.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}lf set <span class="opt-arg">last.fm username</span></code> makes
+                        robyul remember your username so you don't have to name it every time for
+                        <code>{{ guildBotPrefix }}lf np</code> and the other last.fm commands.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}lf <span
+                                    class="opt-arg">@user or user id or last.fm username</span></code> find out more
+                        about the user.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}lf np <span
+                                    class="opt-arg">@user or user id or last.fm username</span></code> see what the user
+                        is listening to right now.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}lf topartists <span class="opt-arg">@user or user id or last.fm username</span>
+                            <span class="opt-arg"><a class="arg" data-toggle="tooltip"
+                                                     title="overall/week/month/3month/6month/year">timerange</a></code>
+                        see the top artists of the user.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}lf toptracks <span class="opt-arg">@user or user id or last.fm username</span>
+                            <span class="opt-arg"><a class="arg" data-toggle="tooltip"
+                                                     title="overall/week/month/3month/6month/year">timerange</a></code>
+                        see the top tracks of the user.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}lf topalbums <span class="opt-arg">@user or user id or last.fm username</span>
+                            <span class="opt-arg"><a class="arg" data-toggle="tooltip"
+                                                     title="overall/week/month/3month/6month/year">timerange</a></code>
+                        see the top albums of the user.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}lf server-top <span class="opt-arg"><a class="arg"
+                                                                                         data-toggle="tooltip"
+                                                                                         title="overall/week/month/3month/6month/year">timerange</a></span></code>
+                        shows the top tracks of all last.fm users on this server combined for the given timespan, by
+                        default overall.
+                    </li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="mod"><a href="#mod">Mod</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Get help Moderating your Server.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}cleanup after <span class="arg">after message id</span> <span class="opt-arg">until message id</span></code> cleans up after the first message id until the end, or the second message id if provided. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}cleanup messages <span class="arg">number of messages</span></code> cleans up the last <span class="arg">number of messages</span> messages. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}mute <span class="arg">@user or user id</span> <span class="opt-arg">for n minutes/hours/days</span></code> mutes the user on the whole server. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}pending-unmutes</code> displays all pending unmutes the current server. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}unmute <spann class="arg">@user or user id</spann></code> unmutes the user on the whole server. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}say <span class="arg">#channel or channel id</span> <span class="arg">message text</span></code> make the bot say the text in the specified channel. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}upload <span class="arg">#channel or channel id</span> <a class="arg" class="opt-arg" href="#" data-toggle="tooltip" title="Upload a File using Discord when you use the command">+ ATTACHMENT</a></code> upload a file in the specified channel. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}inspect <span class="opt-arg">@user or user id</span> <span class="opt-arg">text</span></code> shows various information about the given user relevant to mods. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}search-user <span class="arg">search text</span></code> searches for users with text in their name. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}kick <span class="arg">@user or user id</span> <span class="opt-arg">Reason<span></code> kicks the user from the server. <span class="badge badge-default">Mod and Discord Permission to Kick</span></li>
-                <li><code>{{ guildBotPrefix }}ban <span class="arg">@user or user id</span> <a href="#" class="opt-arg" data-toggle="tooltip" title="Number of Days of messages you want to delete of the User">number of days</a> <span class="opt-arg">Reason<span></code> bans the user from the server, and deletes the messages for the last <span class="opt-arg">number of days</span> days of messages if provided.  <span class="badge badge-default">Mod and Discord Permission to Ban</span></li>
-                <li><code>{{ guildBotPrefix }}edit <span class="arg">#channel or channel id</span> <span class="arg">message id</span> <span class="arg">message text</span></code> edit a message sent by robyul. <span class="badge badge-default">Admin</span></li>
-                <li><code>{{ guildBotPrefix }}get <span class="arg">#channel or channel id</span> <span class="arg">message id</span></code> get the content of a specified message. <span class="badge badge-default">Admin</span></li>
-                <li><code>{{ guildBotPrefix }}react <span class="arg">#channel or channel id</span> <span class="arg">message id</span> <span class="arg">emoji</span></code> adds a reaction to the specified message. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}batch-roles <span class="arg">role a</span> | <span class="arg">role b</span> | <span class="arg">role c</span> | <span class="opt-arg">after=role name</span> <span class="opt-arg">color=hex code</span></code> creates multiple roles at once. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}auto-inspects-channel <span class="opt-arg">channel # or id</span></code> prints the information above for users who join and different occasions. Run the command without a channel to disable it. <span class="badge badge-default">Admin</span></li>
-                <li><code>{{ guildBotPrefix }}prefix <span class="opt-arg">new prefix</span></code> sets the new Robyul prefix for this server. Call it without the argument to find out the current prefix. <span class="badge badge-default">Admin</span></li>
-                <li><code>@{{ bot_user }} set prefix <span class="opt-arg">new prefix</span></code> sets the new Robyul prefix for this server. <span class="badge badge-default">Admin</span></li>
-                <li><code>{{ guildBotPrefix }}toggle-chatlog</code> Toggle Chatlog recording and anonymising of server statistics. <span class="badge badge-default">Admin</span></li>
-                <li><code>{{ guildBotPrefix }}leave-server <span class="arg">server id</span></code> makes robyul leave a server. <span class="badge badge-default">Bot Admin</span></li>
-                <li><code>{{ guildBotPrefix }}inspect-extended <span class="opt-arg">@user or user id</span> <span class="opt-arg">text</span></code> like <code>{{ guildBotPrefix }}inspect</code> with more information. <span class="badge badge-default">Bot Owner</span></li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "mod" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="mod"><a href="#mod">Mod</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Get help Moderating your Server.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}cleanup after <span class="arg">after message id</span> <span
+                                    class="opt-arg">until message id</span></code> cleans up after the first message id
+                        until the end, or the second message id if provided. <span
+                                class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}cleanup messages <span class="arg">number of messages</span></code>
+                        cleans up the last <span class="arg">number of messages</span> messages. <span
+                                class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}mute <span class="arg">@user or user id</span> <span class="opt-arg">for n minutes/hours/days</span></code>
+                        mutes the user on the whole server. <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}pending-unmutes</code> displays all pending unmutes the current
+                        server. <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}unmute
+                            <spann class="arg">@user or user id</spann>
+                        </code> unmutes the user on the whole server. <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}say <span class="arg">#channel or channel id</span> <span class="arg">message text</span></code>
+                        make the bot say the text in the specified channel. <span class="badge badge-default">Mod</span>
+                    </li>
+                    <li><code>{{ guildBotPrefix }}upload <span class="arg">#channel or channel id</span> <a class="arg"
+                                                                                                            class="opt-arg"
+                                                                                                            href="#"
+                                                                                                            data-toggle="tooltip"
+                                                                                                            title="Upload a File using Discord when you use the command">+
+                                ATTACHMENT</a></code> upload a file in the specified channel. <span
+                                class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}inspect <span class="opt-arg">@user or user id</span> <span
+                                    class="opt-arg">text</span></code> shows various information about the given user
+                        relevant to mods. <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}search-user <span class="arg">search text</span></code> searches for
+                        users with text in their name. <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}kick <span class="arg">@user or user id</span> <span class="opt-arg">Reason<span></code>
+                        kicks the user from the server. <span class="badge badge-default">Mod and Discord Permission to Kick</span>
+                    </li>
+                    <li><code>{{ guildBotPrefix }}ban <span class="arg">@user or user id</span> <a href="#"
+                                                                                                   class="opt-arg"
+                                                                                                   data-toggle="tooltip"
+                                                                                                   title="Number of Days of messages you want to delete of the User">number
+                                of days</a> <span class="opt-arg">Reason<span></code> bans the user from the server, and
+                        deletes the messages for the last <span class="opt-arg">number of days</span> days of messages
+                        if provided. <span class="badge badge-default">Mod and Discord Permission to Ban</span></li>
+                    <li><code>{{ guildBotPrefix }}edit <span class="arg">#channel or channel id</span> <span
+                                    class="arg">message id</span> <span class="arg">message text</span></code> edit a
+                        message sent by robyul. <span class="badge badge-default">Admin</span></li>
+                    <li><code>{{ guildBotPrefix }}get <span class="arg">#channel or channel id</span> <span class="arg">message id</span></code>
+                        get the content of a specified message. <span class="badge badge-default">Admin</span></li>
+                    <li><code>{{ guildBotPrefix }}react <span class="arg">#channel or channel id</span> <span
+                                    class="arg">message id</span> <span class="arg">emoji</span></code> adds a reaction
+                        to the specified message. <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}batch-roles <span class="arg">role a</span> | <span
+                                    class="arg">role b</span> | <span class="arg">role c</span> | <span class="opt-arg">after=role name</span>
+                            <span class="opt-arg">color=hex code</span></code> creates multiple roles at once. <span
+                                class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}auto-inspects-channel <span
+                                    class="opt-arg">channel # or id</span></code> prints the information above for users
+                        who join and different occasions. Run the command without a channel to disable it. <span
+                                class="badge badge-default">Admin</span></li>
+                    <li><code>{{ guildBotPrefix }}prefix <span class="opt-arg">new prefix</span></code> sets the new
+                        Robyul prefix for this server. Call it without the argument to find out the current prefix.
+                        <span class="badge badge-default">Admin</span></li>
+                    <li><code>@{{ bot_user }} set prefix <span class="opt-arg">new prefix</span></code> sets the new
+                        Robyul prefix for this server. <span class="badge badge-default">Admin</span></li>
+                    <li><code>{{ guildBotPrefix }}toggle-chatlog</code> Toggle Chatlog recording and anonymising of
+                        server statistics. <span class="badge badge-default">Admin</span></li>
+                    <li><code>{{ guildBotPrefix }}leave-server <span class="arg">server id</span></code> makes robyul
+                        leave a server. <span class="badge badge-default">Bot Admin</span></li>
+                    <li><code>{{ guildBotPrefix }}inspect-extended <span class="opt-arg">@user or user id</span> <span
+                                    class="opt-arg">text</span></code> like <code>{{ guildBotPrefix }}inspect</code>
+                        with more information. <span class="badge badge-default">Bot Owner</span></li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="custominvites"><a href="#custominvites">Custom Invites</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Get a prettier invite url for your server.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}custom-invite</code> View the current Custom Invite configuration for your server. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}custom-invite set <span class="arg">name</span> <span class="arg">#channel or channel id</span></code> Set the Custom Invite name for your server. The invite will go to the given channel. <span class="badge badge-default">Admin</span></li>
-                <li><code>{{ guildBotPrefix }}custom-invite remove</code> Removes the Custom Invite for your server. <span class="badge badge-default">Admin</span></li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "custominvite" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="custominvites"><a href="#custominvites">Custom Invites</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Get a prettier invite url for your server.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}custom-invite</code> View the current Custom Invite configuration for
+                        your server. <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}custom-invite set <span class="arg">name</span> <span class="arg">#channel or channel id</span></code>
+                        Set the Custom Invite name for your server. The invite will go to the given channel. <span
+                                class="badge badge-default">Admin</span></li>
+                    <li><code>{{ guildBotPrefix }}custom-invite remove</code> Removes the Custom Invite for your server.
+                        <span class="badge badge-default">Admin</span></li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="bias"><a href="#bias">Bias</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Set up self bias role assignment for your members.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}bias stats</code> get bias role statistics.</li>
-                <li><code>{{ guildBotPrefix }}bias help</code> prints the bias help text meant to guide your users in the specific channel.</li>
-                <li><code>{{ guildBotPrefix }}bias set-config <span class="arg">channel # or id</span> <a class="arg" href="#" data-toggle="tooltip" title="Upload a Bias Config JSON using Discord when you use the command">+ ATTACHMENT</a></code> set a bias config for the specific channel. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}bias get-config <span class="arg">channel # or id</span></code> get a bias config for the specific channel. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}bias remove-config <span class="arg">channel # or id</span></code> remove a bias config for the specific channel. <span class="badge badge-default">Admin</span></li>
-                <li><code>{{ guildBotPrefix }}bias refresh</code> reloads all bias configs. <span class="badge badge-default">Bot Owner</span></li>
-            </ul>
-            A guide how to set up the config can be found on the Discord Server for Robyul.</a>.
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "bias" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="bias"><a href="#bias">Bias</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Set up self bias role assignment for your members.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}bias stats</code> get bias role statistics.</li>
+                    <li><code>{{ guildBotPrefix }}bias help</code> prints the bias help text meant to guide your users
+                        in the specific channel.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}bias set-config <span class="arg">channel # or id</span> <a
+                                    class="arg" href="#" data-toggle="tooltip"
+                                    title="Upload a Bias Config JSON using Discord when you use the command">+
+                                ATTACHMENT</a></code> set a bias config for the specific channel. <span
+                                class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}bias get-config <span class="arg">channel # or id</span></code> get a
+                        bias config for the specific channel. <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}bias remove-config <span class="arg">channel # or id</span></code>
+                        remove a bias config for the specific channel. <span class="badge badge-default">Admin</span>
+                    </li>
+                    <li><code>{{ guildBotPrefix }}bias refresh</code> reloads all bias configs. <span
+                                class="badge badge-default">Bot Owner</span></li>
+                </ul>
+                A guide how to set up the config can be found on the Discord Server for Robyul.</a>.
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="autorole"><a href="#autorole">AutoRole</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Assign Roles as soon as a member joins.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}autorole add <span class="arg">role name or role id</span> <span class="opt-arg">after n minutes/hours/days</span></code> robyul will assign the role to new members. <span class="badge badge-default">Admin</span></li>
-                <li><code>{{ guildBotPrefix }}autorole remove <span class="arg">role name or role id</span></code> robyul will no longer assign the role to new members. <span class="badge badge-default">Admin</span></li>
-                <li><code>{{ guildBotPrefix }}autorole list</code> lists all active autoroles.</li>
-                <li><code>{{ guildBotPrefix }}autorole apply <span class="arg">role name or role id</span></code> assign a role to all members on your server. <span class="badge badge-default">Admin</span></li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "autorole" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="autorole"><a href="#autorole">AutoRole</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Assign Roles as soon as a member joins.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}autorole add <span class="arg">role name or role id</span> <span
+                                    class="opt-arg">after n minutes/hours/days</span></code> robyul will assign the role
+                        to new members. <span class="badge badge-default">Admin</span></li>
+                    <li><code>{{ guildBotPrefix }}autorole remove <span class="arg">role name or role id</span></code>
+                        robyul will no longer assign the role to new members. <span
+                                class="badge badge-default">Admin</span></li>
+                    <li><code>{{ guildBotPrefix }}autorole list</code> lists all active autoroles.</li>
+                    <li><code>{{ guildBotPrefix }}autorole apply <span class="arg">role name or role id</span></code>
+                        assign a role to all members on your server. <span class="badge badge-default">Admin</span></li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="guildannouncements"><a href="#guildannouncements">Server Announcements</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Set up a welcome and leave message.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}guildannouncements set guild_join <span class="opt-arg">channel # or id</span> <span class="opt-arg">text</span></code> Set a Join message in the specific channel. Run the command without arguments to disable it.</li>
-                <li><code>{{ guildBotPrefix }}guildannouncements set guild_leave <span class="opt-arg">channel # or id</span> <span class="opt-arg">text</span></code> Set a Leave message in the specific channel. Run the command without arguments to disable it.</li>
-            </ul>
-            Available placeholders for <span class="opt-arg">text</span>: <code>{USER_USERNAME}</code>, <code>{USER_ID}</code>, <code>{USER_DISCRIMINATOR}</code>, <code>{USER_NUMBER}</code>, <code>{USER_MENTION}</code>, <code>{GUILD_NAME}</code> and <code>{GUILD_ID}</code>. It is not recommended to use <code>{USER_MENTION}</code> and <code>{USER_NUMBER}</code> in leave messages.
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "serverannouncements" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="guildannouncements"><a href="#guildannouncements">Server Announcements</a>
+                </h4>
+                <h6 class="card-subtitle mb-2 text-muted">Set up a welcome and leave message.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}guildannouncements set guild_join <span class="opt-arg">channel # or id</span>
+                            <span class="opt-arg">text</span></code> Set a Join message in the specific channel. Run the
+                        command without arguments to disable it.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}guildannouncements set guild_leave <span class="opt-arg">channel # or id</span>
+                            <span class="opt-arg">text</span></code> Set a Leave message in the specific channel. Run
+                        the command without arguments to disable it.
+                    </li>
+                </ul>
+                Available placeholders for <span class="opt-arg">text</span>: <code>{USER_USERNAME}</code>, <code>{USER_ID}</code>,
+                <code>{USER_DISCRIMINATOR}</code>, <code>{USER_NUMBER}</code>, <code>{USER_MENTION}</code>, <code>{GUILD_NAME}</code>
+                and <code>{GUILD_ID}</code>. It is not recommended to use <code>{USER_MENTION}</code> and <code>{USER_NUMBER}</code>
+                in leave messages.
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="translate"><a href="#translate">Translator</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Translate whatever language in your favorite language. Powered by <a href="https://translate.google.com/" target="_blank">Google Translate</a> and <a href="https://developers.naver.com" target="_blank">Naver Open API</a>.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}translate <span class="arg">source language code</span> <span class="arg">target language code</span> <span class="arg">text to translate</span></code> translates text, language code korean: <span class="arg">ko</span>, language code english: <span class="arg">en</span>, all languages code <a href="https://cloud.google.com/translate/docs/languages" target="_blank">here</a>.</li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "translator" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="translate"><a href="#translate">Translator</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Translate whatever language in your favorite language. Powered
+                    by <a href="https://translate.google.com/" target="_blank">Google Translate</a> and <a
+                            href="https://developers.naver.com" target="_blank">Naver Open API</a>.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}translate <span class="arg">source language code</span> <span
+                                    class="arg">target language code</span> <span
+                                    class="arg">text to translate</span></code> translates text, language code korean:
+                        <span class="arg">ko</span>, language code english: <span class="arg">en</span>, all languages
+                        code <a href="https://cloud.google.com/translate/docs/languages" target="_blank">here</a>.
+                    </li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="urban"><a href="#urban">Urban Dictionary</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">The Dictionary of the internet.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}urban <span class="arg">word to look up</span></code> get a definition from Urban Dictionary. Warning: can get very explicit.</li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "urbandict" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="urban"><a href="#urban">Urban Dictionary</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">The Dictionary of the internet.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}urban <span class="arg">word to look up</span></code> get a definition
+                        from Urban Dictionary. Warning: can get very explicit.
+                    </li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="reminder"><a href="#reminder">Reminders</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Never forget anything again.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}remindme <span class="arg">what to do</span> <a class="arg" href="#" data-toggle="tooltip" title="Example: in 2 hours">time</a></code> Robyul will send you a DM when it's time.</li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "reminders" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="reminder"><a href="#reminder">Reminders</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Never forget anything again.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}remindme <span class="arg">what to do</span> <a class="arg" href="#"
+                                                                                                  data-toggle="tooltip"
+                                                                                                  title="Example: in 2 hours">time</a></code>
+                        Robyul will send you a DM when it's time.
+                    </li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="wolframalpha"><a href="#wolframalpha">WolframAlpha</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">The smartest search engine on the internet.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}w <span class="arg">question</span></code> WolframAlpha will tell you the answer, hopefully.</li>
-                <li><code>{{ guildBotPrefix }}w image <span class="arg">question</span></code> get the result as an image.</li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "wolframalpha" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="wolframalpha"><a href="#wolframalpha">WolframAlpha</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">The smartest search engine on the internet.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}w <span class="arg">question</span></code> WolframAlpha will tell you
+                        the answer, hopefully.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}w image <span class="arg">question</span></code> get the result as an
+                        image.
+                    </li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="gfycat"><a href="#gfycat">Gfycat</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Make GIFs less of a pain.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}gfy <span class="arg">link OR discord attachment</span> <span class="opt-arg">start in seconds</span> <span class="opt-arg">duration in seconds</span></code> Create a Gfy from the given video.</li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "gfycat" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="gfycat"><a href="#gfycat">Gfycat</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Make GIFs less of a pain.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}gfy <span class="arg">link OR discord attachment</span> <span
+                                    class="opt-arg">start in seconds</span> <span
+                                    class="opt-arg">duration in seconds</span></code> Create a Gfy from the given video.
+                    </li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="streamable"><a href="#streamable">Streamable</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">The simple video streaming service.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}streamable <span class="arg">link OR discord attachment</span></code> Create a Streamable from the given video.</li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "streamable" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="streamable"><a href="#streamable">Streamable</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">The simple video streaming service.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}streamable <span class="arg">link OR discord attachment</span></code>
+                        Create a Streamable from the given video.
+                    </li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="gallery"><a href="#gallery">Gallery</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Galleries are copies of other channels where only the posted links get reposted.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}gallery add <span class="arg">source #channel or id</span> <span class="arg">target #channel or id</span> <span class="arg">target channel webhook id</span> <span class="arg">target channel webhook token</span></code> Creates a gallery for the given channels. <span class="badge badge-default">Admin</span></li>
-                <li><code>{{ guildBotPrefix }}gallery list</code> Lists all active galleries on the channel.</li>
-                <li><code>{{ guildBotPrefix }}gallery delete <span class="arg">gallery id</span></code> Deletes a gallery on the server. Use <code>{{ guildBotPrefix }}gallery list</code> to get the gallery id. <span class="badge badge-default">Admin</span></li>
-                <li><code>{{ guildBotPrefix }}gallery refresh</code> Refreshes all Gallery caches. <span class="badge badge-default">Bot Owner</span></li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "gallery" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="gallery"><a href="#gallery">Gallery</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Galleries are copies of other channels where only the posted
+                    links get reposted.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}gallery add <span class="arg">source #channel or id</span> <span
+                                    class="arg">target #channel or id</span> <span
+                                    class="arg">target channel webhook id</span> <span class="arg">target channel webhook token</span></code>
+                        Creates a gallery for the given channels. <span class="badge badge-default">Admin</span></li>
+                    <li><code>{{ guildBotPrefix }}gallery list</code> Lists all active galleries on the channel.</li>
+                    <li><code>{{ guildBotPrefix }}gallery delete <span class="arg">gallery id</span></code> Deletes a
+                        gallery on the server. Use <code>{{ guildBotPrefix }}gallery list</code> to get the gallery id.
+                        <span class="badge badge-default">Admin</span></li>
+                    <li><code>{{ guildBotPrefix }}gallery refresh</code> Refreshes all Gallery caches. <span
+                                class="badge badge-default">Bot Owner</span></li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="mirror"><a href="#mirror">Mirror</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Mirrors are like Galleries but across servers. DM <code>Sekl#7397</code> on Discord to set up a Mirror.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}mirror create</code> Creates an empty mirror. <span class="badge badge-default">Bot Owner</span></li>
-                <li><code>{{ guildBotPrefix }}mirror add-channel <span class="arg">mirror id</span> <span class="arg">#channel or id</span> <span class="arg">channel webhook id</span> <span class="arg">channel webhook token</span></code> Adds the given channel to a mirror. <span class="badge badge-default">Robyul Staff</span></li>
-                <li><code>{{ guildBotPrefix }}mirror list</code> Lists all mirrors. <span class="badge badge-default">Robyul Staff</span></li>
-                <li><code>{{ guildBotPrefix }}mirror toggle <span class="arg">gallery id</span></code> Toggles between text and link mode for mirrors. Use <code>{{ guildBotPrefix }}mirror list</code> to get the mirror id. <span class="badge badge-default">Robyul Staff</span></li>
-                <li><code>{{ guildBotPrefix }}mirror delete <span class="arg">gallery id</span></code> Deletes a mirror. Use <code>{{ guildBotPrefix }}mirror list</code> to get the mirror id. <span class="badge badge-default">Robyul Staff</span></li>
-                <li><code>{{ guildBotPrefix }}mirror refresh</code> Refreshes all Mirror caches. <span class="badge badge-default">Robyul Staff</span></li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "mirror" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="mirror"><a href="#mirror">Mirror</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Mirrors are like Galleries but across servers. DM <code>Sekl#7397</code>
+                    on Discord to set up a Mirror.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}mirror create</code> Creates an empty mirror. <span
+                                class="badge badge-default">Bot Owner</span></li>
+                    <li><code>{{ guildBotPrefix }}mirror add-channel <span class="arg">mirror id</span> <span
+                                    class="arg">#channel or id</span> <span class="arg">channel webhook id</span> <span
+                                    class="arg">channel webhook token</span></code> Adds the given channel to a mirror.
+                        <span class="badge badge-default">Robyul Staff</span></li>
+                    <li><code>{{ guildBotPrefix }}mirror list</code> Lists all mirrors. <span
+                                class="badge badge-default">Robyul Staff</span></li>
+                    <li><code>{{ guildBotPrefix }}mirror toggle <span class="arg">gallery id</span></code> Toggles
+                        between text and link mode for mirrors. Use <code>{{ guildBotPrefix }}mirror list</code> to get
+                        the mirror id. <span class="badge badge-default">Robyul Staff</span></li>
+                    <li><code>{{ guildBotPrefix }}mirror delete <span class="arg">gallery id</span></code> Deletes a
+                        mirror. Use <code>{{ guildBotPrefix }}mirror list</code> to get the mirror id. <span
+                                class="badge badge-default">Robyul Staff</span></li>
+                    <li><code>{{ guildBotPrefix }}mirror refresh</code> Refreshes all Mirror caches. <span
+                                class="badge badge-default">Robyul Staff</span></li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="starboard"><a href="#starboard">Starboard</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Reposts messages reacted to with a ⭐ to a specific channel, also provides top starred and more.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li>React with a ⭐ to a message to star it.</li>
-                <li><code>{{ guildBotPrefix }}starboard top</code> Displays the top starred messages.</li>
-                <li><code>{{ guildBotPrefix }}starboard starrers <span class="opt-arg">message id</span></code> Shows who starred the specific message.</li>
-                <li><code>{{ guildBotPrefix }}starboard status</code> Displays inoformation about the Starboard settings.</li>
-                <li><code>{{ guildBotPrefix }}starboard set <span class="opt-arg">channel # or id</span></code> Sets the starboard channel. Use it without the argument to disable the channel. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}starboard minimum <span class="arg">number of stars</span></code> Sets how many stars are required to have Robyul post it in the defined channel. By default 1 star. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}starboard emoji <span class="arg">discord emoji</span></code> Sets an Emoji as a Starboard instead of the star. You can add multiple emojis by running the command with different emoji multiple times. Remove the emoji by running the command again with the same emoji. <span class="badge badge-default">Mod</span></li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "starboard" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="starboard"><a href="#starboard">Starboard</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Reposts messages reacted to with a ⭐ to a specific channel,
+                    also provides top starred and more.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li>React with a ⭐ to a message to star it.</li>
+                    <li><code>{{ guildBotPrefix }}starboard top</code> Displays the top starred messages.</li>
+                    <li><code>{{ guildBotPrefix }}starboard starrers <span class="opt-arg">message id</span></code>
+                        Shows who starred the specific message.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}starboard status</code> Displays inoformation about the Starboard
+                        settings.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}starboard set <span class="opt-arg">channel # or id</span></code> Sets
+                        the starboard channel. Use it without the argument to disable the channel. <span
+                                class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}starboard minimum <span class="arg">number of stars</span></code> Sets
+                        how many stars are required to have Robyul post it in the defined channel. By default 1 star.
+                        <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}starboard emoji <span class="arg">discord emoji</span></code> Sets an
+                        Emoji as a Starboard instead of the star. You can add multiple emojis by running the command
+                        with different emoji multiple times. Remove the emoji by running the command again with the same
+                        emoji. <span class="badge badge-default">Mod</span></li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="randompictures"><a href="#randompictures">Random Picture</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Makes Robyul post random pictures of a Google Drive folder in time intervals or on request. DM <code>Sekl#7397</code> on Discord to set up a Random Picture folder.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}pic <span class="opt-arg">name</span></code> get a random picture from a folder. Without arguments it gets the folder from your roles.</li>
-                <li><code>{{ guildBotPrefix }}randompictures pic-delay <span class="arg">n in minutes</span></code> Sets a timeout for the <code>{{ guildBotPrefix }}pic</code> command. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}randompictures delay-ignore-channel <span class="arg">#channel or channel id</span></code> Robyul will ignore the timeout for the <code>{{ guildBotPrefix }}pic</code> command in this channel. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}randompictures new-config <span class="arg">alias=alias1,alias2</span> <span class="arg">folder=folder1,folder2</span> <span class="opt-arg">channel=channel1,channel2</span></code> Creates an empty config. <span class="badge badge-default">Bot Owner</span></li>
-                <li><code>{{ guildBotPrefix }}randompictures list</code> Lists all picture folders. <span class="badge badge-default">Bot Owner</span></li>
-                <li><code>{{ guildBotPrefix }}randompictures refresh <span class="arg">source id</span></code> Refreshes a source. Use <code>{{ guildBotPrefix }}randompictures list</code> to get the source id. <span class="badge badge-default">Bot Owner</span></li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "randompictures" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="randompictures"><a href="#randompictures">Random Picture</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Makes Robyul post random pictures of a Google Drive folder in
+                    time intervals or on request. DM <code>Sekl#7397</code> on Discord to set up a Random Picture
+                    folder.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}pic <span class="opt-arg">name</span></code> get a random picture from
+                        a folder. Without arguments it gets the folder from your roles.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}randompictures pic-delay <span class="arg">n in minutes</span></code>
+                        Sets a timeout for the <code>{{ guildBotPrefix }}pic</code> command. <span
+                                class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}randompictures delay-ignore-channel <span class="arg">#channel or channel id</span></code>
+                        Robyul will ignore the timeout for the <code>{{ guildBotPrefix }}pic</code> command in this
+                        channel. <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}randompictures new-config <span class="arg">alias=alias1,alias2</span>
+                            <span class="arg">folder=folder1,folder2</span> <span class="opt-arg">channel=channel1,channel2</span></code>
+                        Creates an empty config. <span class="badge badge-default">Bot Owner</span></li>
+                    <li><code>{{ guildBotPrefix }}randompictures list</code> Lists all picture folders. <span
+                                class="badge badge-default">Bot Owner</span></li>
+                    <li><code>{{ guildBotPrefix }}randompictures refresh <span class="arg">source id</span></code>
+                        Refreshes a source. Use <code>{{ guildBotPrefix }}randompictures list</code> to get the source
+                        id. <span class="badge badge-default">Bot Owner</span></li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="choice"><a href="#choice">Choice</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Let Robyul make your life decisions.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}choose <span class="arg">choice a</span> <span class="arg">choice b</span> <span class="opt-arg">more choices...</span></code> Robyul chooses one of the choices.</li>
-                <li><code>{{ guildBotPrefix }}roll <a class="opt-arg" href="#" data-toggle="tooltip" title="default 100">max number</a></code> lets Robyul choose a random number between 1 and <a class="opt-arg" href="#" data-toggle="tooltip" title="default 100">max number</a>.</li>
-                <li><code>{{ guildBotPrefix }}8ball <span class="arg">question</span></code> he always has an answer.</li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "choice" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="choice"><a href="#choice">Choice</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Let Robyul make your life decisions.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}choose <span class="arg">choice a</span> <span
+                                    class="arg">choice b</span> <span class="opt-arg">more choices...</span></code>
+                        Robyul chooses one of the choices.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}roll <a class="opt-arg" href="#" data-toggle="tooltip"
+                                                          title="default 100">max number</a></code> lets Robyul choose a
+                        random number between 1 and <a class="opt-arg" href="#" data-toggle="tooltip"
+                                                       title="default 100">max number</a>.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}8ball <span class="arg">question</span></code> he always has an
+                        answer.
+                    </li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="spoiler"><a href="#spoiler">Spoiler</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Protect others from your secret information.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}spoiler <span class="arg">text</span></code> hides text until you hover it. Doesn't work on Discord's Mobile Apps.</li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "spoiler" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="spoiler"><a href="#spoiler">Spoiler</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Protect others from your secret information.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}spoiler <span class="arg">text</span></code> hides text until you
+                        hover it. Doesn't work on Discord's Mobile Apps.
+                    </li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="reactionpolls"><a href="#reactionpolls">Reaction Polls</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Create Polls where you can vote using reactions.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}reactionpoll create "<span class="arg">question</span>" <span class="arg">max number of votes per user</span> <span class="arg">allowed emote</span> <span class="opt-arg">more allowed emotes...</span></code> create a Reaction Poll.</li>
-                <li><code>{{ guildBotPrefix }}reactionpoll refresh</code> refreshes the Reaction Poll database. <span class="badge badge-default">Bot Owner</span></li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "reactionpolls" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="reactionpolls"><a href="#reactionpolls">Reaction Polls</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Create Polls where you can vote using reactions.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}reactionpoll create "<span class="arg">question</span>" <span
+                                    class="arg">max number of votes per user</span> <span
+                                    class="arg">allowed emote</span> <span class="opt-arg">more allowed emotes...</span></code>
+                        create a Reaction Poll.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}reactionpoll refresh</code> refreshes the Reaction Poll database.
+                        <span class="badge badge-default">Bot Owner</span></li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="customcommands"><a href="#customcommands">Custom Commands</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Make Custom Commands with Text, Pics and GIFs.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}<span class="arg">command name</span></code> run a custom command</li>
-                <li><code>{{ guildBotPrefix }}commands list</code> lists all custom commands on a server.</li>
-                <li><code>{{ guildBotPrefix }}commands list top</code> lists all custom commands on a server ordered by usage.</li>
-                <li><code>{{ guildBotPrefix }}commands info <span class="arg">command name</span></code> shows information about a custom command.</li>
-                <li><code>{{ guildBotPrefix }}commands search <span class="arg">search text</span></code> search in the custom command names.</li>
-                <li><code>{{ guildBotPrefix }}commands add <span class="arg">command name</span> <span class="arg">command content</span></code> create a custom command. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}commands delete <span class="arg">command name</span></code> delete a custom command. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}commands edit <span class="arg">command name</span> <span class="arg">new command content</span></code> edit a custom command. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}commands export-json</code> Exports custom commands on your server. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}commands import-json <span class="arg">JSON attachment</span></code> Imports custom commands to a server. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}commands refresh</code> Refreshes the custom command cache. <span class="badge badge-default">Bot Owner</span></li>
-            </ul>
-            Format of the Custom Commands JSON
-            <code>
-                {
-                "command_a" : "content a",
-                "command_b" : "content b"
-                }
-            </code>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "customcommands" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="customcommands"><a href="#customcommands">Custom Commands</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Make Custom Commands with Text, Pics and GIFs.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}<span class="arg">command name</span></code> run a custom command</li>
+                    <li><code>{{ guildBotPrefix }}commands list</code> lists all custom commands on a server.</li>
+                    <li><code>{{ guildBotPrefix }}commands list top</code> lists all custom commands on a server ordered
+                        by usage.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}commands info <span class="arg">command name</span></code> shows
+                        information about a custom command.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}commands search <span class="arg">search text</span></code> search in
+                        the custom command names.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}commands add <span class="arg">command name</span> <span class="arg">command content</span></code>
+                        create a custom command. <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}commands delete <span class="arg">command name</span></code> delete a
+                        custom command. <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}commands edit <span class="arg">command name</span> <span class="arg">new command content</span></code>
+                        edit a custom command. <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}commands export-json</code> Exports custom commands on your server.
+                        <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}commands import-json <span class="arg">JSON attachment</span></code>
+                        Imports custom commands to a server. <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}commands refresh</code> Refreshes the custom command cache. <span
+                                class="badge badge-default">Bot Owner</span></li>
+                </ul>
+                Format of the Custom Commands JSON
+                <code>
+                    {
+                    "command_a" : "content a",
+                    "command_b" : "content b"
+                    }
+                </code>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="twitch"><a href="#twitch">Twitch</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Gaming is important too.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}twitch <span class="arg">twitch channel name</span></code> get information about a Twitch channel</li>
-                <li><code>{{ guildBotPrefix }}twitch list</code> view all active Twitch channel feeds on this server</li>
-                <li><code>{{ guildBotPrefix }}twitch add <span class="arg">twitch channel name</span> <span class="arg">discord #channel or channel id</span></code> adds a Twitch channel feed to the specific channel. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}twitch delete <span class="arg">twitch feed id</span></code> delete a Twitch channel feed. Use <code>{{ guildBotPrefix }}twitch list</code> to get the feed id. <span class="badge badge-default">Mod</span></li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "twitch" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="twitch"><a href="#twitch">Twitch</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Gaming is important too.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}twitch <span class="arg">twitch channel name</span></code> get
+                        information about a Twitch channel
+                    </li>
+                    <li><code>{{ guildBotPrefix }}twitch list</code> view all active Twitch channel feeds on this server
+                    </li>
+                    <li><code>{{ guildBotPrefix }}twitch add <span class="arg">twitch channel name</span> <span
+                                    class="arg">discord #channel or channel id</span></code> adds a Twitch channel feed
+                        to the specific channel. <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}twitch delete <span class="arg">twitch feed id</span></code> delete a
+                        Twitch channel feed. Use <code>{{ guildBotPrefix }}twitch list</code> to get the feed id. <span
+                                class="badge badge-default">Mod</span></li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="cat"><a href="#cat">Cat</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">The real MVPs of the internet.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}cat</code> shows you a cute cat. 🐈</li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "cat" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="cat"><a href="#cat">Cat</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">The real MVPs of the internet.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}cat</code> shows you a cute cat. 🐈</li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="rps"><a href="#rps">Rock Paper Scissors</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Play against Robyul.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}rps <span class="arg">rock|paper|scissors</span></code> play a round of rock paper scissors against Robyul.</li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "rps" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="rps"><a href="#rps">Rock Paper Scissors</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Play against Robyul.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}rps <span class="arg">rock|paper|scissors</span></code> play a round
+                        of rock paper scissors against Robyul.
+                    </li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="osu"><a href="#osu">osu!</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">View osu! stats.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}osu <span class="arg">osu! username</span></code> shows osu-classic stats for the username.</li>
-                <li><code>{{ guildBotPrefix }}osu!mania <span class="arg">osu! username</span></code> shows osu-mania stats for the username.</li>
-                <li><code>{{ guildBotPrefix }}osu!ctb <span class="arg">osu! username</span></code> shows osu catch-the-beat stats for the username.</li>
-                <li><code>{{ guildBotPrefix }}osu!taiko <span class="arg">osu! username</span></code> shows osu-taiko stats for the username.</li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "osu" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="osu"><a href="#osu">osu!</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">View osu! stats.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}osu <span class="arg">osu! username</span></code> shows osu-classic
+                        stats for the username.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}osu!mania <span class="arg">osu! username</span></code> shows
+                        osu-mania stats for the username.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}osu!ctb <span class="arg">osu! username</span></code> shows osu
+                        catch-the-beat stats for the username.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}osu!taiko <span class="arg">osu! username</span></code> shows
+                        osu-taiko stats for the username.
+                    </li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="nuke"><a href="#nuke">Nuke</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Nuke are opt-in global bans. The Robyul team will be able to ban members on your server if you enable nuke. We do this to ban Raiders and similar people who threaten multiple servers. You can always opt-out or unban nuked people.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}nuke participate <span class="opt-arg">log channel</span></code> Enable nukes on your server. The nuke log will be printed in the given channel. Please make sure Robyul has the permission to ban people. Run it again without arguments to disable it. <span class="badge badge-default">Admin</span></li>
-                <li><code>{{ guildBotPrefix }}nuke log</code> Show nukes in the past. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}nuke user <span class="arg">@user or user id</span> <span class="arg">reason</span></code> nuke an user. <span class="badge badge-default">Nuke Mod (Robyul Staff)</span></li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "nuke" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="nuke"><a href="#nuke">Nuke</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Nuke are opt-in global bans. The Robyul team will be able to
+                    ban members on your server if you enable nuke. We do this to ban Raiders and similar people who
+                    threaten multiple servers. You can always opt-out or unban nuked people.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}nuke participate <span class="opt-arg">log channel</span></code>
+                        Enable nukes on your server. The nuke log will be printed in the given channel. Please make sure
+                        Robyul has the permission to ban people. Run it again without arguments to disable it. <span
+                                class="badge badge-default">Admin</span></li>
+                    <li><code>{{ guildBotPrefix }}nuke log</code> Show nukes in the past. <span
+                                class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}nuke user <span class="arg">@user or user id</span> <span class="arg">reason</span></code>
+                        nuke an user. <span class="badge badge-default">Nuke Mod (Robyul Staff)</span></li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="troublemaker"><a href="#troublemaker">Troublemaker</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">This is a member report server across servers. Troublemakers will get posted across all participating servers. These reports will also get used in the inspects.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}troublemaker participate <span class="opt-arg">log channel</span></code> enable troublemaker log on your discord. Run it again without arguments to disable it. <span class="badge badge-default">Admin</span></li>
-                <li><code>{{ guildBotPrefix }}troublemaker <span class="arg">@user or user id</span> <span class="arg">reason</span></code> reports a troublemaker. We encourage Mods to report all troublemakers if they could threaten other servers. <span class="badge badge-default">Mod</span></li>
-                <li><code>{{ guildBotPrefix }}troublemaker list <span class="arg">@user or user id</span></code> shows all reports given for an user. <span class="badge badge-default">Mod</span></li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "troublemaker" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="troublemaker"><a href="#troublemaker">Troublemaker</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">This is a member report server across servers. Troublemakers
+                    will get posted across all participating servers. These reports will also get used in the
+                    inspects.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}troublemaker participate <span
+                                    class="opt-arg">log channel</span></code> enable troublemaker log on your discord.
+                        Run it again without arguments to disable it. <span class="badge badge-default">Admin</span>
+                    </li>
+                    <li><code>{{ guildBotPrefix }}troublemaker <span class="arg">@user or user id</span> <span
+                                    class="arg">reason</span></code> reports a troublemaker. We encourage Mods to report
+                        all troublemakers if they could threaten other servers. <span
+                                class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}troublemaker list <span class="arg">@user or user id</span></code>
+                        shows all reports given for an user. <span class="badge badge-default">Mod</span></li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="stats"><a href="#stats">Stats</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Look up Statistics of Users and Servers.</h6>
-            <p class="card-text">
+    {% endif %}
+    {% if moduleNames is null or "stats" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="stats"><a href="#stats">Stats</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Look up Statistics of Users and Servers.</h6>
+                <p class="card-text">
                 <ul class="list-unstyled">
                     <li><code>{{ guildBotPrefix }}stats</code> statistics of the bot.</li>
-                    <li><code>{{ guildBotPrefix }}userinfo <span class="opt-arg">@user or user id</span></code> information about a user.</li>
-                    <li><code>{{ guildBotPrefix }}serverinfo <span class="opt-arg">server id</span></code> information about a server. Information about other servers is only available to Robyul Staff.</li>
-                    <li><code>{{ guildBotPrefix }}channelinfo <span class="opt-arg">channel id</span></code> information about a channel. Information about channels on other servers is only available to Robyul Staff.</li>
-                    <li><code>{{ guildBotPrefix }}voicestats <span class="opt-arg">@user or user id</span></code> shows the voice stats of an user.</li>
+                    <li><code>{{ guildBotPrefix }}userinfo <span class="opt-arg">@user or user id</span></code>
+                        information about a user.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}serverinfo <span class="opt-arg">server id</span></code> information
+                        about a server. Information about other servers is only available to Robyul Staff.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}channelinfo <span class="opt-arg">channel id</span></code> information
+                        about a channel. Information about channels on other servers is only available to Robyul Staff.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}voicestats <span class="opt-arg">@user or user id</span></code> shows
+                        the voice stats of an user.
+                    </li>
                     <li><code>{{ guildBotPrefix }}voicestats top</code> shows the top voice users on this server.</li>
                     <li><code>{{ guildBotPrefix }}emotes</code> shows a list of all custom emotes on the server.</li>
-                    <li><code>{{ guildBotPrefix }}memberlist <span class="opt-arg">page #</span> <span class="opt-arg">role name or id</span> <a class="opt-arg" href="#" data-toggle="tooltip" title="only available for Bot Owners">server id</a></code> shows a list of all members on your server ordered by the date they joined the server.</li>
-                    <li><code>{{ guildBotPrefix }}rolelist <a class="opt-arg" href="#" data-toggle="tooltip" title="only available for Bot Owners">server id</a></code> shows all roles on the server.</li>
-                    <li><code>{{ guildBotPrefix }}channellist <a class="opt-arg" href="#" data-toggle="tooltip" title="only available for Bot Owners">server id</a></code> shows all channels on the server.</li>
-                    <li><code>{{ guildBotPrefix }}names <span class="arg">@user or user id</span></code> shows past user and nicknames of an user.</li>
-                    <li><code>{{ guildBotPrefix }}invite <span class="arg">invite code or url</span></code> shows information about an invite.</li>
-                    <li><code>{{ guildBotPrefix }}serverlist <span class="opt-arg">xlsx</span></code> shows a list with all servers robyul is on, or exports it to a excel file. <span class="badge badge-default">Robyul Staff</span></li>
+                    <li><code>{{ guildBotPrefix }}memberlist <span class="opt-arg">page #</span> <span class="opt-arg">role name or id</span>
+                            <a class="opt-arg" href="#" data-toggle="tooltip" title="only available for Bot Owners">server
+                                id</a></code> shows a list of all members on your server ordered by the date they joined
+                        the server.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}rolelist <a class="opt-arg" href="#" data-toggle="tooltip"
+                                                              title="only available for Bot Owners">server id</a></code>
+                        shows all roles on the server.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}channellist <a class="opt-arg" href="#" data-toggle="tooltip"
+                                                                 title="only available for Bot Owners">server
+                                id</a></code> shows all channels on the server.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}names <span class="arg">@user or user id</span></code> shows past user
+                        and nicknames of an user.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}invite <span class="arg">invite code or url</span></code> shows
+                        information about an invite.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}serverlist <span class="opt-arg">xlsx</span></code> shows a list with
+                        all servers robyul is on, or exports it to a excel file. <span class="badge badge-default">Robyul Staff</span>
+                    </li>
                 </ul>
-            </p>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="persistency"><a href="#persistency">Persistency</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Restores roles and more for users who rejoin a server they were on before</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}persistency status</code> shows what robyul is restoring on rejoins.</li>
-                <li><code>{{ guildBotPrefix }}persistency toggle bias-roles</code> toggles restoring of all <a href="#bias">bias</a> roles (disabled by default).</li>
-                <li><code>{{ guildBotPrefix }}persistency role add <span class="arg">role name or id</span></code> adds a role to the list of roles that get restored.</li>
-                <li><code>{{ guildBotPrefix }}persistency role remove <span class="arg">role name or id</span></code> removes a role from the list of roles that get restored.</li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "persistency" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="persistency"><a href="#persistency">Persistency</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Restores roles and more for users who rejoin a server they
+                    were on before</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}persistency status</code> shows what robyul is restoring on rejoins.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}persistency toggle bias-roles</code> toggles restoring of all <a
+                                href="#bias">bias</a> roles (disabled by default).
+                    </li>
+                    <li><code>{{ guildBotPrefix }}persistency role add <span class="arg">role name or id</span></code>
+                        adds a role to the list of roles that get restored.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}persistency role remove <span
+                                    class="arg">role name or id</span></code> removes a role from the list of roles that
+                        get restored.
+                    </li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="weather"><a href="#weather">Weather</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">How is Real Life looking?</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}weather <span class="opt-arg">location</span></code> get the weather. Remembers the last location you requested. </li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "weather" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="weather"><a href="#weather">Weather</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">How is Real Life looking?</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}weather <span class="opt-arg">location</span></code> get the weather.
+                        Remembers the last location you requested.
+                    </li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="uptime"><a href="#uptime">Uptime</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">How long is Robyul running?</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}uptime</code> see Robyul's uptime.</li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "stats" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="uptime"><a href="#uptime">Uptime</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">How long is Robyul running?</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}uptime</code> see Robyul's uptime.</li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="color"><a href="#color">Color</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">All colors are beautiful</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}color <span class="arg">#hex</span></code> shows a sample of the given color.</li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "color" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="color"><a href="#color">Color</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">All colors are beautiful</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}color <span class="arg">#hex</span></code> shows a sample of the given
+                        color.
+                    </li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="network"><a href="#network">Network</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">It's always DNS.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}dig <a class="arg" href="#" data-toggle="tooltip" title="eg. robyul.chat">name</a> <a class="arg" href="#" data-toggle="tooltip" title="eg. AAAA">type</a> <span class="opt-arg">@DNS Server</span></code> do DNS queries.</li>
-                <li><code>{{ guildBotPrefix }}whois <a class="arg" href="#" data-toggle="tooltip" title="eg. robyul.chat">name</a></code> make whois requests.</li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or ("dig" in moduleNames or "whois" in moduleNames) %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="network"><a href="#network">Network</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">It's always DNS.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    {% if moduleNames is null or "dig" in moduleNames %}
+                        <li><code>{{ guildBotPrefix }}dig <a class="arg" href="#" data-toggle="tooltip"
+                                                             title="eg. robyul.chat">name</a> <a class="arg" href="#"
+                                                                                                 data-toggle="tooltip"
+                                                                                                 title="eg. AAAA">type</a>
+                                <span class="opt-arg">@DNS Server</span></code> do DNS queries.
+                        </li>
+                    {% endif %}
+                    {% if moduleNames is null or "whois" in moduleNames %}
+                        <li><code>{{ guildBotPrefix }}whois <a class="arg" href="#" data-toggle="tooltip"
+                                                               title="eg. robyul.chat">name</a></code> make whois
+                            requests.
+                        </li>
+                    {% endif %}
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-block">
-            <h4 class="card-title" id="misc"><a href="#misc">Miscellaneous</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Everything else.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}discordmoney</code> find out how much your friends spent on discord.</li>
-            </ul>
-            </p>
+    {% endif %}
+    {% if moduleNames is null or "discordmoney" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="misc"><a href="#misc">Miscellaneous</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Everything else.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}discordmoney</code> find out how much your friends spent on discord.
+                    </li>
+                </ul>
+                </p>
+            </div>
         </div>
-    </div>
+    {% endif %}
 {% endblock %}
 

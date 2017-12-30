@@ -40,19 +40,42 @@ class DefaultController extends Controller
             ->addMeta('property', 'og:description', "View a list of all Robyul Discord Bot commands here.");
         $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
 
+        $guildName = 'Global';
         $guildPrefix = $this->container->getParameter('bot_default_prefix');
+        $modules = null;
+        $moduleNames = null;
 
         if ($guildID !== 'global') {
-            $guildData = $robyulApi->getRequest('guild/'.$guildID);
+            $guildData = $robyulApi->getRequest('guild/' . $guildID);
+
+            if (array_key_exists('Name', $guildData)) {
+                $guildName = $guildData['Name'];
+            }
 
             if (array_key_exists('BotPrefix', $guildData)) {
                 $guildPrefix = $guildData['BotPrefix'];
+            }
+
+            if (array_key_exists('Features', $guildData) &&
+                array_key_exists('Modules', $guildData['Features'])) {
+                $modules = (array)(((array)$guildData['Features'])['Modules']);
+            }
+        }
+
+        if ($modules !== null && is_array($modules)) {
+            $moduleNames = array();
+            foreach ($modules as $module) {
+                if (array_key_exists('Name', $module)) {
+                    $moduleNames[] = ((array)$module)['Name'];
+                }
             }
         }
 
         return $this->render('RobyulWebBundle:Default:commands.html.twig',
             array(
-                'guildBotPrefix' => $guildPrefix
+                'guildName' => $guildName,
+                'guildBotPrefix' => $guildPrefix,
+                'moduleNames' => $moduleNames
             ));
     }
 
@@ -178,7 +201,7 @@ class DefaultController extends Controller
         $guildIcon = '';
 
         if ($guildID !== 'global') {
-            $guildData = $robyulApi->getRequest('guild/'.$guildID);
+            $guildData = $robyulApi->getRequest('guild/' . $guildID);
 
             $guildName = $guildData['Name'];
             $guildIcon = $guildData['Icon'];
@@ -193,7 +216,7 @@ class DefaultController extends Controller
         $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
 
 
-        $rankingData = $robyulApi->getRequest('rankings/'.$guildID, '+30 minutes');
+        $rankingData = $robyulApi->getRequest('rankings/' . $guildID, '+30 minutes');
 
         return $this->render('RobyulWebBundle:Default:ranking.html.twig', array(
             'guildID' => $guildID,
@@ -202,7 +225,7 @@ class DefaultController extends Controller
             'rankings' => $rankingData
         ));
     }
-    
+
     /**
      * @Route("/invite")
      */
@@ -210,7 +233,7 @@ class DefaultController extends Controller
     {
         return $this->redirect($this->getParameter('bot_invite_link'));
     }
-        
+
     /**
      * @Route("/session")
      * @Method({"POST"})
