@@ -150,6 +150,115 @@ $(function () {
             }
         });
     }
+    // ServerActivity Chart
+    var $serverActivityChart = $('#serveractivity-chart');
+    if (typeof $serverActivityChart !== 'undefined' && $serverActivityChart.length > 0) {
+        var guildID = $serverActivityChart.data('guild-id');
+        var guildName = $serverActivityChart.data('guild-name');
+
+        var data = {
+            labels: ["Please wait…", "Please wait…"],
+            datasets: [
+                {
+                    title: "Messages",
+                    values: [0, 0]
+                },
+                {
+                    title: "Joins",
+                    values: [0, 0]
+                },
+                {
+                    title: "Leaves",
+                    values: [0, 0]
+                }
+            ]
+        };
+
+        var chart = new Chart({
+            parent: $serverActivityChart[0],
+            title: "Server Activity on " + guildName,
+            data: data,
+            type: 'line',
+            height: 250,
+
+            colors: ['#7cd6fd', '#28a745', '#ff5858'],
+
+            show_dots: 1,
+            heatline: 1,
+            region_fill: 1
+        });
+        // ServerActivitySubmit submit
+        var $serverActivityRangeForm = $('#serveractivity-range-form');
+        var $serverActivityCountInput = $('#count-serveractivity-input');
+        var $serverActivityIntervalSelect = $('#interval-serveractivity-select');
+        var $serverActivitySubmitButton = $('#button-serveractivity-submit');
+        $serverActivityRangeForm.on('submit', function (event) {
+            event.preventDefault();
+            $serverActivitySubmitButton.prop('disabled', true);
+            var count = $serverActivityCountInput.val();
+            var interval = $serverActivityIntervalSelect.find('option:selected').val();
+
+            if (!$.isNumeric(count) || parseInt(count) < 3) {
+                return
+            }
+
+            var serverActivityStatisticsEndpoint = "statistics/" + guildID + "/serveractivity/" + interval + "/histogram/" + count;
+
+            apiRequest(serverActivityStatisticsEndpoint, function (msg) {
+                var valuesMessages = [];
+                var valuesJoins = [];
+                var valuesLeaves = [];
+                var labels = [];
+
+                $.each(msg.reverse(), function (key, value) {
+                    valuesMessages.push(value.Count1);
+                    valuesJoins.push(value.Count2);
+                    valuesLeaves.push(value.Count3);
+
+                    var date = moment(value.Time);
+
+                    //console.debug(date);
+
+                    switch (interval) {
+                        case "minute":
+                            labels.push(date.format('HH:mm'));
+                            break;
+                        case "hour":
+                            labels.push(date.format('Do HH:00'));
+                            break;
+                        case "day":
+                            labels.push(date.format('MMM DD'));
+                            break;
+                        case "week":
+                            labels.push(date.format('MMM DD'));
+                            break;
+                        case "month":
+                            labels.push(date.format('YYYY MMM'));
+                            break;
+                        default:
+                            labels.push(value.Time);
+                    }
+                });
+
+                //console.debug(valuesMessages);
+                //console.debug(valuesJoins);
+                //console.debug(valuesLeaves);
+                //console.debug(labels);
+
+                chart.update_values(
+                    [
+                        {values: valuesMessages},
+                        {values: valuesJoins},
+                        {values: valuesLeaves}
+                    ],
+                    labels
+                );
+
+                $serverActivitySubmitButton.prop('disabled', false);
+            });
+        });
+        $serverActivityRangeForm.submit();
+    }
     // Chatlog submit
     var $chatlogAroundMessageIDForm = $('#chatlog-around-messageid-form');
     var $chatlogChannelSelect = $('#chatlog-channel-select');
@@ -244,7 +353,7 @@ $(function () {
         };
 
         var chart = new Chart({
-            parent: $vanityInviteChart[0], // or a DOM element
+            parent: $vanityInviteChart[0],
             title: "Stats for " + vanityInviteUrl + " on " + guildName,
             data: data,
             type: 'line',
@@ -256,7 +365,6 @@ $(function () {
             heatline: 1,
             region_fill: 1
         });
-
         // VanityStats submit
         var $vanityInviteRangeForm = $('#vanityinvite-range-form');
         var $vanityInviteCountInput = $('#count-vanityinvite-input');
