@@ -268,6 +268,21 @@ $(function () {
 
                 messageChart.update_values(
                     [
+                        {values: [0, 0]}
+                    ],
+                    ["Please wait…", "Please wait…"]
+                );
+
+                joinsAndLeavesChart.update_values(
+                    [
+                        {values: [0, 0]},
+                        {values: [0, 0]}
+                    ],
+                    ["Please wait…", "Please wait…"]
+                );
+
+                messageChart.update_values(
+                    [
                         {values: valuesMessages}
                     ],
                     labels
@@ -458,6 +473,14 @@ $(function () {
                 //console.debug(valuesJoins);
                 //console.debug(labels);
                 //console.debug(referers);
+
+                chart.update_values(
+                    [
+                        {values: [0, 0]},
+                        {values: [0, 0]}
+                    ],
+                    ["Please wait…", "Please wait…"]
+                );
 
                 chart.update_values(
                     [
