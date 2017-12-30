@@ -150,19 +150,26 @@ $(function () {
             }
         });
     }
-    // ServerActivity Chart
-    var $serverActivityChart = $('#serveractivity-chart');
-    if (typeof $serverActivityChart !== 'undefined' && $serverActivityChart.length > 0) {
-        var guildID = $serverActivityChart.data('guild-id');
-        var guildName = $serverActivityChart.data('guild-name');
+    // ServerActivity Charts
+    var $messageActivityChart = $('#messageactivity-chart');
+    var $joinsAndLeavesActivityChart = $('#joinsandleavesactivity-chart');
+    if (typeof $messageActivityChart !== 'undefined' && $messageActivityChart.length > 0 &&
+        typeof $joinsAndLeavesActivityChart !== 'undefined' && $joinsAndLeavesActivityChart.length > 0) {
+        var guildID = $messageActivityChart.data('guild-id');
+        var guildName = $messageActivityChart.data('guild-name');
 
-        var data = {
+        var dataMessages = {
             labels: ["Please wait…", "Please wait…"],
             datasets: [
                 {
                     title: "Messages",
                     values: [0, 0]
-                },
+                }
+            ]
+        };
+        var dataJoinsAndLeaves = {
+            labels: ["Please wait…", "Please wait…"],
+            datasets: [
                 {
                     title: "Joins",
                     values: [0, 0]
@@ -174,14 +181,28 @@ $(function () {
             ]
         };
 
-        var chart = new Chart({
-            parent: $serverActivityChart[0],
-            title: "Server Activity on " + guildName,
-            data: data,
+        var messageChart = new Chart({
+            parent: $messageActivityChart[0],
+            title: "Message Activity on " + guildName,
+            data: dataMessages,
             type: 'line',
             height: 250,
 
-            colors: ['#7cd6fd', '#28a745', '#ff5858'],
+            colors: ['#7cd6fd'],
+
+            show_dots: 1,
+            heatline: 1,
+            region_fill: 1
+        });
+
+        var joinsAndLeavesChart = new Chart({
+            parent: $joinsAndLeavesActivityChart[0],
+            title: "Joins and Leaves on " + guildName,
+            data: dataJoinsAndLeaves,
+            type: 'line',
+            height: 250,
+
+            colors: ['#28a745', '#ff5858'],
 
             show_dots: 1,
             heatline: 1,
@@ -245,9 +266,15 @@ $(function () {
                 //console.debug(valuesLeaves);
                 //console.debug(labels);
 
-                chart.update_values(
+                messageChart.update_values(
                     [
-                        {values: valuesMessages},
+                        {values: valuesMessages}
+                    ],
+                    labels
+                );
+
+                joinsAndLeavesChart.update_values(
+                    [
                         {values: valuesJoins},
                         {values: valuesLeaves}
                     ],

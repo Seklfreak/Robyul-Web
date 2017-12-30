@@ -36,12 +36,21 @@
     </form>
     <div class="row">
         <div class="col-12">
-            <div id="serveractivity-chart"
+            <div id="messageactivity-chart"
                  data-guild-id="{{ guildID }}"
                  data-guild-name="{{ guildName }}"
             ></div>
         </div>
     </div>
+    <div class="row">
+        <div class="col-12">
+            <div id="joinsandleavesactivity-chart"
+                 data-guild-id="{{ guildID }}"
+                 data-guild-name="{{ guildName }}"
+            ></div>
+        </div>
+    </div>
+    {#
     <div class="row">
         <div class="col-4">
             <div class="statistics-counter" data-type="messages" data-interval="5m" data-refresh="10000" data-guild-id="{{ guildID }}">
@@ -142,4 +151,5 @@
             </div>
         </div>
     </div>
+    {##}
 {% endblock %}
