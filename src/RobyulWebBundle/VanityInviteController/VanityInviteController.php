@@ -48,7 +48,8 @@ class VanityInviteController extends Controller
                 ->setCampaignSource('web')
                 ->setCampaignMedium('discord')
                 ->setCampaignContent($guildIdText)
-                ->sendEvent();
+                //->sendEvent();
+                ->sendPageview();
 
             return $this->redirect($this->getParameter('discord_invite_base') . '/' . $vanityInviteData['Code']);
         }
