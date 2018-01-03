@@ -55,6 +55,27 @@
             </p>
         </div>
     </div>
+    {% if moduleNames is null or "feedback" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-block">
+                <h4 class="card-title" id="feedback"><a href="#feedback">Feedback</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Tell us how to improve Robyul!</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}suggestion <span class="arg">your suggestion</span></code> make a
+                        suggestion.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}issue <span class="arg">your issue</span></code> make a suggestion.
+                    </li>
+                </ul>
+                Please be aware that all suggestions and issues will be publicly visible on <a
+                        href="https://trello.robyul.chat" target="_blank">Trello</a>. For private suggestions or issues
+                please contact a
+                Robyul Staff member.
+                </p>
+            </div>
+        </div>
+    {% endif %}
     {% if moduleNames is null or "levels" in moduleNames %}
         <div class="card commands-card">
             <div class="card-block">
@@ -633,7 +654,7 @@
                     <li><code>{{ guildBotPrefix }}bias refresh</code> reloads all bias configs. <span
                                 class="badge badge-default">Bot Owner</span></li>
                 </ul>
-                A guide how to set up the config can be found on the Discord Server for Robyul.</a>.
+                A guide how to set up the config can be found on the Discord Server for Robyul.
                 </p>
             </div>
         </div>
@@ -795,7 +816,7 @@
                 <ul class="list-unstyled">
                     <li><code>{{ guildBotPrefix }}gallery add <span class="arg">source #channel or id</span> <span
                                     class="arg">target #channel or id</span> <span
-                                    class="arg">target channel webhook id</span> <span class="arg">target channel webhook token</span></code>
+                                    class="opt-arg">target channel webhook id</span> <span class="opt-arg">target channel webhook token</span></code>
                         Creates a gallery for the given channels. <span class="badge badge-default">Admin</span></li>
                     <li><code>{{ guildBotPrefix }}gallery list</code> Lists all active galleries on the channel.</li>
                     <li><code>{{ guildBotPrefix }}gallery delete <span class="arg">gallery id</span></code> Deletes a
@@ -1237,13 +1258,17 @@
             </div>
         </div>
     {% endif %}
-    {% if moduleNames is null or ("dig" in moduleNames or "whois" in moduleNames) %}
+    {% if moduleNames is null or ("dig" in moduleNames or "whois" in moduleNames or "isup" in moduleNames) %}
         <div class="card commands-card">
             <div class="card-block">
                 <h4 class="card-title" id="network"><a href="#network">Network</a></h4>
                 <h6 class="card-subtitle mb-2 text-muted">It's always DNS.</h6>
                 <p class="card-text">
                 <ul class="list-unstyled">
+                    {% if moduleNames is null or "isup" in moduleNames %}
+                        <li><code>{{ guildBotPrefix }}isup <span class="arg">link</span></code> check if a link is up.
+                        </li>
+                    {% endif %}
                     {% if moduleNames is null or "dig" in moduleNames %}
                         <li><code>{{ guildBotPrefix }}dig <a class="arg" href="#" data-toggle="tooltip"
                                                              title="eg. robyul.chat">name</a> <a class="arg" href="#"
@@ -1277,5 +1302,24 @@
             </div>
         </div>
     {% endif %}
+    <div class="card commands-card">
+        <div class="card-block">
+            <h4 class="card-title" id="modulepermissions"><a href="#modulepermissions">Module Permissions</a></h4>
+            <h6 class="card-subtitle mb-2 text-muted">Disable specific modules in channels or for roles.</h6>
+            <p class="card-text">
+            <ul class="list-unstyled">
+                <li><code>{{ guildBotPrefix }}module status</code> displays the current status and all module names.
+                </li>
+                <li><code>{{ guildBotPrefix }}module deny <span class="arg">module name or all</span> <span class="arg">#channel or channel id or role name or role id or everyone</span></code>
+                    disables a module for the given channel or role.
+                </li>
+                <li><code>{{ guildBotPrefix }}module allow <span class="arg">module name or all</span> <span
+                                class="arg">#channel or channel id or role name or role id or everyone</span></code>
+                    disables a module for the given channel or role.
+                </li>
+            </ul>
+            </p>
+        </div>
+    </div>
 {% endblock %}
 
