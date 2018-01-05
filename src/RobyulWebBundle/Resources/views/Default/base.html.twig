@@ -5,16 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <meta name="google" content="notranslate" />
+    <meta name="google" content="notranslate"/>
     <link rel="icon" href="../../favicon.ico">
 
     {{ sonata_seo_title() }}
     {{ sonata_seo_metadatas() }}
     {{ sonata_seo_link_canonical() }}
     {{ sonata_seo_lang_alternates() }}
-
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
-          integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/css/bootstrap.min.css"
+          integrity="sha384-Zug+QiDoJOrZ5t4lssLdxGhVrurbmBWopoEl+M6BdEfwnCJZtKxi1KgxUyJq13dy" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css"
           href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css"/>
     <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
@@ -38,25 +37,25 @@
     </script>
     <script src="https://use.fontawesome.com/2351bf315b.js"></script>
     {% stylesheets '@RobyulWebBundle/Resources/public/css/main.css' output='static/css/main.css' %}
-    <link rel="stylesheet" href="{{ asset_url }}"/>
+        <link rel="stylesheet" href="{{ asset_url }}"/>
     {% endstylesheets %}
     {% block header %}{% endblock %}
 </head>
 
 <body>
 
-<nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse fixed-top">
-    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+<nav class="navbar navbar-expand-md navbar-inverse fixed-top navbar-dark bg-dark">
+    <a class="navbar-brand" href="{{ path('robyulweb_default_index') }}">
+        {% image '@RobyulWebBundle/Resources/public/images/robyulblush.png' output='static/images/robyulblush.png' %}
+            <img src="{{ asset_url }}" width="30" height="30" class="d-inline-block align-top" alt="robyul">
+        {% endimage %}
+        Robyul
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse"
             data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
             aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    <a class="navbar-brand" href="{{ path('robyulweb_default_index') }}">
-        {% image '@RobyulWebBundle/Resources/public/images/robyulblush.png' output='static/images/robyulblush.png' %}
-        <img src="{{ asset_url }}" width="30" height="30" class="d-inline-block align-top" alt="robyul">
-        {% endimage %}
-        Robyul
-    </a>
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
@@ -65,22 +64,22 @@
             </li> #}
             <li class="nav-item{% if app.request.attributes.get('_route') == 'robyulweb_default_commands' %} active{% endif %}">
                 <a class="nav-link" href="{{ path('robyulweb_default_commands') }}">Commands{% if
-                    app.request.attributes.get('_route') == 'robyulweb_default_commands' %} <span class="sr-only">(current)</span>{% endif %}
+                        app.request.attributes.get('_route') == 'robyulweb_default_commands' %} <span class="sr-only">(current)</span>{% endif %}
                 </a>
             </li>
             <li class="nav-item{% if app.request.attributes.get('_route') == 'robyulweb_default_profilebackgrounds' %} active{% endif %}">
                 <a class="nav-link" href="{{ path('robyulweb_default_profilebackgrounds') }}">Backgrounds{% if
-                    app.request.attributes.get('_route') == 'robyulweb_default_profilebackgrounds' %} <span
+                        app.request.attributes.get('_route') == 'robyulweb_default_profilebackgrounds' %} <span
                         class="sr-only">(current)</span>{% endif %}</a>
             </li>
             <li class="nav-item{% if app.request.attributes.get('_route') == 'robyulweb_default_ranking' %} active{% endif %}">
                 <a class="nav-link" href="{{ path('robyulweb_default_ranking') }}">Rankings{% if
-                    app.request.attributes.get('_route') == 'robyulweb_default_ranking' %} <span class="sr-only">(current)</span>{% endif %}
+                        app.request.attributes.get('_route') == 'robyulweb_default_ranking' %} <span class="sr-only">(current)</span>{% endif %}
                 </a>
             </li>
             <li class="nav-item{% if app.request.attributes.get('_route') == 'robyulweb_default_statistics' %} active{% endif %}">
                 <a class="nav-link" href="{{ path('robyulweb_default_statistics') }}">Statistics{% if
-                    app.request.attributes.get('_route') == 'robyulweb_default_statistics' %} <span class="sr-only">(current)</span>{% endif %}
+                        app.request.attributes.get('_route') == 'robyulweb_default_statistics' %} <span class="sr-only">(current)</span>{% endif %}
                 </a>
             </li>
             {#
@@ -96,7 +95,7 @@
             #}
             <li class="nav-item{% if app.request.attributes.get('_route') == 'robyulweb_showrankings_index' %} active{% endif %}">
                 <a class="nav-link" href="{{ path('robyulweb_showrankings_index') }}">Idol School{% if
-                    app.request.attributes.get('_route') == 'robyulweb_showrankings_index' %} <span class="sr-only">(current)</span>{% endif %}
+                        app.request.attributes.get('_route') == 'robyulweb_showrankings_index' %} <span class="sr-only">(current)</span>{% endif %}
                 </a>
             </li>
             <li class="nav-item dropdown">
@@ -104,10 +103,10 @@
                    aria-expanded="false">MIXNINE</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                     <a class="dropdown-item" href="{{ path('robyulweb_showrankings_mixnineboys') }}">Boys{% if
-                        app.request.attributes.get('_route') == 'robyulweb_showrankings_mixnineboys' %} <span
+                            app.request.attributes.get('_route') == 'robyulweb_showrankings_mixnineboys' %} <span
                             class="sr-only">(current)</span>{% endif %}</a>
                     <a class="dropdown-item" href="{{ path('robyulweb_showrankings_mixnine') }}">Girls{% if
-                        app.request.attributes.get('_route') == 'robyulweb_showrankings_mixnine' %} <span
+                            app.request.attributes.get('_route') == 'robyulweb_showrankings_mixnine' %} <span
                             class="sr-only">(current)</span>{% endif %}</a>
                 </div>
             </li>
@@ -116,10 +115,10 @@
                    aria-expanded="false">The Unit</a>
                 <div class="dropdown-menu" aria-labelledby="dropdown01">
                     <a class="dropdown-item" href="{{ path('robyulweb_showrankings_theunitboys') }}">Boys{% if
-                        app.request.attributes.get('_route') == 'robyulweb_showrankings_theunitboys' %} <span
+                            app.request.attributes.get('_route') == 'robyulweb_showrankings_theunitboys' %} <span
                             class="sr-only">(current)</span>{% endif %}</a>
                     <a class="dropdown-item" href="{{ path('robyulweb_showrankings_theunitgirls') }}">Girls{% if
-                        app.request.attributes.get('_route') == 'robyulweb_showrankings_theunitgirls' %} <span
+                            app.request.attributes.get('_route') == 'robyulweb_showrankings_theunitgirls' %} <span
                             class="sr-only">(current)</span>{% endif %}</a>
                 </div>
             </li>
@@ -128,9 +127,6 @@
             </li>#}
             {##}
         </ul>
-        <span class="navbar-text">
-            This website is in an early Alpha
-        </span>
         <span class="navbar-text patreon-nav">
             <a href="https://www.patreon.com/sekl"
                target="_blank">{% image '@RobyulWebBundle/Resources/public/images/become_a_patron_button.png' output='static/images/become_a_patron_button.png' %}
@@ -141,7 +137,8 @@
             {% set discordUser = discord_user(app.user.id) %}
             <span>
                 <a class="nav-link login-link" href="{{ path('robyulweb_security_profile') }}">
-                    <img class="nav-link login-link" src="{{ discord_avatar(app.user.ID, discordUser.AvatarHash) }}?size=64">
+                    <img class="nav-link login-link"
+                         src="{{ discord_avatar(app.user.ID, discordUser.AvatarHash) }}?size=64">
                     Hi, {{ discordUser.Username }}!</a>
             </span>
             <span>
@@ -166,7 +163,7 @@
     <div class="footer">
         {% block footer %}
             <hr>
-            &copy; Copyright 2017 by <a href="https://slmn.de/">Sebastian Winkler</a> - <a
+            &copy; Copyright 2018 by <a href="https://slmn.de/">Sebastian Winkler</a> - <a
                 href="https://trello.robyul.chat/" target="_blank">Robyul Trello</a> - <a
                 href="https://status.robyul.chat/" target="_blank">Robyul Status</a> - <a
                 href="{{ path('robyulweb_default_imprint') }}">Impressum</a> - <a
@@ -180,24 +177,27 @@
         src="https://code.jquery.com/jquery-3.2.1.min.js"
         integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
         crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+{# <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
         integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous"></script> #}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
         crossorigin="anonymous"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js"
-        integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn"
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"
+        integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
         crossorigin="anonymous"></script>
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 {% javascripts
-'@RobyulWebBundle/Resources/public/js/main.js'
-'@RobyulWebBundle/Resources/public/js/imagesloaded.pkgd.js'
-'@RobyulWebBundle/Resources/public/js/isotope.pkgd.js'
-'@RobyulWebBundle/Resources/public/js/ie10-viewport-bug-workaround.js'
-'@RobyulWebBundle/Resources/public/js/jquery.lazyload.js'
-'@RobyulWebBundle/Resources/public/js/Chart.bundle.js'
-'@RobyulWebBundle/Resources/public/js/clipboard.js'
-'@RobyulWebBundle/Resources/public/js/frappe-charts.min.iife.js'
-'@RobyulWebBundle/Resources/public/js/moment.js' output='static/js/main.js' %}
-<script src="{{ asset_url }}"></script>
+    '@RobyulWebBundle/Resources/public/js/main.js'
+    '@RobyulWebBundle/Resources/public/js/imagesloaded.pkgd.js'
+    '@RobyulWebBundle/Resources/public/js/isotope.pkgd.js'
+    '@RobyulWebBundle/Resources/public/js/ie10-viewport-bug-workaround.js'
+    '@RobyulWebBundle/Resources/public/js/jquery.lazyload.js'
+    '@RobyulWebBundle/Resources/public/js/Chart.bundle.js'
+    '@RobyulWebBundle/Resources/public/js/clipboard.js'
+    '@RobyulWebBundle/Resources/public/js/frappe-charts.min.iife.js'
+    '@RobyulWebBundle/Resources/public/js/moment.js' output='static/js/main.js' %}
+    <script src="{{ asset_url }}"></script>
 {% endjavascripts %}
 {% if ga_tracking_id != "" %}
     <script type="text/javascript" data-cfasync="false">
@@ -230,7 +230,7 @@
     </script>
 {% endif %}
 <script type="text/javascript" data-cfasync="false">
-window.parameters = {{ js_parameters|json_encode|raw }};
+    window.parameters = {{ js_parameters|json_encode|raw }};
 </script>
 {% block scripts %}{% endblock %}
 </body>
