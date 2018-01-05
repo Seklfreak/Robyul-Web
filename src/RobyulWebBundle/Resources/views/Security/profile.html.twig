@@ -24,11 +24,9 @@
             {% endif %}
         </div>
     </div>
-    <div class="row">
-        <div class="col-12">
-            <ul class="list-inline" style="margin-top: 1rem;">
+    <div class="row justify-content-center">
                 {% for guild in memberOfGuilds %}
-                    <li class="list-inline-item server-tile-item">
+                    <div class="col-12 col-sm-4 col-lg-2 server-tile-item">
                         <span class="profile-hover"
                               data-profile-iframe-url="{{ path('robyulweb_frame_profile',
                                   {'userID': app.user.id, 'guildID': guild.ID}) }}">
@@ -82,9 +80,7 @@
                                 </li>
                             {% endif %}
                         </ul>
-                    </li>
+                    </div>
                 {% endfor %}
-            </ul>
-        </div>
     </div>
 {% endblock %}
