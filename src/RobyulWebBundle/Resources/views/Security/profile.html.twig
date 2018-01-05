@@ -18,7 +18,7 @@
         <div class="col-12">
             <h4>Most active servers</h4>
             <div id="profile-bar-chart"></div>
-            <script>
+            <script type="text/javascript" data-cfasync="false">
                 window.profileBarRankingData = {{ rawRankings|json_encode|raw }};
             </script>
             {% endif %}
