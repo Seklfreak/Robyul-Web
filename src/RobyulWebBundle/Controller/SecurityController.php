@@ -24,9 +24,9 @@ class SecurityController extends Controller
             ->addMeta('property', 'og:description', "View your Profile.");
         $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
 
-        $allGuilds = $robyulApi->getRequest('user/'.$this->getUser()->getID().'/guilds', '+15 minutes');
+        $allGuilds = $robyulApi->getRequest('user/' . $this->getUser()->getID() . '/guilds', '+15 minutes');
 
-        $allRankings = $robyulApi->getRequest('rankings/user/'.$this->getUser()->getID().'/all', '+15 minutes');
+        $allRankings = $robyulApi->getRequest('rankings/user/' . $this->getUser()->getID() . '/all', '+15 minutes');
 
         $adjustedRankings = array();
         $globalAdjustedEXP = 0;
@@ -42,10 +42,25 @@ class SecurityController extends Controller
             }
         }
 
+        foreach ($allRankings as $ranking) {
+            $ranking->GuildName = 'N/A';
+            if ($ranking->GuildID == 'global') {
+                $ranking->GuildName = 'Global';
+            } else {
+                foreach ($allGuilds as $guild) {
+                    if ($ranking->GuildID == $guild->ID) {
+                        $ranking->GuildName = $guild->Name;
+                        break;
+                    }
+                }
+            }
+        }
+
         return $this->render('RobyulWebBundle:Security:profile.html.twig', array(
             'memberOfGuilds' => $allGuilds,
             'allRankings' => $adjustedRankings,
             'globalAdjustedEXP' => $globalAdjustedEXP,
+            'rawRankings' => $allRankings,
         ));
     }
 
@@ -54,13 +69,13 @@ class SecurityController extends Controller
      */
     public function randomPicturesHistoryAction($guildID, RobyulApi $robyulApi)
     {
-        $memberStatus = $robyulApi->getRequest('member/'.$guildID.'/'.$this->getUser()->getID().'/is', '+15 minutes');
+        $memberStatus = $robyulApi->getRequest('member/' . $guildID . '/' . $this->getUser()->getID() . '/is', '+15 minutes');
 
         if ($memberStatus['IsMember'] !== true) {
             return $this->redirectToRoute('robyulweb_security_profile');
         }
 
-        $guildData = $robyulApi->getRequest('guild/'.$guildID);
+        $guildData = $robyulApi->getRequest('guild/' . $guildID);
 
         $seoPage = $this->container->get('sonata.seo.page');
         $seoPage
@@ -75,13 +90,13 @@ class SecurityController extends Controller
             'pictureHistoryItems' => $pictureHistoryData
         ));
     }
-    
+
     /**
      * @Route("/d/statistics/{guildID}")
      */
     public function statisticsAction($guildID, RobyulApi $robyulApi)
     {
-        $statusMember = $robyulApi->getRequest('member/'.$guildID.'/'.$this->getUser()->getID().'/status', '+1 minutes');
+        $statusMember = $robyulApi->getRequest('member/' . $guildID . '/' . $this->getUser()->getID() . '/status', '+1 minutes');
 
         if ($statusMember['IsGuildAdmin'] !== true && $statusMember['IsGuildMod'] !== true) {
             return $this->redirectToRoute('robyulweb_security_profile');
@@ -99,24 +114,24 @@ class SecurityController extends Controller
         $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
 
         return $this->render('RobyulWebBundle:Security:statistics.html.twig', array(
-        'guildID' => $guildID,
-        'guildName' => $guildName,
-        'guildIcon' => $guildIcon,
+            'guildID' => $guildID,
+            'guildName' => $guildName,
+            'guildIcon' => $guildIcon,
         ));
     }
-        
+
     /**
      * @Route("/d/chatlog/{guildID}")
      */
     public function chatlogAction($guildID, RobyulApi $robyulApi)
     {
-        $statusMember = $robyulApi->getRequest('member/'.$guildID.'/'.$this->getUser()->getID().'/status', '+1 minutes');
-    
+        $statusMember = $robyulApi->getRequest('member/' . $guildID . '/' . $this->getUser()->getID() . '/status', '+1 minutes');
+
         if ($statusMember['HasGuildPermissionAdministrator'] !== true) {
             return $this->redirectToRoute('robyulweb_security_profile');
         }
 
-        $guildData = $robyulApi->getRequest('guild/'.$guildID, '+1 minutes');
+        $guildData = $robyulApi->getRequest('guild/' . $guildID, '+1 minutes');
 
         $guildName = $guildData['Name'];
         $guildIcon = $guildData['Icon'];
@@ -125,19 +140,19 @@ class SecurityController extends Controller
         if ($chatlogEnabled !== true) {
             return $this->redirectToRoute('robyulweb_security_profile');
         }
-        
+
         $seoPage = $this->container->get('sonata.seo.page');
         $seoPage
-        ->setTitle($guildName . " Chatlog - The KPop Discord Bot - Robyul")
-        ->addMeta('name', 'description', "View the chatlog for " . $guildName . ".")
-        ->addMeta('property', 'og:description', "View the chatlog for " . $guildName . ".");
+            ->setTitle($guildName . " Chatlog - The KPop Discord Bot - Robyul")
+            ->addMeta('name', 'description', "View the chatlog for " . $guildName . ".")
+            ->addMeta('property', 'og:description', "View the chatlog for " . $guildName . ".");
         $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
-    
+
         return $this->render('RobyulWebBundle:Security:chatlog.html.twig', array(
-        'guildID' => $guildID,
-        'guildName' => $guildName,
-        'guildIcon' => $guildIcon,
-        'guildChannels' => $guildChannels,
+            'guildID' => $guildID,
+            'guildName' => $guildName,
+            'guildIcon' => $guildIcon,
+            'guildChannels' => $guildChannels,
         ));
     }
 
@@ -146,13 +161,13 @@ class SecurityController extends Controller
      */
     public function vanityInviteAction($guildID, RobyulApi $robyulApi)
     {
-        $statusMember = $robyulApi->getRequest('member/'.$guildID.'/'.$this->getUser()->getID().'/status', '+1 minutes');
+        $statusMember = $robyulApi->getRequest('member/' . $guildID . '/' . $this->getUser()->getID() . '/status', '+1 minutes');
 
         if ($statusMember['IsGuildAdmin'] !== true && $statusMember['IsGuildMod'] !== true) {
             return $this->redirectToRoute('robyulweb_security_profile');
         }
 
-        $guildData = $robyulApi->getRequest('guild/'.$guildID, '+1 minutes');
+        $guildData = $robyulApi->getRequest('guild/' . $guildID, '+1 minutes');
 
         $guildName = $guildData['Name'];
         $guildIcon = $guildData['Icon'];

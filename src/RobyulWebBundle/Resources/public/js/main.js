@@ -506,6 +506,39 @@ $(function () {
         });
         $vanityInviteRangeForm.submit();
     }
+    // profile user bar
+    var $profileBarChart = $('#profile-bar-chart');
+    if (typeof $profileBarChart !== 'undefined' && typeof window.profileBarRankingData !== 'undefined' && window.profileBarRankingData.length > 0) {
+        var data = {
+            labels: [],
+
+            datasets: [
+                {
+                    title: "EXP",
+                    values: []
+                }
+            ]
+        };
+
+        $.each(window.profileBarRankingData, function (_, value) {
+            if (value.GuildID === "global" || value.Level <= 0) {
+                return
+            }
+
+            data.labels.push(value.GuildName);
+            data.datasets[0].values.push(value.EXP)
+        });
+
+        var chart = new Chart({
+            parent: $profileBarChart[0],
+            data: data,
+            type: 'percentage',
+
+            colors: ['light-blue', 'blue', 'violet', 'red',
+                'orange', 'yellow', 'green', 'light-green',
+                'purple', 'magenta', 'grey', 'dark-grey']
+        });
+    }
 
     // helpers
     function escapeHTML(text) {

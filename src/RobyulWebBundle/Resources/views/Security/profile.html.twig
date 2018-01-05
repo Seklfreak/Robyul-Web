@@ -12,34 +12,15 @@
         </div>
         <div class="col-12 col-md-6">
             <iframe width="400" height="300" frameborder="0" scrolling="no" src="{{ path('robyulweb_frame_profile',
-            {'userID': app.user.id, 'guildID': 'global'}) }}"></iframe>
+                {'userID': app.user.id, 'guildID': 'global'}) }}"></iframe>
         </div>
         {% if globalAdjustedEXP > 0 %}
         <div class="col-12">
             <h4>Most active servers</h4>
-            <div class="progress profile-bar">
-                {% set numOfBarColours = 4 %}
-                {% set curBarColour = 1 %}
-                {% for ranking in allRankings %}
-                    {% if ranking.GuildID != "global" and ranking.Level > 0 %}
-                        {% set currentGuild = "" %}
-                        {% for guild in memberOfGuilds %}
-                            {% if guild.ID == ranking.GuildID %}{% set currentGuild = guild %}{% endif %}
-                        {% endfor %}
-                        {% set percentage = (100/(globalAdjustedEXP/ranking.EXP))|round(0, 'ceil') %}
-                        <div class="progress-bar bg-success profile-bar-colour-{{ curBarColour }}"
-                             role="progressbar" style="width: {{ percentage }}%"
-                             data-toggle="tooltip" data-placement="top" title="{{ currentGuild.Name }}: Level {{ ranking.Level }}"
-                        >
-                            {% if percentage >= 3 %}
-                                {{ currentGuild.Name }}
-                            {% endif %}
-                        </div>
-                        {% set curBarColour = curBarColour+1 %}
-                        {% if curBarColour > numOfBarColours %}{% set curBarColour = 1 %}{% endif %}
-                    {% endif %}
-                {% endfor %}
-            </div>
+            <div id="profile-bar-chart"></div>
+            <script>
+                window.profileBarRankingData = {{ rawRankings|json_encode|raw }};
+            </script>
             {% endif %}
         </div>
     </div>
@@ -48,9 +29,9 @@
             <ul class="list-inline" style="margin-top: 1rem;">
                 {% for guild in memberOfGuilds %}
                     <li class="list-inline-item server-tile-item">
-                        <span   class="profile-hover"
-                                data-profile-iframe-url="{{ path('robyulweb_frame_profile',
-                                {'userID': app.user.id, 'guildID': guild.ID}) }}">
+                        <span class="profile-hover"
+                              data-profile-iframe-url="{{ path('robyulweb_frame_profile',
+                                  {'userID': app.user.id, 'guildID': guild.ID}) }}">
                         <a href="{{ path('robyulweb_default_ranking', {'guildID': guild.ID}) }}">
                             <div>
                                 <h5>{{ guild.Name }}</h5>
@@ -60,7 +41,7 @@
                                      src="https://cdn.discordapp.com/icons/{{ guild.ID }}/{{ guild.Icon }}.jpg?size=256">
                             {% else %}
                                 {% image '@RobyulWebBundle/Resources/public/images/placeholder_icon.jpg' output='static/images/placeholder_icon.jpg' %}
-                                <img class="profile-big-avatar" src="{{ asset_url }}">
+                                    <img class="profile-big-avatar" src="{{ asset_url }}">
                                 {% endimage %}
                             {% endif %}
                         </a>

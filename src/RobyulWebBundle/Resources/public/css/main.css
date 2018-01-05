@@ -209,3 +209,23 @@ body {
 .profile-bar-colour-4 {
     background-color: #dc3545 !important;
 }
+
+#profile-bar-chart > .chart-container > .title {
+    display: none;
+}
+#profile-bar-chart > .chart-container > .frappe-chart {
+    margin-top: 0 !important;
+    margin-left: 0;
+    margin-right: 0;
+    padding-bottom: 0;
+}
+#profile-bar-chart > .chart-container > .graph-stats-container {
+    margin: 0 0 !important;
+}
+#profile-bar-chart > .chart-container .progress {
+    height: 2.5rem;
+    margin-bottom: 5px;
+}
+#profile-bar-chart > .chart-container .progress-bar {
+    margin-bottom: 5px;
+}
