@@ -534,9 +534,8 @@ $(function () {
             data: data,
             type: 'percentage',
 
-            colors: ['light-blue', 'blue', 'violet', 'red',
-                'orange', 'yellow', 'green', 'light-green',
-                'purple', 'magenta', 'grey', 'dark-grey']
+            colors: ['light-blue', 'violet', 'red', 'yellow', 'light-green',
+                'purple', 'grey']
         });
     }
 

@@ -229,3 +229,6 @@ body {
 #profile-bar-chart > .chart-container .progress-bar {
     margin-bottom: 5px;
 }
+#profile-bar-chart > .chart-container .indicator:after {
+    content: ' EXP';
+}
