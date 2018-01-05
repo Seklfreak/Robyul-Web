@@ -52,10 +52,12 @@
                                 </li>
                             {% endif %}
                             {% if guild.Features.RandomPictures.Count > 0 %}
+                                {#
                                 <li>
                                     <a href="{{ path('robyulweb_default_commands', {'guildID': guild.ID}) }}#randompictures"><i
                                                 class="fa fa-picture-o" aria-hidden="true"></i> Random Pictures</a>
                                 </li>
+                                #}
                                 <li>
                                     <a href="{{ path('robyulweb_security_randompictureshistory', {'guildID': guild.ID}) }}"><i
                                                 class="fa fa-picture-o" aria-hidden="true"></i> Gallery</a>
