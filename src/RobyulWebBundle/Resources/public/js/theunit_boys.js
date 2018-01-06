@@ -15,7 +15,7 @@ var middlePadding = (padding * 2) + 100;
 //var width = $(window).width() - middlePadding - CHART_WIDTH - 30;
 var width = 1280 - middlePadding - CHART_WIDTH - 30;
 
-var episodes = [4,5,7,8];
+var episodes = [4,5,7,8,10];
 var totalData;
 var dFirst;
 
@@ -32,7 +32,7 @@ var plot = svg.append("g").attr("transform", "translate(" + padding + "," + padd
 setXAxis();
 
 // Get data
-d3.csv("/bundles/robyulweb/csv/theunit.boys.v6.csv", parseLine, function (err, data) {
+d3.csv("/bundles/robyulweb/csv/theunit.boys.v7.csv", parseLine, function (err, data) {
     totalData = processData(data);
     plotData(data);
     selectLine(dFirst, "#line1");
