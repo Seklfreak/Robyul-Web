@@ -7,5 +7,20 @@ before-install:
 install:
   - composer install
   - cp app/config/parameters.yml.dist app/config/parameters.yml
+  # update npm
+  - npm install npm -g
+  - npm install -g snyk
+  - snyk test
 script:
   - phpunit
+after_success:
+  - snyk monitor
+notifications:
+  webhooks:
+    urls:
+      - https://slmn.de/robyul-cord-travis-webhook/travis-ci.php
+    on_success: always
+    on_failure: always
+    on_start: never
+    on_cancel: always
+    on_error: always
