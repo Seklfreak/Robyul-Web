@@ -232,3 +232,7 @@ body {
 #profile-bar-chart > .chart-container .indicator:after {
     content: ' EXP';
 }
+
+.theme-dark .chat, .theme-dark .chat>.content, .theme-dark .friends-table, .theme-dark .messages-wrapper {
+    border-radius: 3px;
+}

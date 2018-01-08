@@ -36,7 +36,8 @@
         });
     </script>
     <script src="https://use.fontawesome.com/2351bf315b.js"></script>
-    {% stylesheets '@RobyulWebBundle/Resources/public/css/main.css' output='static/css/main.css' %}
+    {% stylesheets '@RobyulWebBundle/Resources/public/css/main.css'
+        '@RobyulWebBundle/Resources/public/css/discord.css' output='static/css/main.css' %}
         <link rel="stylesheet" href="{{ asset_url }}"/>
     {% endstylesheets %}
     {% block header %}{% endblock %}
@@ -80,6 +81,11 @@
             <li class="nav-item{% if app.request.attributes.get('_route') == 'robyulweb_default_statistics' %} active{% endif %}">
                 <a class="nav-link" href="{{ path('robyulweb_default_statistics') }}">Statistics{% if
                         app.request.attributes.get('_route') == 'robyulweb_default_statistics' %} <span class="sr-only">(current)</span>{% endif %}
+                </a>
+            </li>
+            <li class="nav-item{% if app.request.attributes.get('_route') == 'robyulweb_default_embed' %} active{% endif %}">
+                <a class="nav-link" href="{{ path('robyulweb_default_embed') }}">Embed{% if
+                        app.request.attributes.get('_route') == 'robyulweb_default_embed' %} <span class="sr-only">(current)</span>{% endif %}
                 </a>
             </li>
             {#

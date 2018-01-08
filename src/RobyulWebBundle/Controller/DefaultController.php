@@ -227,6 +227,31 @@ class DefaultController extends Controller
     }
 
     /**
+     * @Route("/embed-creator")
+     */
+    public function embedAction(RobyulApi $robyulApi)
+    {
+        $seoPage = $this->container->get('sonata.seo.page');
+        $seoPage
+            ->setTitle("Embed Creator - The KPop Discord Bot - Robyul")
+            ->addMeta('name', 'description', "Create pretty Discord Embeds with easy using Robyul.")
+            ->addMeta('property', 'og:description', "Create pretty Discord Embeds with easy using Robyul.");
+        $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
+
+        $botData = $robyulApi->getRequest('user/@me');
+
+        $botID = $botData['ID'];
+        $botUsername = $botData['Username'];
+        $botAvatarHash = $botData['AvatarHash'];
+
+        return $this->render('RobyulWebBundle:Default:embed.html.twig', array(
+            'botID' => $botID,
+            'botUsername' => $botUsername,
+            'botAvatarHash' => $botAvatarHash,
+        ));
+    }
+
+    /**
      * @Route("/invite")
      */
     public function inviteAction()

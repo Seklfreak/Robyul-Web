@@ -538,6 +538,172 @@ $(function () {
                 'purple', 'grey']
         });
     }
+    // discord embed creator
+    var $discordEmbedForm = $('#discord-embed-form');
+    if (typeof $discordEmbedForm !== 'undefined') {
+        updateDiscordEmbedCreator();
+        $('#discord-embed-form textarea, #discord-embed-form input').on('input', function () {
+            updateDiscordEmbedCreator();
+        });
+        $('#discord-embed-form input[type="checkbox"]').change(function () {
+            updateDiscordEmbedCreator();
+        });
+        var $discordEmbedAddFieldButton = $('#buttonDiscordEmbedAddField');
+        $discordEmbedAddFieldButton.click(function () {
+            var newIndex = $('.embed-field').length;
+            var $newElement = $('<div class="form-row">' +
+                '<div class="form-group col-md-6">' +
+                '<label for="inputDiscordEmbedFieldTitle' + newIndex + '">Field Title</label>' +
+                '<input type="text" class="form-control form-control-sm inputDiscordEmbedFieldTitles" id="inputDiscordEmbedFieldTitle' + newIndex + '" placeholder="Favourite Field">' +
+                '</div>' +
+                '<div class="form-group col-md-5">' +
+                '<label for="inputDiscordEmbedFieldValue' + newIndex + '">Field Value</label>' +
+                '<textarea class="form-control form-control-sm inputDiscordEmbedFieldValues" id="inputDiscordEmbedFieldValue' + newIndex + '" placeholder="For even more data" rows="3"></textarea>' +
+                '</div>' +
+                '<div class="form-group col-md-1">' +
+                '<input class="form-check-input inputDiscordEmbedFieldInlines" type="checkbox" value="" id="inputDiscordEmbedFieldInline' + newIndex + '" checked>' +
+                '<label class="form-check-label" for="inputDiscordEmbedFieldInline' + newIndex + '">' +
+                'Inline' +
+                '</label>' +
+                '</div>' +
+                '</div>').insertBefore($discordEmbedAddFieldButton);
+            $newElement.find('textarea, input').on('input', function () {
+                updateDiscordEmbedCreator();
+            });
+            $newElement.find('input[type="checkbox"]').change(function () {
+                updateDiscordEmbedCreator();
+            });
+            updateDiscordEmbedCreator();
+        })
+    }
+
+    function updateDiscordEmbedCreator() {
+        var embedContent = $('#inputDiscordEmbedContent').val();
+        var embedAuthorName = $('#inputDiscordEmbedAuthorName').val();
+        var embedAuthorPicture = $('#inputDiscordEmbedAuthorPicture').val();
+        var embedAuthorLink = $('#inputDiscordEmbedAuthorLink').val();
+        var embedTitleText = $('#inputDiscordEmbedTitleText').val();
+        //var embedTitleLink = $('#inputDiscordEmbedTitleLink').val();
+        var embedDescription = $('#inputDiscordEmbedDescription').val();
+        var embedThumbnailLink = $('#inputDiscordEmbedThumbnailLink').val();
+        var embedImageLink = $('#inputDiscordEmbedImageLink').val();
+        var embedFooterText = $('#inputDiscordEmbedFooterText').val();
+        var embedFooterLink = $('#inputDiscordEmbedFooterLink').val();
+        var embedColor = $('#inputDiscordEmbedColor').val();
+
+        var embedFieldData = [];
+        $('.inputDiscordEmbedFieldTitles').each(function (index) {
+            if (typeof embedFieldData[index] === 'undefined') {
+                embedFieldData[index] = {};
+            }
+            embedFieldData[index]['title'] = $(this).val();
+        });
+        $('.inputDiscordEmbedFieldValues').each(function (index) {
+            if (typeof embedFieldData[index] === 'undefined') {
+                embedFieldData[index] = {};
+            }
+            embedFieldData[index]['value'] = $(this).val();
+        });
+        $('.inputDiscordEmbedFieldInlines').each(function (index) {
+            if (typeof embedFieldData[index] === 'undefined') {
+                embedFieldData[index] = {};
+            }
+            embedFieldData[index]['checked'] = $(this).is(':checked');
+        });
+
+        var $outputEmbedCode = $('#outputEmbedCode');
+        var commandPrefix = $outputEmbedCode.data('command-prefix');
+
+        var command = commandPrefix;
+
+        $('.message-text > .markup').html(embedContent);
+        if (embedContent.length > 0) {
+            command += 'ptext=' + embedContent + ' | ';
+        }
+        if (embedAuthorLink.length > 0) {
+            if (embedAuthorPicture.length > 0) {
+                $('.embed-author').html('<a target="_blank" rel="noreferrer" href="' + embedAuthorLink + '" class="embed-author-name"><img src="' + embedAuthorPicture + '" role="presentation" class="embed-author-icon">' + embedAuthorName + '</a>')
+                command += 'author=name=' + embedAuthorName + ' icon=' + embedAuthorPicture + ' url=' + embedAuthorLink + ' | ';
+            } else {
+                $('.embed-author').html('<a target="_blank" rel="noreferrer" href="' + embedAuthorLink + '" class="embed-author-name">' + embedAuthorName + '</a>');
+                command += 'author=name=' + embedAuthorName + ' url=' + embedAuthorLink + ' | ';
+            }
+        } else {
+            if (embedAuthorPicture.length > 0) {
+                $('.embed-author').html('<div class="embed-author-name"><img src="' + embedAuthorPicture + '" role="presentation" class="embed-author-icon">' + embedAuthorName + '</div>');
+                command += 'author=name=' + embedAuthorName + ' icon=' + embedAuthorPicture + ' | ';
+            } else {
+                $('.embed-author').html('<div class="embed-author-name">' + embedAuthorName + '</div>');
+                if (embedAuthorName.length > 0) {
+                    command += 'author=' + embedAuthorName + ' | ';
+                }
+            }
+        }
+        $('.embed-title').replaceWith('<div class="embed-title">' + embedTitleText + '</div>')
+        if (embedTitleText.length > 0) {
+            command += 'title=' + embedTitleText + ' | ';
+        }
+        $('.embed-description.markup').html(embedDescription);
+        if (embedDescription.length > 0) {
+            command += 'description=' + embedDescription + ' | ';
+        }
+        if (embedThumbnailLink.length > 0) {
+            $('.embed-rich-thumb').attr('src', embedThumbnailLink).show();
+            command += 'thumbnail=' + embedThumbnailLink + ' | ';
+        } else {
+            $('.embed-rich-thumb').hide();
+        }
+        if (embedImageLink.length > 0) {
+            $('.embed-thumbnail-rich img').attr('src', embedImageLink);
+            $('.embed-thumbnail-rich').show();
+            command += 'image=' + embedThumbnailLink + ' | ';
+        } else {
+            $('.embed-thumbnail-rich').hide();
+        }
+
+        var numberOfEmbedFieldsInHTML = $('.embed-field').length;
+        if (embedFieldData.length - numberOfEmbedFieldsInHTML) {
+            for (i = 0; i < embedFieldData.length - numberOfEmbedFieldsInHTML; i++) {
+                $('.embed-fields').append('<div class="embed-field">\n' +
+                    '<div class="embed-field-name"></div><div class="embed-field-value markup"></div>\n' +
+                    '</div>');
+            }
+        }
+        $.each(embedFieldData, function (index) {
+            $('.embed-field-name').eq(index).html(this.title);
+            $('.embed-field-value.markup').eq(index).html(this.value);
+            if (this.checked) {
+                $('.embed-field').eq(index).attr('class', 'embed-field embed-field-inline');
+                if (this.title.length > 0 || this.value.length > 0) {
+                    command += 'field=name=' + this.title + ' value=' + this.value + ' | ';
+                }
+            } else {
+                $('.embed-field').eq(index).attr('class', 'embed-field');
+                if (this.title.length > 0 || this.value.length > 0) {
+                    command += 'field=name=' + this.title + ' value=' + this.value + ' inline=no | ';
+                }
+            }
+        });
+        $('.embed-footer').html(embedFooterText);
+        if (embedFooterLink.length > 0) {
+            $('.embed-footer-icon').attr('src', embedFooterLink).show();
+            command += 'footer=name=' + embedFooterText + ' icon=' + embedFooterLink + ' | ';
+        } else {
+            $('.embed-footer-icon').hide();
+            if (embedFooterText.length > 0) {
+                command += 'footer=' + embedFooterText + ' | ';
+            }
+        }
+        $('.embed-color-pill').css('background-color', embedColor);
+        command += 'color=' + embedColor + ' | ';
+
+        command = command.replace(/\| $/g, '');
+        command = command.trim();
+        $outputEmbedCode.html(command)
+    }
+
+    // TODO: text formatting
+    // TODO: paste embed code
 
     // helpers
     function escapeHTML(text) {
@@ -579,4 +745,6 @@ $(function () {
                     });
             });
     }
+
+
 });

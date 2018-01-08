@@ -1,0 +1,167 @@
+{% extends "RobyulWebBundle:Default:base.html.twig" %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-12">
+            <h1>Embed Creator</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <form id="discord-embed-form">
+                <div class="form-group">
+                    <label for="inputDiscordEmbedContent">Message Content</label>
+                    <textarea class="form-control form-control-sm" id="inputDiscordEmbedContent" placeholder="Robyul is ok" rows="3"></textarea>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-4">
+                        <label for="inputDiscordEmbedAuthorName">Author Name</label>
+                        <input type="text" class="form-control form-control-sm" id="inputDiscordEmbedAuthorName" placeholder="Yoojung">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputDiscordEmbedAuthorPicture">Author Picture</label>
+                        <input type="text" class="form-control form-control-sm" id="inputDiscordEmbedAuthorPicture" placeholder="https://example.org/cutepic.jpg">
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label for="inputDiscordEmbedAuthorLink">Author Link</label>
+                        <input type="text" class="form-control form-control-sm" id="inputDiscordEmbedAuthorLink" placeholder="https://example.org/author">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputDiscordEmbedTitleText">Title</label>
+                    <input type="text" class="form-control form-control-sm" id="inputDiscordEmbedTitleText" placeholder="This is an example">
+                </div>
+                {#
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputDiscordEmbedTitleText">Title Text</label>
+                        <input type="text" class="form-control form-control-sm" id="inputDiscordEmbedTitleText" placeholder="This is an example">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputDiscordEmbedTitleLink">Title Link</label>
+                        <input type="text" class="form-control form-control-sm" id="inputDiscordEmbedTitleLink" placeholder="https://example.org/cat.jpg">
+                    </div>
+                </div>
+                #}
+                <div class="form-group">
+                    <label for="inputDiscordEmbedDescription">Description</label>
+                    <textarea class="form-control form-control-sm" id="inputDiscordEmbedDescription" placeholder="Robyul is ok" rows="3"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="inputDiscordEmbedThumbnailLink">Thumbnail</label>
+                    <input type="text" class="form-control form-control-sm" id="inputDiscordEmbedThumbnailLink">
+                </div>
+                <div class="form-group">
+                    <label for="inputDiscordEmbedImageLink">Image</label>
+                    <input type="text" class="form-control form-control-sm" id="inputDiscordEmbedImageLink">
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputDiscordEmbedFieldTitle">Field Title</label>
+                        <input type="text" class="form-control form-control-sm inputDiscordEmbedFieldTitles" id="inputDiscordEmbedFieldTitle" placeholder="Favourite Field">
+                    </div>
+                    <div class="form-group col-md-5">
+                        <label for="inputDiscordEmbedFieldValue">Field Value</label>
+                        <textarea class="form-control form-control-sm inputDiscordEmbedFieldValues" id="inputDiscordEmbedFieldValue" placeholder="For even more data" rows="3"></textarea>
+                    </div>
+                    <div class="form-group col-md-1">
+                        <input class="form-check-input inputDiscordEmbedFieldInlines" type="checkbox" value="" id="inputDiscordEmbedFieldInline" checked>
+                        <label class="form-check-label" for="inputDiscordEmbedFieldInline">
+                            Inline
+                        </label>
+                    </div>
+                </div>
+                <button type="button" class="btn btn-secondary" id="buttonDiscordEmbedAddField"><i class="fa fa-plus" aria-hidden="true"></i></button>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputDiscordEmbedFooterText">Footer Text</label>
+                        <input type="text" class="form-control form-control-sm" id="inputDiscordEmbedFooterText" placeholder="powered by discord">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="inputDiscordEmbedFooterLink">Footer Link</label>
+                        <input type="text" class="form-control form-control-sm" id="inputDiscordEmbedFooterLink" placeholder="https://example.org/discord.jpg">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="inputDiscordEmbedColor">Color</label>
+                    <input type="color" class="form-control form-control-sm" id="inputDiscordEmbedColor" value="#4f545c">
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <div class="w-100 h-100 overflow-auto pa2 discord-view">
+                <div class="flex-vertical whitney theme-dark">
+                    <div class="chat flex-vertical flex-spacer">
+                        <div class="content flex-spacer flex-horizontal">
+                            <div class="flex-spacer flex-vertical messages-wrapper">
+                                <div class="scroller-wrap">
+                                    <div class="scroller messages">
+                                        <div class="message-group hide-overflow ">
+                                            <div class="avatar-large animate"
+                                                 style="background-image: url('{{ discord_avatar(botID, botAvatarHash) }}?size=128');"></div>
+                                            <div class="comment">
+                                                <div class="message first">
+                                                    <h2 style="line-height: 16px;">
+                                                        <span class="username-wrapper v-btm"><strong class="user-name">{{ botUsername }}</strong><span class="bot-tag">BOT</span></span><span class="highlight-separator"> - </span><span class="timestamp">Today at 9:08 PM</span>
+                                                    </h2>
+                                                    <div class="message-text"><div class="markup"></div></div>
+                                                </div>
+                                                <div class="accessory">
+                                                    <div class="embed-wrapper">
+                                                        <div class="embed-color-pill"></div>
+                                                        <div class="embed embed-rich">
+                                                            <div class="embed-content">
+                                                                <div class="embed-content-inner">
+                                                                    <div class="embed-author"><img
+                                                                                src=""
+                                                                                role="presentation"
+                                                                                class="embed-author-icon"><a target="_blank"
+                                                                                                             rel="noreferrer"
+                                                                                                             href="https://discordapp.com"
+                                                                                                             class="embed-author-name"></a></div>
+                                                                    <a target="_blank" rel="noreferrer"
+                                                                       href="https://discordapp.com" class="embed-title"></a>
+                                                                    <div class="embed-description markup"></div>
+                                                                    <div class="embed-fields">
+                                                                        <div class="embed-field">
+                                                                            <div class="embed-field-name"></div><div class="embed-field-value markup"></div>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <img src=""
+                                                                     role="presentation" class="embed-rich-thumb"
+                                                                     style="max-width: 80px; max-height: 80px;"></div>
+                                                            <a class="embed-thumbnail embed-thumbnail-rich"><img
+                                                                        class="image" role="presentation"
+                                                                        src=""></a>
+                                                            <div><img src=""
+                                                                      class="embed-footer-icon" role="presentation"
+                                                                      width="20" height="20"><span class="embed-footer"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <label for="outputEmbedCode">Embed Code <button type="button" class="btn btn-primary clipboard-button" data-clipboard-target="#outputEmbedCode"><i class="fa fa-clipboard" aria-hidden="true"></i> Copy</button></label>
+            <textarea class="form-control form-control-sm" id="outputEmbedCode" rows="3" readonly data-command-prefix="{{ bot_default_prefix }}embed #channel "></textarea>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <p>This site uses code from <a href="https://github.com/leovoel/embed-visualizer" target="_blank">github.com/leovoel/embed-visualizer</a>.</p>
+        </div>
+    </div>
+{% endblock %}
+
