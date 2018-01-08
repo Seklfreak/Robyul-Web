@@ -554,11 +554,11 @@ $(function () {
             var $newElement = $('<div class="form-row">' +
                 '<div class="form-group col-md-6">' +
                 '<label for="inputDiscordEmbedFieldTitle' + newIndex + '">Field Title</label>' +
-                '<input type="text" class="form-control form-control-sm inputDiscordEmbedFieldTitles" id="inputDiscordEmbedFieldTitle' + newIndex + '" placeholder="Favourite Field">' +
+                '<input type="text" class="form-control form-control-sm inputDiscordEmbedFieldTitles" id="inputDiscordEmbedFieldTitle' + newIndex + '">' +
                 '</div>' +
                 '<div class="form-group col-md-5">' +
                 '<label for="inputDiscordEmbedFieldValue' + newIndex + '">Field Value</label>' +
-                '<textarea class="form-control form-control-sm inputDiscordEmbedFieldValues" id="inputDiscordEmbedFieldValue' + newIndex + '" placeholder="For even more data" rows="3"></textarea>' +
+                '<textarea class="form-control form-control-sm inputDiscordEmbedFieldValues" id="inputDiscordEmbedFieldValue' + newIndex + '" rows="3"></textarea>' +
                 '</div>' +
                 '<div class="form-group col-md-1">' +
                 '<input class="form-check-input inputDiscordEmbedFieldInlines" type="checkbox" value="" id="inputDiscordEmbedFieldInline' + newIndex + '" checked>' +
