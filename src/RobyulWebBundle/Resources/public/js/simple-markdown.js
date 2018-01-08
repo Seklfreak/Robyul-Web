@@ -1397,12 +1397,14 @@ var SimpleMarkdown = {
     defaultOutput: defaultReactOutput,
 };
 
+/*
 if (typeof module !== "undefined" && module.exports) {
     module.exports = SimpleMarkdown;
 } else if (typeof global !== "undefined") {
     global.SimpleMarkdown = SimpleMarkdown;
 } else {
+*/
     window.SimpleMarkdown = SimpleMarkdown;
-}
+//}
 
 })();
