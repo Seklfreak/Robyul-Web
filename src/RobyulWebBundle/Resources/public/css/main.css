@@ -1,29 +1,39 @@
 body {
     padding-top: 5rem;
 }
+
 .footer {
     margin-bottom: 1rem;
 }
+
 .arg {
     color: #031eff;
     background-color: #e0e0e0;
 }
+
 .opt-arg {
     color: rgba(40, 189, 61, 0.6);
     background-color: #e0e0e0;
 }
+
 .commands-card {
     margin-bottom: 1rem;
 }
+
 .patreon-nav > a > img {
     height: 30px;
 }
+
 .background-card {
     margin-bottom: 1rem;
 }
+
 .background-card > img {
-    object-fit: cover; max-height: 300px; width: 100%;
+    object-fit: cover;
+    max-height: 300px;
+    width: 100%;
 }
+
 .datadog-iframe {
     position: absolute;
     left: 0;
@@ -31,6 +41,7 @@ body {
     height: 2500px;
     border: none;
 }
+
 @media (min-width: 768px) {
     .patreon-nav {
         margin-left: 1rem;
@@ -44,6 +55,7 @@ body {
 .login-link {
     color: rgba(255, 255, 255, 0.5);
 }
+
 .login-link img {
     display: inline;
     padding: 0;
@@ -51,6 +63,7 @@ body {
     width: 30px;
     border-radius: 15px;
 }
+
 .profile-big-avatar {
     height: 128px;
     width: 128px;
@@ -130,6 +143,7 @@ body {
     overflow: hidden;
     margin-bottom: 0.2rem;
 }
+
 .server-tile-item div h5 {
     line-height: 1.25rem;
     margin-bottom: 0;
@@ -142,15 +156,18 @@ body {
 .random-pictures-grid-sizer, .random-pictures-grid-item {
     width: 100%;
 }
+
 @media (min-width: 768px) {
     .random-pictures-grid-sizer, .random-pictures-grid-item {
         width: 25%;
     }
 }
+
 @media (min-width: 992px) {
     .random-pictures-grid-sizer, .random-pictures-grid-item {
         width: 20%;
     }
+
     .random-pictures-grid-container-fluid {
         margin-top: -1.1rem;
     }
@@ -177,11 +194,13 @@ body {
 .chatlog-table td {
     font-size: 0.75rem;
 }
+
 .chatlog-table tr.selected {
-    background-color: rgba(0,0,0,.065);
+    background-color: rgba(0, 0, 0, .065);
 }
+
 .chatlog-table tr.deleted {
-    background-color: rgba(255,0,0,.065);
+    background-color: rgba(255, 0, 0, .065);
 }
 
 .profile-bar, .profile-bar .progress-bar {
@@ -200,12 +219,15 @@ body {
 .profile-bar-colour-1 {
     background-color: #007bff !important;
 }
+
 .profile-bar-colour-2 {
     background-color: #5cb85c !important;
 }
+
 .profile-bar-colour-3 {
-    background-color: #ffc107!important
+    background-color: #ffc107 !important
 }
+
 .profile-bar-colour-4 {
     background-color: #dc3545 !important;
 }
@@ -213,26 +235,35 @@ body {
 #profile-bar-chart > .chart-container > .title {
     display: none;
 }
+
 #profile-bar-chart > .chart-container > .frappe-chart {
     margin-top: 0 !important;
     margin-left: 0;
     margin-right: 0;
     padding-bottom: 0;
 }
+
 #profile-bar-chart > .chart-container > .graph-stats-container {
     margin: 0 0 !important;
 }
+
 #profile-bar-chart > .chart-container .progress {
     height: 2.5rem;
     margin-bottom: 5px;
 }
+
 #profile-bar-chart > .chart-container .progress-bar {
     margin-bottom: 5px;
 }
+
 #profile-bar-chart > .chart-container .indicator:after {
     content: ' EXP';
 }
 
-.theme-dark .chat, .theme-dark .chat>.content, .theme-dark .friends-table, .theme-dark .messages-wrapper {
-    border-radius: 3px;
+.theme-dark .chat, .theme-dark .chat > .content, .theme-dark .friends-table, .theme-dark .messages-wrapper {
+    border-radius: 4px;
+}
+
+.discord-view code {
+    color: #fff;
 }

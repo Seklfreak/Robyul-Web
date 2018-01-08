@@ -616,7 +616,7 @@ $(function () {
 
         var command = commandPrefix;
 
-        $('.message-text > .markup').html(embedContent);
+        $('.message-text > .markup').html(parseDiscordMarkdown(embedContent));
         if (embedContent.length > 0) {
             command += 'ptext=' + embedContent + ' | ';
         }
@@ -639,11 +639,11 @@ $(function () {
                 }
             }
         }
-        $('.embed-title').replaceWith('<div class="embed-title">' + embedTitleText + '</div>')
+        $('.embed-title').replaceWith('<div class="embed-title">' + parseDiscordMarkdown(embedTitleText) + '</div>')
         if (embedTitleText.length > 0) {
             command += 'title=' + embedTitleText + ' | ';
         }
-        $('.embed-description.markup').html(embedDescription);
+        $('.embed-description.markup').html(parseDiscordMarkdown(embedDescription));
         if (embedDescription.length > 0) {
             command += 'description=' + embedDescription + ' | ';
         }
@@ -670,8 +670,8 @@ $(function () {
             }
         }
         $.each(embedFieldData, function (index) {
-            $('.embed-field-name').eq(index).html(this.title);
-            $('.embed-field-value.markup').eq(index).html(this.value);
+            $('.embed-field-name').eq(index).html(parseDiscordMarkdown(this.title));
+            $('.embed-field-value.markup').eq(index).html(parseDiscordMarkdown(this.value));
             if (this.checked) {
                 $('.embed-field').eq(index).attr('class', 'embed-field embed-field-inline');
                 if (this.title.length > 0 || this.value.length > 0) {
@@ -746,5 +746,10 @@ $(function () {
             });
     }
 
-
+    function parseDiscordMarkdown(inputText) {
+        var mdParse = SimpleMarkdown.defaultBlockParse;
+        var mdOutput = SimpleMarkdown.defaultOutput;
+        var syntaxTree = mdParse(inputText);
+        return convert(mdOutput(syntaxTree)[0]);
+    }
 });
