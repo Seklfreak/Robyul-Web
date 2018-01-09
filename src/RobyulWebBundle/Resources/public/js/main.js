@@ -701,8 +701,6 @@ $(function () {
         command = command.trim();
         $outputEmbedCode.html(command)
     }
-
-    // TODO: text formatting
     // TODO: paste embed code
 
     // helpers
