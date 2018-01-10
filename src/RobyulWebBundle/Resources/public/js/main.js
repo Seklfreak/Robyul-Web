@@ -541,43 +541,53 @@ $(function () {
     // discord embed creator
     var $discordEmbedForm = $('#discord-embed-form');
     if (typeof $discordEmbedForm !== 'undefined') {
-        updateDiscordEmbedCreator();
+        updateDiscordEmbedCreator(true);
         $('#discord-embed-form textarea, #discord-embed-form input').on('input', function () {
-            updateDiscordEmbedCreator();
+            updateDiscordEmbedCreator(true);
         });
         $('#discord-embed-form input[type="checkbox"]').change(function () {
-            updateDiscordEmbedCreator();
+            updateDiscordEmbedCreator(true);
         });
         var $discordEmbedAddFieldButton = $('#buttonDiscordEmbedAddField');
         $discordEmbedAddFieldButton.click(function () {
-            var newIndex = $('.embed-field').length;
-            var $newElement = $('<div class="form-row">' +
-                '<div class="form-group col-md-6">' +
-                '<label for="inputDiscordEmbedFieldTitle' + newIndex + '">Field Title</label>' +
-                '<input type="text" class="form-control form-control-sm inputDiscordEmbedFieldTitles" id="inputDiscordEmbedFieldTitle' + newIndex + '">' +
-                '</div>' +
-                '<div class="form-group col-md-5">' +
-                '<label for="inputDiscordEmbedFieldValue' + newIndex + '">Field Value</label>' +
-                '<textarea class="form-control form-control-sm inputDiscordEmbedFieldValues" id="inputDiscordEmbedFieldValue' + newIndex + '" rows="3"></textarea>' +
-                '</div>' +
-                '<div class="form-group col-md-1">' +
-                '<input class="form-check-input inputDiscordEmbedFieldInlines" type="checkbox" value="" id="inputDiscordEmbedFieldInline' + newIndex + '" checked>' +
-                '<label class="form-check-label" for="inputDiscordEmbedFieldInline' + newIndex + '">' +
-                'Inline' +
-                '</label>' +
-                '</div>' +
-                '</div>').insertBefore($discordEmbedAddFieldButton);
-            $newElement.find('textarea, input').on('input', function () {
-                updateDiscordEmbedCreator();
-            });
-            $newElement.find('input[type="checkbox"]').change(function () {
-                updateDiscordEmbedCreator();
-            });
-            updateDiscordEmbedCreator();
+            addDiscordEmbedFieldForm(true);
         })
     }
+    var $discordOutputForm = $('#outputEmbedCode');
+    if (typeof $discordOutputForm !== 'undefined') {
+        $discordOutputForm.on('input', function () {
+            importDiscordEmbedCreator();
+        });
+    }
 
-    function updateDiscordEmbedCreator() {
+    function addDiscordEmbedFieldForm(updateCode) {
+        var newIndex = $('.embed-field').length;
+        var $newElement = $('<div class="form-row">' +
+            '<div class="form-group col-md-6">' +
+            '<label for="inputDiscordEmbedFieldTitle' + newIndex + '">Field Title</label>' +
+            '<input type="text" class="form-control form-control-sm inputDiscordEmbedFieldTitles" id="inputDiscordEmbedFieldTitle' + newIndex + '">' +
+            '</div>' +
+            '<div class="form-group col-md-5">' +
+            '<label for="inputDiscordEmbedFieldValue' + newIndex + '">Field Value</label>' +
+            '<textarea class="form-control form-control-sm inputDiscordEmbedFieldValues" id="inputDiscordEmbedFieldValue' + newIndex + '" rows="3"></textarea>' +
+            '</div>' +
+            '<div class="form-group col-md-1">' +
+            '<input class="form-check-input inputDiscordEmbedFieldInlines" type="checkbox" value="" id="inputDiscordEmbedFieldInline' + newIndex + '" checked>' +
+            '<label class="form-check-label" for="inputDiscordEmbedFieldInline' + newIndex + '">' +
+            'Inline' +
+            '</label>' +
+            '</div>' +
+            '</div>').insertBefore($discordEmbedAddFieldButton);
+        $newElement.find('textarea, input').on('input', function () {
+            updateDiscordEmbedCreator(updateCode);
+        });
+        $newElement.find('input[type="checkbox"]').change(function () {
+            updateDiscordEmbedCreator(updateCode);
+        });
+        updateDiscordEmbedCreator(updateCode);
+    }
+
+    function updateDiscordEmbedCreator(updateCode) {
         var embedContent = $('#inputDiscordEmbedContent').val();
         var embedAuthorName = $('#inputDiscordEmbedAuthorName').val();
         var embedAuthorPicture = $('#inputDiscordEmbedAuthorPicture').val();
@@ -662,7 +672,7 @@ $(function () {
         }
 
         var numberOfEmbedFieldsInHTML = $('.embed-field').length;
-        if (embedFieldData.length - numberOfEmbedFieldsInHTML) {
+        if (embedFieldData.length - numberOfEmbedFieldsInHTML > 0) {
             for (i = 0; i < embedFieldData.length - numberOfEmbedFieldsInHTML; i++) {
                 $('.embed-fields').append('<div class="embed-field">\n' +
                     '<div class="embed-field-name"></div><div class="embed-field-value markup"></div>\n' +
@@ -699,9 +709,183 @@ $(function () {
 
         command = command.replace(/\| $/g, '');
         command = command.trim();
-        $outputEmbedCode.html(command)
+
+        if (updateCode) {
+            $outputEmbedCode.val(command);
+        }
     }
-    // TODO: paste embed code
+
+    function importDiscordEmbedCreator() {
+        var inputValue = $('#outputEmbedCode').val();
+        var inputParts = inputValue.split(' ');
+        if (inputParts[0].indexOf('=') < 0) {
+            inputValue = inputValue.replace(inputParts[0], '');
+        }
+        if (inputParts[0].indexOf('=') < 0) {
+            inputValue = inputValue.replace(inputParts[1], '');
+        }
+        inputValue = inputValue.trim();
+
+        if (inputValue.length <= 0) {
+            return;
+        }
+
+        // Code ported from https://github.com/appu1232/Discord-Selfbot/blob/master/cogs/misc.py#L146
+        // Reference https://github.com/Seklfreak/Robyul2/blob/master/modules/plugins/embedpost.go#L74
+        var messageContent = "", authorName = "", authorPicture = "", authorLink = "", title = "", description = "",
+            thumbnail = "", image = "", footerText = "",
+            footerLink = "", color = "";
+
+        var inputValues = [];
+
+        $.each(inputValue.split('|'), function () {
+            inputValues.push($.trim(this));
+        });
+
+        $.each(inputValues, function () {
+            var embedValue = this;
+            if (embedValue.indexOf('ptext=') === 0) {
+                messageContent = embedValue.substr(6, embedValue.length).trim();
+            } else if (embedValue.indexOf('title=') === 0) {
+                title = embedValue.substr(6, embedValue.length).trim();
+            } else if (embedValue.indexOf('description=') === 0) {
+                description = embedValue.substr(12, embedValue.length).trim();
+            } else if (embedValue.indexOf('desc=') === 0) {
+                description = embedValue.substr(5, embedValue.length).trim();
+            } else if (embedValue.indexOf('image=') === 0) {
+                image = embedValue.substr(6, embedValue.length).trim();
+            } else if (embedValue.indexOf('thumbnail=') === 0) {
+                thumbnail = embedValue.substr(10, embedValue.length).trim();
+            } else if (embedValue.indexOf('colour=') === 0) {
+                color = embedValue.substr(7, embedValue.length).trim();
+            } else if (embedValue.indexOf('color=') === 0) {
+                color = embedValue.substr(6, embedValue.length).trim();
+            } else if (embedValue.indexOf('footer=') === 0) {
+                footerText = embedValue.substr(7, embedValue.length).trim();
+            } else if (embedValue.indexOf('author=') === 0) {
+                authorName = embedValue.substr(7, embedValue.length).trim();
+            } else if (description.length <= 0 && embedValue.indexOf('field=') !== 0) {
+                description = embedValue
+            }
+        });
+
+        if (authorName.length > 0) {
+            if (authorName.indexOf('icon=') >= 0) {
+                var authorValues = authorName.split('icon=', 2);
+                if (authorValues.length >= 2) {
+                    if (authorValues[1].indexOf('url=') >= 0) {
+                        var iconValues = authorValues[1].split('url=', 2);
+                        if (iconValues.length >= 2) {
+                            authorName = authorValues[0].substr(5, authorValues[0].length).trim();
+                            authorPicture = iconValues[0].trim();
+                            authorLink = iconValues[1].trim();
+                        }
+                    } else {
+                        authorName = authorValues[0].substr(5, authorValues[0].length).trim();
+                        authorPicture = authorValues[1].trim();
+                    }
+                }
+            } else {
+                if (authorName.indexOf('url=') >= 0) {
+                    var authorValues = authorName.split('url=', 2);
+                    if (authorValues.length >= 2) {
+                        authorName = authorValues[0].substr(5, authorValues[0].length).trim();
+                        authorLink = authorValues[1].trim();
+                    }
+                }
+            }
+        }
+
+        if (footerText.length > 0) {
+            if (footerText.indexOf('icon=') > 0) {
+                var footerValues = footerText.split('icon=', 2);
+                if (footerValues.length >= 2) {
+                    footerText = footerValues[0].substr(5, footerValues[0].length).trim();
+                    footerLink = footerValues[1].trim();
+                }
+            }
+        }
+
+        var embedFieldData = [];
+        $.each(inputValues, function () {
+            var embedValue = this;
+            if (embedValue.indexOf('field=') === 0) {
+                var currentIndex = embedFieldData.length;
+                embedFieldData[currentIndex] = {
+                    title: '',
+                    value: '',
+                    checked: true
+                };
+                embedValue = embedValue.substr(6, embedValue.length).trim();
+                var fieldValues = embedValue.split('value=', 2);
+                if (fieldValues.length >= 2) {
+                    embedFieldData[currentIndex]['title'] = fieldValues[0].trim();
+                    embedFieldData[currentIndex]['value'] = fieldValues[1].trim();
+                } else if (fieldValues.length >= 1) {
+                    embedFieldData[currentIndex]['title'] = fieldValues[0].trim();
+                }
+                if (embedFieldData[currentIndex]['value'].indexOf('inline=') > 0) {
+                    var fieldValues = embedFieldData[currentIndex]['value'].split('inline=', 2);
+                    if (fieldValues.length >= 2) {
+                        embedFieldData[currentIndex]['value'] = fieldValues[0].trim();
+                        if (fieldValues[1].indexOf('false') >= 0 || fieldValues[1].indexOf('no') >= 0) {
+                            embedFieldData[currentIndex]['checked'] = false;
+                        }
+                    } else if (fieldValues.length >= 1) {
+                        embedFieldData[currentIndex]['value'] = fieldValues[0].trim();
+                    }
+                }
+                if (embedFieldData[currentIndex]['title'].indexOf('name=') >= 0) {
+                    embedFieldData[currentIndex]['title'] = embedFieldData[currentIndex]['title'].substr(5, embedFieldData[currentIndex]['title'].length);
+                }
+            }
+        });
+
+        if (color.length <= 0) {
+            color = '#4f545c';
+        }
+
+        var embedContent = $('#inputDiscordEmbedContent').val(messageContent);
+        var embedAuthorName = $('#inputDiscordEmbedAuthorName').val(authorName);
+        var embedAuthorPicture = $('#inputDiscordEmbedAuthorPicture').val(authorPicture);
+        var embedAuthorLink = $('#inputDiscordEmbedAuthorLink').val(authorLink);
+        var embedTitleText = $('#inputDiscordEmbedTitleText').val(title);
+        var embedDescription = $('#inputDiscordEmbedDescription').val(description);
+        var embedThumbnailLink = $('#inputDiscordEmbedThumbnailLink').val(thumbnail);
+        var embedImageLink = $('#inputDiscordEmbedImageLink').val(image);
+        var embedFooterText = $('#inputDiscordEmbedFooterText').val(footerText);
+        var embedFooterLink = $('#inputDiscordEmbedFooterLink').val(footerLink);
+        var embedColor = $('#inputDiscordEmbedColor').val(color);
+
+        var numberOfEmbedFieldFormsInHTML = $('.inputDiscordEmbedFieldTitles').length;
+        createDelayedEmbedFieldFormsWithCallback(embedFieldData.length - numberOfEmbedFieldFormsInHTML, function () {
+            $.each(embedFieldData, function (index) {
+                $('.inputDiscordEmbedFieldTitles').eq(index).val(this.title);
+                $('.inputDiscordEmbedFieldValues').eq(index).val(this.value);
+                if (this.checked) {
+                    $('.inputDiscordEmbedFieldInlines').eq(index).attr('checked', true);
+                } else {
+                    $('.inputDiscordEmbedFieldInlines').eq(index).attr('checked', false);
+                }
+            });
+
+            updateDiscordEmbedCreator(false);
+        });
+    }
+
+    // TODO: wrong code when creating fields using code insert
+    // probably because of addDiscordEmbedFieldForm();
+
+    function createDelayedEmbedFieldFormsWithCallback(numberOfForms, callback) {
+        if (numberOfForms <= 0) {
+            callback();
+        } else {
+            setTimeout(function () {
+                addDiscordEmbedFieldForm(false);
+                createDelayedEmbedFieldFormsWithCallback(numberOfForms - 1, callback)
+            }, 10);
+        }
+    }
 
     // helpers
     function escapeHTML(text) {

@@ -267,3 +267,8 @@ body {
 .discord-view code {
     color: #fff;
 }
+
+.embed-creator-footer {
+    margin-bottom: 0;
+    margin-top: 1rem;
+}
