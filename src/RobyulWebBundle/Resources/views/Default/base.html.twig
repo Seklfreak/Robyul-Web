@@ -36,7 +36,8 @@
         });
     </script>
     <script src="https://use.fontawesome.com/2351bf315b.js"></script>
-    {% stylesheets '@RobyulWebBundle/Resources/public/css/main.css'
+    {% stylesheets '@RobyulWebBundle/Resources/public/css/pace-theme-minimal.css'
+        '@RobyulWebBundle/Resources/public/css/main.css'
         '@RobyulWebBundle/Resources/public/css/discord.css' output='static/css/main.css' %}
         <link rel="stylesheet" href="{{ asset_url }}"/>
     {% endstylesheets %}
@@ -195,6 +196,7 @@
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 {% javascripts
     '@RobyulWebBundle/Resources/public/js/main.js'
+    '@RobyulWebBundle/Resources/public/js/pace.js'
     '@RobyulWebBundle/Resources/public/js/imagesloaded.pkgd.js'
     '@RobyulWebBundle/Resources/public/js/isotope.pkgd.js'
     '@RobyulWebBundle/Resources/public/js/ie10-viewport-bug-workaround.js'

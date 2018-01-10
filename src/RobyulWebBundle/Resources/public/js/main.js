@@ -540,7 +540,7 @@ $(function () {
     }
     // discord embed creator
     var $discordEmbedForm = $('#discord-embed-form');
-    if (typeof $discordEmbedForm !== 'undefined') {
+    if (typeof $discordEmbedForm !== 'undefined' && $discordEmbedForm.length > 0) {
         updateDiscordEmbedCreator(true);
         $('#discord-embed-form textarea, #discord-embed-form input').on('input', function () {
             updateDiscordEmbedCreator(true);
@@ -554,7 +554,7 @@ $(function () {
         })
     }
     var $discordOutputForm = $('#outputEmbedCode');
-    if (typeof $discordOutputForm !== 'undefined') {
+    if (typeof $discordOutputForm !== 'undefined' && $discordOutputForm.length > 0) {
         $discordOutputForm.on('input', function () {
             importDiscordEmbedCreator();
         });
