@@ -35,6 +35,7 @@ parameters:
     discord_invite_base: 'https://discord.gg'
 
     sentry_dns: ~
+    sentry_frontend_public_dns: ~
 
     bot_default_prefix: '_'
     bot_user: 'Robyul#7030'

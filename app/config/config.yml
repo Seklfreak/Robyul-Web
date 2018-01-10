@@ -32,7 +32,7 @@ framework:
     fragments: ~
     http_method_override: true
     assets:
-        version: 'v100'
+        version: 'v101'
     php_errors:
         log: true
 
@@ -46,6 +46,7 @@ twig:
         bot_user: '%bot_user%'
         bot_user_id: '%bot_user_id%'
         vanityinvite_domain: '%vanityinvite_domain%'
+        sentry_frontend_public_dns: '%sentry_frontend_public_dns%'
         js_parameters:
             bot_api_base_url: '%bot_api_base_url%'
             session_url: '%session_url%'

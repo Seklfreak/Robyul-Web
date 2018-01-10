@@ -31,7 +31,7 @@
             </div>
         </div>
     </form>
-    <div class="row">
+    <div class="row" id="chatlog-container-table">
         <div class="col-12">
             <table class="table table-hover table-sm chatlog-table">
                 <thead>
@@ -44,6 +44,11 @@
                 </thead>
                 <tbody id="chatlog-result-tbody"></tbody>
             </table>
+        </div>
+    </div>
+    <div class="row" id="chatlog-container-not-found" style="display: none;">
+        <div class="mx-auto">
+            <h4>Sorry, no chatlog found!</h4>
         </div>
     </div>
 {% endblock %}
