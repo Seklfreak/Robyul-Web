@@ -845,17 +845,17 @@ $(function () {
             color = '#4f545c';
         }
 
-        var embedContent = $('#inputDiscordEmbedContent').val(messageContent);
-        var embedAuthorName = $('#inputDiscordEmbedAuthorName').val(authorName);
-        var embedAuthorPicture = $('#inputDiscordEmbedAuthorPicture').val(authorPicture);
-        var embedAuthorLink = $('#inputDiscordEmbedAuthorLink').val(authorLink);
-        var embedTitleText = $('#inputDiscordEmbedTitleText').val(title);
-        var embedDescription = $('#inputDiscordEmbedDescription').val(description);
-        var embedThumbnailLink = $('#inputDiscordEmbedThumbnailLink').val(thumbnail);
-        var embedImageLink = $('#inputDiscordEmbedImageLink').val(image);
-        var embedFooterText = $('#inputDiscordEmbedFooterText').val(footerText);
-        var embedFooterLink = $('#inputDiscordEmbedFooterLink').val(footerLink);
-        var embedColor = $('#inputDiscordEmbedColor').val(color);
+        $('#inputDiscordEmbedContent').val(messageContent);
+        $('#inputDiscordEmbedAuthorName').val(authorName);
+        $('#inputDiscordEmbedAuthorPicture').val(authorPicture);
+        $('#inputDiscordEmbedAuthorLink').val(authorLink);
+        $('#inputDiscordEmbedTitleText').val(title);
+        $('#inputDiscordEmbedDescription').val(description);
+        $('#inputDiscordEmbedThumbnailLink').val(thumbnail);
+        $('#inputDiscordEmbedImageLink').val(image);
+        $('#inputDiscordEmbedFooterText').val(footerText);
+        $('#inputDiscordEmbedFooterLink').val(footerLink);
+        $('#inputDiscordEmbedColor').val(color);
 
         var numberOfEmbedFieldFormsInHTML = $('.inputDiscordEmbedFieldTitles').length;
         createDelayedEmbedFieldFormsWithCallback(embedFieldData.length - numberOfEmbedFieldFormsInHTML, function () {
@@ -872,9 +872,6 @@ $(function () {
             updateDiscordEmbedCreator(false);
         });
     }
-
-    // TODO: wrong code when creating fields using code insert
-    // probably because of addDiscordEmbedFieldForm();
 
     function createDelayedEmbedFieldFormsWithCallback(numberOfForms, callback) {
         if (numberOfForms <= 0) {
