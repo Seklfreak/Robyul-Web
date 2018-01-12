@@ -945,13 +945,23 @@ Raven.context(function () {
                             targetText = '';
                             if (targetChannel !== null) {
                                 if (targetChannel.ParentID !== "") {
-                                    parentChannel = getFromEventlogData(msg.Channels, targetChannel.ParentID)
+                                    parentChannel = getFromEventlogData(msg.Channels, targetChannel.ParentID);
                                     if (parentChannel !== null) {
                                         targetText += '#' + parentChannel.Name + ' / ';
                                     }
                                 }
 
                                 targetText += '#' + targetChannel.Name
+                            } else {
+                                targetText += 'N/A'
+                            }
+                            targetText += ' #' + message.TargetID;
+                            break;
+                        case "role":
+                            targetRole = getFromEventlogData(msg.Roles, message.TargetID);
+                            targetText = '';
+                            if (targetRole !== null) {
+                                targetText += targetRole.Name
                             } else {
                                 targetText += 'N/A'
                             }
@@ -994,7 +1004,9 @@ Raven.context(function () {
                 return null;
             }
 
-            var result = $.grep(eventlogData, function(e){ return e.ID === id; });
+            var result = $.grep(eventlogData, function (e) {
+                return e.ID === id;
+            });
             if (result.length <= 0) {
                 return null;
             } else {
@@ -1008,7 +1020,7 @@ Raven.context(function () {
             }
 
             optionText = '';
-            $.each(options, function(i, option) {
+            $.each(options, function (i, option) {
                 optionText += escapeHTML(option.Key) + ': ' + escapeHTML(option.Value) + "<br>\n";
             });
             return optionText;
@@ -1063,7 +1075,7 @@ Raven.context(function () {
         }
     });
 });
-$(document).ajaxError(function(event, jqXHR, ajaxSettings, thrownError) {
+$(document).ajaxError(function (event, jqXHR, ajaxSettings, thrownError) {
     Raven.captureMessage(thrownError || jqXHR.statusText, {
         extra: {
             type: ajaxSettings.type,
