@@ -897,6 +897,123 @@ Raven.context(function () {
             }
         }
 
+        // Eventlog submit
+        var $eventlogContainerTable = $('#eventlog-container-table');
+        var $eventlogContainerNotFound = $('#eventlog-container-not-found');
+        var $eventlogForm = $('#eventlog-form');
+        var $eventlogSubmitButton = $('#button-eventlog-submit');
+        var $eventlogResultTBody = $eventlogContainerTable.find('tbody');
+        $eventlogForm.on('submit', function (event) {
+            event.preventDefault();
+            $eventlogSubmitButton.prop('disabled', true);
+            var guildID = $eventlogForm.data('guild-id');
+
+            var eventlogEndpoint = 'eventlog/' + guildID;
+
+            apiRequest(eventlogEndpoint, function (msg) {
+                if (typeof msg === 'undefined' || msg.length <= 0) {
+                    $eventlogResultTBody.html('');
+                    $eventlogContainerNotFound.show();
+                    $eventlogContainerTable.hide();
+                    $eventlogSubmitButton.prop('disabled', false);
+                    return;
+                }
+                $eventlogContainerTable.show();
+                $eventlogContainerNotFound.hide();
+
+                var resultHTML = '';
+                $.each(msg.Entries, function (i, message) {
+                    var classes = '';
+                    if (message.WaitingForData === true) {
+                        classes = 'waiting-for-data';
+                    }
+
+                    targetText = message.TargetID;
+                    switch (message.TargetType) {
+                        case "user":
+                            targetUser = getFromEventlogData(msg.Users, message.TargetID);
+                            targetText = '';
+                            if (targetUser !== null) {
+                                targetText += '@' + targetUser.Username + '#' + targetUser.Discriminator
+                            } else {
+                                targetText += 'N/A'
+                            }
+                            targetText += ' #' + message.TargetID;
+                            break;
+                        case "channel":
+                            targetChannel = getFromEventlogData(msg.Channels, message.TargetID);
+                            targetText = '';
+                            if (targetChannel !== null) {
+                                if (targetChannel.ParentID !== "") {
+                                    parentChannel = getFromEventlogData(msg.Channels, targetChannel.ParentID)
+                                    if (parentChannel !== null) {
+                                        targetText += '#' + parentChannel.Name + ' / ';
+                                    }
+                                }
+
+                                targetText += '#' + targetChannel.Name
+                            } else {
+                                targetText += 'N/A'
+                            }
+                            targetText += ' #' + message.TargetID;
+                            break;
+                    }
+                    issuerText = message.UserID;
+                    if (message.UserID !== "") {
+                        issuerUser = getFromEventlogData(msg.Users, message.UserID);
+                        issuerText = '';
+                        if (issuerUser !== null) {
+                            issuerText += '@' + issuerUser.Username + '#' + issuerUser.Discriminator
+                        } else {
+                            issuerText += 'N/A'
+                        }
+                        issuerText += ' #' + message.UserID;
+                    }
+
+                    resultHTML += '<tr class="' + classes + '">' +
+                        '<td scope="row">' + escapeHTML(message.CreatedAt) + '</td>' +
+                        '<td>' + escapeHTML(targetText) + '</td>' +
+                        '<td>' + escapeHTML(issuerText) + '</td>' +
+                        '<td>' + escapeHTML(message.ActionType) + '</td>' +
+                        '<td>' + escapeHTML(message.Reason) + '</td>' +
+                        '<td>' + escapeHTML(JSON.stringify(message.Changes)) + '</td>' +
+                        '<td>' + stringifyOptions(message.Options) + '</td>' +
+                        '</tr>';
+                });
+                $eventlogResultTBody.html(resultHTML);
+                $eventlogSubmitButton.prop('disabled', false);
+            });
+        });
+
+        if (typeof $eventlogSubmitButton !== 'undefined' && $eventlogSubmitButton.length > 0) {
+            $eventlogSubmitButton.click();
+        }
+
+        function getFromEventlogData(eventlogData, id) {
+            if (eventlogData === null) {
+                return null;
+            }
+
+            var result = $.grep(eventlogData, function(e){ return e.ID === id; });
+            if (result.length <= 0) {
+                return null;
+            } else {
+                return result[0];
+            }
+        }
+
+        function stringifyOptions(options) {
+            if (options === null || options.length <= 0) {
+                return '';
+            }
+
+            optionText = '';
+            $.each(options, function(i, option) {
+                optionText += escapeHTML(option.Key) + ': ' + escapeHTML(option.Value) + "<br>\n";
+            });
+            return optionText;
+        }
+
         // helpers
         function escapeHTML(text) {
             var htmlEscapes = {

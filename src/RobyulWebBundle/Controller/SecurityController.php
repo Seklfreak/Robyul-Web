@@ -190,4 +190,40 @@ class SecurityController extends Controller
             'vanityInviteName' => $vanityInviteName,
         ));
     }
+
+    /**
+     * @Route("/d/eventlog/{guildID}")
+     */
+    public function eventlogAction($guildID, RobyulApi $robyulApi)
+    {
+        $statusMember = $robyulApi->getRequest('member/' . $guildID . '/' . $this->getUser()->getID() . '/status', '+1 minutes');
+
+        if ($statusMember['IsGuildMod'] !== true && $statusMember['IsGuildAdmin'] !== true) {
+            return $this->redirectToRoute('robyulweb_security_profile');
+        }
+
+        $guildData = $robyulApi->getRequest('guild/' . $guildID, '+1 minutes');
+
+        $guildName = $guildData['Name'];
+        $guildIcon = $guildData['Icon'];
+        $guildChannels = $guildData['Channels'];
+        $eventlogEnabled = (bool)$guildData['Features']->Eventlog->Enabled;
+        if ($eventlogEnabled !== true) {
+            return $this->redirectToRoute('robyulweb_security_profile');
+        }
+
+        $seoPage = $this->container->get('sonata.seo.page');
+        $seoPage
+            ->setTitle($guildName . " Eventlog - The KPop Discord Bot - Robyul")
+            ->addMeta('name', 'description', "View the eventlog for " . $guildName . ".")
+            ->addMeta('property', 'og:description', "View the eventlog for " . $guildName . ".");
+        $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
+
+        return $this->render('RobyulWebBundle:Security:eventlog.html.twig', array(
+            'guildID' => $guildID,
+            'guildName' => $guildName,
+            'guildIcon' => $guildIcon,
+            'guildChannels' => $guildChannels,
+        ));
+    }
 }

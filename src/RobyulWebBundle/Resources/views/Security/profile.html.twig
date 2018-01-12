@@ -69,6 +69,12 @@
                                                 class="fa fa-bar-chart" aria-hidden="true"></i> Statistics</a>
                                 </li>
                             {% endif %}
+                            {% if (guild.Status.IsGuildAdmin or guild.Status.IsGuildMod) and guild.Features.Eventlog.Enabled %}
+                                <li>
+                                    <a href="{{ path('robyulweb_security_eventlog', {'guildID': guild.ID}) }}"><i
+                                                class="fa fa-binoculars" aria-hidden="true"></i> Eventlog</a>
+                                </li>
+                            {% endif %}
                             {% if guild.Status.HasGuildPermissionAdministrator and guild.Features.Chatlog.Enabled %}
                                 <li>
                                     <a href="{{ path('robyulweb_security_chatlog', {'guildID': guild.ID}) }}"><i

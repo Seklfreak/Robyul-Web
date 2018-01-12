@@ -1,0 +1,66 @@
+{% extends "RobyulWebBundle:Default:base.html.twig" %}
+
+{% block content %}
+    <div class="row server-general-header">
+        <div class="col-12">
+            {% if guildIcon !=  "" %}
+                <img class="ranking-big-icon"
+                    src="https://cdn.discordapp.com/icons/{{ guildID }}/{{ guildIcon }}.jpg?size=256">
+            {% endif %}
+            <h1 class="display-3 ranking-server-title">
+                <small>Eventlog for</small> {{ guildName }}
+            </h1>
+        </div>
+    </div>
+    <form id="eventlog-form" data-guild-id="{{ guildID }}">
+        <div class="row">
+            <div class="col-12 col-md-9"></div>
+            {#
+            <div class="col-12 col-md-3">
+                <select class="form-control" id="chatlog-channel-select" required>
+                    {% for channel in guildChannels %}
+                        {% if channel.Type == "text" %}
+                            <option value="{{ channel.ID }}">#{{ channel.Name }}</option>
+                        {% endif %}
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="col-12 col-md-3">
+                <input type="text" class="form-control" id="chatlog-around-messageid-input" placeholder="Around Message ID">
+            </div>
+            #}
+            <div class="col-12 col-md-3">
+                <button type="submit" class="btn btn-primary" id="button-eventlog-submit">Lookup</button>
+            </div>
+        </div>
+    </form>
+    <div class="row">
+        <div class="col-12">
+            {# TODO: implement permissions check #}
+            <p>yellow highlighted entries: waiting for more data. Please make sure Robyul has the <code>View Audit Log</code> permission if the data is not appearing.</p>
+        </div>
+    </div>
+    <div class="row" id="eventlog-container-table">
+        <div class="col-12">
+            <table class="table table-hover table-sm">
+                <thead>
+                    <tr>
+                        <th>Time</th>
+                        <th>Target</th>
+                        <th>Issuer</th>
+                        <th>ActionType</th>
+                        <th>Reason</th>
+                        <th>Changes</th>
+                        <th>Options</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row" id="eventlog-container-not-found" style="display: none;">
+        <div class="mx-auto">
+            <h4>Sorry, no eventlog entries found!</h4>
+        </div>
+    </div>
+{% endblock %}
