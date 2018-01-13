@@ -967,6 +967,16 @@ Raven.context(function () {
                             }
                             targetText += ' #' + message.TargetID;
                             break;
+                        case "emoji":
+                            targetEmoji = getFromEventlogData(msg.Emoji, message.TargetID);
+                            targetText = '';
+                            if (targetEmoji !== null) {
+                                targetText += ':' + targetEmoji.Name + ':'
+                            } else {
+                                targetText += 'N/A'
+                            }
+                            targetText += ' #' + message.TargetID;
+                            break;
                     }
                     issuerText = message.UserID;
                     if (message.UserID !== "") {
@@ -986,7 +996,7 @@ Raven.context(function () {
                         '<td>' + escapeHTML(issuerText) + '</td>' +
                         '<td>' + escapeHTML(message.ActionType) + '</td>' +
                         '<td>' + escapeHTML(message.Reason) + '</td>' +
-                        '<td>' + escapeHTML(JSON.stringify(message.Changes)) + '</td>' +
+                        '<td>' + stringifyChanges(message.Changes) + '</td>' +
                         '<td>' + stringifyOptions(message.Options) + '</td>' +
                         '</tr>';
                 });
@@ -1024,6 +1034,19 @@ Raven.context(function () {
                 optionText += escapeHTML(option.Key) + ': ' + escapeHTML(option.Value) + "<br>\n";
             });
             return optionText;
+        }
+
+        function stringifyChanges(changes) {
+            if (changes === null || changes.length <= 0) {
+                return '';
+            }
+
+            changeText = '';
+            $.each(changes, function (i, change) {
+                changeText += escapeHTML(change.Key) + ': ' + escapeHTML(change.OldValue)
+                    + ' => ' + escapeHTML(change.NewValue) + "<br>\n";
+            });
+            return changeText;
         }
 
         // helpers
