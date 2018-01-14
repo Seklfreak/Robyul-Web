@@ -977,6 +977,16 @@ Raven.context(function () {
                             }
                             targetText += ' #' + message.TargetID;
                             break;
+                        case "guild":
+                            targetGuild = getFromEventlogData(msg.Guilds, message.TargetID);
+                            targetText = '';
+                            if (targetGuild !== null) {
+                                targetText += targetGuild.Name
+                            } else {
+                                targetText += 'N/A'
+                            }
+                            targetText += ' #' + message.TargetID;
+                            break;
                     }
                     issuerText = message.UserID;
                     if (message.UserID !== "") {
