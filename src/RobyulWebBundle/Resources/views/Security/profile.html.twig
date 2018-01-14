@@ -87,6 +87,12 @@
                                                 class="fa fa-link" aria-hidden="true"></i> Custom Invite</a>
                                 </li>
                             {% endif %}
+                            {% if (guild.Status.IsGuildAdmin or guild.Status.IsGuildMod) and guild.Settings and guild.Settings.Strings and guild.Settings.Strings|length > 0 %}
+                                <li>
+                                    <a href="{{ path('robyulweb_security_settings', {'guildID': guild.ID}) }}"><i
+                                                class="fa fa-wrench" aria-hidden="true"></i> Settings</a>
+                                </li>
+                            {% endif %}
                         </ul>
                     </div>
                 {% endfor %}

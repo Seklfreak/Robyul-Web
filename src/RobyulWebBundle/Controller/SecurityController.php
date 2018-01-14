@@ -226,4 +226,36 @@ class SecurityController extends Controller
             'guildChannels' => $guildChannels,
         ));
     }
+
+    /**
+     * @Route("/d/settings/{guildID}")
+     */
+    public function settingsAction($guildID, RobyulApi $robyulApi)
+    {
+        $statusMember = $robyulApi->getRequest('member/' . $guildID . '/' . $this->getUser()->getID() . '/status', '+1 minutes');
+
+        if ($statusMember['IsGuildMod'] !== true && $statusMember['IsGuildAdmin'] !== true) {
+            return $this->redirectToRoute('robyulweb_security_profile');
+        }
+
+        $guildData = $robyulApi->getRequest('guild/' . $guildID, '+1 minutes');
+
+        $guildName = $guildData['Name'];
+        $guildIcon = $guildData['Icon'];
+        $guildChannels = $guildData['Channels'];
+
+        $seoPage = $this->container->get('sonata.seo.page');
+        $seoPage
+            ->setTitle($guildName . " Settings - The KPop Discord Bot - Robyul")
+            ->addMeta('name', 'description', "Change Robyul Settings for " . $guildName . ".")
+            ->addMeta('property', 'og:description', "Change Robyul Settings for " . $guildName . ".");
+        $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
+
+        return $this->render('RobyulWebBundle:Security:settings.html.twig', array(
+            'guildID' => $guildID,
+            'guildName' => $guildName,
+            'guildIcon' => $guildIcon,
+            'guildChannels' => $guildChannels,
+        ));
+    }
 }

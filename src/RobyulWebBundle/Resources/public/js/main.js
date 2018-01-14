@@ -1019,6 +1019,78 @@ Raven.context(function () {
             $eventlogSubmitButton.click();
         }
 
+        // settings
+        $settingsContainer = $('#settings-container');
+        if (typeof $settingsContainer !== 'undefined' && $settingsContainer.length > 0) {
+            displaySettingsForm();
+        }
+
+        function displaySettingsForm() {
+            guildID = $settingsContainer.data('guild-id');
+            var guildEndpoint = 'guild/' + guildID;
+
+            apiRequest(guildEndpoint, function (msg) {
+                // TODO: check user level before displaying
+                // TODO: sort channels, show parent channel names
+
+                $settingsContainer.html('');
+                newHTML = '';
+                if (typeof msg.Settings === 'undefined') {
+                    return;
+                }
+                if (typeof msg.Settings.Strings !== 'undefined') {
+                    $.each(msg.Settings.Strings, function (i, stringSetting) {
+                        switch (stringSetting.Key) {
+                            case 'eventlog_discord_channelid':
+                                newHTML += '<div class="form-row">' +
+                                    '<div class="form-group col-12">' +
+                                    '<label for="input' + stringSetting.Key + '">Eventlog Discord Channel</label>' +
+                                    '<select class="form-control robyul-setting-string-input" id="input' + stringSetting.Key + '" data-setting-key="' + stringSetting.Key + '" required>' +
+                                    '<option value=""' + ((stringSetting.Values.length <= 0) ? 'selected' : '') + '>None</option>';
+                                $.each(msg.Channels, function (j, channel) {
+                                    if (channel.Type !== 'text') {
+                                        return
+                                    }
+
+                                    newHTML += '<option value="' + channel.ID + '" ' + (($.inArray(channel.ID, stringSetting.Values) > -1) ? 'selected' : '') + '>#' + channel.Name + '</option>';
+                                });
+                                newHTML += '</select>' +
+                                    '<small class="form-text text-muted">Eventlog events will be posted in this channel.</small>' +
+                                    '</div>';
+                                break;
+                        }
+                    });
+                }
+                if (newHTML.length > 0) {
+                    newHTML += '<div class="col-12">' +
+                        '<button type="submit" class="btn btn-primary" id="button-settings-submit">Save</button>' +
+                        '</div>';
+                }
+                $settingsContainer.html(newHTML);
+                if (newHTML.length > 0) {
+                    $settingsSubmitButton = $('#button-settings-submit');
+                    $settingsSubmitButton.click(function (event) {
+                        event.preventDefault();
+                        $settingsSubmitButton.prop('disabled', true);
+
+                        var newSettings = {Strings: []};
+                        $('.robyul-setting-string-input').each(function () {
+                            newSettings.Strings.push({
+                                Key: $(this).data('setting-key'),
+                                Values: [$(this).val()]
+                            });
+                        });
+
+                        var guildEndpoint = 'guild/' + guildID + '/set-settings';
+                        apiRequestData(guildEndpoint, function () {
+                            console.debug('done');
+                            displaySettingsForm();
+                        }, newSettings);
+                    });
+                }
+            });
+        }
+
         function getFromEventlogData(eventlogData, id) {
             if (eventlogData === null) {
                 return null;
@@ -1080,24 +1152,67 @@ Raven.context(function () {
                 method: "POST",
                 url: window.parameters.session_url,
                 cache: false,
-                dataType: "text"
-            })
-                .done(function (msg) {
+                dataType: "text",
+                error: function (_, errMsg, _) {
+                    alert(errMsg);
+                },
+                success: function (msg) {
                     sessionID = msg;
 
                     $.ajax({
                         method: "GET",
                         url: window.parameters.bot_api_base_url + endpoint,
                         cache: false,
-                        dataType: "json",
+                        //dataType: "json",
                         headers: {
                             "Authorization": "PHP-Session " + sessionID
-                        }
-                    })
-                        .done(function (msg) {
+                        },
+                        error: function (_, errMsg, _) {
+                            alert(errMsg);
+                        },
+                        success: function (msg) {
                             callback(msg)
-                        });
-                });
+                        }
+                    });
+                }
+            });
+        }
+
+        function apiRequestData(endpoint, callback, data) {
+            $.ajax({
+                method: "POST",
+                url: window.parameters.session_url,
+                cache: false,
+                dataType: "text",
+                error: function (_, errMsg, _) {
+                    alert(errMsg);
+                },
+                success: function (msg) {
+                    sessionID = msg;
+
+                    $.ajax({
+                        method: "POST",
+                        url: window.parameters.bot_api_base_url + endpoint,
+                        cache: false,
+                        contentType: "application/json; charset=utf-8",
+                        //dataType: "json",
+                        headers: {
+                            "Authorization": "PHP-Session " + sessionID
+                        },
+                        data: JSON.stringify(data),
+                        error: function (_, errMsg, _) {
+                            console.debug('error');
+                            console.debug(errMsg);
+                            alert(errMsg);
+                        },
+                        success: function (msg) {
+                            console.debug('success');
+                            console.debug(msg);
+                            callback(msg)
+                        }
+                    });
+                }
+            });
         }
 
         function parseDiscordMarkdown(inputText) {

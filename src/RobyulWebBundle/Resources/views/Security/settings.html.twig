@@ -1,0 +1,17 @@
+{% extends "RobyulWebBundle:Default:base.html.twig" %}
+
+{% block content %}
+    <div class="row server-general-header">
+        <div class="col-12">
+            {% if guildIcon !=  "" %}
+                <img class="ranking-big-icon"
+                    src="https://cdn.discordapp.com/icons/{{ guildID }}/{{ guildIcon }}.jpg?size=256">
+            {% endif %}
+            <h1 class="display-3 ranking-server-title">
+                <small>Settings for</small> {{ guildName }}
+            </h1>
+        </div>
+    </div>
+    <div class="row" id="settings-container" data-guild-id="{{ guildID }}">
+    </div>
+{% endblock %}

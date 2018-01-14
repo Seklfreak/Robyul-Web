@@ -24,23 +24,23 @@ class RobyulApi
         $this->logger->info($method . ' ' . $url . ' as ' . $as . ' took ' . $took . 's');
     }
 
-    public function getRequest($endpoint, $expire = '+1 hour')
+    public function getRequest($endpoint, $expire = '+1 hour', $fresh = false)
     {
         $key = 'robyul2-web:api:' . md5($endpoint);
-        if ($this->redis->exists($key) == true) {
+        if ($fresh == false && $this->redis->exists($key) == true) {
             $data = unserialize($this->redis->get($key));
         } else {
             $timeStart = microtime(true);
-            $data = Unirest\Request::get('http://localhost:2021/' . $endpoint,
+            $result = Unirest\Request::get('http://localhost:2021/' . $endpoint,
                 array(
                     'Authorization' => 'Webkey ' . $this->container->getParameter('bot_webkey'),
                     'User-Agent' => 'Robuyl-Web/0.1' // TODO: version
                 ));
             $timeEnd = microtime(true);
             $this->logRequest('GET', 'http://localhost:2021/' . $endpoint, 'json array', $timeEnd - $timeStart);
-            $data = (array)$data->body;
+            $data = (array)$result->body;
 
-            if ($expire != '') {
+            if ($expire != '' && ($result->code >= 200 && $result->code < 300)) {
                 $this->redis->set($key, serialize($data));
                 $this->redis->expireat($key, strtotime($expire));
             }
