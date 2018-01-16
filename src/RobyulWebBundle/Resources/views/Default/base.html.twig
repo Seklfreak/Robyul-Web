@@ -193,7 +193,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.3/js/bootstrap.min.js"
         integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
         crossorigin="anonymous"></script>
-<script src="https://cdn.ravenjs.com/3.21.0/raven.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.ravenjs.com/3.21.0/raven.min.js" crossorigin="anonymous" data-cfasync="false"></script>
 {% if sentry_frontend_public_dns != "" %}
 <script type="text/javascript" data-cfasync="false">
     Raven.config('{{ sentry_frontend_public_dns }}', {

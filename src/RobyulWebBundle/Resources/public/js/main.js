@@ -679,7 +679,7 @@ Raven.context(function () {
             if (embedImageLink.length > 0) {
                 $('.embed-thumbnail-rich img').attr('src', embedImageLink);
                 $('.embed-thumbnail-rich').show();
-                command += 'image=' + embedThumbnailLink + ' | ';
+                command += 'image=' + embedImageLink + ' | ';
             } else {
                 $('.embed-thumbnail-rich').hide();
             }

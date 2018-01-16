@@ -15,7 +15,7 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-4">
-                        <label for="inputDiscordEmbedAuthorName">Author Name</label>
+                        <label for="inputDiscordEmbedAuthorName">* Author Name</label>
                         <input type="text" class="form-control form-control-sm" id="inputDiscordEmbedAuthorName">
                     </div>
                     <div class="form-group col-md-4">
@@ -57,11 +57,11 @@
                 </div>
                 <div class="form-row">
                     <div class="form-group col-md-6">
-                        <label for="inputDiscordEmbedFieldTitle">Field Title</label>
+                        <label for="inputDiscordEmbedFieldTitle">* Field Title</label>
                         <input type="text" class="form-control form-control-sm inputDiscordEmbedFieldTitles" id="inputDiscordEmbedFieldTitle">
                     </div>
                     <div class="form-group col-md-5">
-                        <label for="inputDiscordEmbedFieldValue">Field Value</label>
+                        <label for="inputDiscordEmbedFieldValue">* Field Value</label>
                         <textarea class="form-control form-control-sm inputDiscordEmbedFieldValues" id="inputDiscordEmbedFieldValue" rows="3"></textarea>
                     </div>
                     <div class="form-group col-md-1">
@@ -89,54 +89,56 @@
             </form>
         </div>
         <div class="col-md-6">
-            <div class="w-100 h-100 overflow-auto pa2 discord-view">
-                <div class="flex-vertical whitney theme-dark">
-                    <div class="chat flex-vertical flex-spacer">
-                        <div class="content flex-spacer flex-horizontal">
-                            <div class="flex-spacer flex-vertical messages-wrapper">
-                                <div class="scroller-wrap">
-                                    <div class="scroller messages">
-                                        <div class="message-group hide-overflow ">
-                                            <div class="avatar-large animate"
-                                                 style="background-image: url('{{ discord_avatar(botID, botAvatarHash) }}?size=128');"></div>
-                                            <div class="comment">
-                                                <div class="message first">
-                                                    <h2 style="line-height: 16px;">
-                                                        <span class="username-wrapper v-btm"><strong class="user-name">{{ botUsername }}</strong><span class="bot-tag">BOT</span></span><span class="highlight-separator"> - </span><span class="timestamp">Today at 9:08 PM</span>
-                                                    </h2>
-                                                    <div class="message-text"><div class="markup"></div></div>
-                                                </div>
-                                                <div class="accessory">
-                                                    <div class="embed-wrapper">
-                                                        <div class="embed-color-pill"></div>
-                                                        <div class="embed embed-rich">
-                                                            <div class="embed-content">
-                                                                <div class="embed-content-inner">
-                                                                    <div class="embed-author"><img
-                                                                                src=""
-                                                                                role="presentation"
-                                                                                class="embed-author-icon"><a target="_blank"
-                                                                                                             rel="noreferrer"
-                                                                                                             href="https://discordapp.com"
-                                                                                                             class="embed-author-name"></a></div>
-                                                                    <a target="_blank" rel="noreferrer"
-                                                                       href="https://discordapp.com" class="embed-title"></a>
-                                                                    <div class="embed-description markup"></div>
-                                                                    <div class="embed-fields">
-                                                                        <div class="embed-field">
-                                                                            <div class="embed-field-name"></div><div class="embed-field-value markup"></div>
+            <div class="row">
+                <div class="w-100 h-100 overflow-auto pa2 discord-view">
+                    <div class="flex-vertical whitney theme-dark">
+                        <div class="chat flex-vertical flex-spacer">
+                            <div class="content flex-spacer flex-horizontal">
+                                <div class="flex-spacer flex-vertical messages-wrapper">
+                                    <div class="scroller-wrap">
+                                        <div class="scroller messages">
+                                            <div class="message-group hide-overflow ">
+                                                <div class="avatar-large animate"
+                                                     style="background-image: url('{{ discord_avatar(botID, botAvatarHash) }}?size=128');"></div>
+                                                <div class="comment">
+                                                    <div class="message first">
+                                                        <h2 style="line-height: 16px;">
+                                                            <span class="username-wrapper v-btm"><strong class="user-name">{{ botUsername }}</strong><span class="bot-tag">BOT</span></span><span class="highlight-separator"> - </span><span class="timestamp">Today at 9:08 PM</span>
+                                                        </h2>
+                                                        <div class="message-text"><div class="markup"></div></div>
+                                                    </div>
+                                                    <div class="accessory">
+                                                        <div class="embed-wrapper">
+                                                            <div class="embed-color-pill"></div>
+                                                            <div class="embed embed-rich">
+                                                                <div class="embed-content">
+                                                                    <div class="embed-content-inner">
+                                                                        <div class="embed-author"><img
+                                                                                    src=""
+                                                                                    role="presentation"
+                                                                                    class="embed-author-icon"><a target="_blank"
+                                                                                                                 rel="noreferrer"
+                                                                                                                 href="https://discordapp.com"
+                                                                                                                 class="embed-author-name"></a></div>
+                                                                        <a target="_blank" rel="noreferrer"
+                                                                           href="https://discordapp.com" class="embed-title"></a>
+                                                                        <div class="embed-description markup"></div>
+                                                                        <div class="embed-fields">
+                                                                            <div class="embed-field">
+                                                                                <div class="embed-field-name"></div><div class="embed-field-value markup"></div>
+                                                                            </div>
                                                                         </div>
                                                                     </div>
+                                                                    <img src=""
+                                                                         role="presentation" class="embed-rich-thumb"
+                                                                         style="max-width: 80px; max-height: 80px;"></div>
+                                                                <a class="embed-thumbnail embed-thumbnail-rich"><img
+                                                                            class="image" role="presentation"
+                                                                            src=""></a>
+                                                                <div><img src=""
+                                                                          class="embed-footer-icon" role="presentation"
+                                                                          width="20" height="20"><span class="embed-footer"></span>
                                                                 </div>
-                                                                <img src=""
-                                                                     role="presentation" class="embed-rich-thumb"
-                                                                     style="max-width: 80px; max-height: 80px;"></div>
-                                                            <a class="embed-thumbnail embed-thumbnail-rich"><img
-                                                                        class="image" role="presentation"
-                                                                        src=""></a>
-                                                            <div><img src=""
-                                                                      class="embed-footer-icon" role="presentation"
-                                                                      width="20" height="20"><span class="embed-footer"></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -149,6 +151,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="row">
+                <p>You can mask links like this: <code>[example](https://example.org)</code>.</p>
             </div>
         </div>
     </div>
