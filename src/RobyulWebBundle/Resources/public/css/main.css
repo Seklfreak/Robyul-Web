@@ -276,3 +276,8 @@ body {
 #eventlog-container-table tr.waiting-for-data {
     background-color: rgba(255, 255, 0, 0.065);
 }
+.discord-banner-image {
+    box-shadow: 0 0 5px 2px #bfbfbf;
+    margin-bottom: 0.75rem;
+    margin-left: .75rem;
+}

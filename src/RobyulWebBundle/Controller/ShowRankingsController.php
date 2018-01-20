@@ -60,8 +60,8 @@ class ShowRankingsController extends Controller
         $seoPage = $this->container->get('sonata.seo.page');
         $seoPage
             ->setTitle("The Unit Ranking Boys - The KPop Discord Bot - Robyul")
-            ->addMeta('name', 'description', "View the Boys Ranking over time for KBS's The Unit survival show.")
-            ->addMeta('property', 'og:description', "View the Boys Ranking over time for KBS's The Unit survival show.");
+            ->addMeta('name', 'description', "Check out the Boys Ranking for KBS's The Unit survival show.")
+            ->addMeta('property', 'og:description', "Check out the Boys Ranking for KBS's The Unit survival show.");
         $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
 
         return $this->render('RobyulWebBundle:ShowRankings:theunit_boys.html.twig');
@@ -75,8 +75,8 @@ class ShowRankingsController extends Controller
         $seoPage = $this->container->get('sonata.seo.page');
         $seoPage
             ->setTitle("The Unit Ranking Girls - The KPop Discord Bot - Robyul")
-            ->addMeta('name', 'description', "View the Girls Ranking over time for KBS's The Unit survival show.")
-            ->addMeta('property', 'og:description', "View the Girls Ranking over time for KBS's The Unit survival show.");
+            ->addMeta('name', 'description', "Check out the Girls Ranking for KBS's The Unit survival show.")
+            ->addMeta('property', 'og:description', "Check out the Girls Ranking for KBS's The Unit survival show.");
         $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
 
         return $this->render('RobyulWebBundle:ShowRankings:theunit_girls.html.twig');
