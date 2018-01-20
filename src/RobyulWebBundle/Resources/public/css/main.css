@@ -279,5 +279,9 @@ body {
 .discord-banner-image {
     box-shadow: 0 0 5px 2px #bfbfbf;
     margin-bottom: 0.75rem;
-    margin-left: 1.75rem;
+    margin-left: 2.5rem;
+}
+
+#plot > .axis {
+    overflow: visible;
 }
