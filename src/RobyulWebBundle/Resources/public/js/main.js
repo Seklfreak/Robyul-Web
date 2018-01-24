@@ -592,10 +592,10 @@ Raven.context(function () {
                 '</div>' +
                 '</div>').insertBefore($discordEmbedAddFieldButton);
             $newElement.find('textarea, input').on('input', function () {
-                updateDiscordEmbedCreator(updateCode);
+                updateDiscordEmbedCreator(true);
             });
             $newElement.find('input[type="checkbox"]').change(function () {
-                updateDiscordEmbedCreator(updateCode);
+                updateDiscordEmbedCreator(true);
             });
             updateDiscordEmbedCreator(updateCode);
         }
