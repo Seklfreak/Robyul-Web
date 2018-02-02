@@ -32,7 +32,7 @@ var plot = svg.append("g").attr("transform", "translate(" + padding + "," + padd
 setXAxis();
 
 // Get data
-d3.csv("/bundles/robyulweb/csv/mixnine.boys.v11.csv", parseLine, function (err, data) {
+d3.csv("/bundles/robyulweb/csv/mixnine.boys.v12.csv", parseLine, function (err, data) {
     totalData = processData(data);
     plotData(data);
     selectLine(dFirst, "#line1");
@@ -73,6 +73,9 @@ function setXAxis() {
 function processData(data) {
     var result = [];
     i = 0;
+    data.sort(function (a, b) {
+        return getCurrentRank(a) - getCurrentRank(b);
+    });
     data.forEach(function(d) {
         if (getCurrentRank(d) >= 0) {
             d.latestRank = getLatestRank(d);
@@ -83,6 +86,9 @@ function processData(data) {
             preloadImage(getImageSource(d));
             i += 1;
         }
+    });
+    data.sort(function (a, b) {
+        return getLatestRank(a) - getLatestRank(b);
     });
     data.forEach(function(d) {
         if (getCurrentRank(d) < 0) {
