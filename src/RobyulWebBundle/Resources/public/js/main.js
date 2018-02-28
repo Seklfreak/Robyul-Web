@@ -348,7 +348,7 @@ Raven.context(function () {
                         classes = 'deleted';
                     }
 
-                    var contentText1 = message.Content;
+                    var contentText1 = escapeHTML(message.Content);
                     var contentText2 = "";
                     if (Array.isArray(contentText1) && contentText1.length > 1) {
                         $.each(contentText1, function (contentI, contentText) {
