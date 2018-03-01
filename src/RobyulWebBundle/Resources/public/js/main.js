@@ -348,17 +348,17 @@ Raven.context(function () {
                         classes = 'deleted';
                     }
 
-                    var contentText1 = escapeHTML(message.Content);
-                    var contentText2 = "";
-                    if (Array.isArray(contentText1) && contentText1.length > 1) {
-                        $.each(contentText1, function (contentI, contentText) {
+                    var contentTextPrimary = escapeHTML(message.Content);
+                    var contentTextEdits = "";
+                    var attachmentsText = "";
+                    if (Array.isArray(message.Content) && message.Content.length > 1) {
+                        contentTextPrimary = escapeHTML(message.Content[0]);
+                        $.each(message.Content, function (contentI, contentText) {
                             if (contentI > 0) {
-                                contentText2 += " <i class=\"fa fa-arrow-right\" aria-hidden=\"true\"></i> Edited:<br>" + escapeHTML(contentText)
+                                contentTextEdits += " <i class=\"fa fa-arrow-right\" aria-hidden=\"true\"></i> Edited:<br>" + escapeHTML(contentText)
                             }
                         });
-                        contentText1 = escapeHTML(contentText1[0]);
                     }
-                    var attachmentsText = "";
                     if (Array.isArray(message.Attachments) && message.Attachments.length > 0) {
                         $.each(message.Attachments, function (attachmentI, attachmentText) {
                             attachmentsText += "<a href=\"" + attachmentText + "\" target=\"_blank\" rel=\"nofollow\">" + attachmentText + "</a>";
@@ -369,7 +369,7 @@ Raven.context(function () {
                         attachmentsText = "<br><i class=\"fa fa-arrow-right\" aria-hidden=\"true\"></i> Attachment(s): " + attachmentsText;
                     }
 
-                    resultHTML += '<tr class="' + classes + '"><td scope="row"><a href="#" class="chatlog-messageid-click" data-message-id="' + escapeHTML(message.ID) + '" id="message-' + escapeHTML(message.ID) + '">#' + escapeHTML(message.ID) + '</a></td><td>' + escapeHTML(message.CreatedAt) + '</td><td>' + escapeHTML(message.AuthorUsername) + ' (#' + escapeHTML(message.AuthorID) + ')</td><td>' + contentText1 + attachmentsText + contentText2 + '</td></tr>';
+                    resultHTML += '<tr class="' + classes + '"><td scope="row"><a href="#" class="chatlog-messageid-click" data-message-id="' + escapeHTML(message.ID) + '" id="message-' + escapeHTML(message.ID) + '">#' + escapeHTML(message.ID) + '</a></td><td>' + escapeHTML(message.CreatedAt) + '</td><td>' + escapeHTML(message.AuthorUsername) + ' (#' + escapeHTML(message.AuthorID) + ')</td><td>' + contentTextPrimary + attachmentsText + contentTextEdits + '</td></tr>';
                 });
                 $chatlogResultTBody.html(resultHTML);
                 if ($("#message-" + aroundMessageID).length > 0) {
