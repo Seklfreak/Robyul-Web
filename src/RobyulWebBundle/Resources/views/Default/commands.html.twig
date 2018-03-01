@@ -908,8 +908,10 @@
                         Robyul will ignore the timeout for the <code>{{ guildBotPrefix }}pic</code> command in this
                         channel. <span class="badge badge-default">Mod</span></li>
                     <li><code>{{ guildBotPrefix }}randompictures new-config <span class="arg">alias=alias1,alias2</span>
-                            <span class="arg">folder=folder1,folder2</span> <span class="opt-arg">channel=channel1,channel2</span></code>
+                            <span class="arg">folder=folder1,folder2</span> <span class="opt-arg">channel=channel1,channel2</span> <span class="opt-arg">skiproles=roleid1,roleid2</span></code>
                         Creates an empty config. <span class="badge badge-default">Bot Owner</span></li>
+                    <li><code>{{ guildBotPrefix }}randompictures delete-config <span class="arg">source id</span></code>
+                        Deletes a RandomPictures config. <span class="badge badge-default">Admin</span></li>
                     <li><code>{{ guildBotPrefix }}randompictures list</code> Lists all picture folders. <span
                                 class="badge badge-default">Bot Owner</span></li>
                     <li><code>{{ guildBotPrefix }}randompictures refresh <span class="arg">source id</span></code>
