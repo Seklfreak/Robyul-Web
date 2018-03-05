@@ -618,6 +618,22 @@
             </div>
         </div>
     {% endif %}
+    {% if moduleNames is null or "embed" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-body">
+                <h4 class="card-title" id="embed"><a href="#embed">Embed</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Create pretty Discord Embeds <a href="{{ path('robyulweb_default_embed') }}">here</a>.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}embed <span class="arg">#channel or channel id</span> <span class="arg">embed code</span></code> post an embed. <span class="badge badge-default">Mod</span>
+                    <li><code>{{ guildBotPrefix }}embed-get <span class="arg">#channel or channel id</span> <span class="arg">message-id</span></code> get the emebed code of a message. <span class="badge badge-default">Mod</span>
+                    <li><code>{{ guildBotPrefix }}embed-edit <span class="arg">#channel or channel id</span> <span class="arg">message-id</span> <span class="arg">embed code</span></code> edit an embed. <span class="badge badge-default">Mod</span>
+                    </li>
+                </ul>
+                </p>
+            </div>
+        </div>
+    {% endif %}
     {% if moduleNames is null or "custominvite" in moduleNames %}
         <div class="card commands-card">
             <div class="card-body">
