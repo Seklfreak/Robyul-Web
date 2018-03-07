@@ -344,8 +344,10 @@
                     </li>
                     <li><code>{{ guildBotPrefix }}twitter list</code> view all active Twitter feeds on this server</li>
                     <li><code>{{ guildBotPrefix }}twitter add <span class="arg">twitter username</span> <span
-                                    class="arg">discord #channel or channel id</span> <span class="opt-arg">role name or role id</span> <a class="opt-arg" href="#" data-toggle="tooltip"
-                                                                                                                                           title="setting this will use the official discord embed for tweets instead of the Robyul embed">discord-embed</a></code> adds a Twitter feed to the
+                                    class="arg">discord #channel or channel id</span> <span class="opt-arg">role name or role id</span>
+                            <a class="opt-arg" href="#" data-toggle="tooltip"
+                               title="setting this will use the official discord embed for tweets instead of the Robyul embed">discord-embed</a></code>
+                        adds a Twitter feed to the
                         specific channel. <span class="badge badge-default">Mod</span></li>
                     <li><code>{{ guildBotPrefix }}twitter delete <span class="arg">twitter feed id</span></code> delete
                         a Twitter feed. Use <code>{{ guildBotPrefix }}twitter list</code> to get the feed id. <span
@@ -516,17 +518,20 @@
                     </li>
                     <li><code>{{ guildBotPrefix }}lf topartists <span class="opt-arg">@user or user id or last.fm username</span>
                             <span class="opt-arg"><a class="arg" data-toggle="tooltip"
-                                                     title="overall/week/month/3month/6month/year">timerange</a></code>
+                                                     title="overall/week/month/3month/6month/year">timerange</a> <span
+                                        class="opt-arg">collage</span></code>
                         see the top artists of the user.
                     </li>
                     <li><code>{{ guildBotPrefix }}lf toptracks <span class="opt-arg">@user or user id or last.fm username</span>
                             <span class="opt-arg"><a class="arg" data-toggle="tooltip"
-                                                     title="overall/week/month/3month/6month/year">timerange</a></code>
+                                                     title="overall/week/month/3month/6month/year">timerange</a> <span
+                                        class="opt-arg">collage</span></code>
                         see the top tracks of the user.
                     </li>
                     <li><code>{{ guildBotPrefix }}lf topalbums <span class="opt-arg">@user or user id or last.fm username</span>
                             <span class="opt-arg"><a class="arg" data-toggle="tooltip"
-                                                     title="overall/week/month/3month/6month/year">timerange</a></code>
+                                                     title="overall/week/month/3month/6month/year">timerange</a> <span
+                                        class="opt-arg">collage</span></code>
                         see the top albums of the user.
                     </li>
                     <li><code>{{ guildBotPrefix }}lf server-top <span class="opt-arg"><a class="arg"
@@ -623,12 +628,19 @@
         <div class="card commands-card">
             <div class="card-body">
                 <h4 class="card-title" id="embed"><a href="#embed">Embed</a></h4>
-                <h6 class="card-subtitle mb-2 text-muted">Create pretty Discord Embeds <a href="{{ path('robyulweb_default_embed') }}">here</a>.</h6>
+                <h6 class="card-subtitle mb-2 text-muted">Create pretty Discord Embeds <a
+                            href="{{ path('robyulweb_default_embed') }}">here</a>.</h6>
                 <p class="card-text">
                 <ul class="list-unstyled">
-                    <li><code>{{ guildBotPrefix }}embed <span class="arg">#channel or channel id</span> <span class="arg">embed code</span></code> post an embed. <span class="badge badge-default">Mod</span>
-                    <li><code>{{ guildBotPrefix }}embed-get <span class="arg">#channel or channel id</span> <span class="arg">message id</span></code> get the embed code of a message. <span class="badge badge-default">Mod</span>
-                    <li><code>{{ guildBotPrefix }}embed-edit <span class="arg">#channel or channel id</span> <span class="arg">message id</span> <span class="arg">embed code</span></code> edit an embed. <span class="badge badge-default">Mod</span>
+                    <li><code>{{ guildBotPrefix }}embed <span class="arg">#channel or channel id</span> <span
+                                    class="arg">embed code</span></code> post an embed. <span
+                                class="badge badge-default">Mod</span>
+                    <li><code>{{ guildBotPrefix }}embed-get <span class="arg">#channel or channel id</span> <span
+                                    class="arg">message id</span></code> get the embed code of a message. <span
+                                class="badge badge-default">Mod</span>
+                    <li><code>{{ guildBotPrefix }}embed-edit <span class="arg">#channel or channel id</span> <span
+                                    class="arg">message id</span> <span class="arg">embed code</span></code> edit an
+                        embed. <span class="badge badge-default">Mod</span>
                     </li>
                 </ul>
                 </p>
