@@ -12,7 +12,7 @@ body {
 }
 
 .opt-arg {
-    color: rgba(40, 189, 61, 0.6);
+    color: rgba(40, 189, 61, 0.6) !important;
     background-color: #e0e0e0;
 }
 
