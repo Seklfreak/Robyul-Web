@@ -60,7 +60,7 @@ class RandomPicturesProxy extends Controller
      * @Route(
      *     "/static/proxy/{fileHash}/{slug}.{_format}",
      *     requirements={
-     *         "_format": "jpeg|jpg|gif|png"
+     *         "_format": "jpeg|jpg|gif|png|mp4|webm"
      *     }
      * )
      */
