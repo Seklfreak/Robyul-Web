@@ -39,6 +39,8 @@
                 <li><code>@{{ bot_user }} prefix</code> or <code>{{ guildBotPrefix }}prefix</code> find out the Robyul
                     prefix for this server.
                 </li>
+                <li><code>@{{ bot_user }} <span class="arg">:emoji:</span></code> get a bigger version of the emoji.
+                </li>
                 <li><code>@{{ bot_user }} <span class="arg">message</span></code> talk to Robyul.</li>
             </ul>
             </p>
@@ -152,7 +154,15 @@
                                 server level to be able to get the badge</a> <a class="opt-arg" href="#"
                                                                                 data-toggle="tooltip"
                                                                                 title="Only available for Bot Owners">global</a></code>
-                        create a Robyul Badge on your server. <span class="badge badge-default">Admin</span></li>
+                        create a Robyul Badge on your server which will be tied to a minimum level. <span
+                                class="badge badge-default">Admin</span></li>
+                    <li><code>{{ guildBotPrefix }}profile badge create <span class="arg">category name</span> <span
+                                    class="arg">badge name</span> <a class="arg" href="#" data-toggle="tooltip"
+                                                                     title="28x28px picture, Direct Link! (imgur for example), the bot will make it round automatically">image
+                                url</a> <a href="#" data-toggle="tooltip" title="HEX Color code" class="arg">border
+                                color</a> role <span class="arg">role name or role id</span></code>
+                        create a Robyul Badge on your server which will be tied to a role. <span
+                                class="badge badge-default">Admin</span></li>
                     <li><code>{{ guildBotPrefix }}profile badge delete <span class="arg">category name</span> <span
                                     class="arg">badge name</span></code> Delete a badge from your server. <span
                                 class="badge badge-default">Admin</span></li>
@@ -230,7 +240,8 @@
                         keyword from this server.
                     </li>
                     <li><code>{{ guildBotPrefix }}noti toggle-mode</code> switches between display modes for the
-                        notification messages (content after information or content before information).
+                        notification messages (content after information, content before information or embed with
+                        context).
                     </li>
                     <li><code>{{ guildBotPrefix }}noti ignore-channel <span class="arg">#channel or id</span></code>
                         lets Robyul ignore all messages in the given channel. Run it again to turn it on again. <span
@@ -1042,6 +1053,8 @@
                     <li><code>{{ guildBotPrefix }}commands info <span class="arg">command name</span></code> shows
                         information about a custom command.
                     </li>
+                    <li><code>{{ guildBotPrefix }}commands random</code> displays a random command.
+                    </li>
                     <li><code>{{ guildBotPrefix }}commands search <span class="arg">search text</span></code> search in
                         the custom command names.
                     </li>
@@ -1055,8 +1068,9 @@
                         <span class="badge badge-default">Mod</span></li>
                     <li><code>{{ guildBotPrefix }}commands import-json <span class="arg">JSON attachment</span></code>
                         Imports custom commands to a server. <span class="badge badge-default">Mod</span></li>
-                    <li><code>{{ guildBotPrefix }}commands refresh</code> Refreshes the custom command cache. <span
-                                class="badge badge-default">Bot Owner</span></li>
+                    <li><code>{{ guildBotPrefix }}commands toggle-permission</code> Allows everyone to add commands. Use
+                        it again to only allow moderators to add commands. <span
+                                class="badge badge-default">Admin</span></li>
                 </ul>
                 Format of the Custom Commands JSON
                 <code>
@@ -1100,6 +1114,19 @@
                 <p class="card-text">
                 <ul class="list-unstyled">
                     <li><code>{{ guildBotPrefix }}cat</code> shows you a cute cat. 🐈</li>
+                </ul>
+                </p>
+            </div>
+        </div>
+    {% endif %}
+    {% if moduleNames is null or "dog" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-body">
+                <h4 class="card-title" id="cat"><a href="#dog">Dog</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Woof woof.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}dog</code> shows you a Dog. With an Idol.</li>
                 </ul>
                 </p>
             </div>
@@ -1230,6 +1257,9 @@
                     </li>
                     <li><code>{{ guildBotPrefix }}invite <span class="arg">invite code or url</span></code> shows
                         information about an invite.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}avatar <span class="opt-arg">@user or user id</span></code> displays
+                        the avatar of an user.
                     </li>
                     <li><code>{{ guildBotPrefix }}serverlist <span class="opt-arg">xlsx</span></code> shows a list with
                         all servers robyul is on, or exports it to a excel file. <span class="badge badge-default">Robyul Staff</span>
