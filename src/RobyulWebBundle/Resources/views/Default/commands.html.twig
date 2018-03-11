@@ -745,17 +745,20 @@
                 <h6 class="card-subtitle mb-2 text-muted">Set up a welcome and leave message.</h6>
                 <p class="card-text">
                 <ul class="list-unstyled">
-                    <li><code>{{ guildBotPrefix }}guildannouncements set guild_join <span class="opt-arg">channel # or id</span>
-                            <span class="opt-arg">text</span></code> Set a Join message in the specific channel. Run the
+                    <li><code>{{ guildBotPrefix }}greeter join <span class="opt-arg">channel # or id</span>
+                            <span class="opt-arg">text, or embed code</span></code> Set a Join message in the specific
+                        channel. Run the
                         command without arguments to disable it.
                     </li>
-                    <li><code>{{ guildBotPrefix }}guildannouncements set guild_leave <span class="opt-arg">channel # or id</span>
-                            <span class="opt-arg">text</span></code> Set a Leave message in the specific channel. Run
+                    <li><code>{{ guildBotPrefix }}greeter leave <span class="opt-arg">channel # or id</span>
+                            <span class="opt-arg">text, or embed code</span></code> Set a Leave message in the specific
+                        channel. Run
                         the command without arguments to disable it.
                     </li>
                 </ul>
                 Available placeholders for <span class="opt-arg">text</span>: <code>{USER_USERNAME}</code>, <code>{USER_ID}</code>,
-                <code>{USER_DISCRIMINATOR}</code>, <code>{USER_NUMBER}</code>, <code>{USER_MENTION}</code>, <code>{GUILD_NAME}</code>
+                <code>{USER_DISCRIMINATOR}</code>, <code>{USER_NUMBER}</code>, <code>{USER_MENTION}</code>, <code>{USER_AVATARURL}</code>,
+                <code>{GUILD_NAME}</code>
                 and <code>{GUILD_ID}</code>. It is not recommended to use <code>{USER_MENTION}</code> and <code>{USER_NUMBER}</code>
                 in leave messages.
                 </p>
