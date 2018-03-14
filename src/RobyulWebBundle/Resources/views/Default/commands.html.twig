@@ -129,6 +129,9 @@
                         set the opacity for elements of your profile. Call it without an opacity to set the default
                         opacity.
                     </li>
+                    <li><code>{{ guildBotPrefix }}profile toggle-lastfm</code> hides the last.fm information from your
+                        profile. Use it again to show it again.
+                    </li>
                     <li><code>{{ guildBotPrefix }}profile badge move <span class="arg">category name</span> <span
                                     class="arg">badge name</span> <span class="arg">new spot number</span></code> Move a
                         badge's position on your Profile.
@@ -866,6 +869,21 @@
             </div>
         </div>
     {% endif %}
+    {% if moduleNames is null or "imgur" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-body">
+                <h4 class="card-title" id="streamable"><a href="#imgur">Imgur</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">The magic of the internet.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}imgur <span class="arg">link OR discord attachment</span></code>
+                        Uploads an image to imgur.
+                    </li>
+                </ul>
+                </p>
+            </div>
+        </div>
+    {% endif %}
     {% if moduleNames is null or "gallery" in moduleNames %}
         <div class="card commands-card">
             <div class="card-body">
@@ -1056,7 +1074,7 @@
                     <li><code>{{ guildBotPrefix }}commands info <span class="arg">command name</span></code> shows
                         information about a custom command.
                     </li>
-                    <li><code>{{ guildBotPrefix }}commands random</code> displays a random command.
+                    <li><code>{{ guildBotPrefix }}random</code> displays a random command.
                     </li>
                     <li><code>{{ guildBotPrefix }}commands search <span class="arg">search text</span></code> search in
                         the custom command names.
@@ -1073,6 +1091,10 @@
                         Imports custom commands to a server. <span class="badge badge-default">Mod</span></li>
                     <li><code>{{ guildBotPrefix }}commands toggle-permission</code> Allows everyone to add commands. Use
                         it again to only allow moderators to add commands. <span
+                                class="badge badge-default">Admin</span></li>
+                    <li><code>{{ guildBotPrefix }}commands toggle-permission <span
+                                    class="arg">role ID or Name</span></code> Allows everyone with a specific role add
+                        commands. Run it without commands to disable it. <span
                                 class="badge badge-default">Admin</span></li>
                 </ul>
                 Format of the Custom Commands JSON
@@ -1168,6 +1190,21 @@
                     </li>
                     <li><code>{{ guildBotPrefix }}osu!taiko <span class="arg">osu! username</span></code> shows
                         osu-taiko stats for the username.
+                    </li>
+                </ul>
+                </p>
+            </div>
+        </div>
+    {% endif %}
+    {% if moduleNames is null or "crypto" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-body">
+                <h4 class="card-title" id="crypto"><a href="#crypto">Crypto</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Internet Money~</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}crypto <span class="opt-arg">from symbols, eg BTC,ETH</span> <span
+                                    class="opt-arg">to symbols, eg USD,EUR</span></code> shows cryptocurrency prices
                     </li>
                 </ul>
                 </p>
