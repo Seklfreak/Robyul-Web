@@ -259,8 +259,8 @@
     '@RobyulWebBundle/Resources/public/js/moment.js' output='static/js/main.js' %}
     <script src="{{ asset_url }}"></script>
 {% endjavascripts %}
+<script type="text/javascript" data-cfasync="false">
 {% if ga_tracking_id != "" %}
-    <script type="text/javascript" data-cfasync="false">
         var gaProperty = '{{ ga_tracking_id }}';
         var disableStr = 'ga-disable-' + gaProperty;
         if (document.cookie.indexOf(disableStr + '=true') > -1) {
@@ -287,8 +287,30 @@
         ga('create', gaProperty, 'auto');
         ga('require', 'linkid');
         ga('send', 'pageview');
-    </script>
 {% endif %}
+{% if drift_id != "" %}
+    !function() {
+        var t;
+        if (t = window.driftt = window.drift = window.driftt || [], !t.init) return t.invoked ? void (window.console && console.error && console.error("Drift snippet included twice.")) : (t.invoked = !0,
+            t.methods = [ "identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on" ],
+            t.factory = function(e) {
+                return function() {
+                    var n;
+                    return n = Array.prototype.slice.call(arguments), n.unshift(e), t.push(n), t;
+                };
+            }, t.methods.forEach(function(e) {
+            t[e] = t.factory(e);
+        }), t.load = function(t) {
+            var e, n, o, i;
+            e = 3e5, i = Math.ceil(new Date() / e) * e, o = document.createElement("script"),
+                o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + i + "/" + t + ".js",
+                n = document.getElementsByTagName("script")[0], n.parentNode.insertBefore(o, n);
+        });
+    }();
+    drift.SNIPPET_VERSION = '0.3.1';
+    drift.load('{{ drift_id }}');
+{% endif %}
+</script>
 <script type="text/javascript" data-cfasync="false">
     window.parameters = {{ js_parameters|json_encode|raw }};
 </script>

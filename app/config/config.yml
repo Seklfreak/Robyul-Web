@@ -42,6 +42,7 @@ twig:
     strict_variables: '%kernel.debug%'
     globals:
         ga_tracking_id: '%ga_tracking_id%'
+        drift_id: '%drift_id%'
         bot_default_prefix: '%bot_default_prefix%'
         bot_user: '%bot_user%'
         bot_user_id: '%bot_user_id%'
@@ -103,7 +104,7 @@ sonata_seo:
         metas:
             name:
                 keywords:             robyul kpop discord bot chatbot
-                description:          Robyul is a Discord Bot developed especially with the needs of of KPop Discord Servers in mind.
+                description:          Robyul is a Discord Bot developed especially with the needs of KPop Discord Servers in mind.
                 robots:               index, follow
 
             property:
@@ -114,7 +115,7 @@ sonata_seo:
                 # Open Graph information
                 # see http://developers.facebook.com/docs/opengraphprotocol/#types or http://ogp.me/
                 'og:site_name':       'Robyul: The KPop Discord Bot'
-                'og:description':     Robyul is a Discord Bot developed especially with the needs of of KPop Discord Servers in mind.
+                'og:description':     Robyul is a Discord Bot developed especially with the needs of KPop Discord Servers in mind.
                 'og:type':            website
 
             http-equiv:
