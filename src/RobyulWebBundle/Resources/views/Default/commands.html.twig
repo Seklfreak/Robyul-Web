@@ -12,7 +12,10 @@
                     Board</code>, <code>admin</code> and <code>admins</code>.<br>
                 Possible Mod Role Names: <code>Mod</code>, <code>Mods</code>, <code>Moderator</code>,
                 <code>Moderators</code>, <code>Mod Trainee</code>, <code>MOD</code>, <code>Minimod</code>,
-                <code>Guard</code>, <code>Janitor</code>, <code>mod</code> and <code>mods</code>.
+                <code>Guard</code>, <code>Janitor</code>, <code>mod</code> and <code>mods</code>.<br>
+                You can set custom Admin roles using <code>{{ guildBotPrefix }}config set admin <span class="arg">role name or id</span></code>,
+                and custom Mod roles using <code>{{ guildBotPrefix }}config set mod <span
+                            class="arg">role name or id</span></code>.
             </p>
         </div>
     </div>
@@ -209,6 +212,17 @@
                     <li><code>{{ guildBotPrefix }}levels ignore channel <span class="arg">#channel or channel id</span></code>
                         makes Robyul ignore a channels messages for EXP. <span class="badge badge-default">Admin</span>
                     </li>
+                    <li><code>{{ guildBotPrefix }}levels set-level-notifications <span class="opt-arg">message or embed code</span></code>
+                        sets a level up notification message. Disabled by default. Run it without arguments to disable
+                        it again. The following placeholders can be used: <code>{USER_NEWLEVEL}</code>, <code>{USER_USERNAME}</code>,
+                        <code>{USER_ID}</code>, <code>{USER_DISCRIMINATOR}</code>, <code>{USER_MENTION}</code>, <code>{USER_AVATARURL}</code>,
+                        <code>{GUILD_NAME}</code>, <code>{GUILD_ID}</code>. <span class="badge badge-default">Mod</span>
+                    </li>
+                    <li><code>{{ guildBotPrefix }}levels set-level-notifications-autodelete <span class="opt-arg">number of seconds</span></code>
+                        deletes the level up notification after <span class="opt-arg">number of seconds</span>
+                        automatically. Run it without arguments to disable autodeletion. <span
+                                class="badge badge-default">Admin</span>
+                    </li>
                     <li><code>{{ guildBotPrefix }}level process-history</code> Process old messages for Robyul EXP. If
                         you want this done on your server DM <code>Sekl#7397</code> on Discord. <span
                                 class="badge badge-default">Bot Owner</span></li>
@@ -245,6 +259,10 @@
                     <li><code>{{ guildBotPrefix }}noti toggle-mode</code> switches between display modes for the
                         notification messages (content after information, content before information or embed with
                         context).
+                    </li>
+                    <li><code>{{ guildBotPrefix }}noti ignore <span class="arg">keyword(s)</span></code> ignores a
+                        specific keyword of your global keywords on the server you are currently on. Run it again to get
+                        notifications for the keyword on the specific server again.
                     </li>
                     <li><code>{{ guildBotPrefix }}noti ignore-channel <span class="arg">#channel or id</span></code>
                         lets Robyul ignore all messages in the given channel. Run it again to turn it on again. <span
@@ -643,6 +661,19 @@
                                                                            title="how many messages to copy, includes the first message, default: 1, max: 100">number
                                 of messages</a></code> copies messages of your current channel to a different channel.
                         <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}config</code> shows a overview about various Robyul configurations for
+                        the server you are currently on.
+                        <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}config set admin <span class="arg">role name or id</span></code> set a
+                        custom Admin role. Use it again to remove the Admin role. You can set multiple Admin roles. If
+                        there are no custom roles set it will check for the role names listed at the top of this page,
+                        which is the default state.
+                        <span class="badge badge-default">Admin</span></li>
+                    <li><code>{{ guildBotPrefix }}config set mod <span class="arg">role name or id</span></code> set a
+                        custom Mod role. Use it again to remove the Mod role. You can set multiple Mod roles. If there
+                        are no custom roles set it will check for the role names listed at the top of this page, which
+                        is the default state.
+                        <span class="badge badge-default">Admin</span></li>
                 </ul>
                 </p>
             </div>
@@ -745,18 +776,21 @@
             <div class="card-body">
                 <h4 class="card-title" id="guildannouncements"><a href="#guildannouncements">Server Announcements</a>
                 </h4>
-                <h6 class="card-subtitle mb-2 text-muted">Set up a welcome and leave message.</h6>
+                <h6 class="card-subtitle mb-2 text-muted">Set up a join and leave message.</h6>
                 <p class="card-text">
                 <ul class="list-unstyled">
                     <li><code>{{ guildBotPrefix }}greeter join <span class="opt-arg">channel # or id</span>
                             <span class="opt-arg">text, or embed code</span></code> Set a Join message in the specific
                         channel. Run the
-                        command without arguments to disable it.
+                        command without arguments to disable it. <span class="badge badge-default">Admin</span>
                     </li>
                     <li><code>{{ guildBotPrefix }}greeter leave <span class="opt-arg">channel # or id</span>
                             <span class="opt-arg">text, or embed code</span></code> Set a Leave message in the specific
                         channel. Run
-                        the command without arguments to disable it.
+                        the command without arguments to disable it. <span class="badge badge-default">Admin</span>
+                    </li>
+                    <li><code>{{ guildBotPrefix }}greeter list</code> Shows active join and leave messages on the
+                        current server. <span class="badge badge-default">mod</span>
                     </li>
                 </ul>
                 Available placeholders for <span class="opt-arg">text</span>: <code>{USER_USERNAME}</code>, <code>{USER_ID}</code>,
@@ -1190,6 +1224,22 @@
                     </li>
                     <li><code>{{ guildBotPrefix }}osu!taiko <span class="arg">osu! username</span></code> shows
                         osu-taiko stats for the username.
+                    </li>
+                </ul>
+                </p>
+            </div>
+        </div>
+    {% endif %}
+    {% if moduleNames is null or "steam" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-body">
+                <h4 class="card-title" id="steam"><a href="#steam">steam</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">View steam stats.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}steam <span
+                                    class="arg">steam id or steam custom url name</span></code> shows information about
+                        a steam profile.
                     </li>
                 </ul>
                 </p>
