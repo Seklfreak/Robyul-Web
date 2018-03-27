@@ -110,8 +110,8 @@ class DefaultController extends Controller
 
         $tags = array();
         foreach ($backgrounds as $background) {
-            if (array_key_exists('tags', $background)) {
-                foreach ($background['tags'] as $tag) {
+            if (array_key_exists('Tags', $background)) {
+                foreach ($background['Tags'] as $tag) {
                     if (!in_array($tag, $tags)) {
                         $tags[] = $tag;
                     }
