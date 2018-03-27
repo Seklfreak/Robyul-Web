@@ -97,7 +97,7 @@ class DefaultController extends Controller
     /**
      * @Route("/profile/backgrounds")
      */
-    public function profileBackgroundsAction()
+    public function profileBackgroundsAction(RobyulApi $robyulApi)
     {
         $seoPage = $this->container->get('sonata.seo.page');
         $seoPage
@@ -106,30 +106,7 @@ class DefaultController extends Controller
             ->addMeta('property', 'og:description', "Customize your Robyul Discord Bot Profile using Background Pictures.");
         $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
 
-        $unpacker = new Unpacker();
-        $packer = new Packer();
-        $redis = $this->container->get('snc_redis.default');
-
-        $key = 'robyul2-web:db:backgrounds';
-        if ($redis->exists($key) == true) {
-            $backgrounds = unserialize($unpacker->unpack($redis->get($key)));
-        } else {
-            $conn = \r\connect(
-                $this->container->getParameter('rethinkdb_host'),
-                $this->container->getParameter('rethinkdb_port'),
-                $this->container->getParameter('rethinkdb_database')
-            );
-
-            $backgroundsIterator = \r\table("profile_backgrounds")->run($conn);
-
-            $backgrounds = array();
-            foreach ($backgroundsIterator as $backgroundIterator) {
-                $backgrounds[$backgroundIterator["id"]] = iterator_to_array($backgroundIterator);
-            }
-
-            $redis->set($key, $packer->pack(serialize($backgrounds)));
-            $redis->expireat($key, strtotime("+15 minutes"));
-        }
+        $backgrounds = $robyulApi->getRequest('/backgrounds');
 
         $tags = array();
         foreach ($backgrounds as $background) {

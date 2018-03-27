@@ -96,13 +96,13 @@
         <div class="row justify-content-md-center backgrounds-container">
             {% for background in backgrounds %}
             <div class="col col-12 col-lg-5 background-item"
-                data-tags="{% if "tags" in background|keys %}{{ background.tags|join(',') }}{% endif %}" data-name="{{ background.id }}"
+                data-tags="{% if "tags" in background|keys %}{{ background.Tags|join(',') }}{% endif %}" data-name="{{ background.Name }}"
             >
                 <div class="card background-card">
-                    <img class="card-img-top" src="{{ background.url }}" height="300" alt="{{ background.id }}">
+                    <img class="card-img-top" src="{{ background.URL }}" height="300" alt="{{ background.Name }}">
                     <div class="card-body">
                         <p class="card-text">
-                            To choose this Background say<br><code>{{ bot_default_prefix }}profile background {{ background.id }}</code> in Discord.</p>
+                            To choose this Background say<br><code>{{ bot_default_prefix }}profile background {{ background.Name }}</code> in Discord.</p>
                     </div>
                 </div>
             </div>
