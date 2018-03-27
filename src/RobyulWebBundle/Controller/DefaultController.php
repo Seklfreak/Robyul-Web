@@ -106,12 +106,12 @@ class DefaultController extends Controller
             ->addMeta('property', 'og:description', "Customize your Robyul Discord Bot Profile using Background Pictures.");
         $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
 
-        $backgrounds = $robyulApi->getRequest('/backgrounds');
+        $backgrounds = $robyulApi->getRequest('/backgrounds', '', true);
 
         $tags = array();
         foreach ($backgrounds as $background) {
             if (array_key_exists('Tags', $background)) {
-                foreach ($background['Tags'] as $tag) {
+                foreach ($background->Tags as $tag) {
                     if (!in_array($tag, $tags)) {
                         $tags[] = $tag;
                     }
