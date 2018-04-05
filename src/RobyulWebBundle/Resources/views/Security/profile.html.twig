@@ -72,7 +72,7 @@
                             {% if (guild.Status.IsGuildAdmin or guild.Status.IsGuildMod) and guild.Features.Eventlog.Enabled %}
                                 <li>
                                     <a href="{{ path('robyulweb_security_eventlog', {'guildID': guild.ID}) }}"><i
-                                                class="fa fa-binoculars" aria-hidden="true"></i> Eventlog</a>
+                                                class="fa fa-binoculars" aria-hidden="true"></i> Eventlog</a> <span class="badge badge-secondary">Beta</span>
                                 </li>
                             {% endif %}
                             {% if guild.Status.HasGuildPermissionAdministrator and guild.Features.Chatlog.Enabled %}
@@ -90,7 +90,7 @@
                             {% if (guild.Status.IsGuildAdmin or guild.Status.IsGuildMod) and guild.Settings and guild.Settings.Strings and guild.Settings.Strings|length > 0 %}
                                 <li>
                                     <a href="{{ path('robyulweb_security_settings', {'guildID': guild.ID}) }}"><i
-                                                class="fa fa-wrench" aria-hidden="true"></i> Settings</a>
+                                                class="fa fa-wrench" aria-hidden="true"></i> Settings</a> <span class="badge badge-secondary">Beta</span>
                                 </li>
                             {% endif %}
                         </ul>
