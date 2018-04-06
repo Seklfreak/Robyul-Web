@@ -22,7 +22,6 @@
     },
     "require": {
         "php": ">=5.5.9",
-        "danielmewes/php-rql": "^2.3",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
         "fourlabs/gamp-bundle": "^2.2",
