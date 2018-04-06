@@ -8,7 +8,14 @@
         </div>
         <div class="col-12 col-md-4">
             <h1>{{ discordUser.Username }}</h1>
-            <p>You are in <b>{{ memberOfGuilds|length }} servers</b> with Robyul.</p>
+            <p>
+                You are in <b>{{ memberOfGuilds|length }} servers</b> with Robyul.
+            </p>
+            {{ form_start(refreshForm) }}
+            <button type="submit" id="form_refresh" name="form[refresh]" class="btn btn-secondary btn-sm"><i class="fa fa-refresh"></i></button>
+            {% do refreshForm.refresh.setRendered %}
+            {{ form_widget(refreshForm) }}
+            {{ form_end(refreshForm) }}
         </div>
         <div class="col-12 col-md-6">
             <iframe width="400" height="300" frameborder="0" scrolling="no" src="{{ path('robyulweb_frame_profile',
@@ -21,8 +28,8 @@
             <script type="text/javascript" data-cfasync="false">
                 window.profileBarRankingData = {{ rawRankings|json_encode|raw }};
             </script>
-            {% endif %}
         </div>
+        {% endif %}
     </div>
     <div class="row justify-content-center">
                 {% for guild in memberOfGuilds %}

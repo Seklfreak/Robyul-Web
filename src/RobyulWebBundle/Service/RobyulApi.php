@@ -24,6 +24,14 @@ class RobyulApi
         $this->logger->info($method . ' ' . $url . ' as ' . $as . ' took ' . $took . 's');
     }
 
+    public function invalidate($endpoint)
+    {
+        $key = 'robyul2-web:api:' . md5($endpoint);
+        if ($this->redis->exists($key) == true) {
+            $this->redis->del($key);
+        }
+    }
+
     public function getRequest($endpoint, $expire = '+1 hour', $fresh = false)
     {
         $key = 'robyul2-web:api:' . md5($endpoint);

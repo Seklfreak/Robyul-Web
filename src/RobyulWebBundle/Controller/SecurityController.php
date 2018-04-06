@@ -7,15 +7,17 @@ use MessagePack\Packer;
 use MessagePack\Unpacker;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Unirest;
 use RobyulWebBundle\Service\RobyulApi;
+use Symfony\Component\HttpFoundation\Request;
 
 class SecurityController extends Controller
 {
     /**
      * @Route("/d/profile")
      */
-    public function profileAction(RobyulApi $robyulApi)
+    public function profileAction(Request $request, RobyulApi $robyulApi)
     {
         $seoPage = $this->container->get('sonata.seo.page');
         $seoPage
@@ -23,6 +25,22 @@ class SecurityController extends Controller
             ->addMeta('name', 'description', "View your Profile.")
             ->addMeta('property', 'og:description', "View your Profile.");
         $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
+
+        // refresh button (invalidates rest cache)
+        $refreshForm = $this->createFormBuilder()
+            ->add('refresh', SubmitType::class, array(
+                'label' => 'Refresh',
+                'attr' => array(
+                    'class' => 'btn btn-secondary btn-sm'
+                )
+            ))
+            ->getForm();
+        $refreshForm->handleRequest($request);
+        if ($refreshForm->isSubmitted() && $refreshForm->isValid()) {
+            $robyulApi->invalidate('user/' . $this->getUser()->getID() . '/guilds');
+            $robyulApi->invalidate('rankings/user/' . $this->getUser()->getID() . '/all');
+            return $this->redirectToRoute('robyulweb_security_profile');
+        }
 
         $allGuilds = $robyulApi->getRequest('user/' . $this->getUser()->getID() . '/guilds', '+15 minutes');
 
@@ -61,6 +79,7 @@ class SecurityController extends Controller
             'allRankings' => $adjustedRankings,
             'globalAdjustedEXP' => $globalAdjustedEXP,
             'rawRankings' => $allRankings,
+            'refreshForm' => $refreshForm->createView()
         ));
     }
 
