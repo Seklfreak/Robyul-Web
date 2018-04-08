@@ -110,25 +110,24 @@ body {
     margin-right: 1rem;
 }
 
-.ranking-table-item-inactive {
+.ranking-item-inactive {
     color: #8e8e8e;
 }
 
-.ranking-table-item-inactive img {
+.ranking-item-inactive img {
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
 }
 
-.ranking-table-row th small, .ranking-table-row td small {
-    font-size: 60%;
-    color: #8e8e8e;
-}
-
-.ranking-table-row th, .ranking-table-row td {
-    font-size: 2.5rem;
+.ranking-container .row p {
+    font-size: 2.5rem !important;
     font-weight: 300;
     line-height: 1.1;
     vertical-align: middle !important;
+}
+
+.ranking-container .row p small {
+    color: #8e8e8e;
 }
 
 .server-tile-item {
@@ -284,4 +283,8 @@ body {
 
 #plot > .axis {
     overflow: visible;
+}
+
+.box-shadow {
+    box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, .05);
 }

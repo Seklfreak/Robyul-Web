@@ -29,43 +29,54 @@
             {% endif %}
         </p>
     </div>
-    <table class="table">
-        <thead>
-        <tr>
-            <th>#</th>
-            <th>User</th>
-            <th>Level</th>
-        </tr>
-        </thead>
-        <tbody>
+    <div class="container ranking-container">
         {% for rank in rankings.Ranks %}
-            <tr class="ranking-table-row">
-                <th scope="row">{{ rank.Ranking }}</th>
-                <td>
-                    {% set isMember = false %}
-                    {% if rank.IsMember is defined %}
-                        {% set isMember = rank.IsMember %}
+            <div class="row">
+                <div class="col-md-1 col-2">
+                    <p>#{{ rank.Ranking }}</p>
+                </div>
+                <div class="col-md-6 col-10">
+                    <p>
+                        {% set isMember = false %}
+                        {% if rank.IsMember is defined %}
+                            {% set isMember = rank.IsMember %}
+                        {% endif %}
+                        <span class="ranking-table-item {% if isMember == true %}profile-hover{% else %}ranking-item-inactive{% endif %}" data-profile-iframe-url="{{ path('robyulweb_frame_profile',
+                            {'userID': rank.User.ID, 'guildID': guildID}) }}">
+                        {% if rank.User.AvatarHash == "" %}
+                            {% image '@RobyulWebBundle/Resources/public/images/placeholder_icon.jpg' output='static/images/placeholder_icon.jpg' %}
+                                <img class="profile-medium-avatar" src="{{ asset_url }}">
+                            {% endimage %}
+                        {% else %}
+                            <img class="profile-medium-avatar lazy"
+                                 data-original="{{ discord_avatar(rank.User.ID, rank.User.AvatarHash) }}?size=128">
+                        {% endif %}
+                            {{ rank.User.Username }}
+                            <small>#{{ rank.User.Discriminator }}</small>
+                        </span>
+                    </p>
+                </div>
+                <div class="col-md-3 col-8">
+                    {% if rank.Progress is defined %}
+                        <div class="row">
+                            <div class="col-12">
+                                {{ rank.NextLevelCurrentEXP|number_format(0, '', ' ') }} / {{ rank.NextLevelTotalEXP|number_format(0, '', ' ') }} EXP
+                            </div>
+                            <div class="col-12">
+                                <div class="progress">
+                                    <div class="progress-bar" role="progressbar" style="width: {{ rank.Progress }}%" aria-valuenow="{{ rank.Progress }}" aria-valuemin="0" aria-valuemax="100"></div>
+                                </div>
+                            </div>
+                        </div>
                     {% endif %}
-                <span class="ranking-table-item {% if isMember == true %}profile-hover{% else %}ranking-table-item-inactive{% endif %}" data-profile-iframe-url="{{ path('robyulweb_frame_profile',
-                {'userID': rank.User.ID, 'guildID': guildID}) }}">
-                    {% if rank.User.AvatarHash == "" %}
-                        {% image '@RobyulWebBundle/Resources/public/images/placeholder_icon.jpg' output='static/images/placeholder_icon.jpg' %}
-                        <img class="profile-medium-avatar" src="{{ asset_url }}">
-                                {% endimage %}
-                    {% else %}
-                        <img class="profile-medium-avatar lazy"
-                             data-original="{{ discord_avatar(rank.User.ID, rank.User.AvatarHash) }}?size=128">
-                    {% endif %}
-                    {{ rank.User.Username }}
-                    <small>#{{ rank.User.Discriminator }}</small>
-                </span>
-                </td>
-                <td>
-                    <small>Level</small> {{ rank.Level }}
-                </td>
-            </tr>
+                </div>
+                <div class="col-md-2 col-4">
+                    <p>
+                        <small>Level</small> {{ rank.Level }}
+                    </p>
+                </div>
+            </div>
         {% endfor %}
-        </tbody>
-    </table>
+    </div>
 {% endblock %}
 
