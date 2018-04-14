@@ -378,7 +378,9 @@
                     <li><code>{{ guildBotPrefix }}twitter add <span class="arg">twitter username</span> <span
                                     class="arg">discord #channel or channel id</span> <span class="opt-arg">role name or role id</span>
                             <a class="opt-arg" href="#" data-toggle="tooltip"
-                               title="setting this will use the official discord embed for tweets instead of the Robyul embed">discord-embed</a></code>
+                               title="setting this will use the official discord embed for tweets instead of the Robyul embed">discord-embed</a>
+                            <span class="opt-arg">exclude-rts</span> <span
+                                    class="opt-arg">exclude-mentions</span></code>
                         adds a Twitter feed to the
                         specific channel. <span class="badge badge-default">Mod</span></li>
                     <li><code>{{ guildBotPrefix }}twitter delete <span class="arg">twitter feed id</span></code> delete
@@ -1207,11 +1209,16 @@
                     <li><code>{{ guildBotPrefix }}biasgame rankings</code> displays user with most singleplayer games
                         played globally.
                     </li>
-                    <li><code>{{ guildBotPrefix }}biasgame rankings server <span class="opt-arg">server id</span></code>
-                        displays user with most singleplayer games played on the current server or specific server.
+                    <li><code>{{ guildBotPrefix }}biasgame rankings <span class="opt-arg">32/64/128/256/512/1024</span>
+                            server <span class="opt-arg">server id</span></code>
+                        displays users with most singleplayer games played on the current server or specific server.
                     </li>
                     <li><code>{{ guildBotPrefix }}biasgame server-rankings <span
+                                    class="opt-arg">32/64/128/256/512/1024</span><span
                                     class="opt-arg">single/multi</span></code> displays servers with most games played.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}biasgame group-stats <span class="arg">"group name"</span></code>
+                        displays statistics for a specific group.
                     </li>
                     <li><code>{{ guildBotPrefix }}biasgame idol-stats <span class="arg">"group name"</span> <span
                                     class="arg">"idol name"</span></code> displays statistics for an specific Idol.
