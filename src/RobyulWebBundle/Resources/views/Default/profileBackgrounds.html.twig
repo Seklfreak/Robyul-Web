@@ -12,7 +12,7 @@
     </div>
     <div class="container">
         <div class="row">
-            <ul class="list-inline nav-pills backgrounds-nav">
+            <ul class=" nav nav-pills backgrounds-nav">
                 <li class="list-inline-item nav-item backgrounds-filter-button-tag">
                     <a class="nav-link active" data-toggle="pill" href="#" data-tag="">All</a>
                 </li>
@@ -75,7 +75,7 @@
                     </li>
                     {% endif %}
                 {% endfor %}
-                <br>
+                <li style="width: 1rem;"></li>
                 {% for tag in tags|sort %}
                     {% if tag not in tagsPrintFirst %}
                         <li class="list-inline-item nav-item backgrounds-filter-button-tag">
