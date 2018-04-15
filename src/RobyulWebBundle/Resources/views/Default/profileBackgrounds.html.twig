@@ -5,8 +5,8 @@
         <div class="row">
             <p class="lead">
                 You can customize your Robyul Profile using one of these user submitted backgrounds.<br>
-                To view your Robyul Profile say <code>{{ bot_default_prefix }}profile</code> in Discord.<br>
-                You can submit new backgrounds <a href="https://goo.gl/forms/ZYFCGWNi5tYPAfki2" target="_blank">here</a>.
+                To view your Robyul Profile say <code>{{ bot_default_prefix }}profile</code> in Discord. {# <br>
+                You can submit new backgrounds <a href="https://goo.gl/forms/ZYFCGWNi5tYPAfki2" target="_blank">here</a>.#}
             </p>
         </div>
     </div>
@@ -96,7 +96,7 @@
         <div class="row justify-content-md-center backgrounds-container">
             {% for background in backgrounds %}
             <div class="col col-12 col-lg-5 background-item"
-                data-tags="{% if "tags" in background|keys %}{{ background.Tags|join(',') }}{% endif %}" data-name="{{ background.Name }}"
+                data-tags="{{ background.Tags|join(',') }}" data-name="{{ background.Name }}"
             >
                 <div class="card background-card">
                     <img class="card-img-top" src="{{ background.URL }}" height="300" alt="{{ background.Name }}">
