@@ -17,6 +17,7 @@
     <link rel="stylesheet" type="text/css"
           href="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.css"/>
     <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/3.0.3/cookieconsent.min.js"></script>
+    {% jshrink %}
     <script data-cfasync="false">
         window.addEventListener("load", function () {
             window.cookieconsent.initialise({
@@ -35,6 +36,7 @@
             })
         });
     </script>
+    {% endjshrink %}
     <script src="https://use.fontawesome.com/2351bf315b.js"></script>
     {% stylesheets '@RobyulWebBundle/Resources/public/css/pace-theme-minimal.css'
         '@RobyulWebBundle/Resources/public/css/main.css'
@@ -194,8 +196,9 @@
         integrity="sha384-a5N7Y/aK3qNeh15eJKGWxsqtnX/wWdSZSKp+81YjTmS15nvnvxKHuzaWwXHDli+4"
         crossorigin="anonymous"></script>
 <script src="https://cdn.ravenjs.com/3.21.0/raven.min.js" crossorigin="anonymous" data-cfasync="false"></script>
-{% if sentry_frontend_public_dns != "" %}
+{% jshrink %}
 <script type="text/javascript" data-cfasync="false">
+    {% if sentry_frontend_public_dns != "" %}
     Raven.config('{{ sentry_frontend_public_dns }}', {
         // https://docs.sentry.io/clients/javascript/tips/#decluttering-sentry
         ignoreErrors: [
@@ -237,16 +240,15 @@
             /webappstoolbarba\.texthelp\.com\//i,
             /metrics\.itunes\.apple\.com\.edgesuite\.net\//i
         ]}).install();
-    {% if is_granted('ROLE_DISCORD_USER') %}
-    Raven.setUserContext({
-        id: '{{ app.user.id }}'
-    });
+        {% if is_granted('ROLE_DISCORD_USER') %}
+        Raven.setUserContext({
+            id: '{{ app.user.id }}'
+        });
+        {% endif %}
     {% endif %}
-</script>
-{% endif %}
-<script type="text/javascript" data-cfasync="false">
     window.parameters = {{ js_parameters|json_encode|raw }};
 </script>
+{% endjshrink %}
 {% javascripts
     '@RobyulWebBundle/Resources/public/js/main.js'
     '@RobyulWebBundle/Resources/public/js/pace.js'

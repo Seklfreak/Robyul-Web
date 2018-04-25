@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1e65a3593dff0316a1e20de9f519e7aa",
+    "content-hash": "6dd14b4544d30663b61be7cb76fa7764",
     "packages": [
         {
             "name": "composer/ca-bundle",
@@ -2061,6 +2061,71 @@
             "time": "2017-03-11T15:48:37+00:00"
         },
         {
+            "name": "salva/jshrink-bundle",
+            "version": "1.1.4",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/nibsirahsieu/SalvaJshrinkBundle.git",
+                "reference": "4abe08d9d68875bc6234b6957a4299af14128b7e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/nibsirahsieu/SalvaJshrinkBundle/zipball/4abe08d9d68875bc6234b6957a4299af14128b7e",
+                "reference": "4abe08d9d68875bc6234b6957a4299af14128b7e",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.3.2|^7.0",
+                "symfony/assetic-bundle": "^2.7|^3.0",
+                "symfony/framework-bundle": "^2.7|^3.0",
+                "symfony/twig-bundle": "^2.7|^3.0",
+                "tedivm/jshrink": "~1.0",
+                "twig/extensions": "~1.2"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^4.0|^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Salva\\JshrinkBundle\\": "."
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nibsirahsieu",
+                    "email": "nibsirahsieu@gmail.com",
+                    "role": "Lead Developer"
+                },
+                {
+                    "name": "Emanuele Minotto",
+                    "email": "minottoemanuele@gmail.com",
+                    "homepage": "http://emanueleminotto.github.io/",
+                    "role": "Collaborator"
+                }
+            ],
+            "description": "This bundle integrate jshrink library as Assetic filter and twig extension",
+            "homepage": "https://github.com/nibsirahsieu/SalvaJshrinkBundle",
+            "keywords": [
+                "Symfony Bundle",
+                "assetic",
+                "javascript",
+                "jshrink",
+                "minify",
+                "twig"
+            ],
+            "time": "2016-03-12T14:14:57+00:00"
+        },
+        {
             "name": "sensio/distribution-bundle",
             "version": "v5.0.21",
             "source": {
@@ -3289,6 +3354,52 @@
                 "framework"
             ],
             "time": "2018-01-29T11:42:20+00:00"
+        },
+        {
+            "name": "tedivm/jshrink",
+            "version": "v1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/tedious/JShrink.git",
+                "reference": "68ce379b213741e86f02bf6053b0d26b9f833448"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/tedious/JShrink/zipball/68ce379b213741e86f02bf6053b0d26b9f833448",
+                "reference": "68ce379b213741e86f02bf6053b0d26b9f833448",
+                "shasum": ""
+            },
+            "require": {
+                "php": "^5.6|^7.0"
+            },
+            "require-dev": {
+                "friendsofphp/php-cs-fixer": "^2.8",
+                "php-coveralls/php-coveralls": "^1.1.0",
+                "phpunit/phpunit": "^6"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "JShrink": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause"
+            ],
+            "authors": [
+                {
+                    "name": "Robert Hafner",
+                    "email": "tedivm@tedivm.com"
+                }
+            ],
+            "description": "Javascript Minifier built in PHP",
+            "homepage": "http://github.com/tedious/JShrink",
+            "keywords": [
+                "javascript",
+                "minifier"
+            ],
+            "time": "2017-12-08T00:59:56+00:00"
         },
         {
             "name": "theiconic/php-ga-measurement-protocol",

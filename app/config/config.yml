@@ -168,3 +168,7 @@ four_labs_gamp:
     anonymize_ip: true
     async_requests: true
     sandbox: true
+
+salva_jshrink:
+    enabled: true
+    flaggedComments: true

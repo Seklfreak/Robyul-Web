@@ -44,3 +44,6 @@ snc_redis:
     profiler_storage:
         client: default
         ttl: 3600
+
+salva_jshrink:
+    enabled: false

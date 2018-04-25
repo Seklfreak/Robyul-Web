@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new Sentry\SentryBundle\SentryBundle(),
             new FourLabs\GampBundle\FourLabsGampBundle(),
+            new Salva\JshrinkBundle\SalvaJshrinkBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
