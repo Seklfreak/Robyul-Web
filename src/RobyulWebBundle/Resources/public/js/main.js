@@ -1,5 +1,57 @@
 Raven.context(function () {
     $(function () {
+        // google analytics
+        if (window.parameters.ga_tracking_id != null && window.parameters.ga_tracking_id.length > 0) {
+            var disableStr = 'ga-disable-' + window.parameters.ga_tracking_id;
+            if (document.cookie.indexOf(disableStr + '=true') > -1) {
+                window[disableStr] = true;
+            }
+
+            function gaOptout() {
+                document.cookie = disableStr + '=true; expires=Thu, 31 Dec 2099 23:59:59 UTC';
+                path = '/';
+                window[disableStr] = true;
+            }
+
+            (function (i, s, o, g, r, a, m) {
+                i['GoogleAnalyticsObject'] = r;
+                i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+                a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+                a.async = 1;
+                a.src = g;
+                m.parentNode.insertBefore(a, m)
+            })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+            ga('set', 'anonymizeIp', true);
+            ga('create', window.parameters.ga_tracking_id, 'auto');
+            ga('require', 'linkid');
+            ga('send', 'pageview');
+        }
+        // drift
+        if (window.parameters.drift_id != null && window.parameters.drift_id.length > 0) {
+            !function() {
+                var t;
+                if (t = window.driftt = window.drift = window.driftt || [], !t.init) return t.invoked ? void (window.console && console.error && console.error("Drift snippet included twice.")) : (t.invoked = !0,
+                    t.methods = [ "identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on" ],
+                    t.factory = function(e) {
+                        return function() {
+                            var n;
+                            return n = Array.prototype.slice.call(arguments), n.unshift(e), t.push(n), t;
+                        };
+                    }, t.methods.forEach(function(e) {
+                    t[e] = t.factory(e);
+                }), t.load = function(t) {
+                    var e, n, o, i;
+                    e = 3e5, i = Math.ceil(new Date() / e) * e, o = document.createElement("script"),
+                        o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + i + "/" + t + ".js",
+                        n = document.getElementsByTagName("script")[0], n.parentNode.insertBefore(o, n);
+                });
+            }();
+            drift.SNIPPET_VERSION = '0.3.1';
+            drift.load(window.parameters.drift_id);
+        }
         // Activate tooltips
         $('[data-toggle="tooltip"]').tooltip();
         // Lazy load lazy images
