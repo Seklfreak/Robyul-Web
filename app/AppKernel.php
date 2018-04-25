@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new Symfony\Bundle\AsseticBundle\AsseticBundle(),
             new Sonata\SeoBundle\SonataSeoBundle(),
             new Snc\RedisBundle\SncRedisBundle(),
+            new Http\HttplugBundle\HttplugBundle(),
             new HWI\Bundle\OAuthBundle\HWIOAuthBundle(),
             new Sentry\SentryBundle\SentryBundle(),
             new FourLabs\GampBundle\FourLabsGampBundle(),

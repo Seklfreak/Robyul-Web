@@ -149,15 +149,16 @@ hwi_oauth:
             type:                oauth2
             client_id:           '%discord_client_id%'
             client_secret:       '%discord_client_secret%'
+            scope:               'identify'
             access_token_url:    https://discordapp.com/api/oauth2/token
             authorization_url:   https://discordapp.com/api/oauth2/authorize
             infos_url:           https://discordapp.com/api/v6/users/@me
-            scope:               'identify'
             user_response_class: HWI\Bundle\OAuthBundle\OAuth\Response\PathUserResponse
             paths:
-                identifier: id
-                nickname:   id
-                realname:   id
+                identifier:     id
+                nickname:       username
+                realname:       username
+                profilepicture: avatar
             options:
                 csrf: true
 

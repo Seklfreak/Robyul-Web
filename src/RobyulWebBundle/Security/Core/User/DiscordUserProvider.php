@@ -39,17 +39,11 @@ class DiscordUserProvider implements UserProviderInterface, OAuthAwareUserProvid
 
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        $responseArray = $response->getResponse();
-        $id = $responseArray['id'];
-        $username = $responseArray['username'];
-        $discriminator = $responseArray['discriminator'];
-        $avatar = $responseArray['avatar'];
-
-        $user = new DiscordUser($id, $username, $discriminator, $avatar);
+        $user = new DiscordUser($response->getData()["id"], $response->getData()["username"], $response->getData()["discriminator"], $response->getData()["avatar"]);
 
         $packer = new Packer();
 
-        $this->redis->set($this->getRedisKey($id), $packer->pack($user->serialize()));
+        $this->redis->set($this->getRedisKey($response->getData()["id"]), $packer->pack($user->serialize()));
 
         return $user;
     }

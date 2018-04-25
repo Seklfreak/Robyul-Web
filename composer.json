@@ -25,9 +25,11 @@
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
         "fourlabs/gamp-bundle": "^2.2",
-        "hwi/oauth-bundle": "^0.5.3",
+        "hwi/oauth-bundle": "^0.6.2",
         "incenteev/composer-parameter-handler": "^2.0",
         "mashape/unirest-php": "^3.0",
+        "php-http/guzzle6-adapter": "^1.1",
+        "php-http/httplug-bundle": "^1.10",
         "predis/predis": "^1.1",
         "rybakit/msgpack": "^0.2.2",
         "salva/jshrink-bundle": "^1.1",
@@ -42,8 +44,15 @@
         "symfony/swiftmailer-bundle": "^2.3.10",
         "symfony/symfony": "3.4.*",
         "twig/extensions": "^1.5",
-        "twig/twig": "^1.0||^2.0"
+        "twig/twig": "^1.0||^2.0",
+        "nyholm/psr7": "dev-cast-string"
     },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url":  "https://github.com/Seklfreak/psr7"
+        }
+    ],
     "require-dev": {
         "sensio/generator-bundle": "^3.0",
         "symfony/phpunit-bridge": "^3.0"
