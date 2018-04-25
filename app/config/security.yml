@@ -31,6 +31,11 @@ security:
 
                 oauth_user_provider:
                     service: discord_user_provider
+            remember_me:
+                secret:   '%kernel.secret%'
+                lifetime: 2592000 # 1 month
+                path:     /
+                always_remember_me: true
 
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
