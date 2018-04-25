@@ -1205,8 +1205,8 @@ Raven.context(function () {
                 url: window.parameters.session_url,
                 cache: false,
                 dataType: "text",
-                error: function (_, errMsg, _) {
-                    alert(errMsg);
+                error: function (xhr, errMsg, error) {
+                    handleApiError(xhr, errMsg, error);
                 },
                 success: function (msg) {
                     sessionID = msg;
@@ -1219,8 +1219,8 @@ Raven.context(function () {
                         headers: {
                             "Authorization": "PHP-Session " + sessionID
                         },
-                        error: function (_, errMsg, _) {
-                            alert(errMsg);
+                        error: function (xhr, errMsg, error) {
+                            handleApiError(xhr, errMsg, error);
                         },
                         success: function (msg) {
                             callback(msg)
@@ -1236,8 +1236,8 @@ Raven.context(function () {
                 url: window.parameters.session_url,
                 cache: false,
                 dataType: "text",
-                error: function (_, errMsg, _) {
-                    alert(errMsg);
+                error: function (xhr, errMsg, error) {
+                    handleApiError(xhr, errMsg, error);
                 },
                 success: function (msg) {
                     sessionID = msg;
@@ -1252,19 +1252,29 @@ Raven.context(function () {
                             "Authorization": "PHP-Session " + sessionID
                         },
                         data: JSON.stringify(data),
-                        error: function (_, errMsg, _) {
-                            console.debug('error');
-                            console.debug(errMsg);
-                            alert(errMsg);
+                        error: function (xhr, errMsg, error) {
+                            handleApiError(xhr, errMsg, error);
                         },
                         success: function (msg) {
-                            console.debug('success');
-                            console.debug(msg);
                             callback(msg)
                         }
                     });
                 }
             });
+        }
+
+        function handleApiError(xhr, errMsg, error) {
+            if(isUserAbortedRequest(xhr)) {
+                return
+            }
+            console.debug(xhr);
+            console.debug(errMsg);
+            console.debug(error);
+            alert(errMsg+"\n"+error);
+        }
+
+        function isUserAbortedRequest(xhr) {
+            return !xhr.getAllResponseHeaders();
         }
 
         function parseDiscordMarkdown(inputText) {
