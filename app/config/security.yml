@@ -16,6 +16,8 @@ security:
             security: false
 
         secured_area:
+            provider: in_memory
+            logout_on_user_change: true
             anonymous: ~
             logout:
                 path:   /logout
