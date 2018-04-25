@@ -48,6 +48,7 @@ class VanityInviteController extends Controller
                 ->setCampaignSource('web')
                 ->setCampaignMedium('discord')
                 ->setCampaignContent($guildIdText)
+                ->setAnonymizeIp(true)
                 //->sendEvent();
                 ->sendPageview();
 
