@@ -36,6 +36,7 @@ class RobyulApi
     {
         $key = 'robyul2-web:api:' . md5($endpoint);
         if ($fresh == false && $this->redis->exists($key) == true) {
+            $this->logger->info('HIT http://localhost:2021/' . $endpoint);
             $data = unserialize($this->redis->get($key));
         } else {
             $timeStart = microtime(true);

@@ -1,10 +1,11 @@
 parameters:
+    robyul_api_service.class: RobyulWebBundle\Service\RobyulApi
     discord_user_provider.class: RobyulWebBundle\Security\Core\User\DiscordUserProvider
 
 services:
-#    robyul_web.example:
-#        class: RobyulWebBundle\Example
-#        arguments: ["@service_id", "plain_value", "%parameter%"]
+    robyul_api_service:
+        class: "%robyul_api_service.class%"
+        arguments: ['@service_container', '@logger']
     discord_user_provider:
         class: "%discord_user_provider.class%"
-        arguments: ['@snc_redis.default']
+        arguments: ['@robyul_api_service']

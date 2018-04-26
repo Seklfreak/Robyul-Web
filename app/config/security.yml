@@ -28,6 +28,7 @@ security:
                 use_forward:       false
                 login_path:        /connect/discord
                 default_target_path: /d/profile
+                failure_path:      /
 
                 oauth_user_provider:
                     service: discord_user_provider
@@ -39,4 +40,4 @@ security:
 
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/d/, roles: ROLE_DISCORD_USER }
+        - { path: ^/d/, roles: [IS_AUTHENTICATED_FULLY,IS_AUTHENTICATED_REMEMBERED] }

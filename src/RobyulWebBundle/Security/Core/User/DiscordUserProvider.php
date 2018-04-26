@@ -10,42 +10,27 @@ use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthUser;
+use RobyulWebBundle\Service\RobyulApi;
 
 class DiscordUserProvider implements UserProviderInterface, OAuthAwareUserProviderInterface
 {
-    protected $redis;
+    protected $robyul;
 
-    public function __construct($redis)
+    public function __construct(RobyulApi $robyulApi)
     {
-        $this->redis = $redis;
-    }
-
-    public function getRedisKey($id)
-    {
-        return 'robyul2-web:auth:user-data:'.$id;
+        $this->robyul = $robyulApi;
     }
 
     public function loadUserByUsername($id)
     {
-        $unpacker = new Unpacker();
+        $data = $this->robyul->getRequest('user/' . $id);
 
-        $userData = $unpacker->unpack($this->redis->get($this->getRedisKey($id)));
-
-        $user = new DiscordUser($id, "", "", "");
-        $user->unserialize($userData);
-
-        return $user;
+        return new DiscordUser($id, $data["Username"], $data["Discriminator"], $data["AvatarHash"]);
     }
 
     public function loadUserByOAuthUserResponse(UserResponseInterface $response)
     {
-        $user = new DiscordUser($response->getData()["id"], $response->getData()["username"], $response->getData()["discriminator"], $response->getData()["avatar"]);
-
-        $packer = new Packer();
-
-        $this->redis->set($this->getRedisKey($response->getData()["id"]), $packer->pack($user->serialize()));
-
-        return $user;
+        return new DiscordUser($response->getData()["id"], $response->getData()["username"], $response->getData()["discriminator"], $response->getData()["avatar"]);
     }
 
     public function refreshUser(UserInterface $user)
