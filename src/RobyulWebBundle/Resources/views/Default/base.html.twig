@@ -176,10 +176,15 @@
                 href="https://trello.robyul.chat/" target="_blank">Robyul Trello</a> - <a
                 href="https://status.robyul.chat/" target="_blank">Robyul Status</a> - <a
                 href="{{ path('robyulweb_default_imprint') }}">Impressum</a> - <a
-                href="{{ path('robyulweb_default_privacypolicy') }}">Datenschutzerklärung</a>.
+                href="{{ path('robyulweb_default_privacypolicy') }}">Datenschutzerklärung</a>.<br>
+                <p class="love">
+                    Made with <i class="fa fa-heart"></i> using
+                    {% image '@RobyulWebBundle/Resources/public/images/Go-Logo_Blue_38.png' output='static/images/go-logo-small.png' %}
+                        <img src="{{ asset_url }}" alt="Go">
+                    {% endimage %}
+                </p>
         {% endblock %}
     </div>
-
 </div><!-- /.container -->
 
 <script

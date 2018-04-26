@@ -296,3 +296,14 @@ body {
 .nav-link:hover {
     color: rgba(255,255,255,.75);
 }
+
+.love {
+    margin-top: 4px;
+}
+.love .fa-heart {
+    color: #e25555;
+}
+.love img {
+    height: 19px;
+    margin-bottom: 3px;
+}
