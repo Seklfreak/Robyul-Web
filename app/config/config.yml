@@ -134,7 +134,6 @@ snc_redis:
     session:
         client: default
         prefix: 'robyul2-web:session:'
-        ttl: 1800
     clients:
         default:
             type: predis

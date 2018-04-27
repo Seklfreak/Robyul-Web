@@ -4,8 +4,6 @@ security:
 
     # https://symfony.com/doc/current/security.html#b-configuring-how-users-are-loaded
     providers:
-        in_memory:
-            memory: ~
         hwi:
             id: discord_user_provider
 
@@ -16,7 +14,7 @@ security:
             security: false
 
         secured_area:
-            provider: in_memory
+            provider: hwi
             logout_on_user_change: true
             anonymous: ~
             logout:
@@ -40,4 +38,4 @@ security:
 
     access_control:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/d/, roles: [IS_AUTHENTICATED_FULLY,IS_AUTHENTICATED_REMEMBERED] }
+        - { path: ^/d/, roles: ROLE_DISCORD_USER }
