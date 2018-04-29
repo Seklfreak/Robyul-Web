@@ -81,4 +81,19 @@ class ShowRankingsController extends Controller
 
         return $this->render('RobyulWebBundle:ShowRankings:theunit_girls.html.twig');
     }
+
+    /**
+     * @Route("/produce101-china/")
+     */
+    public function produce101ChinaAction()
+    {
+        $seoPage = $this->container->get('sonata.seo.page');
+        $seoPage
+            ->setTitle("Produce 101 China - The KPop Discord Bot - Robyul")
+            ->addMeta('name', 'description', "Check out the current ranking for Produce 101 China.")
+            ->addMeta('property', 'og:description', "Check out the current ranking for Produce 101 China.");
+        $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
+
+        return $this->render('RobyulWebBundle:ShowRankings:produce101china.html.twig');
+    }
 }

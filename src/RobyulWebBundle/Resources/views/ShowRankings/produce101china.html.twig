@@ -1,0 +1,76 @@
+{% extends "RobyulWebBundle:Default:base.html.twig" %}
+
+{% block header %}
+    {% stylesheets '@RobyulWebBundle/Resources/public/css/idolschool.css' output='static/css/idolschool.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+    {% stylesheets '@RobyulWebBundle/Resources/public/css/produce101china.css' output='static/css/produce101china.css' %}
+    <link rel="stylesheet" href="{{ asset_url }}"/>
+    {% endstylesheets %}
+{% endblock %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-7">
+            <div id="graph">
+                <div class="row">
+                    <div class="col-12">
+                        <div id="plot">
+                            <div class="note" id="note0"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row justify-content-end" id="profile">
+                    <div class="col-12 col-md-3">
+                        <img src="#" id="pic">
+                    </div>
+                    <div class="col-12 col-md-5">
+                        <h4 id="infoName"></h4>
+                        <div id="infoRank"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            {#
+            <div class="row">
+                <a href="https://discord.is/theunit" target="_blank">
+                    <img class="discord-banner-image" src="https://discordapp.com/api/guilds/342422646832758784/widget.png?style=banner3">
+                </a>
+            </div>
+            #}
+            <div class="row">
+                <div id="chart">
+                    <h1>Current Rankings
+                    </h1>
+                    <table id="top">
+                        <thead>
+                        <tr class="smallCaps">
+                            <th id="latestRank" class="selectedSort">Rank</th>
+                            <th id="name">Name</th>
+                            <th id="rankChange">Change</th>
+                        </tr>
+                        </thead>
+                        <tbody id="topBody">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12 idolschool-footer">
+            <a href="https://p101s2.github.io/" target="_blank">built using p101s2.github.io</a>{# -
+            <a href="https://discord.is/theunit" target="_blank">join the The Unit discord</a> -
+            <a href="https://www.reddit.com/r/KBSTheUnit/" target="_blank">The Unit subreddit</a>#}
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://d3js.org/d3.v4.js"></script>
+    {% javascripts
+    '@RobyulWebBundle/Resources/public/js/produce101china.js' output='static/js/produce101china.js' %}
+    <script src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
