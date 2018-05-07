@@ -534,6 +534,10 @@
                                     class="opt-arg">@user or user id or last.fm username</span></code> see what the user
                         is listening to right now.
                     </li>
+                    <li><code>{{ guildBotPrefix }}lf recent <span
+                                    class="opt-arg">@user or user id or last.fm username</span></code> shows recent
+                        tracks for an user.
+                    </li>
                     <li><code>{{ guildBotPrefix }}lf yt <span
                                     class="opt-arg">@user or user id or last.fm username</span></code> search for the
                         current or last track on youtube.
@@ -651,6 +655,10 @@
                                                                            title="how many messages to copy, includes the first message, default: 1, max: 100">number
                                 of messages</a></code> copies messages of your current channel to a different channel.
                         <span class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}pin <span class="opt-arg">target #channel or channel id</span> <span
+                                    class="optarg">message id</span></code> pins a message. If no message given Robyul
+                        will pin the last message in the current channel.
+                        <span class="badge badge-default">Mod</span></li>
                     <li><code>{{ guildBotPrefix }}config</code> shows a overview about various Robyul configurations for
                         the server you are currently on.
                         <span class="badge badge-default">Mod</span></li>
@@ -732,8 +740,6 @@
                     <li><code>{{ guildBotPrefix }}bias remove-config <span class="arg">channel # or id</span></code>
                         remove a bias config for the specific channel. <span class="badge badge-default">Admin</span>
                     </li>
-                    <li><code>{{ guildBotPrefix }}bias refresh</code> reloads all bias configs. <span
-                                class="badge badge-default">Bot Owner</span></li>
                 </ul>
                 A guide how to set up the config can be found on the Discord Server for Robyul.
                 </p>
@@ -776,6 +782,11 @@
                     </li>
                     <li><code>{{ guildBotPrefix }}greeter leave <span class="opt-arg">channel # or id</span>
                             <span class="opt-arg">text, or embed code</span></code> Set a Leave message in the specific
+                        channel. Run
+                        the command without arguments to disable it. <span class="badge badge-default">Admin</span>
+                    </li>
+                    <li><code>{{ guildBotPrefix }}greeter ban <span class="opt-arg">channel # or id</span>
+                            <span class="opt-arg">text, or embed code</span></code> Set a Ban message in the specific
                         channel. Run
                         the command without arguments to disable it. <span class="badge badge-default">Admin</span>
                     </li>
@@ -908,6 +919,24 @@
             </div>
         </div>
     {% endif %}
+    {% if moduleNames is null or "google" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-body">
+                <h4 class="card-title" id="google"><a href="#google">Google</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Search the internet.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}google <span class="arg">search text</span></code>
+                        Shows the first google result for the search.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}image <span class="arg">search text</span></code>
+                        Shows the first google image result for the search.
+                    </li>
+                </ul>
+                </p>
+            </div>
+        </div>
+    {% endif %}
     {% if moduleNames is null or "gallery" in moduleNames %}
         <div class="card commands-card">
             <div class="card-body">
@@ -923,8 +952,6 @@
                     <li><code>{{ guildBotPrefix }}gallery delete <span class="arg">gallery id</span></code> Deletes a
                         gallery on the server. Use <code>{{ guildBotPrefix }}gallery list</code> to get the gallery id.
                         <span class="badge badge-default">Admin</span></li>
-                    <li><code>{{ guildBotPrefix }}gallery refresh</code> Refreshes all Gallery caches. <span
-                                class="badge badge-default">Bot Owner</span></li>
                 </ul>
                 </p>
             </div>
@@ -951,8 +978,6 @@
                         the mirror id. <span class="badge badge-default">Robyul Staff</span></li>
                     <li><code>{{ guildBotPrefix }}mirror delete <span class="arg">gallery id</span></code> Deletes a
                         mirror. Use <code>{{ guildBotPrefix }}mirror list</code> to get the mirror id. <span
-                                class="badge badge-default">Robyul Staff</span></li>
-                    <li><code>{{ guildBotPrefix }}mirror refresh</code> Refreshes all Mirror caches. <span
                                 class="badge badge-default">Robyul Staff</span></li>
                 </ul>
                 </p>
@@ -1075,8 +1100,6 @@
                                     class="arg">allowed emote</span> <span class="opt-arg">more allowed emotes...</span></code>
                         create a Reaction Poll.
                     </li>
-                    <li><code>{{ guildBotPrefix }}reactionpoll refresh</code> refreshes the Reaction Poll database.
-                        <span class="badge badge-default">Bot Owner</span></li>
                 </ul>
                 </p>
             </div>
@@ -1144,7 +1167,8 @@
                     <li><code>{{ guildBotPrefix }}twitch list</code> view all active Twitch channel feeds on this server
                     </li>
                     <li><code>{{ guildBotPrefix }}twitch add <span class="arg">twitch channel name</span> <span
-                                    class="arg">discord #channel or channel id</span></code> adds a Twitch channel feed
+                                    class="arg">discord #channel or channel id</span> <span class="opt-arg">discord role name or role id</span></code>
+                        adds a Twitch channel feed
                         to the specific channel. <span class="badge badge-default">Mod</span></li>
                     <li><code>{{ guildBotPrefix }}twitch delete <span class="arg">twitch feed id</span></code> delete a
                         Twitch channel feed. Use <code>{{ guildBotPrefix }}twitch list</code> to get the feed id. <span
@@ -1196,7 +1220,8 @@
                     <li><code>{{ guildBotPrefix }}biasgame multi</code> starts a new mixed multiplayer game with 32
                         idols.
                     </li>
-                    <li><code>{{ guildBotPrefix }}biasgame multi <span class="opt-arg">girl/boy/mixed</span></code>
+                    <li><code>{{ guildBotPrefix }}biasgame multi <span class="opt-arg">girl/boy/mixed</span> <span
+                                    class="opt-arg">32/64</span></code>
                         start a new multiplayer game with specific options.
                     </li>
                     <li><code>{{ guildBotPrefix }}biasgame stats</code> shows your stats.
@@ -1323,6 +1348,9 @@
                                 class="badge badge-default">Admin</span></li>
                     <li><code>{{ guildBotPrefix }}nuke log</code> Show nukes in the past. <span
                                 class="badge badge-default">Mod</span></li>
+                    <li><code>{{ guildBotPrefix }}nuke apply</code> Bans all users that have been nuked in the past on
+                        the current server. <span
+                                class="badge badge-default">Admin</span></li>
                     <li><code>{{ guildBotPrefix }}nuke user <span class="arg">@user or user id</span> <span class="arg">reason</span></code>
                         nuke an user. <span class="badge badge-default">Nuke Mod (Robyul Staff)</span></li>
                 </ul>
@@ -1454,6 +1482,9 @@
                 <p class="card-text">
                 <ul class="list-unstyled">
                     <li><code>{{ guildBotPrefix }}uptime</code> see Robyul's uptime.</li>
+                    <li><code>{{ guildBotPrefix }}storage</code> see how much files you have uploaded to Robyul in
+                        total.
+                    </li>
                 </ul>
                 </p>
             </div>
