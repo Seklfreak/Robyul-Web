@@ -15,8 +15,8 @@ var middlePadding = (padding * 2) + 100;
 //var width = $(window).width() - middlePadding - CHART_WIDTH - 30;
 var width = 1280 - middlePadding - CHART_WIDTH - 30;
 
-var csv = "produce101china.v3.csv";
-var episodes = [2,3];
+var csv = "produce101china.v4.csv";
+var episodes = [2,3,4];
 var totalData;
 var dFirst;
 
