@@ -1558,6 +1558,25 @@
             </div>
         </div>
     {% endif %}
+    {% if moduleNames is null or "eventlog" in moduleNames %}
+        <div class="card commands-card">
+            <div class="card-body">
+                <h4 class="card-title" id="eventlog"><a href="#eventlog">Eventlog</a> <span class="badge badge-info">Beta</span></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Monitor moderator activities on your server.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}toggle-eventlog</code> disables and enabled the eventlog.
+                        <span class="badge badge-default">Admin</span>
+                    </li>
+                    <li><code>{{ guildBotPrefix }}eventlog set-log <span class="opt-arg">#channel or channel id</span></code>
+                        posts the eventlog in the given channel. <span
+                                class="badge badge-default">Mod</span>
+                    </li>
+                </ul>
+                </p>
+            </div>
+        </div>
+    {% endif %}
     <div class="card commands-card">
         <div class="card-body">
             <h4 class="card-title" id="modulepermissions"><a href="#modulepermissions">Module Permissions</a></h4>
