@@ -16,7 +16,7 @@ var middlePadding = (padding * 2) + 100;
 var width = 1280 - middlePadding - CHART_WIDTH - 30;
 
 var csv = "produce101china.v5.csv";
-var episodes = [2,3,4,5,6];
+var episodes = [2,3,4,5,6,7];
 var totalData;
 var dFirst;
 
