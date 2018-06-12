@@ -1,0 +1,11 @@
+#pic {
+    height: 150px;
+    width: 150px;
+}
+
+.link-girls {
+    color: #f55f5f;
+}
+.link-girls:hover, .link-girls:active {
+    color: #d25757;
+}

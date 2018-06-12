@@ -96,4 +96,19 @@ class ShowRankingsController extends Controller
 
         return $this->render('RobyulWebBundle:ShowRankings:produce101china.html.twig');
     }
+
+    /**
+     * @Route("/produce48/")
+     */
+    public function produce48Action()
+    {
+        $seoPage = $this->container->get('sonata.seo.page');
+        $seoPage
+            ->setTitle("Produce 48 - The KPop Discord Bot - Robyul")
+            ->addMeta('name', 'description', "Check out the current ranking for Produce 48.")
+            ->addMeta('property', 'og:description', "Check out the current ranking for Produce 48.");
+        $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
+
+        return $this->render('RobyulWebBundle:ShowRankings:produce48.html.twig');
+    }
 }

@@ -136,6 +136,11 @@
                         app.request.attributes.get('_route') == 'robyulweb_showrankings_produce101china' %} <span class="sr-only">(current)</span>{% endif %}
                 </a>
             </li>
+            <li class="nav-item{% if app.request.attributes.get('_route') == 'robyulweb_showrankings_produce48' %} active{% endif %}">
+                <a class="nav-link" href="{{ path('robyulweb_showrankings_produce48') }}">Produce 48{% if
+                        app.request.attributes.get('_route') == 'robyulweb_showrankings_produce48' %} <span class="sr-only">(current)</span>{% endif %}
+                </a>
+            </li>
             {#<li class="nav-item">
                 <a class="nav-link disabled" href="#">Disabled</a>
             </li>#}

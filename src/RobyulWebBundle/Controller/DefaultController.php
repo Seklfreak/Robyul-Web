@@ -212,7 +212,7 @@ class DefaultController extends Controller
         $seoPage
             ->setTitle("Embed Creator - The KPop Discord Bot - Robyul")
             ->addMeta('name', 'description', "Create pretty Discord Embeds with ease using Robyul.")
-            ->addMeta('property', 'og:description', "w.");
+            ->addMeta('property', 'og:description', "Create pretty Discord Embeds with ease using Robyul.");
         $seoPage->addMeta('property', 'og:title', $seoPage->getTitle());
 
         $botData = $robyulApi->getRequest('user/@me');
