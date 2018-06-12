@@ -1367,30 +1367,6 @@
             </div>
         </div>
     {% endif %}
-    {% if moduleNames is null or "troublemaker" in moduleNames %}
-        <div class="card commands-card">
-            <div class="card-body">
-                <h4 class="card-title" id="troublemaker"><a href="#troublemaker">Troublemaker</a></h4>
-                <h6 class="card-subtitle mb-2 text-muted">This is a member report server across servers. Troublemakers
-                    will get posted across all participating servers. These reports will also get used in the
-                    inspects.</h6>
-                <p class="card-text">
-                <ul class="list-unstyled">
-                    <li><code>{{ guildBotPrefix }}troublemaker participate <span
-                                    class="opt-arg">log channel</span></code> enable troublemaker log on your discord.
-                        Run it again without arguments to disable it. <span class="badge badge-default">Admin</span>
-                    </li>
-                    <li><code>{{ guildBotPrefix }}troublemaker <span class="arg">@user or user id</span> <span
-                                    class="arg">reason</span></code> reports a troublemaker. We encourage Mods to report
-                        all troublemakers if they could threaten other servers. <span
-                                class="badge badge-default">Mod</span></li>
-                    <li><code>{{ guildBotPrefix }}troublemaker list <span class="arg">@user or user id</span></code>
-                        shows all reports given for an user. <span class="badge badge-default">Mod</span></li>
-                </ul>
-                </p>
-            </div>
-        </div>
-    {% endif %}
     {% if moduleNames is null or "stats" in moduleNames %}
         <div class="card commands-card">
             <div class="card-body">
