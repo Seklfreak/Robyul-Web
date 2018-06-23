@@ -16,7 +16,7 @@ var middlePadding = (padding * 2) + 100;
 var width = 1280 - middlePadding - CHART_WIDTH - 30;
 
 var csv = "produce48.v1.csv";
-var episodes = [0];
+var episodes = [1,2];
 var totalData;
 var dFirst;
 
