@@ -9,3 +9,17 @@
 .link-girls:hover, .link-girls:active {
     color: #d25757;
 }
+
+.letter {
+    border-radius: 100%;
+    box-sizing: border-box;
+    width: 28px;
+    height: 28px;
+    padding-top: 4px;
+    position: relative;
+    text-align: center;
+    display: inline-block;
+    margin-left: 5px;
+    font-size: 14px;
+    font-weight: bold;
+}

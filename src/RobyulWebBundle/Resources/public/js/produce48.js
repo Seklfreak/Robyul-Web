@@ -15,8 +15,8 @@ var middlePadding = (padding * 2) + 100;
 //var width = $(window).width() - middlePadding - CHART_WIDTH - 30;
 var width = 1280 - middlePadding - CHART_WIDTH - 30;
 
-var csv = "produce48.v1.csv";
-var episodes = [1,2];
+var csv = "produce48.v2.csv";
+var episodes = [1,2,3];
 var totalData;
 var dFirst;
 
@@ -149,11 +149,12 @@ function showChart(key, asc) {
             }
         })
         .html(function(d) {
+            var letter = td('<div class="letter" style="background: ' + getLetterBackground(d) + '; color: ' + getTextColor(d) + '">' + d.letter + '</div>', 'smWidth');
             var rank = d.latestRank;
             if (rank == 1000) {
                 rank = "-";
             }
-            return td(rank, "smWidth") + td(d.name, "nameWidth") + td(displayRankChange(d), "rankWidth");
+            return td(rank, "smWidth") + td(d.name, "nameWidth") + letter  + td(displayRankChange(d), "rankWidth");
         })
         .on("mouseover", function(d) {
             selectLine(d, "#line" + d.latestRank);
@@ -178,6 +179,26 @@ function displayProfile(d) {
 
 function getImageSource(d) {
     return "/bundles/robyulweb/images/produce48/" + d.name.replace(/ /g, "").split("/")[0] + ".jpg";
+}
+
+function getLetterBackground(d) {
+    if (d.letter === 'A') {
+        return '#E0709B';
+    }
+    if (d.letter === 'B') {
+        return '#F37020';
+    }
+    if (d.letter === 'C') {
+        return '#F7B938';
+    }
+    if (d.letter === 'D') {
+        return '#16AA52';
+    }
+    if (d.letter === 'F') {
+        return '#959EA2';
+    }
+
+    return '#000000';
 }
 
 function getBackground(d) {
@@ -350,11 +371,8 @@ function updateNotes(d) {
     }
 }
 
-// Get color of note text (all white except for yellow rank C)
+// Get color of note text
 function getTextColor(d) {
-    if (d.letter == "C") {
-        return "black";
-    }
     return "white";
 }
 
@@ -371,7 +389,7 @@ function parseLine(row) {
     var r = {};
     r.name = row.Name;
     r.company = "";
-    r.letter = "";
+    r.letter = row.Letter;
     r.specialNote = row.Notes;
     r.color = row.Color;
     r.ranking = [];
