@@ -928,24 +928,6 @@
             </div>
         </div>
     {% endif %}
-    {% if moduleNames is null or "google" in moduleNames %}
-        <div class="card commands-card">
-            <div class="card-body">
-                <h4 class="card-title" id="google"><a href="#google">Google</a></h4>
-                <h6 class="card-subtitle mb-2 text-muted">Search the internet.</h6>
-                <p class="card-text">
-                <ul class="list-unstyled">
-                    <li><code>{{ guildBotPrefix }}google <span class="arg">search text</span></code>
-                        Shows the first google result for the search.
-                    </li>
-                    <li><code>{{ guildBotPrefix }}image <span class="arg">search text</span></code>
-                        Shows the first google image result for the search.
-                    </li>
-                </ul>
-                </p>
-            </div>
-        </div>
-    {% endif %}
     {% if moduleNames is null or "gallery" in moduleNames %}
         <div class="card commands-card">
             <div class="card-body">
