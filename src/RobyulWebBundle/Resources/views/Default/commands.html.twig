@@ -1198,6 +1198,48 @@
     {% if moduleNames is null or "games" in moduleNames %}
         <div class="card commands-card">
             <div class="card-body">
+                <h4 class="card-title" id="nugugame"><a href="#nugugame">Nugu Game</a></h4>
+                <h6 class="card-subtitle mb-2 text-muted">Show off your skills.</h6>
+                <p class="card-text">
+                <ul class="list-unstyled">
+                    <li><code>{{ guildBotPrefix }}nugugame</code> Starts a solo mixed nugugame at medium difficulty.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}nugugame <span class="opt-arg">girl/boy</span> <span
+                                    class="opt-arg">easy/medium/hard/koreaboo</span> <span
+                                    class="opt-arg">multi</span> <span
+                                    class="opt-arg">group</span></code> start a new game with specific
+                        options.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}nugugame stats</code> shows your stats.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}nugugame stats <span class="opt-arg">server/global</span> <span
+                                    class="opt-arg">@mention/user ID/server ID</span></code>
+                        shows specific statistics.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}nugugame missed <span class="opt-arg">server/global</span></code> displays all the idols you have missed.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}nugugame rankings <span class="opt-arg">easy/medium/hard/koreaboo</span> <span class="opt-arg">server</span></code>
+                        displays user rankings.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}nugugame server-rankings <span
+                                    class="opt-arg">easy/medium/hard/koreaboo</span></code> displays server rankings.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}nugugame group-stats <span class="arg">"group name"</span></code>
+                        displays statistics for a specific group.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}nugugame idol-stats <span class="arg">"group name"</span> <span
+                                    class="arg">"idol name"</span></code> displays statistics for an specific Idol.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}nugugame skip</code> skips the current round in a solo game.
+                    </li>
+                    <li><code>{{ guildBotPrefix }}nugugame quit</code> quits the current solo game early.
+                    </li>
+                </ul>
+                </p>
+            </div>
+        </div>
+        <div class="card commands-card">
+            <div class="card-body">
                 <h4 class="card-title" id="biasgame"><a href="#biasgame">Bias Game</a></h4>
                 <h6 class="card-subtitle mb-2 text-muted">Who is your favorite idol?</h6>
                 <p class="card-text">
