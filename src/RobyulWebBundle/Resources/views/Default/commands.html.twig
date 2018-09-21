@@ -1216,13 +1216,18 @@
                                     class="opt-arg">@mention/user ID/server ID</span></code>
                         shows specific statistics.
                     </li>
-                    <li><code>{{ guildBotPrefix }}nugugame missed <span class="opt-arg">server/global</span></code> displays all the idols you have missed.
+                    <li><code>{{ guildBotPrefix }}nugugame missed <span class="opt-arg">server/global</span></code>
+                        displays all the idols you have missed.
                     </li>
-                    <li><code>{{ guildBotPrefix }}nugugame rankings <span class="opt-arg">easy/medium/hard/koreaboo</span> <span class="opt-arg">server</span></code>
+                    <li><code>{{ guildBotPrefix }}nugugame rankings <span
+                                    class="opt-arg">easy/medium/hard/koreaboo</span> <span
+                                    class="opt-arg">girl/boy</span> <span class="opt-arg">server</span></code>
                         displays user rankings.
                     </li>
                     <li><code>{{ guildBotPrefix }}nugugame server-rankings <span
-                                    class="opt-arg">easy/medium/hard/koreaboo</span></code> displays server rankings.
+                                    class="opt-arg">easy/medium/hard/koreaboo</span> <span
+                                    class="opt-arg">girl/boy</span> <span
+                                    class="opt-arg">solo/multi</span></code> displays server rankings.
                     </li>
                     <li><code>{{ guildBotPrefix }}nugugame group-stats <span class="arg">"group name"</span></code>
                         displays statistics for a specific group.
@@ -1561,14 +1566,16 @@
     {% if moduleNames is null or "eventlog" in moduleNames %}
         <div class="card commands-card">
             <div class="card-body">
-                <h4 class="card-title" id="eventlog"><a href="#eventlog">Eventlog</a> <span class="badge badge-info">Beta</span></h4>
+                <h4 class="card-title" id="eventlog"><a href="#eventlog">Eventlog</a> <span class="badge badge-info">Beta</span>
+                </h4>
                 <h6 class="card-subtitle mb-2 text-muted">Monitor moderator activities on your server.</h6>
                 <p class="card-text">
                 <ul class="list-unstyled">
                     <li><code>{{ guildBotPrefix }}toggle-eventlog</code> disables and enabled the eventlog.
                         <span class="badge badge-default">Admin</span>
                     </li>
-                    <li><code>{{ guildBotPrefix }}eventlog set-log <span class="opt-arg">#channel or channel id</span></code>
+                    <li><code>{{ guildBotPrefix }}eventlog set-log <span
+                                    class="opt-arg">#channel or channel id</span></code>
                         posts the eventlog in the given channel. <span
                                 class="badge badge-default">Mod</span>
                     </li>
