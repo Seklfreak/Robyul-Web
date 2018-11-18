@@ -260,12 +260,14 @@
                         notification messages (content after information, content before information or embed with
                         context).
                     </li>
-                    <li><code>{{ guildBotPrefix }}noti ignore <span class="arg">keyword(s)</span></code> ignores a
-                        specific keyword of your global keywords on the server you are currently on. Run it again to get
-                        notifications for the keyword on the specific server again.
+                    <li><code>{{ guildBotPrefix }}noti ignore <span class="arg">keyword(s)</span> <span class="opt-arg">#channel or channel id</span></code>
+                        ignores a
+                        specific (global) keyword of yours on the server you are on, or in the given channel. Run it
+                        again to get
+                        notified again.
                     </li>
                     <li><code>{{ guildBotPrefix }}noti ignore-channel <span class="arg">#channel or id</span></code>
-                        lets Robyul ignore all messages in the given channel. Run it again to turn it on again. <span
+                        lets Robyul ignore all messages in the given channel for all users. Run it again to turn it on again. <span
                                 class="badge badge-default">Admin</span></li>
                     <li><code>{{ guildBotPrefix }}noti ignore-channel list</code> lists all ignored channels on this
                         server.
