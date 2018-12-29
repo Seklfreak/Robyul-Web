@@ -31,18 +31,18 @@ Raven.context(function () {
         }
         // drift
         if (window.parameters.drift_id != null && window.parameters.drift_id.length > 0) {
-            !function() {
+            !function () {
                 var t;
                 if (t = window.driftt = window.drift = window.driftt || [], !t.init) return t.invoked ? void (window.console && console.error && console.error("Drift snippet included twice.")) : (t.invoked = !0,
-                    t.methods = [ "identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on" ],
-                    t.factory = function(e) {
-                        return function() {
+                    t.methods = ["identify", "config", "track", "reset", "debug", "show", "ping", "page", "hide", "off", "on"],
+                    t.factory = function (e) {
+                        return function () {
                             var n;
                             return n = Array.prototype.slice.call(arguments), n.unshift(e), t.push(n), t;
                         };
-                    }, t.methods.forEach(function(e) {
+                    }, t.methods.forEach(function (e) {
                     t[e] = t.factory(e);
-                }), t.load = function(t) {
+                }), t.load = function (t) {
                     var e, n, o, i;
                     e = 3e5, i = Math.ceil(new Date() / e) * e, o = document.createElement("script"),
                         o.type = "text/javascript", o.async = !0, o.crossorigin = "anonymous", o.src = "https://js.driftt.com/include/" + i + "/" + t + ".js",
@@ -217,6 +217,10 @@ Raven.context(function () {
                     {
                         title: "Messages",
                         values: [0, 0]
+                    },
+                    {
+                        title: "By Uniques",
+                        values: [0, 0]
                     }
                 ]
             };
@@ -241,7 +245,7 @@ Raven.context(function () {
                 type: 'line',
                 height: 250,
 
-                colors: ['#7cd6fd'],
+                colors: ['#7cd6fd', '#5e64ff'],
 
                 show_dots: 1,
                 heatline: 1,
@@ -280,6 +284,7 @@ Raven.context(function () {
 
                 apiRequest(serverActivityStatisticsEndpoint, function (msg) {
                     var valuesMessages = [];
+                    var valuesByUniqueUsers = [];
                     var valuesJoins = [];
                     var valuesLeaves = [];
                     var labels = [];
@@ -288,6 +293,7 @@ Raven.context(function () {
                         valuesMessages.push(value.Count1);
                         valuesJoins.push(value.Count2);
                         valuesLeaves.push(value.Count3);
+                        valuesByUniqueUsers.push(value.Count4);
 
                         var date = moment(value.Time);
 
@@ -321,6 +327,7 @@ Raven.context(function () {
 
                     messageChart.update_values(
                         [
+                            {values: [0, 0]},
                             {values: [0, 0]}
                         ],
                         ["Please wait…", "Please wait…"]
@@ -336,7 +343,8 @@ Raven.context(function () {
 
                     messageChart.update_values(
                         [
-                            {values: valuesMessages}
+                            {values: valuesMessages},
+                            {values: valuesByUniqueUsers}
                         ],
                         labels
                     );
@@ -1264,13 +1272,13 @@ Raven.context(function () {
         }
 
         function handleApiError(xhr, errMsg, error) {
-            if(isUserAbortedRequest(xhr)) {
+            if (isUserAbortedRequest(xhr)) {
                 return
             }
             console.debug(xhr);
             console.debug(errMsg);
             console.debug(error);
-            alert(errMsg+"\n"+error);
+            alert(errMsg + "\n" + error);
         }
 
         function isUserAbortedRequest(xhr) {
@@ -1285,7 +1293,13 @@ Raven.context(function () {
         }
     });
 });
+
 $(document).ajaxError(function (event, jqXHR, ajaxSettings, thrownError) {
+    var responseText = '';
+    if (typeof jqXHR.responseText !== 'undefined') {
+        responseText = jqXHR.responseText.substring(0, 100);
+    }
+
     Raven.captureMessage(thrownError || jqXHR.statusText, {
         extra: {
             type: ajaxSettings.type,
@@ -1293,7 +1307,9 @@ $(document).ajaxError(function (event, jqXHR, ajaxSettings, thrownError) {
             data: ajaxSettings.data,
             status: jqXHR.status,
             error: thrownError || jqXHR.statusText,
-            response: jqXHR.responseText.substring(0, 100)
+            response: responseText
         }
     });
+
+    console.error(jqXHR);
 });

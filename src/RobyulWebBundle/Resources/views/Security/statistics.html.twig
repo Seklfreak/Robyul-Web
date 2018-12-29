@@ -50,7 +50,6 @@
             ></div>
         </div>
     </div>
-    {##}
     <div class="row">
         <div class="col-4">
             <div class="statistics-counter" data-type="messages" data-interval="5m" data-refresh="10000"
@@ -166,5 +165,30 @@
             </div>
         </div>
     </div>
-    {##}
+    <div class="row">
+        <div class="col-4">
+            <div class="statistics-counter" data-type="by-uniques" data-interval="24h" data-refresh="3600000"
+                 data-guild-id="{{ guildID }}">
+                <h5><a href="#" data-toggle="tooltip"
+                       title="Users chatting in the timerange">Unique Users</a> in the last 24 hours</h5>
+                <h3 id="number"></h3>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="statistics-counter" data-type="by-uniques" data-interval="7d" data-refresh="3600000"
+                 data-guild-id="{{ guildID }}">
+                <h5><a href="#" data-toggle="tooltip"
+                       title="Users chatting in the timerange">Unique Users</a> in the last 7 days</h5>
+                <h3 id="number"></h3>
+            </div>
+        </div>
+        <div class="col-4">
+            <div class="statistics-counter" data-type="by-uniques" data-interval="30d" data-refresh="3600000"
+                 data-guild-id="{{ guildID }}">
+                <h5><a href="#" data-toggle="tooltip"
+                       title="Users chatting in the timerange">Unique Users</a> in the last 30 days</h5>
+                <h3 id="number"></h3>
+            </div>
+        </div>
+    </div>
 {% endblock %}
