@@ -210,19 +210,24 @@ Raven.context(function () {
             typeof $joinsAndLeavesActivityChart !== 'undefined' && $joinsAndLeavesActivityChart.length > 0) {
             var guildID = $messageActivityChart.data('guild-id');
             var guildName = $messageActivityChart.data('guild-name');
+            var displayUniques = (String($messageActivityChart.data('uniques')) === 'true');
+
+            var datasetsMessageActivity = [
+                {
+                    title: "Messages",
+                    values: [0, 0]
+                }
+            ];
+            if (displayUniques) {
+                datasetsMessageActivity.push({
+                    title: "By Uniques",
+                    values: [0, 0]
+                });
+            }
 
             var dataMessages = {
                 labels: ["Please wait…", "Please wait…"],
-                datasets: [
-                    {
-                        title: "Messages",
-                        values: [0, 0]
-                    },
-                    {
-                        title: "By Uniques",
-                        values: [0, 0]
-                    }
-                ]
+                datasets: datasetsMessageActivity
             };
             var dataJoinsAndLeaves = {
                 labels: ["Please wait…", "Please wait…"],

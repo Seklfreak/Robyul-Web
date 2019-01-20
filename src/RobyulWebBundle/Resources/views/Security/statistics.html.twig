@@ -39,6 +39,7 @@
             <div id="messageactivity-chart"
                  data-guild-id="{{ guildID }}"
                  data-guild-name="{{ guildName }}"
+                 data-uniques="{{ uniquesEnabled ? 'true':'false' }}"
             ></div>
         </div>
     </div>
@@ -165,6 +166,7 @@
             </div>
         </div>
     </div>
+    {% if uniquesEnabled %}
     <div class="row">
         <div class="col-4">
             <div class="statistics-counter" data-type="by-uniques" data-interval="24h" data-refresh="3600000"
@@ -191,4 +193,5 @@
             </div>
         </div>
     </div>
+    {% endif %}
 {% endblock %}

@@ -125,6 +125,8 @@ class SecurityController extends Controller
         $guildName = $guildData['Name'];
         $guildIcon = $guildData['Icon'];
 
+        $uniquesEnabled = (bool)$guildData['Features']->ServerStatistics_Uniques->Enabled;
+
         $seoPage = $this->container->get('sonata.seo.page');
         $seoPage
             ->setTitle($guildName . " Server Statistics - The KPop Discord Bot - Robyul")
@@ -136,6 +138,7 @@ class SecurityController extends Controller
             'guildID' => $guildID,
             'guildName' => $guildName,
             'guildIcon' => $guildIcon,
+            'uniquesEnabled' => $uniquesEnabled,
         ));
     }
 
