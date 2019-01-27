@@ -618,16 +618,26 @@
                         relevant to mods. <span class="badge badge-default">Mod</span></li>
                     <li><code>{{ guildBotPrefix }}search-user <span class="arg">search text</span></code> searches for
                         users with text in their name. <span class="badge badge-default">Mod</span></li>
-                    <li><code>{{ guildBotPrefix }}kick <span class="arg">@user or user id</span> <span class="opt-arg">Reason<span></code>
+                    <li><code>{{ guildBotPrefix }}kick <span class="arg">@user or user id, up to 10 Users, seperated by spaces</span> <span class="opt-arg">Reason<span></code>
                         kicks the user from the server. <span class="badge badge-default">Mod and Discord Permission to Kick</span>
+                    </li>
+                    <li><code>{{ guildBotPrefix }}kick <span class="arg">@user or user id, up to 10 Users, seperated by spaces</span> <span class="opt-arg">Reason<span></code>
+                        kicks the user from the server. Does not ask for confirmation. <span class="badge badge-default">Mod and Discord Permission to Kick</span>
                     </li>
                     <li><code>{{ guildBotPrefix }}ban <span class="arg">@user or user id, up to 10 Users, seperated by spaces</span> <a href="#"
                                                                                                    class="opt-arg"
                                                                                                    data-toggle="tooltip"
                                                                                                    title="Number of Days of messages you want to delete of the User">number
-                                of days</a> <span class="opt-arg">Reason<span></code> bans the user from the server, and
+                                of days</a> <span class="opt-arg">Reason</span></code> bans the user from the server, and
                         deletes the messages for the last <span class="opt-arg">number of days</span> days of messages
                         if provided. <span class="badge badge-default">Mod and Discord Permission to Ban</span></li>
+                    <li><code>{{ guildBotPrefix }}ban <span class="arg">@user or user id, up to 10 Users, seperated by spaces</span> <a href="#"
+                                                                                                                                        class="opt-arg"
+                                                                                                                                        data-toggle="tooltip"
+                                                                                                                                        title="Number of Days of messages you want to delete of the User">number
+                                of days</a> <span class="opt-arg">Reason</span></code> bans the user from the server, and
+                        deletes the messages for the last <span class="opt-arg">number of days</span> days of messages
+                        if provided. Does not ask for confirmation. <span class="badge badge-default">Mod and Discord Permission to Ban</span></li>
                     <li><code>{{ guildBotPrefix }}edit <span class="arg">#channel or channel id</span> <span
                                     class="arg">message id</span> <span class="arg">message text</span></code> edit a
                         message sent by robyul. <span class="badge badge-default">Admin</span></li>
