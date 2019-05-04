@@ -29,7 +29,7 @@ class DiscordExtension extends \Twig_Extension
         if ($redis->exists($key) == true) {
             $userData = unserialize($redis->get($key));
         } else {
-            $userInfo = Unirest\Request::get('http://localhost:2021/user/' . $userID, array('Authorization' => 'Webkey '.$this->container->getParameter('bot_webkey')));
+            $userInfo = Unirest\Request::get($this->container->getParameter('bot_api_base_url') . 'user/' . $userID, array('Authorization' => 'Webkey ' . $this->container->getParameter('bot_webkey')));
             $userData = (array)$userInfo->body;
 
             $redis->set($key, serialize($userData));
@@ -60,7 +60,7 @@ class DiscordExtension extends \Twig_Extension
         if ($redis->exists($key) == true) {
             $rankingData = unserialize($redis->get($key));
         } else {
-            $rankingInfo = Unirest\Request::get('http://localhost:2021/rankings/user/' . $userID . '/' . $guildID, array('Authorization' => 'Webkey '.$this->container->getParameter('bot_webkey')));
+            $rankingInfo = Unirest\Request::get($this->container->getParameter('bot_api_base_url') . 'rankings/user/' . $userID . '/' . $guildID, array('Authorization' => 'Webkey ' . $this->container->getParameter('bot_webkey')));
             $rankingData = (array)$rankingInfo->body;
 
             $redis->set($key, serialize($rankingData));

@@ -36,17 +36,17 @@ class RobyulApi
     {
         $key = 'robyul2-web:api:' . md5($endpoint);
         if ($fresh == false && $this->redis->exists($key) == true) {
-            $this->logger->info('HIT http://localhost:2021/' . $endpoint);
+            $this->logger->info('HIT ' . $this->container->getParameter('bot_api_base_url') . $endpoint);
             $data = unserialize($this->redis->get($key));
         } else {
             $timeStart = microtime(true);
-            $result = Unirest\Request::get('http://localhost:2021/' . $endpoint,
+            $result = Unirest\Request::get($this->container->getParameter('bot_api_base_url') . $endpoint,
                 array(
                     'Authorization' => 'Webkey ' . $this->container->getParameter('bot_webkey'),
                     'User-Agent' => 'Robuyl-Web/0.1' // TODO: version
                 ));
             $timeEnd = microtime(true);
-            $this->logRequest('GET', 'http://localhost:2021/' . $endpoint, 'json array', $timeEnd - $timeStart);
+            $this->logRequest('GET', $this->container->getParameter('bot_api_base_url') . $endpoint, 'json array', $timeEnd - $timeStart);
             $data = (array)$result->body;
 
             if ($expire != '' && ($result->code >= 200 && $result->code < 300)) {
@@ -64,13 +64,13 @@ class RobyulApi
             $data = unserialize($this->redis->get($key));
         } else {
             $timeStart = microtime(true);
-            $data = Unirest\Request::get('http://localhost:2021/' . $endpoint,
+            $data = Unirest\Request::get($this->container->getParameter('bot_api_base_url') . $endpoint,
                 array(
                     'Authorization' => 'Webkey ' . $this->container->getParameter('bot_webkey'),
                     'User-Agent' => 'Robuyl-Web/0.1' // TODO: version
                 ));
             $timeEnd = microtime(true);
-            $this->logRequest('GET', 'http://localhost:2021/' . $endpoint, 'raw', $timeEnd - $timeStart);
+            $this->logRequest('GET', $this->container->getParameter('bot_api_base_url') . $endpoint, 'raw', $timeEnd - $timeStart);
             $data = (string)$data->body;
 
             $this->redis->set($key, serialize($data));
