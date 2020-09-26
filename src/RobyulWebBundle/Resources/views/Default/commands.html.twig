@@ -373,65 +373,6 @@
             </div>
         </div>
     {% endif %}
-    {% if moduleNames is null or "twitter" in moduleNames %}
-        <div class="card commands-card">
-            <div class="card-body">
-                <h4 class="card-title" id="twitter"><a href="#twitter">Twitter</a></h4>
-                <h6 class="card-subtitle mb-2 text-muted">Stay up to date.</h6>
-                <p class="card-text">
-                <ul class="list-unstyled">
-                    <li><code>{{ guildBotPrefix }}twitter <span class="arg">twitter username</span></code> get
-                        information about a Twitter account
-                    </li>
-                    <li><code>{{ guildBotPrefix }}twitter list</code> view all active Twitter feeds on this server</li>
-                    <li><code>{{ guildBotPrefix }}twitter add <span class="arg">twitter username</span> <span
-                                    class="arg">discord #channel or channel id</span> <span class="opt-arg">role name or role id</span>
-                            <a class="opt-arg" href="#" data-toggle="tooltip"
-                               title="setting this will use the official discord embed for tweets instead of the Robyul embed">discord-embed</a>
-                            <a class="opt-arg" href="#" data-toggle="tooltip"
-                               title="setting this will post the tweet as raw text instead of using an embed">text</a>
-                            <span class="opt-arg">exclude-rts</span> <span
-                                    class="opt-arg">exclude-mentions</span></code>
-                        adds a Twitter feed to the
-                        specific channel. <span class="badge badge-default">Mod</span></li>
-                    <li><code>{{ guildBotPrefix }}twitter delete <span class="arg">twitter feed id</span></code> delete
-                        a Twitter feed. Use <code>{{ guildBotPrefix }}twitter list</code> to get the feed id. <span
-                                class="badge badge-default">Mod</span></li>
-                </ul>
-                </p>
-            </div>
-        </div>
-    {% endif %}
-{#    {% if moduleNames is null or "instagram" in moduleNames %}#}
-{#        <div class="card commands-card">#}
-{#            <div class="card-body">#}
-{#                <h4 class="card-title" id="instagram"><a href="#instagram">Instagram</a></h4>#}
-{#                <h6 class="card-subtitle mb-2 text-muted">Get all the pictures.</h6>#}
-{#                <p class="card-text">#}
-{#                <ul class="list-unstyled">#}
-{#                    <li><code>{{ guildBotPrefix }}instagram <span class="arg">instagram username</span></code> get#}
-{#                        information about an Instagram account#}
-{#                    </li>#}
-{#                    <li><code>{{ guildBotPrefix }}instagram list</code> view all active Instagram feeds on this server#}
-{#                    </li>#}
-{#                    <li><code>{{ guildBotPrefix }}instagram add <span class="arg">instagram username</span> <span#}
-{#                                    class="arg">discord #channel or channel id</span> <a class="opt-arg" href="#"#}
-{#                                                                                         data-toggle="tooltip"#}
-{#                                                                                         title="add 'links' to make Robyul post direct links instead of using an embed.">links</a></code>#}
-{#                        adds an Instagram feed to the specific channel. <span class="badge badge-default">Mod</span>#}
-{#                    </li>#}
-{#                    <li><code>{{ guildBotPrefix }}instagram toggle-direct-links <span#}
-{#                                    class="arg">instagram feed id</span></code> toggles between Discord Embed (default)#}
-{#                        or linking the Pictures as text. Use <code>{{ guildBotPrefix }}instagram list</code> to get the#}
-{#                        feed id. <span class="badge badge-default">Mod</span></li>#}
-{#                    <li><code>{{ guildBotPrefix }}instagram delete <span class="arg">instagram feed id</span></code>#}
-{#                        delete an Instagram feed. Use <code>{{ guildBotPrefix }}instagram list</code> to get the feed#}
-{#                        id. <span class="badge badge-default">Mod</span></li>#}
-{#                </ul>#}
-{#                </p>#}
-{#            </div>#}
-{#        </div>#}
-{#    {% endif %}#}
     {% if moduleNames is null or "reddit" in moduleNames %}
         <div class="card commands-card">
             <div class="card-body">
@@ -461,30 +402,6 @@
                 If you set a post delay to a reddit feed Robyul will delay posting each submission. Robyul will check if
                 the has been deleted after the post delay, and only post the submission if the post has not been
                 deleted.
-                </p>
-            </div>
-        </div>
-    {% endif %}
-    {% if moduleNames is null or "facebook" in moduleNames %}
-        <div class="card commands-card">
-            <div class="card-body">
-                <h4 class="card-title" id="facebook"><a href="#facebook">Facebook</a></h4>
-                <h6 class="card-subtitle mb-2 text-muted">The biggest social network.</h6>
-                <p class="card-text">
-                <ul class="list-unstyled">
-                    <li><code>{{ guildBotPrefix }}facebook <span class="arg">facebook page name</span></code> get
-                        information about a Facebook page
-                    </li>
-                    <li><code>{{ guildBotPrefix }}facebook list</code> view all active Facebook page feeds on this
-                        server
-                    </li>
-                    <li><code>{{ guildBotPrefix }}facebook add <span class="arg">facebook page name</span> <span
-                                    class="arg">discord #channel or channel id</span></code> adds a Facebook page feed
-                        to the specific channel. <span class="badge badge-default">Mod</span></li>
-                    <li><code>{{ guildBotPrefix }}facebook delete <span class="arg">facebook feed id</span></code>
-                        delete a Facebook page feed. Use <code>{{ guildBotPrefix }}facebook list</code> to get the feed
-                        id. <span class="badge badge-default">Mod</span></li>
-                </ul>
                 </p>
             </div>
         </div>
@@ -659,12 +576,6 @@
                         <span class="badge badge-default">Admin</span></li>
                     <li><code>@{{ bot_user }} set prefix <span class="opt-arg">new prefix</span></code> sets the new
                         Robyul prefix for this server. <span class="badge badge-default">Admin</span></li>
-                    <li><code>{{ guildBotPrefix }}toggle-chatlog</code> Toggle Chatlog recording and anonymising of
-                        server statistics. <span class="badge badge-default">Admin</span></li>
-                    <li><code>{{ guildBotPrefix }}leave-server <span class="arg">server id</span></code> makes robyul
-                        leave a server. <span class="badge badge-default">Bot Admin</span></li>
-                    <li><code>{{ guildBotPrefix }}inspect-extended <span class="opt-arg">@user or user id</span> <span
-                                    class="opt-arg">text</span></code> like <code>{{ guildBotPrefix }}inspect</code>
                         with more information. <span class="badge badge-default">Bot Owner</span></li>
                     <li><code>{{ guildBotPrefix }}move <span class="arg">target #channel or channel id</span> <span
                                     class="arg">first message id</span> <a class="opt-arg" data-toggle="tooltip"
@@ -1401,8 +1312,6 @@
                     <li><code>{{ guildBotPrefix }}nuke apply</code> Bans all users that have been nuked in the past on
                         the current server. <span
                                 class="badge badge-default">Admin</span></li>
-                    <li><code>{{ guildBotPrefix }}nuke user <span class="arg">@user or user id</span> <span class="arg">reason</span></code>
-                        nuke an user. <span class="badge badge-default">Nuke Mod (Robyul Staff)</span></li>
                 </ul>
                 </p>
             </div>
@@ -1419,16 +1328,12 @@
                     <li><code>{{ guildBotPrefix }}userinfo <span class="opt-arg">@user or user id</span></code>
                         information about a user.
                     </li>
-                    <li><code>{{ guildBotPrefix }}serverinfo <span class="opt-arg">server id</span></code> information
-                        about a server. Information about other servers is only available to Robyul Staff.
+                    <li><code>{{ guildBotPrefix }}serverinfo</code> information
+                        about a server.
                     </li>
-                    <li><code>{{ guildBotPrefix }}channelinfo <span class="opt-arg">channel id</span></code> information
-                        about a channel. Information about channels on other servers is only available to Robyul Staff.
+                    <li><code>{{ guildBotPrefix }}channelinfo</code> information
+                        about a channel.
                     </li>
-                    <li><code>{{ guildBotPrefix }}voicestats <span class="opt-arg">@user or user id</span></code> shows
-                        the voice stats of an user.
-                    </li>
-                    <li><code>{{ guildBotPrefix }}voicestats top</code> shows the top voice users on this server.</li>
                     <li><code>{{ guildBotPrefix }}emotes</code> shows a list of all custom emotes on the server.</li>
                     <li><code>{{ guildBotPrefix }}memberlist <span class="opt-arg">page #</span> <span class="opt-arg">role name or id</span>
                             <a class="opt-arg" href="#" data-toggle="tooltip" title="only available for Bot Owners">server
@@ -1443,17 +1348,11 @@
                                                                  title="only available for Bot Owners">server
                                 id</a></code> shows all channels on the server.
                     </li>
-                    <li><code>{{ guildBotPrefix }}names <span class="arg">@user or user id</span></code> shows past user
-                        and nicknames of an user.
-                    </li>
                     <li><code>{{ guildBotPrefix }}invite <span class="arg">invite code or url</span></code> shows
                         information about an invite.
                     </li>
                     <li><code>{{ guildBotPrefix }}avatar <span class="opt-arg">@user or user id</span></code> displays
                         the avatar of an user.
-                    </li>
-                    <li><code>{{ guildBotPrefix }}serverlist <span class="opt-arg">xlsx</span></code> shows a list with
-                        all servers robyul is on, or exports it to a excel file. <span class="badge badge-default">Robyul Staff</span>
                     </li>
                 </ul>
                 </p>
@@ -1569,27 +1468,6 @@
                 <p class="card-text">
                 <ul class="list-unstyled">
                     <li><code>{{ guildBotPrefix }}discordmoney</code> find out how much your friends spent on discord.
-                    </li>
-                </ul>
-                </p>
-            </div>
-        </div>
-    {% endif %}
-    {% if moduleNames is null or "eventlog" in moduleNames %}
-        <div class="card commands-card">
-            <div class="card-body">
-                <h4 class="card-title" id="eventlog"><a href="#eventlog">Eventlog</a> <span class="badge badge-info">Beta</span>
-                </h4>
-                <h6 class="card-subtitle mb-2 text-muted">Monitor moderator activities on your server.</h6>
-                <p class="card-text">
-                <ul class="list-unstyled">
-                    <li><code>{{ guildBotPrefix }}toggle-eventlog</code> disables and enabled the eventlog.
-                        <span class="badge badge-default">Admin</span>
-                    </li>
-                    <li><code>{{ guildBotPrefix }}eventlog set-log <span
-                                    class="opt-arg">#channel or channel id</span></code>
-                        posts the eventlog in the given channel. <span
-                                class="badge badge-default">Mod</span>
                     </li>
                 </ul>
                 </p>
