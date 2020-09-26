@@ -21,18 +21,6 @@
     </div>
     <div class="card commands-card">
         <div class="card-body">
-            <h4 class="card-title" id="donators"><a href="#donators">Donators</a></h4>
-            <h6 class="card-subtitle mb-2 text-muted">Support me on <a href="https://www.patreon.com/sekl"
-                                                                       target="_blank">Patreon</a>.</h6>
-            <p class="card-text">
-            <ul class="list-unstyled">
-                <li><code>{{ guildBotPrefix }}donators</code> see everyone who donated for Robyul.</li>
-            </ul>
-            </p>
-        </div>
-    </div>
-    <div class="card commands-card">
-        <div class="card-body">
             <h4 class="card-title" id="moduleless"><a href="#moduleless">Module-less</a></h4>
             <h6 class="card-subtitle mb-2 text-muted">Various stuff.</h6>
             <p class="card-text">
@@ -487,12 +475,6 @@
                                title="overall/week/month/3month/6month/year">timerange</a> <span
                                     class="opt-arg">collage</span></code>
                         see the top albums of the user.
-                    </li>
-                    <li><code>{{ guildBotPrefix }}lf server-top <span class="opt-arg"><a class="arg"
-                                                                                         data-toggle="tooltip"
-                                                                                         title="overall/week/month/3month/6month/year">timerange</a></span></code>
-                        shows the top tracks of all last.fm users on this server combined for the given timespan, by
-                        default overall.
                     </li>
                 </ul>
                 </p>
@@ -981,21 +963,6 @@
                     </li>
                     <li><code>{{ guildBotPrefix }}8ball <span class="arg">question</span></code> he always has an
                         answer.
-                    </li>
-                </ul>
-                </p>
-            </div>
-        </div>
-    {% endif %}
-    {% if moduleNames is null or "spoiler" in moduleNames %}
-        <div class="card commands-card">
-            <div class="card-body">
-                <h4 class="card-title" id="spoiler"><a href="#spoiler">Spoiler</a></h4>
-                <h6 class="card-subtitle mb-2 text-muted">Protect others from your secret information.</h6>
-                <p class="card-text">
-                <ul class="list-unstyled">
-                    <li><code>{{ guildBotPrefix }}spoiler <span class="arg">text</span></code> hides text until you
-                        hover it. Doesn't work on Discord's Mobile Apps.
                     </li>
                 </ul>
                 </p>
